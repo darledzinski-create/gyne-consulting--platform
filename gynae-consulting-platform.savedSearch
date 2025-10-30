@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CompatibleVersion</key>
+	<integer>1</integer>
+	<key>RawQuery</key>
+	<string>(kMDItemDisplayName = "gyne-consulting-platform*"cdw)</string>
+	<key>RawQueryDict</key>
+	<dict>
+		<key>FinderFilesOnly</key>
+		<false/>
+		<key>RawQuery</key>
+		<string>(kMDItemDisplayName = "gyne-consulting-platform*"cdw)</string>
+		<key>SearchScopes</key>
+		<array>
+			<string>kMDQueryScopeComputer</string>
+		</array>
+		<key>UserFilesOnly</key>
+		<true/>
+	</dict>
+	<key>SearchCriteria</key>
+	<dict>
+		<key>CurrentFolderPath</key>
+		<array>
+			<string>/Applications/untitled folder</string>
+		</array>
+		<key>FXCriteriaSlices</key>
+		<array>
+			<dict>
+				<key>criteria</key>
+				<array>
+					<string>kMDItemDisplayName</string>
+					<integer>120</integer>
+					<integer>104</integer>
+				</array>
+				<key>displayValues</key>
+				<array>
+					<string>Name</string>
+					<string>matches</string>
+					<string>gyne-consulting-platform</string>
+				</array>
+				<key>rowType</key>
+				<integer>0</integer>
+				<key>subrows</key>
+				<array/>
+			</dict>
+		</array>
+		<key>FXScope</key>
+		<integer>1396925814</integer>
+		<key>FXScopeArrayOfPaths</key>
+		<array>
+			<string>kMDQueryScopeComputer</string>
+		</array>
+	</dict>
+	<key>SuggestedAttributes</key>
+	<array/>
+	<key>ViewSettings</key>
+	<dict>
+		<key>GroupBy</key>
+		<string>Name</string>
+		<key>WindowState</key>
+		<dict>
+			<key>ContainerShowSidebar</key>
+			<true/>
+			<key>ShowSidebar</key>
+			<true/>
+			<key>ShowStatusBar</key>
+			<false/>
+			<key>ShowTabView</key>
+			<false/>
+			<key>ShowToolbar</key>
+			<true/>
+			<key>WindowBounds</key>
+			<string>{{320, 306}, {484, 312}}</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
