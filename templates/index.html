@@ -1,93 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dr. Dariusz Ledzinski – Online Gynaecological Consultation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gynae Consulting Platform</title>
   <style>
     body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: url("/static/images/1.jpg") no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #f8f8f8, #ffffff);
       color: #333;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
-    header {
-      background-color: #f5f2f9;
-      text-align: center;
-      padding: 2em 1em;
-      border-bottom: 1px solid #ddd;
+    .content {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
     }
 
     h1 {
+      color: #800080;
       font-size: 2em;
-      margin: 0.2em 0;
-      color: #5a2a83;
-    }
-
-    h2 {
-      color: #7c4bb0;
-      margin-top: 0;
-    }
-
-    main {
-      max-width: 700px;
-      margin: 3em auto;
-      padding: 0 1em;
-      text-align: center;
+      margin-bottom: 0.5em;
     }
 
     p {
-      line-height: 1.6;
       font-size: 1.1em;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: #7c4bb0;
-      color: white;
-      padding: 0.8em 1.6em;
-      border-radius: 6px;
-      text-decoration: none;
-      margin-top: 1.5em;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    .cta-button:hover {
-      background-color: #693b9b;
+      line-height: 1.6;
     }
 
     footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
       text-align: center;
-      padding: 1.5em 0;
-      border-top: 1px solid #ddd;
       font-size: 0.9em;
-      color: #777;
-      margin-top: 3em;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="content">
     <h1>Welcome to the Gynae Consulting Platform</h1>
-    <h2>Warm, confidential, and professional care — from the comfort of your home.</h2>
-  </header>
-
-  <main>
-    <p>
-      Thank you for visiting my online consultation platform. Here, you will soon be able to book secure, private
-      gynaecological consultations with professional, compassionate care.
-    </p>
-    <p>
-      This service is currently in development and will open soon for online consultations.
-    </p>
-    <a href="#contact" class="cta-button">Contact Dr. Ledzinski</a>
-  </main>
-
+    <p>Warm, confidential, and professional care — from the comfort of your home.</p>
+    <p>This service is currently in development and will open soon for online consultations.</p>
+  </div>
   <footer>
-    &copy; 2025 Dr. Dariusz Ledzinski — All rights reserved.
+    © 2025 Dr. Dariusz Ledzinski | Online Gynaecological Consultation
   </footer>
 </body>
 </html>
+🪜 Step 3: Save and Redeploy
+Save the file.
+Commit and upload it to your GitHub repository (replace the existing index.html).
+Render will automatically redeploy your service.
+Once it’s live, visit your Render link again.
+You should see your homepage text beautifully centered over your telehealth office background — subtle, calm, and professional.
+Would you like me to suggest a slightly softer overlay (for example, a warm light tint) to make the text pop more clearly against the image?
+
