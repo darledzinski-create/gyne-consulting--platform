@@ -1,0 +1,113 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit a Private Consultation</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8f9fb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, #6a85b6, #bac8e0);
+            padding: 25px;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #444;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            background: #4a72a1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #3a5a80;
+        }
+
+        .footnote {
+            text-align: center;
+            color: #555;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Private Gynaecological Consultation</h1>
+        <p>Your question will be handled with full confidentiality</p>
+    </div>
+
+    <div class="container">
+        <h2>Submit Your Question</h2>
+
+        <form action="/submit_question" method="POST">
+            <label>Your Name (optional)</label>
+            <input type="text" name="name" placeholder="You may leave this blank">
+
+            <label>Your Email (for response)</label>
+            <input type="email" name="email" required placeholder="Required">
+
+            <label>Your Question</label>
+            <textarea name="question" required placeholder="Describe your concern..."></textarea>
+
+            <button type="submit">Submit Consultation</button>
+        </form>
+
+        <p class="footnote">
+            Response time: usually within 24 hours.<br>
+            Your information is private and never shared.
+        </p>
+    </div>
+</body>
+</html>
