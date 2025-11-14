@@ -1,141 +1,41 @@
 !DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gynae Consulting Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gynae Consulting Platform</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    /* --- DYNAMIC NAVBAR --- */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #ffffffcc;
-      backdrop-filter: blur(8px);
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: top 0.4s ease;
-      z-index: 100;
-    }
-
-    .navbar.hidden {
-      top: -100px; /* Slides up out of view */
-    }
-
-    .navbar .container {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #34495e;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #2c3e50;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #e67e22;
-    }
-
-    /* --- HERO SECTION --- */
-    .hero {
-      height: 100vh;
-      background: url("/static/images/1.jpg") center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .hero-box {
-      background-color: rgba(255, 255, 255, 0.85);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-    }
-
-    .hero-box h1 {
-      font-size: 2rem;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-    }
-
-    .hero-box p {
-      font-size: 1.1rem;
-      color: #34495e;
-      line-height: 1.6;
-    }
-  </style>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: url('/static/images/1.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding-top: 20vh;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- NAVIGATION BAR -->
-  <nav class="navbar" id="navbar">
-    <div class="container">
-      <h1 class="logo">Gynae Consulting</h1>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-box">
-      <h1>Warm, Confidential, Professional Care</h1>
-      <p>
-        Welcome to my online consultation platform.  
-        Soon you’ll be able to book secure and private gynaecological consultations  
-        from the comfort of your home.  
-      </p>
-    </div>
-  </section>
-
-  <!-- DYNAMIC NAVBAR SCRIPT -->
-  <script>
-    let lastScroll = 0;
-    const navbar = document.getElementById("navbar");
-
-    window.addEventListener("scroll", () => {
-      let currentScroll = window.scrollY;
-
-      if (currentScroll > lastScroll) {
-        navbar.classList.add("hidden");    // scrolling down → hide navbar
-      } else {
-        navbar.classList.remove("hidden"); // scrolling up → show navbar
-      }
-      lastScroll = currentScroll;
-    });
-  </script>
+    <h1>Welcome to the Gynae Consulting Platform</h1>
+    <p>Warm, confidential, and professional care — from the comfort of your home.</p>
+    <p>This service is currently in development and will open soon for online consultations.</p>
 
 </body>
 </html>
