@@ -1,61 +1,141 @@
-!-- Navigation Bar -->
-<nav class="navbar">
-  <div class="container">
-    <h1 class="logo">Gynae Consulting</h1>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gynae Consulting Platform</title>
 
-<style>
-  .navbar {
-    background-color: #ffffffcc;
-    backdrop-filter: blur(8px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-  .navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1100px;
-    margin: auto;
-    padding: 1rem 2rem;
-  }
+    /* --- DYNAMIC NAVBAR --- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffffcc;
+      backdrop-filter: blur(8px);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: top 0.4s ease;
+      z-index: 100;
+    }
 
-  .logo {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #34495e;
-  }
+    .navbar.hidden {
+      top: -100px; /* Slides up out of view */
+    }
 
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
+    .navbar .container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  .nav-links a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #34495e;
+    }
 
-  .nav-links a:hover {
-    color: #e67e22;
-  }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
 
-  body {
-    padding-top: 80px; /* prevent overlap from fixed navbar */
-  }
-</style>
+    .nav-links a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #e67e22;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      height: 100vh;
+      background: url("/static/images/1.jpg") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-box {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+    }
+
+    .hero-box h1 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .hero-box p {
+      font-size: 1.1rem;
+      color: #34495e;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <h1 class="logo">Gynae Consulting</h1>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Warm, Confidential, Professional Care</h1>
+      <p>
+        Welcome to my online consultation platform.  
+        Soon you’ll be able to book secure and private gynaecological consultations  
+        from the comfort of your home.  
+      </p>
+    </div>
+  </section>
+
+  <!-- DYNAMIC NAVBAR SCRIPT -->
+  <script>
+    let lastScroll = 0;
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      let currentScroll = window.scrollY;
+
+      if (currentScroll > lastScroll) {
+        navbar.classList.add("hidden");    // scrolling down → hide navbar
+      } else {
+        navbar.classList.remove("hidden"); // scrolling up → show navbar
+      }
+      lastScroll = currentScroll;
+    });
+  </script>
+
+</body>
+</html>
