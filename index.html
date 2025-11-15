@@ -17,20 +17,23 @@
             color: #ffffff;
         }
 
-        /* Warm overlay */
+        /* Soft warm overlay */
         .overlay {
             background: rgba(95, 45, 75, 0.45);
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 1;
         }
 
         /* Navigation bar */
         nav {
-            position: relative;
-            z-index: 10;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,6 +41,11 @@
             background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        nav .logo {
+            font-size: 20px;
+            font-weight: 600;
         }
 
         nav a {
@@ -55,27 +63,49 @@
         /* Main content */
         .content {
             position: relative;
-            z-index: 10;
+            z-index: 3;
             text-align: center;
-            padding-top: 20vh;
+            padding-top: 25vh;
             max-width: 700px;
             margin: auto;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         h1 {
             font-size: 42px;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         p {
-            font-size: 18px;
+            font-size: 20px;
             line-height: 1.6;
             margin-bottom: 15px;
         }
     </style>
-
 </head>
+
 <body>
 
-    <div class
+    <div class="overlay"></div>
+
+    <!-- Navigation bar -->
+    <nav>
+        <div class="logo">Gynae Consulting</div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/ask">Ask a Question</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <!-- Main page content -->
+    <div class="content">
+        <h1>Welcome to the Gynae Consulting Platform</h1>
+        <p>Warm, confidential, and professional care — from the comfort of your home.</p>
+        <p>This service is currently in development and will be available soon.</p>
+    </div>
+
+</body>
+</html>
