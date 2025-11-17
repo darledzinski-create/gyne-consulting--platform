@@ -16,12 +16,8 @@
             color: #ffffff;
         }
 
-        /* Soft gradient overlay improves text readability */
         .overlay {
-            background: linear-gradient(
-                rgba(40, 0, 50, 0.55),
-                rgba(0, 0, 0, 0.55)
-            );
+            background: rgba(95, 45, 75, 0.45);
             position: fixed;
             top: 0;
             left: 0;
@@ -35,75 +31,67 @@
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 3;
+            z-index: 10;
+            padding: 18px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        nav .logo {
-            font-size: 20px;
-            font-weight: 600;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            margin-left: 25px;
-            font-size: 16px;
-        }
-        nav a:hover {
-            text-decoration: underline;
+            background: rgba(255, 255, 255, 0.18);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        /* Main content */
+        nav .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        nav a {
+            margin-left: 35px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
         .content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             text-align: center;
-            padding-top: 28vh;
+            padding-top: 30vh;
             max-width: 700px;
             margin: auto;
             padding-left: 20px;
             padding-right: 20px;
-            animation: fadeIn 1.8s ease;
+        }
+
+        /* Content panel */
+        .panel {
+            background: rgba(255, 255, 255, 0.82);
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            color: #333;
         }
 
         h1 {
-            font-size: 46px;
+            font-size: 42px;
             font-weight: 600;
-            margin-bottom: 25px;
-            color: white;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
         }
 
         p {
-            font-size: 21px;
+            font-size: 20px;
             line-height: 1.6;
-            margin-bottom: 18px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
         }
 
-        /* Fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Footer */
-        footer {
-            position: fixed;
-            bottom: 15px;
-            width: 100%;
-            text-align: center;
-            z-index: 2;
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 14px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-        }
     </style>
 </head>
 
@@ -111,26 +99,20 @@
 
     <div class="overlay"></div>
 
-    <!-- Navigation bar -->
     <nav>
         <div class="logo">Gynae Consulting</div>
-        <div>
+        <div class="links">
             <a href="/">Home</a>
             <a href="/ask">Ask a Question</a>
-            <a href="/about">About</a>
+            <a href="#">About</a>
         </div>
     </nav>
 
-    <!-- Main page content -->
-    <div class="content">
+    <div class="content panel">
         <h1>Welcome to the Gynae Consulting Platform</h1>
         <p>Warm, confidential, and professional care — from the comfort of your home.</p>
-        <p>Private online consultations will soon be available.</p>
+        <p>This service is currently under development and will be available soon.</p>
     </div>
-
-    <footer>
-        © 2025 Dr. Dariusz Ledzinski — Online Gynaecological Consultation
-    </footer>
 
 </body>
 </html>
