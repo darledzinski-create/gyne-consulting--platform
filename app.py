@@ -7,6 +7,9 @@ def home():
     return render_template("index.html")
 
 @app.route("/ask")
+@app.route("/about")
+def about():
+    return render_template("about.html")
 def ask_page():
     return render_template("ask.html")
 
