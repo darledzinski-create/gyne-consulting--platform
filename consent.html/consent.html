@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemedicine Consent</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: url("/static/images/1.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+        }
+
+        .overlay {
+            background: rgba(95, 45, 75, 0.45);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.18);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+        }
+
+        nav .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        nav a {
+            margin-left: 35px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            margin: auto;
+            padding: 22vh 30px 50px 30px;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.88);
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            font-size: 18px;
+            line-height: 1.65;
+        }
+
+        ul {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <nav>
+        <div class="logo">Gynae Consulting</div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/ask">Ask a Question</a>
+            <a href="/about">About</a>
+            <a href="/consent">Telemedicine Consent</a>
+        </div>
+    </nav>
+
+    <div class="content panel">
+        <h1>Telemedicine Consent</h1>
+
+        <p>
+            By submitting a consultation request through the Gynae Consulting Platform, you acknowledge and accept the terms outlined in this Telemedicine Consent. These terms ensure that you fully understand the nature and limitations of remote medical advice.
+        </p>
+
+        <h2>1. Nature of the Service</h2>
+        <p>
+            This service provides remote gynaecological consultations based solely on the information you provide. No physical examination is performed through this platform.
+        </p>
+
+        <h2>2. Limitations of Telemedicine</h2>
+        <p>
+            Remote advice may have limitations compared with an in-person consultation. The accuracy of your assessment depends entirely on the completeness and clarity of the information you supply.
+        </p>
+
+        <h2>3. Acute Matters</h2>
+        <p>
+            This platform is not suitable for **acute, severe, or life-threatening symptoms**, including (but not limited to) heavy bleeding, severe abdominal pain, fevers, dizziness, or symptoms requiring urgent assessment.  
+            In such cases, you must seek immediate in-person care.
+        </p>
+
+        <h2>4. Privacy and Data Protection</h2>
+        <p>
+            Your personal information will be kept confidential and will never be shared with third parties unless required by law. Secure communication methods are used to protect your data.
+        </p>
+
+        <h2>5. Follow-Up and Continuity of Care</h2>
+        <p>
+            You may be advised to follow up with your general practitioner or another specialist if your condition requires a physical examination or further investigation.
+        </p>
+
+        <h2>6. Your Consent</h2>
+        <p>
+            By using this service, you confirm that:
+        </p>
+
+        <ul>
+            <li>You understand the limitations of telemedicine.</li>
+            <li>You agree to provide accurate, honest information.</li>
+            <li>You accept that the advice given is based solely on the details you submit.</li>
+            <li>You acknowledge that this service is not suitable for acute or emergency conditions.</li>
+        </ul>
+
+        <p>
+            If you do not agree with any part of this consent, please do not use the platform for medical guidance.
+        </p>
+
+    </div>
+
+</body>
+</html>
