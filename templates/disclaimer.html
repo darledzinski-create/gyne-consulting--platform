@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer & Terms of Use</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fb;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(to right, #6a85b6, #bac8e0);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #4a5b70;
+        }
+
+        ul {
+            line-height: 1.7;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Disclaimer & Terms of Use</h1>
+    </div>
+
+    <div class="container">
+
+        <h2>1. Purpose of This Online Service</h2>
+        <p>
+            This platform provides general gynaecological advice and guidance based on the information you choose to share.
+            It is intended to support your health decisions — not replace a face-to-face consultation when one is required.
+        </p>
+
+        <h2>2. Limitations of Online Advice</h2>
+        <p>
+            Online consultations have limitations. Without a physical examination, certain conditions cannot be diagnosed with complete certainty.
+            You may be advised to see your GP or a specialist for an in-person assessment if needed.
+        </p>
+
+        <h2>3. Accuracy of Information Provided</h2>
+        <p>
+            The quality of medical guidance depends entirely on the accuracy and completeness of the information you provide.
+            Please include all relevant symptoms, medical history, and concerns.
+        </p>
+
+        <h2>4. Not for Emergencies or Acute Problems</h2>
+        <p>
+            This service must not be used for emergencies or acute medical issues.
+            If you experience severe pain, heavy bleeding, fainting, difficulty breathing, or any worrying symptoms,
+            please contact emergency services or attend the nearest medical facility immediately.
+        </p>
+
+        <h2>5. Privacy and Confidentiality</h2>
+        <p>
+            All information shared through this platform is handled confidentially.
+            However, electronic communication can never be guaranteed to be 100% secure.
+            By using this service, you acknowledge these limitations.
+        </p>
+
+        <h2>6. No Prescriptions Without Appropriate Assessment</h2>
+        <p>
+            Prescriptions, sick notes, and medical certificates are only provided when clinically appropriate
+            and in accordance with professional and legal obligations.
+        </p>
+
+        <h2>7. Acceptance of These Terms</h2>
+        <p>
+            By submitting a consultation request through this platform, you confirm that:
+        </p>
+        <ul>
+            <li>You have read and understood this Disclaimer & Terms of Use.</li>
+            <li>You understand the limitations of online consultations.</li>
+            <li>You agree to use this service responsibly and honestly.</li>
+        </ul>
+
+        <div class="footer-note">
+            © 2025 Dr. Dariusz Ledzinski — Private Gynaecological Consulting Platform
+        </div>
+
+    </div>
+
+</body>
+</html>
+✅ Next step: app.py update
+After you confirm “Yes, this is perfect”, I will generate a ready-to-paste update for app.py that adds:
+/disclaimer route
+Navigation link integration (if desired)
+Footer link
+Any additional homepage link
+Just as we did for the Consent page.
+🔍 Before moving on — please confirm one thing:
+Would you like the “Disclaimer” page to appear in the navigation bar as well?
+Options:
+A) Yes — add “Disclaimer” to the top navigation bar
+B) No — only footer + homepage link is enough
+C) Both top and bottom, like the Consent page
+
+Tell me A, B, or C — and we continue smoothly.
+
+You said:
+Option A
+ChatGPT said:
+Excellent — Option A confirmed ✔️
+We will add “Disclaimer” to the top navigation bar only (no footer link unless you later request it).
+Now that you have already pasted and deployed disclaimer.html, the next step is to update:
+
+✅ 1. Updated index.html (NAVIGATION BAR ONLY)
+Please replace only the navigation bar section inside your current index.html with the version below.
+💡 Do NOT replace the whole file — only the <nav>...</nav> section.
+
+🔧 Paste this over your existing <nav> ... </nav>
+<nav>
+    <a href="/">Home</a>
+    <a href="/ask">Ask a Question</a>
+    <a href="/about">About the Doctor</a>
+    <a href="/consent">Consent</a>
+    <a href="/disclaimer">Disclaimer</a> 
+</nav>
+This will place “Disclaimer” visibly in the navigation bar.
+✅ 2. Ready-to-paste app.py update (adds /disclaimer route)
+Here is your complete, clean, corrected, ready-to-paste app.py including Consent + Disclaimer + Mailjet email function.
+Please paste this entire file into GitHub as the new app.py (not inside templates!).
+
+Your correct app.py:
+
+from flask import Flask, render_template, request
+import os
+import requests
+
+app = Flask(__name__)
+
+# -----------------------------
+# ROUTES
+# -----------------------------
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/ask")
+def ask_page():
+    return render_template("ask.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/consent")
+def consent():
+    return render_template("consent.html")
+
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html")
+
+# Handle form submission
+@app.route("/submit_question", methods=["POST"])
+def submit_question():
+    name = request.form.get("name", "Anonymous")
+    email = request.form.get("email")
+    question = request.form.get("question")
+
+    email_body = f"""
+A new consultation has been submitted:
+
+Name: {name}
+Email: {email}
+
+Question:
+{question}
+"""
+
+    url = "https://api.mailjet.com/v3.1/send"
+
+    payload = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": "Gynae Consulting Platform"
+                },
+                "To": [
+                    {
+                        "Email": os.environ.get("MAILJET_TO_EMAIL"),
+                        "Name": "Dr. Dariusz Ledzinski"
+                    }
+                ],
+                "Subject": "New Consultation Request",
+                "TextPart": email_body
+            }
+        ]
+    }
+
+    try:
+        result = requests.post(
+            url,
+            auth=(
+                os.environ.get("MAILJET_API_KEY"),
+                os.environ.get("MAILJET_SECRET_KEY")
+            ),
+            json=payload
+        )
+
+        if result.status_code not in (200, 201):
+            return f"Mailjet error: {result.text}", 500
+
+        return render_template("thankyou.html")
+
+    except Exception as e:
+        return f"An unexpected error occurred: {e}", 500
+
+
+
+
