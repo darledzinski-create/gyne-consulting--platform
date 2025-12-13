@@ -23,6 +23,10 @@ def consent_page():
 @app.route("/disclaimer")
 def disclaimer_page():
     return render_template("disclaimer.html")
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
+
 
 @app.route("/submit_question", methods=["POST"])
 def submit_question():
