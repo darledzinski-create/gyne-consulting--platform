@@ -26,8 +26,9 @@ def disclaimer_page():
 @app.route("/terms")
 def terms():
     return render_template("terms.html")
-
-
+@app.route("/referral")
+def referral():
+    return render_template("referral.html")
 @app.route("/submit_question", methods=["POST"])
 def submit_question():
     name = request.form.get("name", "Anonymous")
