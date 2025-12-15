@@ -34,6 +34,9 @@ def submit_question():
     name = request.form.get("name", "Anonymous")
     email = request.form.get("email")
     question = request.form.get("question")
+@app.route("/prescriptions")
+def prescriptions():
+    return render_template("prescriptions.html")
 
     email_body = f"""
 A new consultation has been submitted:
