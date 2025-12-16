@@ -37,6 +37,9 @@ def submit_question():
 @app.route("/prescriptions")
 def prescriptions():
     return render_template("prescriptions.html")
+@app.route("/first-consultation")
+def first_consultation():
+    return render_template("first-consultation.html")
 
     email_body = f"""
 A new consultation has been submitted:
