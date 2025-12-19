@@ -43,6 +43,9 @@ def prescriptions():
 @app.route("/first-consultation")
 def first_consultation():
     return render_template("first-consultation.html")
+@app.route("/communication")
+def communication():
+    return render_template("communication.html")
 
 # --------------------
 # Form submission
