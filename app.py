@@ -49,6 +49,9 @@ def communication():
 @app.route("/gp-liaison")
 def gp_liaison():
     return render_template("gp-liaison.html")
+@app.route("/before-you-submit")
+def before_you_submit():
+    return render_template("before-you-submit.html")
 
 # --------------------
 # Form submission
