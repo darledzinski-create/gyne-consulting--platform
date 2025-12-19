@@ -31,6 +31,10 @@ def disclaimer():
 @app.route("/terms")
 def terms():
     return render_template("terms.html")
+    
+@app.route("/referral")
+def referral_notice():
+    return render_template("referral.html")
 
 @app.route("/prescriptions")
 def prescriptions():
