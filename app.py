@@ -46,6 +46,9 @@ def first_consultation():
 @app.route("/communication")
 def communication():
     return render_template("communication.html")
+@app.route("/gp-liaison")
+def gp_liaison():
+    return render_template("gp-liaison.html")
 
 # --------------------
 # Form submission
