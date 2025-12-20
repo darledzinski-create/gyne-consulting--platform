@@ -87,14 +87,14 @@
 
 <body>
     <div class="header">
-        <h1>Private Gynaecological Consultation</h1>
-        <p>Your question will be handled with full confidentiality</p>
+        <h1>Ask a Question</h1>
+        <form method="POST" action="/submit_question">
+            <!-- your existing formfields stay EXACTLY the same -->
+        </form>
     </div>
-
-    <div class="container">
-        <h2>Submit Your Question</h2>
-
-        <form action="/submit_question" method="POST">
+    
+    </body>
+        
             <label>Your Name (optional)</label>
             <input type="text" name="name" placeholder="You may leave this blank">
 
