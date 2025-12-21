@@ -63,6 +63,65 @@ def submit_question():
     email = request.form.get("email")
     question = request.form.get("question")
 
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Response to Your Consultation Enquiry</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f6f8; font-family: Arial, Helvetica, sans-serif; color:#333;">
+
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center" style="padding:30px 15px;">
+
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; padding:30px;">
+          
+          <tr>
+            <td style="font-size:15px; line-height:1.6;">
+              <p>Dear {{name}},</p>
+
+              <p>
+                Thank you for your message and for taking the time to describe your concern.
+              </p>
+
+              <p>
+                Based on the information you have shared, I would like to offer the following guidance:
+              </p>
+
+              <p style="margin-left:15px; border-left:3px solid #ddd; padding-left:15px;">
+                {{your_response_here}}
+              </p>
+
+              <p>
+                Please note that online consultation has its limitations. If your symptoms change, worsen, or raise concern, an in-person medical assessment may be required.
+              </p>
+
+              <p>
+                Should you wish to clarify any aspect of this response, you are welcome to reply.
+              </p>
+
+              <p style="margin-top:30px;">
+                Kind regards,<br>
+                <strong>Dr Dariusz Ledzinski</strong><br>
+                Gynaecological Consulting Platform
+              </p>
+
+              <p style="font-size:12px; color:#777; margin-top:30px;">
+                This response is provided based on the information available and does not replace an in-person medical consultation where clinically indicated.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+
     email_body = f"""
 New consultation submitted:
 
