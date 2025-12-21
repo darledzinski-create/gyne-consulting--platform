@@ -51,17 +51,49 @@ def gp_liaison():
     return render_template("gp-liaison.html")
 @app.route("/before-you-submit")
 def before_you_submit():
-    return render_template("before-you-submit.html")
+    # Confirmation email to patient (if email provided)
+    if email:
+    patient_message = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": "Dr Dariusz Consults"
+                },
+                "To": [
+                    {
+                        "Email": email,
+                        "Name": name
+                    }
+                ],
+                "Subject": "Your message has been received",
+                "TextPart": f"""
+Dear {name},
 
-# --------------------
-# Form submission
-# --------------------
+Thank you for your message.
 
-@app.route("/submit_question", methods=["POST"])
-def submit_question():
-    name = request.form.get("name", "Anonymous")
-    email = request.form.get("email")
-    question = request.form.get("question")
+Your question has been received and will be reviewed personally.
+If any clarification is required, you may be contacted using the details you provided.
+
+Otherwise, you can expect a thoughtful response once your concern has been carefully considered.
+Please note that response times may vary depending on clinical priorities.
+
+If your concern becomes acute or urgent, please seek immediate in-person medical care.
+
+Kind regards,
+Dr Dariusz
+"""
+            }
+        ]
+    }
+
+    requests.post(
+        "https://api.mailjet.com/v3.1/send",
+        auth=(
+            os.environ.get("MAILJET_API_KEY"),
+            os.environ.get("MAILJET_SECRET_KEY")
+        )
+        json=patient_message
 
 if __name__=="__main__":
     app.run(host="0.0.0.",port=5000)
