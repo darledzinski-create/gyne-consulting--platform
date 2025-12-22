@@ -49,35 +49,29 @@ def first_consultation():
 
 @app.route("/submit_question", methods=["POST"])
 def submit_question():
+    confirmation_subject = "We’ve received your consultation request"
+
+    confirmation_body = f"""
+    Dear {name if name else 'Patient'},
+
+    Thank you for submitting your consultation request through the Gynae Consulting Platform.
+
+    Your message has been received successfully and will be reviewed personally.
+
+    You can expect a thoughtful response once your information has been assessed. 
+    Response times are usually within 24 hours on working days.
+
+    Please note that this service does not replace emergency care. 
+    If you experience acute symptoms or feel unwell, seek immediate medical attention locally.
+
+    Kind regards,
+
+    Dr Dariusz Ledzinski
+    Gynaecological Consultant
+    Gynae Consulting Platform
+    """
     name = request.form.get("name", "Anonymous")
-    email = request.form.get("email")
-    question = request.form.get("question")
     
-    print("FORM RECEIVED:", name, email)
-
-    # (Email sending can be added here later)
-
-confirmation_subject = "We’ve received your consultation request"
-
-confirmation_body = f"""
-Dear {name if name else 'Patient'},
-
-Thank you for submitting your consultation request through the Gynae Consulting Platform.
-
-Your message has been received successfully and will be reviewed personally.
-
-You can expect a thoughtful response once your information has been assessed. 
-Response times are usually within 24 hours on working days.
-
-Please note that this service does not replace emergency care. 
-If you experience acute symptoms or feel unwell, seek immediate medical attention locally.
-
-Kind regards,
-
-Dr Dariusz Ledzinski
-Gynaecological Consultant
-Gynae Consulting Platform
-"""
 
 return render_template("thankyou.html")
 
