@@ -17,11 +17,7 @@ def ask_page():
 def about():
     return render_template("about.html")
 
-@app.route("/submit_question", methods=["POST"])
-def submit_question():
-    name = request.form.get("name", "Anonymous")
-    email = request.form.get("email")
-    question = request.form.get("question")
+
 
 @app.route("/thankyou")
 def thankyou():
@@ -50,14 +46,13 @@ def prescriptions():
 @app.route("/first-consultation")
 def first_consultation():
     return render_template("first-consultation.html")
-    return render_template("disclaimer.html")
 
 @app.route("/submit_question", methods=["POST"])
 def submit_question():
     name = request.form.get("name", "Anonymous")
     email = request.form.get("email")
     question = request.form.get("question")
-
+    
     print("FORM RECEIVED:", name, email)
 
     # (Email sending can be added here later)
