@@ -23,6 +23,35 @@ def submit_question():
     email = request.form.get("email")
     question = request.form.get("question")
 
+@app.route("/thankyou")
+def thankyou():
+    return render_template("thankyou.html")
+
+@app.route("/consent")
+def consent():
+    return render_template("consent.html")
+
+@app.route("/disclaimer")
+def disclaimer():
+    return render_template("disclaimer.html")
+
+@app.route("/communication")
+def communication():
+    return render_template("communication.html")
+
+@app.route("/referral")
+def referral():
+    return render_template("referral.html")
+
+@app.route("/prescriptions")
+def prescriptions():
+    return render_template("prescriptions.html")
+
+@app.route("/first-consultation")
+def first_consultation():
+    return render_template("first-consultation.html")
+    return render_template("disclaimer.html")
+
     email_body = f"""
 A new consultation request has been submitted.
 
