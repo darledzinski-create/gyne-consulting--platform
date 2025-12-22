@@ -73,30 +73,30 @@ def submit_question():
     name = request.form.get("name", "Anonymous")
     
 
-return render_template("thankyou.html")
+    return render_template("thankyou.html")
 
-email_body = f"""
-A new consultation request has been submitted.
+    email_body = f"""
+    A new consultation request has been submitted.
 
-Name: {name}
-Email: {email}
+    Name: {name}
+    Email: {email}
 
-Question:
-{question}
-"""
+    Question:
+    {question}
+    """
 
-    payload = {
+payload = {
         "Messages": [
-            {
+          {
                 "From": {
                     "Email": os.environ.get("MAILJET_FROM_EMAIL"),
                     "Name": "Gynae Consulting Platform"
                 },
                 "To": [
-                    {
-                        "Email": os.environ.get("MAILJET_TO_EMAIL"),
+                        {
+                    "Email": os.environ.get("MAILJET_TO_EMAIL"),
                         "Name": "Dr Dariusz Ledzinski"
-                    }
+                }
                 ],
                 "Subject": "New Consultation Request",
                 "TextPart": email_body
@@ -110,8 +110,8 @@ Question:
             auth=(
                 os.environ.get("MAILJET_API_KEY"),
                 os.environ.get("MAILJET_SECRET_KEY")
-            ),
-            json=payload
+        ),
+        json=payload
         )
 
         if result.status_code not in (200, 201):
@@ -119,7 +119,7 @@ Question:
 
         return render_template("thankyou.html")
 
-    except Exception as e:
+        except Exception as e:
         return f"Unexpected error: {e}", 500
 
 
