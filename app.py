@@ -15,10 +15,7 @@ def submit_question():
     name = request.form.get("name", "Anonymous")
     email = request.form.get("email", "").strip()
     question = request.form.get("question", "").strip()
-
-    # Basic validation
-    if not email or not question:
-        return render_template("ask.html", error="Please provide your email and question.")
+    return render_template("ask.html", error="Please provide your email and question.")
 
     # Build email body (no sending yet if Mailjet fails)
     email_body = f"""
