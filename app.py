@@ -10,7 +10,7 @@ def index():
 def ask():
     return render_template("ask.html")
 
-v@app.route("/submit_question", methods=["POST"])
+@app.route("/submit_question", methods=["POST"])
 def submit_question():
     name = request.form.get("name", "Anonymous")
     email = request.form.get("email", "").strip()
