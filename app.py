@@ -69,8 +69,6 @@ Question:
         # IMPORTANT: still return a page even if email fails
         print("Email error:", e)
 
-    # ✅ FINAL, GUARANTEED RETURN
-    return render_template("thankyou.html")
     
 @app.route("/thank-you")
 def thank_you():
