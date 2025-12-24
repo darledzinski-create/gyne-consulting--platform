@@ -12,9 +12,6 @@ def ask():
 
 @app.route("/submit_question", methods=["POST"])
 def submit_question():
-    name = request.form.get("name", "Anonymous")
-    email = request.form.get("email", "").strip()
-    question = request.form.get("question", "").strip()
     return render_template("ask.html", error="Please provide your email and question.")
 
     # Build email body (no sending yet if Mailjet fails)
