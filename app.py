@@ -1,37 +1,22 @@
+from flask import Flask, render_template, request, redirect, url_for
 
+app = Flask(__name__)
 
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-      },
-                "To": [
-                        {
-                    "Email": os.environ.get("MAILJET_TO_EMAIL"),
-                        "Name": "Dr Dariusz Ledzinski"
-                }
-                ],
-                "Subject": "New Consultation Request",
-                "TextPart": email_body
-            }
-        ]
-    }
+@app.route("/ask")
+def ask():
+    return render_template("ask.html")
 
-    try:
-        result = requests.post(
-            "https://api.mailjet.com/v3.1/send",
-            auth=(
-                os.environ.get("MAILJET_API_KEY"),
-                os.environ.get("MAILJET_SECRET_KEY")
-        ),
-        json=payload
-        )
+@app.route("/submit_question", methods=["POST"])
+def submit_question():
+    return redirect(url_for("thank_you"))
 
-        if result.status_code not in (200, 201):
-            return "Email delivery failed.", 500
-
-        return render_template("thankyou.html")
-
-        except Exception as e:
-        return f"Unexpected error: {e}", 500
-
+@app.route("/thank-you")
+def thank_you():
+    return render_template("thank_you.html")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run()
