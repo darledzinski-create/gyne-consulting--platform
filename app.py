@@ -84,7 +84,7 @@ Dr Dariusz
 
     # --- Show Thank You page ---
 
-    v        # Patient confirmation email
+        # Patient confirmation email
         patient_payload = {
             "Messages": [
                 {
