@@ -86,12 +86,12 @@ Dr Dariusz
 
         # Patient confirmation email
         patient_payload = {
-            "Messages": [
+            "Messages" {
                 {
                     "From": {
-                        "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                        "Name": "Gynae Consulting Platform"
-                    },
+                         "Email": os.environ.get("MAILJET_FROM_EMAIL")
+                         "Name": "Gyne ConsultingPlatform"
+                    }
                     "To": [
                         {
                             "Email": email,
