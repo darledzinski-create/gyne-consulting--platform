@@ -83,6 +83,48 @@ Dr Dariusz
         print("Mailjet error:", e)
 
     # --- Show Thank You page ---
+
+    v        # Patient confirmation email
+        patient_payload = {
+            "Messages": [
+                {
+                    "From": {
+                        "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                        "Name": "Gynae Consulting Platform"
+                    },
+                    "To": [
+                        {
+                            "Email": email,
+                            "Name": name
+                        }
+                    ],
+                    "Subject": "We have received your consultation request",
+                    "TextPart": f"""
+Dear {name},
+
+Thank you for contacting the Gynae Consulting Platform.
+
+Your question has been received and will be reviewed carefully.
+If further clarification is required, you may be contacted by email.
+
+Please note:
+This service does not replace emergency or urgent medical care.
+
+Kind regards,
+Gynae Consulting Platform
+"""
+                }
+            ]
+        }
+
+        requests.post(
+            url,
+            auth=(
+                os.environ.get("MAILJET_API_KEY"),
+                os.environ.get("MAILJET_SECRET_KEY")
+            ),
+            json=patient_payload
+        )       
     return render_template("thank_you.html")
 # ------------------------
 # RUN
