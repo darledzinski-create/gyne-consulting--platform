@@ -57,12 +57,16 @@ def submit_question():
                 "To": [
                     {
                         "Email": os.environ.get("MAILJET_TO_EMAIL"),
-                        "Name": name or "Patient"
+                        "Name": "Dr Dariusz"
                     }
                 ],
+                "Reply To": {
+                    "Email": mail,    #patient emailfrom form
+                    "Name": name
+                },
                 "Subject": "New Gynecological Consultation Request",
                 "TextPart": f"""
-New consultation request received.
+New consultation request
 
 Name: {name}
 Email: {email}
@@ -74,7 +78,7 @@ Question:
         ]
     }
 
-    # Send email
+    mailjet.send.create(data=data)
     try:
         result = mailjet.send.create(data=data)
         print("Mailjet response:", result.status_code, result.json())
