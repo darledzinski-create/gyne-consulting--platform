@@ -29,11 +29,56 @@ def submit_question():
     email = request.form.get("email", "").strip()
     question = request.form.get("question", "").strip()
 
-    patient_payload = {
-        "name": name,
-        "email": email,
-        "question": question
+    # Basic validation
+    if not email or not question:
+        return render_template(
+            "error.html",
+            message="Email and question are required."
+        )
+
+    # Initialize Mailjet client
+    mailjet = Client(
+        auth=(
+            os.environ.get("MAILJET_API_KEY"),
+            os.environ.get("MAILJET_SECRET_KEY")
+        ),
+        version="v3.1"
+    )
+
+    # Email content
+    data = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": "Dr Dariusz Gynecological Consults"
+                },
+                "To": [
+                    {
+                        "Email": os.environ.get("MAILJET_TO_EMAIL"),
+                        "Name": name or "Patient"
+                    }
+                ],
+                "Subject": "New Gynecological Consultation Request",
+                "TextPart": f"""
+New consultation request received.
+
+Name: {name}
+Email: {email}
+
+Question:
+{question}
+"""
+            }
+        ]
     }
+
+    # Send email
+    try:
+        result = mailjet.send.create(data=data)
+        print("Mailjet response:", result.status_code, result.json())
+    except Exception as e:
+        print("Mailjet error:", str(e))
 
     return render_template("thank_you.html")
 # ------------------------
