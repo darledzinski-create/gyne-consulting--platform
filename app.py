@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import os
+from mailjet_rest import Client
 import requests
 
 app = Flask(__name__)
