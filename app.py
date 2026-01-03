@@ -22,7 +22,7 @@ def about_page():
     return render_template("about.html")
 @app.route("/intake")
 def intake():
-    return render_template("intake.html")
+    return "INTAKE ROUTE REACHED"
 
 # ================================
 # SUBMIT QUESTION + CONFIRMATION EMAIL
