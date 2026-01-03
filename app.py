@@ -20,6 +20,9 @@ def ask_page():
 @app.route("/about")
 def about_page():
     return render_template("about.html")
+@app.route("/intake")
+def intake():
+    return render_template("intake.html")
 
 # ================================
 # SUBMIT QUESTION + CONFIRMATION EMAIL
