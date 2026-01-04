@@ -1,6 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
+from mailjet_rest import Client
+import os
 
 app = Flask(__name__)
+
+mailjet = Client(
+    auth=(os.environ.get("MAILJET_API_KEY")
+          os.environ.get(MAILJET_SECRET_KEY")
+    ),
+    version="v3.1"
+)
 
 # --------------------
 # ROUTES
