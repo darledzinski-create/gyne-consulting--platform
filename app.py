@@ -129,13 +129,12 @@ send_email(
     subject="Your consultation request has been received",
     text=patient_email_body
 )
-
     print("NEW INTAKE SUBMISSION:")
         for key, value in intake_data.items():
             print(f"{key}: {value}")
     send_doctor_notification(intake_data)
 
-        return redirect(url_for("intake_submitted"))
+    return redirect(url_for("intake_submitted"))
 
     return render_template("intake.html")
 
