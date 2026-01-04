@@ -24,7 +24,6 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        # TEMPORARY: capture submitted data
         intake_data = {
             "full_name": request.form.get("full_name"),
             "age_dob": request.form.get("age_dob"),
@@ -42,14 +41,13 @@ def intake():
             "medications": request.form.get("medications"),
             "allergies": request.form.get("allergies"),
         }
-
-        # TEMPORARY: print to logs (Render)
         print("NEW INTAKE SUBMISSION:")
         for key, value in intake_data.items():
             print(f"{key}: {value}")
-
         return redirect(url_for("intake_submitted"))
-        return render_template("intake.html")
+        
+    return render_template("intake.html")
+
 
 @app.route("/intake-submitted")
 def intake_submitted():
