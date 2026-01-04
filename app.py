@@ -12,6 +12,27 @@ mailjet = Client(
     version="v3.1"
 )
 
+def send_email(to_email, subject, text):
+    data = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": os.environ.get("MAILJET_FROM_NAME")
+                },
+                "To": [
+                    {
+                        "Email": to_email
+                    }
+                ],
+                "Subject": subject,
+                "TextPart": text
+            }
+        ]
+    }
+    result = mailjet.send.create(data=data)
+    return result.status_code
+
 def send_doctor_notification(intake_data):
     subject = "New Gynecology Intake Submission"
 
