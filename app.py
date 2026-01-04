@@ -51,9 +51,9 @@ def intake():
             "medications": request.form.get("medications"),
             "allergies": request.form.get("allergies"),
         }
-print("NEW INTAKE SUBMISSION:")
-for key, value in intake_data.items():
-    print(f"{key}: {value}")
+    print("NEW INTAKE SUBMISSION:")
+    for key, value in intake_data.items():
+      print(f"{key}: {value}")
 
         # --- EMAIL TO DOCTOR (YOU) ---
 
@@ -110,7 +110,7 @@ data = {
 result = mailjet.send.create(data=data)
 print("MAILJET RESULT:", result.status_code)
 
-return redirect(url_for("intake_submitted"))
+     return redirect(url_for("intake_submitted"))
         
 return render_template("intake.html")
 
