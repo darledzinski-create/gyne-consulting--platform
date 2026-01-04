@@ -64,10 +64,6 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
 
-    print("NEW INTAKE SUBMISSION:")
-    for key, value in intake_data.items():
-    print(f"{key}: {value}")
-    send_doctor_notification(intake_data)
     if request.method == "POST":
         intake_data = {
             "full_name": request.form.get("full_name"),
@@ -90,8 +86,9 @@ def intake():
         print("NEW INTAKE SUBMISSION:")
         for key, value in intake_data.items():
             print(f"{key}: {value}")
+        send_doctor_notification(intake_data)
 
-return redirect(url_for("intake_submitted"))
+        return redirect(url_for("intake_submitted"))
 
     return render_template("intake.html")
 
