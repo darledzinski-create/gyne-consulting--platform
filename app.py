@@ -138,7 +138,7 @@ send_doctor_notification(intake_data)
 
 return redirect(url_for("intake_submitted"))
 
-    return render_template("intake.html")
+return render_template("intake.html")
 
 @app.route("/intake-submitted")
 def intake_submitted():
