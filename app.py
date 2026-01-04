@@ -20,10 +20,16 @@ def ask_page():
 @app.route("/about")
 def about_page():
     return render_template("about.html")
-@app.route("/intake")
-def intake():
-    return render_template("intake.html")
+from flask import Flask, render_template, request, redirect, url_for
 
+app = Flask(__name__)
+
+@app.route("/intake", methods=["GET", "POST"])
+def intake():
+    if request.method == "POST":
+        # For now, we simply accept the data and redirect
+        return redirect(url_for("intake_submitted"))
+    return render_template("intake.html")
 # ================================
 # SUBMIT QUESTION + CONFIRMATION EMAIL
 # ================================
