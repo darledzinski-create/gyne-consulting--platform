@@ -136,7 +136,7 @@ for key, value in intake_data.items():
          
 send_doctor_notification(intake_data)
 
-    return redirect(url_for("intake_submitted"))
+return redirect(url_for("intake_submitted"))
 
     return render_template("intake.html")
 
