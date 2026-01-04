@@ -51,70 +51,14 @@ def intake():
             "medications": request.form.get("medications"),
             "allergies": request.form.get("allergies"),
         }
-    print("NEW INTAKE SUBMISSION:")
-    for key, value in intake_data.items():
-      print(f"{key}: {value}")
 
-        # --- EMAIL TO DOCTOR (YOU) ---
+        print("NEW INTAKE SUBMISSION:")
+        for key, value in intake_data.items():
+            print(f"{key}: {value}")
 
-email_body = f"""
-NEW GYNAECOLOGICAL INTAKE SUBMISSION
+        return redirect(url_for("intake_submitted"))
 
-Name: {intake_data['full_name']}
-Email: {intake_data['email']}
-Phone: {intake_data['phone']}
-Country: {intake_data['country']}
-Age / DOB: {intake_data['age_dob']}
-
-Main concern:
-{intake_data['concern']}
-
-Duration:
-{intake_data['duration']}
-
-Pregnant: {intake_data['pregnant']}
-Severe pain: {intake_data['severe_pain']}
-Bleeding: {intake_data['bleeding']}
-Fever: {intake_data['fever']}
-Emergency flagged: {intake_data['emergency']}
-
-Known conditions:
-{intake_data['conditions']}
-
-Medications:
-{intake_data['medications']}
-
-Allergies:
-{intake_data['allergies']}
-"""
-
-data = {
-    "Messages": [
-        {
-            "From": {
-                "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                "Name": "Online Gynaecology Intake"
-            },
-            "To": [
-                {
-                    "Email": os.environ.get("MAILJET_TO_EMAIL"),
-                    "Name": "Dr Dariusz"
-                }
-            ],
-            "Subject": "New Patient Intake Submission",
-            "TextPart": email_body
-        }
-    ]
-}
-
-result = mailjet.send.create(data=data)
-print("MAILJET RESULT:", result.status_code)
-
-     return redirect(url_for("intake_submitted"))
-        
-return render_template("intake.html")
-
-
+    return render_template("intake.html")
 @app.route("/intake-submitted")
 def intake_submitted():
     return render_template("intake_submitted.html")
