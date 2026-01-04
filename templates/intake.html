@@ -1,12 +1,29 @@
-v<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Intake Test</title>
+  <title>Patient Intake</title>
 </head>
 <body>
 
-<h1>Intake Page Works</h1>
-<p>If you can see this, templates are now correctly placed.</p>
+<h1>Patient Intake Form</h1>
+
+<form method="POST" action="/intake">
+
+  <label>Full name:</label><br>
+  <input type="text" name="full_name" required><br><br>
+
+  <label>Email:</label><br>
+  <input type="email" name="email"><br><br>
+
+  <label>Main concern:</label><br>
+  <textarea name="concern"></textarea><br><br>
+
+  <label>Are you pregnant?</label><br>
+  <input type="checkbox" name="pregnant"> Yes<br><br>
+
+  <button type="submit">Submit</button>
+
+</form>
 
 </body>
 </html>
