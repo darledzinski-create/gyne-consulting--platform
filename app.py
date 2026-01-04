@@ -12,6 +12,36 @@ mailjet = Client(
     version="v3.1"
 )
 
+def send_doctor_notification(intake_data):
+    subject = "New Gynecology Intake Submission"
+
+    body_lines = []
+    for key, value in intake_data.items():
+        body_lines.append(f"{key}: {value}")
+
+    body_text = "\n".join(body_lines)
+
+    data = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": os.environ.get("MAILJET_FROM_NAME"),
+                },
+                "To": [
+                    {
+                        "Email": os.environ.get("MAILJET_TO_EMAIL"),
+                        "Name": "Doctor",
+                    }
+                ],
+                "Subject": subject,
+                "TextPart": body_text,
+            }
+        ]
+    }
+
+    mailjet.send.create(data=data)
+
 # --------------------
 # ROUTES
 # --------------------
@@ -33,6 +63,11 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
+
+    print("NEW INTAKE SUBMISSION:")
+for key, value in intake_data.items():
+    print(f"{key}: {value}")
+    send_doctor_notification(intake_data)
     if request.method == "POST":
         intake_data = {
             "full_name": request.form.get("full_name"),
