@@ -24,9 +24,32 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        return redirect(url_for("intake_submitted"))
-    return render_template("intake.html")
+        # TEMPORARY: capture submitted data
+        intake_data = {
+            "full_name": request.form.get("full_name"),
+            "age_dob": request.form.get("age_dob"),
+            "country": request.form.get("country"),
+            "email": request.form.get("email"),
+            "phone": request.form.get("phone"),
+            "concern": request.form.get("concern"),
+            "duration": request.form.get("duration"),
+            "pregnant": bool(request.form.get("pregnant")),
+            "severe_pain": bool(request.form.get("severe_pain")),
+            "bleeding": bool(request.form.get("bleeding")),
+            "fever": bool(request.form.get("fever")),
+            "emergency": bool(request.form.get("emergency")),
+            "conditions": request.form.get("conditions"),
+            "medications": request.form.get("medications"),
+            "allergies": request.form.get("allergies"),
+        }
 
+        # TEMPORARY: print to logs (Render)
+        print("NEW INTAKE SUBMISSION:")
+        for key, value in intake_data.items():
+            print(f"{key}: {value}")
+
+        return redirect(url_for("intake_submitted"))
+        return render_template("intake.html")
 
 @app.route("/intake-submitted")
 def intake_submitted():
