@@ -132,7 +132,7 @@ def intake():
 
         print("NEW INTAKE SUBMISSION:")
         for key, value in intake_data.items():
-        print(f"{key}: {value}")
+            print(f"{key}: {value}")
          
         send_doctor_notification(intake_data)
 
