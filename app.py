@@ -104,39 +104,39 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-      doctor_email_body = "\n".join(
-      f"{key.replace('_', ' ').title()}: {value}"
-      for key, value in intake_data.items()
-)
+        doctor_email_body = "\n".join(
+        f"{key.replace('_', ' ').title()}: {value}"
+        for key, value in intake_data.items()
+        )
 
-     send_email(
+        send_email(
            to_email=os.environ.get("MAILJET_DOCTOR_EMAIL"),
            subject="New Online Gynaecology Intake",
            text=doctor_email_body
-)
+       )
 
-    patient_email_body = (
+        patient_email_body = (
           "Dear " + (intake_data.get("full_name") or "Patient") + ",\n\n"
           "Thank you for submitting your online gynaecological consultation request.\n\n"
           "Your information has been received and will be reviewed.\n\n"
           "If your symptoms worsen or you require urgent care, please seek immediate in-person medical attention.\n\n"
           "Kind regards,\n"
           "Dr Dariusz Ledzinski"
-)
+       )
 
-    send_email(
+        send_email(
           to_email=intake_data.get("email"),
           subject="Your consultation request has been received",
           text=patient_email_body
-)
+       )
 
-    print("NEW INTAKE SUBMISSION:")
-    for key, value in intake_data.items():
-    print(f"{key}: {value}")
+        print("NEW INTAKE SUBMISSION:")
+        for key, value in intake_data.items():
+        print(f"{key}: {value}")
          
-    send_doctor_notification(intake_data)
+        send_doctor_notification(intake_data)
 
-    return redirect(url_for("intake_submitted"))
+        return redirect(url_for("intake_submitted"))
 
 return render_template("intake.html")
 
