@@ -15,7 +15,7 @@ mailjet = Client(
 def send_email(to_email, subject, text):
     data = {
         "Messages": [
-            {
+           {
                 "From": {
                     "Email": os.environ.get("MAILJET_FROM_EMAIL"),
                     "Name": os.environ.get("MAILJET_FROM_NAME")
