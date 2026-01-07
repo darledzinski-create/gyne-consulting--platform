@@ -136,6 +136,11 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
+        send_intake_emails(intake_data)
+        return redirect(url_for("intake_submitted"))
+
+    return render_templat("intake.html")
+
         doctor_email_body = "\n".join(
         f"{key.replace('_', ' ').title()}: {value}"
         for key, value in intake_data.items()
