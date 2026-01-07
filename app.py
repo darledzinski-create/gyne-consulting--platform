@@ -165,9 +165,7 @@ def intake():
         print("NEW INTAKE SUBMISSION:")
         for key, value in intake_data.items():
             print(f"{key}: {value}")
-         
-        send_doctor_notification(intake_data)
-
+        send_intake_emails(intake_data)
         return redirect(url_for("intake_submitted"))
 
     return render_template("intake.html")
