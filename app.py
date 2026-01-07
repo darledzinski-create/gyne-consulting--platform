@@ -141,9 +141,9 @@ def intake():
 
     return render_templat("intake.html")
 
-        doctor_email_body = "\n".join(
-        f"{key.replace('_', ' ').title()}: {value}"
-        for key, value in intake_data.items()
+           doctor_email_body = "\n".join(
+           f"{key.replace('_', ' ').title()}: {value}"
+           for key, value in intake_data.items()
         )
 
         send_email(
