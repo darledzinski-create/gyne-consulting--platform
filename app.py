@@ -33,36 +33,68 @@ def send_email(to_email, subject, text):
     result = mailjet.send.create(data=data)
     return result.status_code
 
-def send_doctor_notification(intake_data):
-    subject = "New Gynecology Intake Submission"
+def send_intake_emails(intake_data):
+    try:
+        # =========================
+        # EMAIL TO YOU (CLINICAL)
+        # =========================
+        admin_body = "\n".join(
+            [f"{key}: {value}" for key, value in intake_data.items()]
+        )
 
-    body_lines = []
-    for key, value in intake_data.items():
-        body_lines.append(f"{key}: {value}")
+        mailjet.send.create(data={
+            "Messages": [
+                {
+                    "From": {
+                        "Email": "no-reply@drdariuszconsults.com",
+                        "Name": "Gyne Consulting Platform"
+                    },
+                    "To": [
+                        {
+                            "Email": os.environ.get("ADMIN_EMAIL"),
+                            "Name": "Dr Dariusz"
+                        }
+                    ],
+                    "Subject": "New Patient Intake Submission",
+                    "TextPart": f"NEW INTAKE SUBMISSION:\n\n{admin_body}"
+                }
+            ]
+        })
 
-    body_text = "\n".join(body_lines)
+        # =========================
+        # EMAIL TO PATIENT
+        # =========================
+        patient_email = intake_data.get("email")
 
-    data = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                    "Name": os.environ.get("MAILJET_FROM_NAME"),
-                },
-                "To": [
+        if patient_email:
+            mailjet.send.create(data={
+                "Messages": [
                     {
-                        "Email": os.environ.get("MAILJET_TO_EMAIL"),
-                        "Name": "Doctor",
+                        "From": {
+                            "Email": "no-reply@drdariuszconsults.com",
+                            "Name": "Gyne Consulting Platform"
+                        },
+                        "To": [
+                            {
+                                "Email": patient_email
+                            }
+                        ],
+                        "Subject": "We have received your request",
+                        "TextPart": (
+                            "Thank you for your submission.\n\n"
+                            "Your request has been received and will be reviewed.\n\n"
+                            "If your symptoms worsen or you require urgent care, "
+                            "please seek immediate in-person medical attention.\n\n"
+                            "— Gyne Consulting Platform"
+                        )
                     }
-                ],
-                "Subject": subject,
-                "TextPart": body_text,
-            }
-        ]
-    }
+                ]
+            })
 
-    mailjet.send.create(data=data)
+        print("Emails sent successfully")
 
+    except Exception as e:
+        print("EMAIL ERROR:", str(e))
 # --------------------
 # ROUTES
 # --------------------
