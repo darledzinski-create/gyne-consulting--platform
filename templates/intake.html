@@ -1,29 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Patient Intake</title>
+  <meta charset="UTF-8">
+  <title>Request for Online Gynecological Consultation</title>
 </head>
 <body>
 
-<h1>Patient Intake Form</h1>
+<h1>Request for Online Gynecological Consultation</h1>
+
+<p>
+This form is the first step in requesting an online gynecological consultation.
+Please answer honestly. Your information will be reviewed before any consultation is offered.
+</p>
 
 <form method="POST" action="/intake">
 
-  <label>Full name:</label><br>
+  <h2>1. About You</h2>
+
+  <label>Full name</label><br>
   <input type="text" name="full_name" required><br><br>
 
-  <label>Email:</label><br>
-  <input type="email" name="email"><br><br>
+  <label>Age</label><br>
+  <input type="number" name="age" min="10" max="100" required><br><br>
 
-  <label>Main concern:</label><br>
-  <textarea name="concern"></textarea><br><br>
+  <label>Country of residence</label><br>
+  <input type="text" name="country" required><br><br>
 
-  <label>Are you pregnant?</label><br>
-  <input type="checkbox" name="pregnant"> Yes<br><br>
+  <label>Email address</label><br>
+  <input type="email" name="email" required><br><br>
 
-  <button type="submit">Submit</button>
+  <hr>
+
+  <h2>2. Reason for Consultation</h2>
+
+  <label>
+    Please describe your concern in your own words
+  </label><br>
+  <textarea name="concern" rows="5" required></textarea><br><br>
+
+  <label>
+    How long has this been an issue?
+  </label><br>
+  <input type="text" name="duration"><br><br>
+
+  <hr>
+
+  <h2>3. Important Safety Questions</h2>
+
+  <p><strong>Please tick any that apply:</strong></p>
+
+  <label>
+    <input type="checkbox" name="pregnant">
+    I am currently pregnant or may be pregnant
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="severe_pain">
+    I have severe or worsening abdominal or pelvic pain
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="bleeding">
+    I have heavy, unexpected, or persistent vaginal bleeding
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="fever">
+    I have fever or feel generally unwell
+  </label><br>
+
+  <label>
+    <input type="checkbox" name="emergency">
+    I believe this may be an emergency
+  </label><br><br>
+
+  <hr>
+
+  <h2>4. Medical Background (brief)</h2>
+
+  <label>Relevant medical conditions (if any)</label><br>
+  <textarea name="conditions" rows="3"></textarea><br><br>
+
+  <label>Current medications</label><br>
+  <textarea name="medications" rows="3"></textarea><br><br>
+
+  <label>Drug allergies</label><br>
+  <textarea name="allergies" rows="2"></textarea><br><br>
+
+  <hr>
+
+  <h2>5. Important Information</h2>
+
+  <label>
+    <input type="checkbox" required>
+    I understand this service is not for emergencies.
+  </label><br>
+
+  <label>
+    <input type="checkbox" required>
+    I understand that online consultations have limitations.
+  </label><br>
+
+  <label>
+    <input type="checkbox" required>
+    I consent to the review of my information for an online consultation.
+  </label><br><br>
+
+  <button type="submit">Submit Request</button>
 
 </form>
+
+<p style="margin-top:20px; font-size:0.9em;">
+If you are experiencing severe pain, heavy bleeding, or feel unwell,
+please seek urgent in-person medical care.
+</p>
 
 </body>
 </html>
