@@ -167,6 +167,6 @@ def intake():
             print(f"{key}: {value}")
         send_intake_emails(intake_data)
         return redirect(url_for("intake_submitted"))
- @app.route("/intake-submitted")
- def intake_submitted():
-     return render_template("intake_submitted.html")
+  @app.route("/intake-submitted")
+  def intake_submitted():
+      return render_template("intake_submitted.html")
