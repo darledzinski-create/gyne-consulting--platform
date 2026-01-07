@@ -116,7 +116,6 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-
     if request.method == "POST":
         intake_data = {
             "full_name": request.form.get("full_name"),
@@ -136,46 +135,44 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-        send_intake_emails(intake_data)
-        return redirect(url_for("intake_submitted"))
-
-    return render_templat("intake.html")
-
-           doctor_email_body = "\n".join(
-           f"{key.replace('_', ' ').title()}: {value}"
-           for key, value in intake_data.items()
+        # --- build doctor email ---
+        doctor_email_body = "\n".join(
+            f"{key.replace('_', ' ').title()}: {value}"
+            for key, value in intake_data.items()
         )
 
         send_email(
-           to_email=os.environ.get("MAILJET_DOCTOR_EMAIL"),
-           subject="New Online Gynaecology Intake",
-           text=doctor_email_body
-       )
+            to_email=os.environ.get("MAILJET_DOCTOR_EMAIL"),
+            subject="New Online Gynaecology Intake",
+            text=doctor_email_body
+        )
 
+        # --- build patient email ---
         patient_email_body = (
-          "Dear " + (intake_data.get("full_name") or "Patient") + ",\n\n"
-          "Thank you for submitting your online gynaecological consultation request.\n\n"
-          "Your information has been received and will be reviewed.\n\n"
-          "If your symptoms worsen or you require urgent care, please seek immediate in-person medical attention.\n\n"
-          "Kind regards,\n"
-          "Dr Dariusz Ledzinski"
-       )
+            "Dear Patient,\n\n"
+            "Your consultation request has been received.\n\n"
+            "If your symptoms worsen or you require urgent care, "
+            "please seek immediate in-person medical attention.\n\n"
+            "Kind regards,\n"
+            "Dr Dariusz Ledzinski"
+        )
 
         send_email(
-          to_email=intake_data.get("email"),
-          subject="Your consultation request has been received",
-          text=patient_email_body
-       )
+            to_email=intake_data.get("email"),
+            subject="Your consultation request has been received",
+            text=patient_email_body
+        )
 
         print("NEW INTAKE SUBMISSION:")
-        for key, value in intake_data.items():
-            print(f"{key}: {value}")
-        send_intake_emails(intake_data)
+        for k, v in intake_data.items():
+            print(f"{k}: {v}")
+
         return redirect(url_for("intake_submitted"))
 
+    # ---------- GET request ----------
     return render_template("intake.html")
- 
-
+    
+      
 @app.route("/intake-submitted")
 def intake_submitted():
     return render_template("intake_submitted.html")
