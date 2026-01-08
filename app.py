@@ -191,7 +191,8 @@ def send_doctor_email(intake_data):
     print("MAILJET DOCTOR STATUS:", status)
 
     if status != 200:
-        raise RuntimeError("Doctor email FAILED — intake blocked")
+       print("WARNING: Doctor email failed:", result.json())
+       return
 
 def send_patient_email(intake_data):
     patient_email = intake_data.get("email")
