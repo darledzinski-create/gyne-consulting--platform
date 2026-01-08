@@ -185,6 +185,7 @@ def send_doctor_email(intake_data):
             "Subject": "New Online Gynaecology Intake",
             "TextPart": body
             }]
+       }
 
     status = result.status_code
     print("MAILJET DOCTOR STATUS:", status)
