@@ -150,7 +150,7 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-        # --- build doctor email ---
+        # Email to doctor
         doctor_email_body = "\n".join(
             f"{key.replace('_', ' ').title()}: {value}"
             for key, value in intake_data.items()
@@ -162,7 +162,7 @@ def intake():
             text=doctor_email_body
         )
 
-        # --- build patient email ---
+        # Email to patient
         patient_email_body = (
             "Dear Patient,\n\n"
             "Your consultation request has been received.\n\n"
@@ -177,6 +177,10 @@ def intake():
             subject="Your consultation request has been received",
             text=patient_email_body
         )
+
+        return redirect(url_for("intake_submitted"))
+
+    return render_template("intake.html")
 
         print("NEW INTAKE SUBMISSION:")
         for k, v in intake_data.items():
