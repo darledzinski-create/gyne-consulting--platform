@@ -193,7 +193,7 @@ def send_doctor_email(intake_data):
     if status != 200:
         raise RuntimeError("Doctor email FAILED — intake blocked")
 
-   def send_patient_email(intake_data):
+def send_patient_email(intake_data):
     patient_email = intake_data.get("email")
 
     if not patient_email:
