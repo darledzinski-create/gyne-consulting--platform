@@ -178,10 +178,6 @@ def intake():
             text=patient_email_body
         )
 
-        return redirect(url_for("intake_submitted"))
-
-    return render_template("intake.html")
-
         print("NEW INTAKE SUBMISSION:")
         for k, v in intake_data.items():
             print(f"{k}: {v}")
