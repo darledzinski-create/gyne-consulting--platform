@@ -129,65 +129,172 @@ def test_email():
     )
     return "Test emails sent successfully."
 
-@app.route("/intake", methods=["GET", "POST"])
-def intake():
-    if request.method == "POST":
-        intake_data = {
-            "full_name": request.form.get("full_name"),
-            "age_dob": request.form.get("age_dob"),
-            "country": request.form.get("country"),
-            "email": request.form.get("email"),
-            "phone": request.form.get("phone"),
-            "concern": request.form.get("concern"),
-            "duration": request.form.get("duration"),
-            "pregnant": bool(request.form.get("pregnant")),
-            "severe_pain": bool(request.form.get("severe_pain")),
-            "bleeding": bool(request.form.get("bleeding")),
-            "fever": bool(request.form.get("fever")),
-            "emergency": bool(request.form.get("emergency")),
-            "conditions": request.form.get("conditions"),
-            "medications": request.form.get("medications"),
-            "allergies": request.form.get("allergies"),
-        }
+def send_doctor_email(intake_data):
+    body = "\n".join(
+        f"{k.replace('_', ' ').title()}: {v}"
+        for k, v in intake_data.items()
+    )
 
-        # Email to doctor
-        doctor_email_body = "\n".join(
-            f"{key.replace('_', ' ').title()}: {value}"
-            for key, value in intake_data.items()
-        )
+    print("SENDING DOCTOR EMAIL...")
 
-        send_email(
-            to_email=os.environ.get("MAILJET_DOCTOR_EMAIL"),
-            subject="New Online Gynaecology Intake",
-            text=doctor_email_body
-        )
+    result = mailjet.send.create(data={
+        "Messages": [{
+            "From": {
+                "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                "Name": os.environ.get("MAILJET_FROM_NAME")
+            },
+            "To": [{
+                "Email": os.environ.get("MAILJET_TO_EMAIL")
+            }],
+            "Subject": "New Online Gynaecology Intake",
+            "TextPart": body
+        }]
+    )
 
-        # Email to patient
-        patient_email_body = (
-            "Dear Patient,\n\n"
-            "Your consultation request has been received.\n\n"
-            "If your symptoms worsen or you require urgent care, "
-            "please seek immediate in-person medical attention.\n\n"
-            "Kind regards,\n"
-            "Dr Dariusz Ledzinski"
-        )
+    status = result.status_code
+    print("MAILJET DOCTOR STATUS:", status)
 
-        send_email(
-            to_email=intake_data.get("email"),
-            subject="Your consultation request has been received",
-            text=patient_email_body
-        )
+    if status != 200:
+        raise RuntimeError("Doctor email FAILED — intake blocked")
 
-        print("NEW INTAKE SUBMISSION:")
-        for k, v in intake_data.items():
-            print(f"{k}: {v}")
+   vvdef send_patient_email(intake_data):
+    patient_email = intake_data.get("email")
 
-        return redirect(url_for("intake_submitted"))
+    if not patient_email:
+        print("No patient email provided — skipping")
+        return
 
-    # ---------- GET request ----------
-    return render_template("intake.html")
-    
-      
-@app.route("/intake-submitted")
-def intake_submitted():
-    return render_template("intake_submitted.html")
+    body = (
+        "Dear Patient,\n\n"
+        "Your consultation request has been received and will be reviewed.\n\n"
+        "If your symptoms worsen or you require urgent care, please seek immediate medical attention.\n\n"
+        "Kind regards,\n"
+        "Dr Dariusz Ledzinski"
+    )
+
+    try:
+        print("SENDING PATIENT EMAIL TO:", patient_email)
+
+        result = mailjet.send.create(data={
+            "Messages": [{
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": os.environ.get("MAILJET_FROM_NAME")
+                },
+                "To": [{
+                    "Email": patient_email
+                }],
+                "Subject": "Your consultation request has been received",
+                "TextPart": body
+            }]
+        })
+
+        print("MAILJET PATIENT STATUS:", result.status_code)
+
+    except Exception as e:
+        print("PATIENT EMAIL FAILED:", str(e))def send_patient_email(intake_data):
+    patient_email = intake_data.get("email")
+
+    if not patient_email:
+        print("No patient email provided — skipping")
+        return
+
+    body = (
+        "Dear Patient,\n\n"
+        "Your consultation request has been received and will be reviewed.\n\n"
+        "If your symptoms worsen or you require urgent care, please seek immediate medical attention.\n\n"
+        "Kind regards,\n"
+        "Dr Dariusz Ledzinski"
+    )
+
+    try:
+        print("SENDING PATIENT EMAIL TO:", patient_email)
+
+        result = mailjet.send.create(data={
+            "Messages": [{
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": os.environ.get("MAILJET_FROM_NAME")
+                },
+                "To": [{
+                    "Email": patient_email
+                }],
+                "Subject": "Your consultation request has been received",
+                "TextPart": body
+            }]
+        })
+
+        print("MAILJET PATIENT STATUS:", result.status_code)
+
+    except Exception as e:
+        print("PATIENT EMAIL FAILED:", str(e))def send_patient_email(intake_data):
+    patient_email = intake_data.get("email")
+
+    if not patient_email:
+        print("No patient email provided — skipping")
+        return
+
+    body = (
+        "Dear Patient,\n\n"
+        "Your consultation request has been received and will be reviewed.\n\n"
+        "If your symptoms worsen or you require urgent care, please seek immediate medical attention.\n\n"
+        "Kind regards,\n"
+        "Dr Dariusz Ledzinski"
+    )
+
+    try:
+        print("SENDING PATIENT EMAIL TO:", patient_email)
+
+        result = mailjet.send.create(data={
+            "Messages": [{
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": os.environ.get("MAILJET_FROM_NAME")
+                },
+                "To": [{
+                    "Email": patient_email
+                }],
+                "Subject": "Your consultation request has been received",
+                "TextPart": body
+            }]
+        })
+
+        print("MAILJET PATIENT STATUS:", result.status_code)
+
+    except Exception as e:
+        print("PATIENT EMAIL FAILED:", str(e))def send_patient_email(intake_data):
+    patient_email = intake_data.get("email")
+
+    if not patient_email:
+        print("No patient email provided — skipping")
+        return
+
+    body = (
+        "Dear Patient,\n\n"
+        "Your consultation request has been received and will be reviewed.\n\n"
+        "If your symptoms worsen or you require urgent care, please seek immediate medical attention.\n\n"
+        "Kind regards,\n"
+        "Dr Dariusz Ledzinski"
+    )
+
+    try:
+        print("SENDING PATIENT EMAIL TO:", patient_email)
+
+        result = mailjet.send.create(data={
+            "Messages": [{
+                "From": {
+                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                    "Name": os.environ.get("MAILJET_FROM_NAME")
+                },
+                "To": [{
+                    "Email": patient_email
+                }],
+                "Subject": "Your consultation request has been received",
+                "TextPart": body
+            }]
+        })
+
+        print("MAILJET PATIENT STATUS:", result.status_code)
+
+    except Exception as e:
+        print("PATIENT EMAIL FAILED:", str(e))
