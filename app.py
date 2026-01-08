@@ -114,6 +114,21 @@ def about_page():
     return render_template("about.html")
 
 
+@app.route("/test-email")
+def test_email():
+    send_email(
+        to_email=os.environ.get("MAILJET_DOCTOR_EMAIL"),
+        subject="Test email – Doctor",
+        text="This is a test email to confirm Mailjet is working."
+    )
+
+    send_email(
+        to_email=os.environ.get("MAILJET_TEST_PATIENT_EMAIL"),
+        subject="Test email – Patient",
+        text="This is a test email to confirm patient notifications work."
+    )
+    return "Test emails sent successfully."
+
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
