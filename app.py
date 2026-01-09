@@ -184,7 +184,7 @@ def send_doctor_email(intake_data):
     result = mailjet.send.create(data={
         "Messages": [{
             "From": {
-                "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
                 "Name": os.environ.get("MAILJET_FROM_NAME")
             },
             "To": [{
