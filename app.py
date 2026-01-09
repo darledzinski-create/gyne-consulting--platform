@@ -137,9 +137,17 @@ def intake():
         print("NEW INTAKE SUBMISSION:")
         for k, v in intake_data.items():
             print(f"{k}: {v}")
-
-        send_doctor_email(intake_data)
-        send_patient_email(intake_data)
+        
+        # Doctor email (must not crush intake)
+        try:
+            send_doctor_email(intake_data)
+        except Exception as e:
+            print("Error sending doctoremail:", str(e))
+        # Patient email (optiional, alsomust not crush)
+        try:
+            send_patient_email(intake_data)
+        except Exceptiion as e:
+            print("Error sending patientemail:", str(e))
 
         return redirect(url_for("intake_submitted"))
 
