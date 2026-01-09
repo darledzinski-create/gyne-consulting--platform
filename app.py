@@ -182,6 +182,21 @@ def send_doctor_email(intake_data):
     print("SENDING DOCTOR EMAIL...")
 
     result = mailjet.send.create(data={
+     "Messages": [{
+            "From": {
+                "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
+                if not doctor email:
+                    raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
+                "Name": os.environ.get("MAILJET_FROM_NAME")
+            },
+            "To": [{
+                "Email": os.environ.get("MAILJET_TO_EMAIL")
+            }],
+            "Subject": "New Online Gynaecology Intake",
+            "TextPart": body
+            }]
+       })
+    
     response = result.json()
     message = response["Messages"][0]
 
