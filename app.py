@@ -182,9 +182,20 @@ def send_doctor_email(intake_data):
     print("SENDING DOCTOR EMAIL...")
 
     result = mailjet.send.create(data={
+    response = result.json()
+    message = response["Messages"][0]
+
+    status = message["Status"]
+    print("MAILJET STATUS:", status)
+
+    if "To" in message and message["T"]:
+        message_id = message["To"][0].get("MessageID")
+        print("MAILJET MESSAGE ID:", message_id)
         "Messages": [{
             "From": {
                 "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
+                if not doctor email:
+                    raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
                 "Name": os.environ.get("MAILJET_FROM_NAME")
             },
             "To": [{
