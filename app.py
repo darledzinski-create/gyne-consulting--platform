@@ -226,8 +226,9 @@ def log_mailjet_response(result):
 
     except Exception as e:
         print("MAILJET RESPONSE PARSE ERROR:", str(e))
-    
-    "Messages": [{
+        
+    payload= {
+        "Messages": [{
             "From": {
                 "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
                 "Name": os.environ.get("MAILJET_FROM_NAME")
@@ -238,6 +239,7 @@ def log_mailjet_response(result):
             "Subject": "New Online Gynaecology Intake",
             "TextPart": body
             }]
+    }
     
     response = result.json()
     message = response["Messages"][0]
