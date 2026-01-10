@@ -31,6 +31,9 @@ def send_email(to_email, subject, text):
         ]
     }
     result = mailjet.send.create(data=data)
+    print("MAILJET RAW RESPONSE:")
+    print(result.json())
+    print("END MAILJET RESPONSE")v
     return result.status_code
 
 def send_intake_emails(intake_data):
