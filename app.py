@@ -184,7 +184,7 @@ def send_doctor_email(intake_data):
 
     print("SENDING DOCTOR EMAIL...")
 
-    doctor_email = os.environ.get(MAILJET_DOCTOR_EMAIL")
+    doctor_email = os.environ.get("MAILJET_DOCTOR_EMAIL")
     if not doctor email:
         raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
 
