@@ -227,7 +227,7 @@ def log_mailjet_response(result):
     except Exception as e:
         print("MAILJET RESPONSE PARSE ERROR:", str(e))
     
-     "Messages": [{
+    "Messages": [{
             "From": {
                 "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
                 "Name": os.environ.get("MAILJET_FROM_NAME")
