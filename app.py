@@ -211,11 +211,6 @@ def send_doctor_email(intake_data):
     if "To" in message and message["To"]:
         message_id = message["To"][0].get("MessageID")
         print("MAILJET MESSAGE ID:", message_id)
-        
-            "Subject": "New Online Gynaecology Intake",
-            "TextPart": body
-            }]
-       })
 
     status = result.status_code
     print("MAILJET DOCTOR STATUS:", status)
