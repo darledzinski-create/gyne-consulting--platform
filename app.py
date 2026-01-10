@@ -176,19 +176,57 @@ def test_email():
     )
     return "Test emails sent successfully."
 
-def send_doctor_email(intake_data):
+ def send_doctor_email(intake_data):
+    print("SENDING DOCTOR EMAIL...")
+
+    doctor_email = os.environ.get("MAILJET_DOCTOR_EMAIL")
+    from_name = os.environ.get("MAILJET_FROM_NAME")
+
+    if not doctor_email:
+        raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
+
+    if not from_name:
+        raise RuntimeError("MAILJET_FROM_NAME not set")
+
     body = "\n".join(
         f"{k.replace('_', ' ').title()}: {v}"
         for k, v in intake_data.items()
     )
 
-    print("SENDING DOCTOR EMAIL...")
+    payload = {
+        "Messages": [{
+            "From": {
+                "Email": doctor_email,
+                "Name": from_name
+            },
+            "To": [{
+                "Email": doctor_email
+            }],
+            "Subject": "New Online Gynaecology Intake",
+            "TextPart": body
+        }]
+    }
 
-    doctor_email = os.environ.get("MAILJET_DOCTOR_EMAIL")
-    if not doctor_email:
-        raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
+    result = mailjet.send.create(data=payload)
+    log_mailjet_response(result)def send_doctor_email(intake_data):
 
-    result = mailjet.send.create(data={
+ def log_mailjet_response(result):
+    print("MAILJET HTTP STATUS:", result.status_code)
+
+    try:
+        response = result.json()
+        print("MAILJET RAW RESPONSE:", response)
+
+        message = response["Messages"][0]
+        print("MAILJET MESSAGE STATUS:", message.get("Status"))
+
+        if "To" in message and message["To"]:
+            message_id = message["To"][0].get("MessageID")
+            print("MAILJET MESSAGE ID:", message_id)
+
+    except Exception as e:
+        print("MAILJET RESPONSE PARSE ERROR:", str(e))
+    
      "Messages": [{
             "From": {
                 "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
@@ -200,7 +238,6 @@ def send_doctor_email(intake_data):
             "Subject": "New Online Gynaecology Intake",
             "TextPart": body
             }]
-       })
     
     response = result.json()
     message = response["Messages"][0]
