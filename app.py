@@ -208,7 +208,7 @@ def send_doctor_email(intake_data):
     }
 
     result = mailjet.send.create(data=payload)
-    log_mailjet_response(result)def send_doctor_email(intake_data):
+    log_mailjet_response(result)
 
  def log_mailjet_response(result):
     print("MAILJET HTTP STATUS:", result.status_code)
