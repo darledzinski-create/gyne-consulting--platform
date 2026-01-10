@@ -176,7 +176,7 @@ def test_email():
     )
     return "Test emails sent successfully."
 
- def send_doctor_email(intake_data):
+def send_doctor_email(intake_data):
     print("SENDING DOCTOR EMAIL...")
 
     doctor_email = os.environ.get("MAILJET_DOCTOR_EMAIL")
