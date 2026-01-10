@@ -208,19 +208,10 @@ def send_doctor_email(intake_data):
     status = message["Status"]
     print("MAILJET STATUS:", status)
 
-    if "To" in message and message["T"]:
+    if "To" in message and message["To"]:
         message_id = message["To"][0].get("MessageID")
         print("MAILJET MESSAGE ID:", message_id)
-        "Messages": [{
-            "From": {
-                "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
-                if not doctor email:
-                    raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
-                "Name": os.environ.get("MAILJET_FROM_NAME")
-            },
-            "To": [{
-                "Email": os.environ.get("MAILJET_TO_EMAIL")
-            }],
+        
             "Subject": "New Online Gynaecology Intake",
             "TextPart": body
             }]
