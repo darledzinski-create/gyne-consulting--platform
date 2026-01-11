@@ -141,19 +141,7 @@ def intake():
         for k, v in intake_data.items():
             print(f"{k}: {v}")
         
-        # Doctor email (must not crush intake)
-        try:
-            send_doctor_email(intake_data)
-        except Exception as e:
-            print("Error sending doctoremail:", str(e))
-        # Patient email (optiional, alsomust not crush)
-        try:
-            send_patient_email(intake_data)
-        except Exceptiion as e:
-            print("Error sending patientemail:", str(e))
-
-        return redirect(url_for("intake_submitted"))
-
+       
     # GET request
     return render_template("intake.html")
 
@@ -177,35 +165,8 @@ def test_email():
     return "Test emails sent successfully."
 
 def send_doctor_email(intake_data):
-    print("SENDING DOCTOR EMAIL...")
-
-    doctor_email = os.environ.get("MAILJET_DOCTOR_EMAIL")
-    from_name = os.environ.get("MAILJET_FROM_NAME")
-
-    if not doctor_email:
-        raise RuntimeError("MAILJET_DOCTOR_EMAIL not set")
-
-    if not from_name:
-        raise RuntimeError("MAILJET_FROM_NAME not set")
-
-    body = "\n".join(
-        f"{k.replace('_', ' ').title()}: {v}"
-        for k, v in intake_data.items()
-    )
-
-    payload = {
-        "Messages": [{
-            "From": {
-                "Email": doctor_email,
-                "Name": from_name
-            },
-            "To": [{
-                "Email": doctor_email
-            }],
-            "Subject": "New Online Gynaecology Intake",
-            "TextPart": body
-        }]
-    }
+    print("SEND_DOCTOR_EMAIL called")
+    print("INTAKE DATA",intake_data)
 
     result = mailjet.send.create(data=payload)
     log_mailjet_response(result)
