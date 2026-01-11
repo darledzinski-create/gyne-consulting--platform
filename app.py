@@ -149,8 +149,7 @@ def intake():
 
     print("STEP D - returning response")
     return "OK"
-        
-return render_template("intake.html")
+    return render_template("intake.html")
 
 @app.route("/intake-submitted")
 def intake_submitted():
