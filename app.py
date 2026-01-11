@@ -118,8 +118,10 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    print("INTAKE ROUTE HIT")
+    print("STEP A - route entered"))
+    
     if request.method == "POST":
+        print("STEP B - POST detected")
         intake_data = {
             "full_name": request.form.get("full_name"),
             "age_dob": request.form.get("age_dob"),
@@ -136,7 +138,24 @@ def intake():
             "conditions": request.form.get("conditions"),
             "medications": request.form.get("medications"),
             "allergies": request.form.get("allergies"),
+        
+        print("ABOUT TO CALL send_doctor_email")
+        send_doctor_email(intake_data)
+        print("RETURNING RESPONSE")
+            
         }
+
+        print("STEP C - intake data built")
+        print(intake_data)
+
+        print("STEP D - about to call send_doctor_email")
+        send_doctor_email(intake_data)
+        print("STEP E - send_doctor_email returned")
+
+        return "Thank you"
+
+        # GET request
+        return render_template("intake.html")
 
         print("NEW INTAKE SUBMISSION:")
         for k, v in intake_data.items():
