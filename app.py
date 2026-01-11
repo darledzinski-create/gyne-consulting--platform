@@ -138,7 +138,6 @@ def intake():
             "conditions": request.form.get("conditions"),
             "medications": request.form.get("medications"),
             "allergies": request.form.get("allergies"),
-        
         print("ABOUT TO CALL send_doctor_email")
         send_doctor_email(intake_data)
         print("RETURNING RESPONSE")
