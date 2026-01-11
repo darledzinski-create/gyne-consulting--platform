@@ -118,6 +118,7 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
+    print("INTAKE ROUTE HIT")
     if request.method == "POST":
         intake_data = {
             "full_name": request.form.get("full_name"),
@@ -165,6 +166,7 @@ def test_email():
     return "Test emails sent successfully."
 
 def send_doctor_email(intake_data):
+    print("ABOUT TO CALL send_doctor_email")
     print("SEND_DOCTOR_EMAIL called")
     print("INTAKE DATA",intake_data)
 
