@@ -186,7 +186,7 @@ def send_doctor_email(intake_data):
     print("SEND_DOCTOR_EMAIL called")
     print("INTAKE DATA",intake_data)
 
-     payload = {
+ payload = {
     "Messages": [{
         "From": {
             "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
