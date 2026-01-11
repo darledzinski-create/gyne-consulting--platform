@@ -186,19 +186,23 @@ def send_doctor_email(intake_data):
     print("SEND_DOCTOR_EMAIL called")
     print("INTAKE DATA",intake_data)
 
-payload = {
-    "Messages": [{
-        "From": {
-            "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
-            "Name": os.environ.get("MAILJET_FROM_NAME")
-        },
-        "To": [{
-            "Email": os.environ.get("MAILJET_TO_EMAIL")
-        }],
-        "Subject": "New Online Gynaecology Intake",
-        "TextPart": body
-    }]
+    body = "\n".join(
+        f"{k.replace('_','').title?()}: {v}"
+        fork, v in intake_data.items()
+    )
 
+    payload = {
+        "Messages": [{
+            "From": {
+                "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
+                "Name": os.environ.get("MAILJET_FROM_NAME")
+            },
+            "To": [{
+                "Email": os.environ.get("MAILJET_TO_EMAIL")
+            }],
+            "Subject": "New Online Gynaecology Intake",
+            "TextPart": body
+        }]
     }
 
     result = mailjet.send.create(data=payload)
