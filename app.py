@@ -165,10 +165,7 @@ def intake():
 
     }
 
-    result = mailjet.send.create(data=payload)
-    log_mailjet_response(result)
-
-    return "Thank you"
+   return "Thank you"
 
     print("NEW INTAKE SUBMISSION:")
     for k, v in intake_data.items():
@@ -201,6 +198,21 @@ def send_doctor_email(intake_data):
     print("SEND_DOCTOR_EMAIL called")
     print("INTAKE DATA",intake_data)
 
+     payload = {
+    "Messages": [{
+        "From": {
+            "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
+            "Name": os.environ.get("MAILJET_FROM_NAME")
+        },
+        "To": [{
+            "Email": os.environ.get("MAILJET_TO_EMAIL")
+        }],
+        "Subject": "New Online Gynaecology Intake",
+        "TextPart": body
+    }]
+
+    }
+
     result = mailjet.send.create(data=payload)
     log_mailjet_response(result)
 
@@ -221,21 +233,7 @@ def log_mailjet_response(result):
     except Exception as e:
         print("MAILJET RESPONSE PARSE ERROR:", str(e))
         
-    payload= {
-        "Messages": [{
-            "From": {
-                "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
-                "Name": os.environ.get("MAILJET_FROM_NAME")
-            },
-            "To": [{
-                "Email": os.environ.get("MAILJET_TO_EMAIL")
-            }],
-            "Subject": "New Online Gynaecology Intake",
-            "TextPart": body
-            }]
-    }
-    
-    response = result.json()
+   response = result.json()
     message = response["Messages"][0]
 
     status = message["Status"]
