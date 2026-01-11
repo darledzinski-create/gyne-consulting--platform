@@ -170,16 +170,12 @@ def intake():
     result = mailjet.send.create(data=payload)
     log_mailjet_response(result)
 
-        return "Thank you"
-
-        # GET request
-        return render_template("intake.html")
+    return "Thank you"
 
         print("NEW INTAKE SUBMISSION:")
         for k, v in intake_data.items():
             print(f"{k}: {v}")
         
-       
     # GET request
     return render_template("intake.html")
 
