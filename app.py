@@ -215,7 +215,7 @@ def log_mailjet_response(result):
     except Exception as e:
         print("MAILJET RESPONSE PARSE ERROR:", str(e))
         
-   response = result.json()
+    response = result.json()
     message = response["Messages"][0]
 
     status = message["Status"]
