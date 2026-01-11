@@ -118,7 +118,7 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    print("STEP A - route entered"))
+    print("STEP A - route entered")
     
     if request.method == "POST":
         print("STEP B - POST detected")
