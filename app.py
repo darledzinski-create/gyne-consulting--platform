@@ -122,6 +122,25 @@ def intake():
     
     if request.method == "POST":
         print("STEP B - POST detected")
+
+ payload = {
+    "Messages": [{
+        "From": {
+            "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
+            "Name": os.environ.get("MAILJET_FROM_NAME")
+        },
+        "To": [{
+            "Email": os.environ.get("MAILJET_TO_EMAIL")
+        }],
+        "Subject": "New Online Gynaecology Intake",
+        "TextPart": body
+    }]
+
+    }
+
+    result = mailjet.send.create(data=payload)
+    log_mailjet_response(result)
+ 
         intake_data = {
             "full_name": request.form.get("full_name"),
             "age_dob": request.form.get("age_dob"),
