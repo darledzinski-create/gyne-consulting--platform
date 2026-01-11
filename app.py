@@ -122,7 +122,8 @@ def intake():
     
     if request.method == "POST":
         print("STEP B - POST detected")
-
+    
+    intake_data ={
         "full_name": request.form.get("full_name"),
         "age_dob": request.form.get("age_dob"),
         "country": request.form.get("country"),
@@ -138,6 +139,8 @@ def intake():
         "conditions": request.form.get("conditions"),
         "medications": request.form.get("medications"),
         "allergies": request.form.get("allergies"),
+
+    }
         
         print("ABOUT TO CALL send_doctor_email")
         send_doctor_email(intake_data)
@@ -150,22 +153,7 @@ def intake():
         send_doctor_email(intake_data)
         print("STEP E - send_doctor_email returned")
 
-    payload = {
-    "Messages": [{
-        "From": {
-            "Email": os.environ.get("MAILJET_DOCTOR_EMAIL"),
-            "Name": os.environ.get("MAILJET_FROM_NAME")
-        },
-        "To": [{
-            "Email": os.environ.get("MAILJET_TO_EMAIL")
-        }],
-        "Subject": "New Online Gynaecology Intake",
-        "TextPart": body
-    }]
-
-    }
-
-   return "Thank you"
+    return "Thank you"
 
     print("NEW INTAKE SUBMISSION:")
     for k, v in intake_data.items():
