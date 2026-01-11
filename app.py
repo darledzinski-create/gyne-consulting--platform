@@ -142,16 +142,16 @@ def intake():
 
     }
         
-        print("ABOUT TO CALL send_doctor_email")
-        send_doctor_email(intake_data)
-        print("RETURNING RESPONSE")
+    print("ABOUT TO CALL send_doctor_email")
+    send_doctor_email(intake_data)
+    print("RETURNING RESPONSE")
 
-        print("STEP C - intake data built")
-        print(intake_data)
+    print("STEP C - intake data built")
+    print(intake_data)
 
-        print("STEP D - about to call send_doctor_email")
-        send_doctor_email(intake_data)
-        print("STEP E - send_doctor_email returned")
+    print("STEP D - about to call send_doctor_email")
+    send_doctor_email(intake_data)
+    print("STEP E - send_doctor_email returned")
 
     return "Thank you"
 
