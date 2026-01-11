@@ -172,9 +172,9 @@ def intake():
 
     return "Thank you"
 
-        print("NEW INTAKE SUBMISSION:")
-        for k, v in intake_data.items():
-            print(f"{k}: {v}")
+    print("NEW INTAKE SUBMISSION:")
+    for k, v in intake_data.items():
+        print(f"{k}: {v}")
         
     # GET request
     return render_template("intake.html")
