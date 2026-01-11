@@ -141,26 +141,16 @@ def intake():
         "allergies": request.form.get("allergies"),
 
     }
-        
-    print("ABOUT TO CALL send_doctor_email")
-    send_doctor_email(intake_data)
-    print("RETURNING RESPONSE")
 
     print("STEP C - intake data built")
     print(intake_data)
 
-    print("STEP D - about to call send_doctor_email")
     send_doctor_email(intake_data)
-    print("STEP E - send_doctor_email returned")
 
-    return "Thank you"
-
-    print("NEW INTAKE SUBMISSION:")
-    for k, v in intake_data.items():
-        print(f"{k}: {v}")
+    print("STEP D - returning response")
+    return "OK"
         
-    # GET request
-    return render_template("intake.html")
+return render_template("intake.html")
 
 @app.route("/intake-submitted")
 def intake_submitted():
