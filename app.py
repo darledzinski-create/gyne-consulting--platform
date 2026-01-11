@@ -177,7 +177,7 @@ def send_doctor_email(intake_data):
     print("INTAKE DATA",intake_data)
 
     body = "\n".join(
-        f"{k.replace('_','').title?()}: {v}"
+        f"{k.replace('_','').title()}: {v}"
         for k, v in intake_data.items()
     )
     
