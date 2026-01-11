@@ -188,9 +188,9 @@ def send_doctor_email(intake_data):
 
     body = "\n".join(
         f"{k.replace('_','').title?()}: {v}"
-        fork, v in intake_data.items()
+        for k, v in intake_data.items()
     )
-
+    
     payload = {
         "Messages": [{
             "From": {
