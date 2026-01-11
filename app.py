@@ -167,8 +167,8 @@ def intake():
 
     }
 
-        result = mailjet.send.create(data=payload)
-        log_mailjet_response(result)
+    result = mailjet.send.create(data=payload)
+    log_mailjet_response(result)
 
         return "Thank you"
 
