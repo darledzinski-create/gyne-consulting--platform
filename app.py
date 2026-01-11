@@ -144,8 +144,6 @@ def intake():
         print("ABOUT TO CALL send_doctor_email")
         send_doctor_email(intake_data)
         print("RETURNING RESPONSE")
-            
-        }
 
         print("STEP C - intake data built")
         print(intake_data)
