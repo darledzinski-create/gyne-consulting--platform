@@ -118,32 +118,41 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    if request.method == "GET":
-        return render_template("intake.html")
-    
+    print("STEP A - route entered")
+
     if request.method == "POST":
-        intake_data ={
-        "full_name": request.form.get("full_name"),
-        "age_dob": request.form.get("age_dob"),
-        "country": request.form.get("country"),
-        "email": request.form.get("email"),
-        "phone": request.form.get("phone"),
-        "concern": request.form.get("concern"),
-        "duration": request.form.get("duration"),
-        "pregnant": bool(request.form.get("pregnant")),
-        "severe_pain": bool(request.form.get("severe_pain")),
-        "bleeding": bool(request.form.get("bleeding")),
-        "fever": bool(request.form.get("fever")),
-        "emergency": bool(request.form.get("emergency")),
-        "conditions": request.form.get("conditions"),
-        "medications": request.form.get("medications"),
-        "allergies": request.form.get("allergies"),
-    }
+        print("STEP B - POST detected")
 
-    send_doctor_email(intake_data)
-    return "OK"
+        intake_data = {
+            "full_name": request.form.get("full_name"),
+            "age_dob": request.form.get("age_dob"),
+            "country": request.form.get("country"),
+            "email": request.form.get("email"),
+            "phone": request.form.get("phone"),
+            "concern": request.form.get("concern"),
+            "duration": request.form.get("duration"),
+            "pregnant": bool(request.form.get("pregnant")),
+            "severe_pain": bool(request.form.get("severe_pain")),
+            "bleeding": bool(request.form.get("bleeding")),
+            "fever": bool(request.form.get("fever")),
+            "emergency": bool(request.form.get("emergency")),
+            "conditions": request.form.get("conditions"),
+            "medications": request.form.get("medications"),
+            "allergies": request.form.get("allergies"),
+        }
+
+        print("STEP C - intake data built")
+        print(intake_data)
+
+        print("STEP D - calling send_doctor_email")
+        send_doctor_email(intake_data)
+
+        print("STEP E - rendering thank you page")
+        return render_template("thank_you.html")
+
+    # GET request → show intake form
     return render_template("intake.html")
-
+    
 @app.route("/intake-submitted")
 def intake_submitted():
     return render_template("intake_submitted.html")
