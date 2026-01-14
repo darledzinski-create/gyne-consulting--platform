@@ -142,12 +142,17 @@ def intake():
         print("STEP B - intake data built")
         print(intake_data)
 
-        #Send email (allowed to fail sailently)
+        # Email sending happens here (allowed to fail silently)
         try:
             send_doctor_email(intake_data)
         except Exception as e:
-            print("WARNING: send_doctor_email failed:",str(e))
+            print("WARNING: send_doctor_email failed:", str(e))
 
+        try:
+            send_patient_email(intake_data)
+        except Exception as e:
+            print("WARNING: send_patient_email failed:", str(e))
+            
         print("STEP C - rendering thank you page")
         return render_template("thank_you.html")
     #Get request - show intake form
@@ -236,38 +241,37 @@ def log_mailjet_response(result):
        return
 
 def send_patient_email(intake_data):
-    patient_email = intake_data.get("email")
+    print("SEND_PATIENT_EMAIL called")
 
+    patient_email = intake_data.get("email")
     if not patient_email:
-        print("No patient email provided — skipping")
+        print("WARNING: No patient email provided")
         return
 
     body = (
-        "Dear Patient,\n\n"
-        "Your consultation request has been received and will be reviewed.\n\n"
-        "If your symptoms worsen or you require urgent care, please seek immediate medical attention.\n\n"
+        "Thank you for your submission.\n\n"
+        "Your consultation request has been received successfully.\n\n"
+        "Dr Dariusz Ledzinski will review your information and respond "
+        "within 1–2 working days.\n\n"
+        "If your symptoms worsen or become urgent, please seek immediate medical care.\n\n"
         "Kind regards,\n"
-        "Dr Dariusz Ledzinski"
+        "Dr Dariusz Ledzinski\n"
+        "Gynaecological Online Consultation"
     )
 
-    try:
-        print("SENDING PATIENT EMAIL TO:", patient_email)
+    payload = {
+        "Messages": [{
+            "From": {
+                "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                "Name": os.environ.get("MAILJET_FROM_NAME")
+            },
+            "To": [{
+                "Email": patient_email
+            }],
+            "Subject": "Your consultation request has been received",
+            "TextPart": body
+        }]
+    }
 
-        result = mailjet.send.create(data={
-            "Messages": [{
-                "From": {
-                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                    "Name": os.environ.get("MAILJET_FROM_NAME")
-                },
-                "To": [{
-                    "Email": patient_email
-                }],
-                "Subject": "Your consultation request has been received",
-                "TextPart": body
-            }]
-        })
-
-        print("MAILJET PATIENT STATUS:", result.status_code)
-
-    except Exception as e:
-        print("PATIENT EMAIL FAILED:", str(e))
+    result = mailjet.send.create(data=payload)
+    log_mailjet_response(result)
