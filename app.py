@@ -144,11 +144,16 @@ def intake():
         print("STEP C - intake data built")
         print(intake_data)
 
+        #Email sending happens here (allowed to fail sailently)
+        try:
+            send_doctor_email(intake_data)
+        except Exception as e:
+            print("WARNING: send_doctor_email failed:",str(e))
+
+        print("STEP D - rendering thank youpage")
+
         print("STEP D - calling send_doctor_email")
         send_doctor_email(intake_data)
-
-        print("STEP E - rendering thank you page")
-        return render_template("thank_you.html")
 
     # GET request → show intake form
     return render_template("intake.html")
