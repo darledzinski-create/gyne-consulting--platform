@@ -118,10 +118,8 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    print("STEP A - route entered")
-
     if request.method == "POST":
-        print("STEP B - POST detected")
+        print("STEP A - POST received")
 
         intake_data = {
             "full_name": request.form.get("full_name"),
@@ -141,17 +139,21 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-        print("STEP C - intake data built")
+        print("STEP B - intake data built")
         print(intake_data)
 
-        #Email sending happens here (allowed to fail sailently)
+        #Send email (allowed to fail sailently)
         try:
             send_doctor_email(intake_data)
         except Exception as e:
             print("WARNING: send_doctor_email failed:",str(e))
 
-        print("STEP D - rendering thank you page")
+        print("STEP C - rendering thank you page")
         return render_template("thank_you.html")
+    #Get request - show intake form
+    print("STEP GET - rendering intake form")
+    return render_template("intake.html")
+        
     
 @app.route("/intake-submitted")
 def intake_submitted():
