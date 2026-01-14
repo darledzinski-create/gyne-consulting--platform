@@ -151,12 +151,7 @@ def intake():
             print("WARNING: send_doctor_email failed:",str(e))
 
         print("STEP D - rendering thank you page")
-
-        print("STEP D - calling send_doctor_email")
-        send_doctor_email(intake_data)
-
-    # GET request → show intake form
-    return render_template("intake.html")
+        return render_template("thank_you.html")
     
 @app.route("/intake-submitted")
 def intake_submitted():
