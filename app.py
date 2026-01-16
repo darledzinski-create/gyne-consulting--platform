@@ -118,7 +118,9 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
+    
     if request.method == "POST":
+        
         intake_data = {
             "full_name": request.form.get("full_name"),
             "age_dob": request.form.get("age_dob"),
@@ -139,14 +141,12 @@ def intake():
 
         print("STEP B - intak data built")
         print(intake_data)
-
-        # Doctor email 
+ 
         try:
             send_doctor_email(intake_data)
         except Exception as e:
             print("WARNING: send_doctor_email failed:", str(e))
 
-        # Patient email
         try:
             send_patient_email(intake_data)
         except Exception as e:
@@ -155,7 +155,7 @@ def intake():
         print("STEP C - rendering thank you page")
         return render_template("thank_.html")
 
-    # GET request Always returns the intake form
+    # ---- GET request ----
     print("STEP GET - rendering intake form")
     return render_template("intake.html")
         
