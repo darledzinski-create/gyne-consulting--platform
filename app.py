@@ -156,7 +156,7 @@ def intake():
         print("STEP C - rendering thank you page")
         return render_template("thank_.html")
 
-    # GET request - ALWAYS return the form
+    # THIS MUST BE THE LAST LINE OF THE FUNCION
     print("STEP GET - rendering intake form")
     return render_template("intake.html")
         
