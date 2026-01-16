@@ -147,7 +147,7 @@ def intake():
         except Exception as e:
             print("WARNING: send_doctor_email failed:", str(e))
 
-        # Ptient email (allowed to fail)
+        # Patient confirmation email
         try:
             send_patient_email(intake_data)
         except Exception as e:
@@ -155,6 +155,10 @@ def intake():
 
         print("STEP C - rendering thank you page")
         return render_template("thank_.html")
+
+    # GET request - ALWAYS return the form
+    print("STEP GET - rendering intake form")
+    return render_template("intake.html")
         
 @app.route("/test-email")
 def test_email():
