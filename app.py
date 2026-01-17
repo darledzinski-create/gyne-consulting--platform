@@ -156,12 +156,11 @@ def intake():
             print("VALIDATION FAILED:", errors)
             return render_template("intake.html")
                
-    def triage_case(intake_data):
-    """
+def triage_case(intake_data):
+    
     Returns (risk_level, flags)
     risk_level: 'URGENT', 'SEMI-URGENT', 'ROUTINE'
     flags: list of strings explaining why
-    """
     flags = []
 
     if intake_data.get("emergency"):
