@@ -139,20 +139,13 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-        return render_template("thank_you.html")
-    return render_template("intake.html")
-
-        print("STEP B - intake data built")
-        print(intake_data)
-
-        # ---- Basic server-side validation ----
-        errors = []
-
-        if not intake_data.get("full_name"):
-            errors.append("Full name is required.")
-
         if not intake_data.get("email"):
             errors.append("Email address is required.")
+
+        if erors:
+            return render_template("intake.html", errors=errors)
+            return render_template("thank_you.html")
+        
         elif "@" not in intake_data["email"]:
             errors.append("Email address is invalid.")
 
@@ -161,10 +154,8 @@ def intake():
 
         if errors:
             print("VALIDATION FAILED:", errors)
-            return render_template(
-                 "intake.html",
-                 errors=errors,
-                 form_data=intake_data
+            return render_template("intake.html")
+               
             )
 
 def triage_case(intake_data):
