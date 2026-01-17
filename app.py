@@ -209,17 +209,17 @@ def triage_case(intake_data):
     intake_data["risk_level"] = risk_level
     intake_data["risk_flags"] = risk_flags
     
-        try:
-            send_doctor_email(intake_data)
-            NEW GYNAECOLOGY CONSULTATION - {{ risk_level }}
-        except Exception as e:
-            print("WARNING: send_doctor_email failed:", str(e))
+    try:
+        send_doctor_email(intake_data)
+        NEW GYNAECOLOGY CONSULTATION - {{ risk_level }}
+    except Exception as e:
+        print("WARNING: send_doctor_email failed:", str(e))
 
-        try:
-            send_patient_email(intake_data)
-            We've received your consultation request
-        except Exception as e:
-            print("WARNING: send_patient_email failed:", str(e))
+    try:
+        send_patient_email(intake_data)
+        We've received your consultation request
+    except Exception as e:
+        print("WARNING: send_patient_email failed:", str(e))
 
         print("STEP C - rendering thank you page")
         return render_template("thank_you.html")
