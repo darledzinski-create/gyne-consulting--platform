@@ -118,106 +118,58 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
+
+    if request.method == "GET":
+        return render_template("intake.html")
+ 
+    # ---- POST logic below ----
+
+    intake_data = {
+        "full_name": request.form.get("full_name"),
+        "age_dob": request.form.get("age_dob"),
+        "country": request.form.get("country"),
+        "email": request.form.get("email"),
+        "phone": request.form.get("phone"),
+        "concern": request.form.get("concern"),
+        "duration": request.form.get("duration"),
+        "pregnant": bool(request.form.get("pregnant")),
+        "severe_pain": bool(request.form.get("severe_pain")),
+        "bleeding": bool(request.form.get("bleeding")),
+        "fever": bool(request.form.get("fever")),
+        "emergency": bool(request.form.get("emergency")),
+        "conditions": request.form.get("conditions"),
+        "medications": request.form.get("medications"),
+        "allergies": request.form.get("allergies"),
+    }
+
+    print("STEP B – intake data built")
+    print(intake_data)
+
+    # Validation
+    errors = []
+
+    if not intake_data.get("full_name"):
+        errors.append("Full name is required.")
+
+    if not intake_data.get("email"):
+        errors.append("Email address is required.")
+    elif "@" not in intake_data["email"]:
+        errors.append("Email address is invalid.")
+
+    if not intake_data.get("concern"):
+        errors.append("Please describe your concern.")
+
+    if errors:
+        print("VALIDATION FAILED:", errors)
+        return render_template(
+            "intake.html",
+            errors=errors,
+            form_data=intake_data
+        )
+
+    # Success path
+    return render_template("thank_you.html")
     
-    if request.method == "POST":
-       
-        intake_data = {
-            "full_name": request.form.get("full_name"),
-            "age_dob": request.form.get("age_dob"),
-            "country": request.form.get("country"),
-            "email": request.form.get("email"),
-            "phone": request.form.get("phone"),
-            "concern": request.form.get("concern"),
-            "duration": request.form.get("duration"),
-            "pregnant": bool(request.form.get("pregnant")),
-            "severe_pain": bool(request.form.get("severe_pain")),
-            "bleeding": bool(request.form.get("bleeding")),
-            "fever": bool(request.form.get("fever")),
-            "emergency": bool(request.form.get("emergency")),
-            "conditions": request.form.get("conditions"),
-            "medications": request.form.get("medications"),
-            "allergies": request.form.get("allergies"),
-        }
-
-        if not intake_data.get("email"):
-            errors.append("Email address is required.")
-
-        if erors:
-            return render_template("intake.html", errors=errors)
-            return render_template("thank_you.html")
-        
-        elif "@" not in intake_data["email"]:
-            errors.append("Email address is invalid.")
-
-        if not intake_data.get("concern"):
-            errors.append("Please describe your concern.")
-
-        if errors:
-            print("VALIDATION FAILED:", errors)
-            return render_template("intake.html")
-               
-def triage_case(intake_data):
-    """
-    Returns (risk_level, flags)
-    risk_level: 'URGENT', 'SEMI-URGENT', 'ROUTINE'
-    flags: list of strings explaining why
-    flags = []
-    """
-    if intake_data.get("emergency"):
-        flags.append("Emergency flagged by patient")
-
-    if intake_data.get("severe_pain"):
-        flags.append("Severe pain reported")
-
-    if intake_data.get("bleeding"):
-        flags.append("Abnormal bleeding")
-
-    if intake_data.get("fever"):
-        flags.append("Fever reported")
-
-    if intake_data.get("pregnant") and (
-        intake_data.get("bleeding") or intake_data.get("severe_pain")
-    ):
-        flags.append("Pregnancy with concerning symptoms")
-
-    # Decide risk level
-    if flags:
-        risk_level = "URGENT"
-    elif intake_data.get("duration") and intake_data.get("duration") not in ["", "less than 1 month"]:
-        risk_level = "SEMI-URGENT"
-    else:
-        risk_level = "ROUTINE"
-
-    return risk_level, flags
-        
-    # ---- validation ends ----
-
-    risk_level, risk_flags = triage_case(intake_data)
-
-    print("TRIAGE LEVEL:", risk_level)
-    print("TRIAGE FLAGS:", risk_flags)
-
-    intake_data["risk_level"] = risk_level
-    intake_data["risk_flags"] = risk_flags
-    
-    try:
-        send_doctor_email(intake_data)
-    except Exception as e:
-        print("WARNING: send_doctor_email failed:", str(e))
-
-    try:
-        send_patient_email(intake_data)
-        body = "We've received your consultation request"
-    except Exception as e:
-        print("WARNING: send_patient_email failed:", str(e))
-
-        print("STEP C - rendering thank you page")
-        return render_template("thank_you.html")
-
-    # ---- GET request ----
-    print("STEP GET - rendering intake form")
-    return render_template("intake.html")
-        
 @app.route("/test-email")
 def test_email():
     send_email(
