@@ -153,7 +153,7 @@ def intake():
             print("WARNING: send_patient_email failed:", str(e))
 
         print("STEP C - rendering thank you page")
-        return render_template("thank_.html")
+        return render_template("thank_you.html")
 
     # ---- GET request ----
     print("STEP GET - rendering intake form")
