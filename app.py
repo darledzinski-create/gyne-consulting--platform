@@ -163,14 +163,61 @@ def intake():
                  errors=errors,
                  form_data=intake_data
             )
-        # ---- validation ends ----
+
+def triage_case(intake_data):
+    """
+    Returns (risk_level, flags)
+    risk_level: 'URGENT', 'SEMI-URGENT', 'ROUTINE'
+    flags: list of strings explaining why
+    """
+    flags = []
+
+    if intake_data.get("emergency"):
+        flags.append("Emergency flagged by patient")
+
+    if intake_data.get("severe_pain"):
+        flags.append("Severe pain reported")
+
+    if intake_data.get("bleeding"):
+        flags.append("Abnormal bleeding")
+
+    if intake_data.get("fever"):
+        flags.append("Fever reported")
+
+    if intake_data.get("pregnant") and (
+        intake_data.get("bleeding") or intake_data.get("severe_pain")
+    ):
+        flags.append("Pregnancy with concerning symptoms")
+
+    # Decide risk level
+    if flags:
+        risk_level = "URGENT"
+    elif intake_data.get("duration") and intake_data.get("duration") not in ["", "less than 1 month"]:
+        risk_level = "SEMI-URGENT"
+    else:
+        risk_level = "ROUTINE"
+
+    return risk_level, flags
+        
+    # ---- validation ends ----
+
+    risk_level, risk_flags = triage_case(intake_data)
+
+    print("TRIAGE LEVEL:", risk_level)
+    print("TRIAGE FLAGS:", risk_flags)
+
+    intake_data["risk_level"] = risk_level
+    intake_data["risk_flags"] = risk_flags
+    
         try:
             send_doctor_email(intake_data)
+            NEW GYNAECOLOGY CONSULTATION - {{ risk_level }}
         except Exception as e:
             print("WARNING: send_doctor_email failed:", str(e))
 
         try:
             send_patient_email(intake_data)
+            We've received your consultation request
         except Exception as e:
             print("WARNING: send_patient_email failed:", str(e))
 
