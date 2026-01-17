@@ -120,10 +120,7 @@ def about_page():
 def intake():
     
     if request.method == "POST":
-        return "POST reached successfully", 200
-
-    return render_template("inake.html")
-        
+       
         intake_data = {
             "full_name": request.form.get("full_name"),
             "age_dob": request.form.get("age_dob"),
@@ -142,7 +139,10 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-        print("STEP B - intake databuilt")
+        return render_template("thank_you.html")
+    return render_template("intake.html")
+
+        print("STEP B - intake data built")
         print(intake_data)
 
         # ---- Basic server-side validation ----
