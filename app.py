@@ -139,48 +139,48 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
-# ---- Basic server-side validation ----
-errors = []
+        # ---- Basic server-side validation ----
+        errors = []
 
-if not intake_data.get("full_name"):
-    errors.append("Full name is required.")
+        if not intake_data.get("full_name"):
+        errors.append("Full name is required.")
 
-if not intake_data.get("email"):
-    errors.append("Email address is required.")
-elif "@" not in intake_data["email"]:
-    errors.append("Email address is invalid.")
+        if not intake_data.get("email"):
+        errors.append("Email address is required.")
+        elif "@" not in intake_data["email"]:
+        errors.append("Email address is invalid.")
 
-if not intake_data.get("concern"):
-    errors.append("Please describe your concern.")
+        if not intake_data.get("concern"):
+        errors.append("Please describe your concern.")
 
-if errors:
+        if errors:
     print("VALIDATION FAILED:", errors)
     return render_template(
         "intake.html",
         errors=errors,
         form_data=intake_data
     )
-# ---- End validation ----
+# ---- validation ends ----
 
-    print("STEP B - intak data built")
+    print("STEP B - intake data built")
     print(intake_data)
  
-    try:
-        send_doctor_email(intake_data)
-    except Exception as e:
-      print("WARNING: send_doctor_email failed:", str(e))
+try:
+    send_doctor_email(intake_data)
+except Exception as e:
+    print("WARNING: send_doctor_email failed:", str(e))
 
-    try:
-        send_patient_email(intake_data)
-    except Exception as e:
-      print("WARNING: send_patient_email failed:", str(e))
+try:
+    send_patient_email(intake_data)
+except Exception as e:
+    print("WARNING: send_patient_email failed:", str(e))
 
       print("STEP C - rendering thank you page")
-    return render_template("thank_you.html")
+return render_template("thank_you.html")
 
-    # ---- GET request ----
+# ---- GET request ----
     print("STEP GET - rendering intake form")
-    return render_template("intake.html")
+return render_template("intake.html")
         
 @app.route("/test-email")
 def test_email():
