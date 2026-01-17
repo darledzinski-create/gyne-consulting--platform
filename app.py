@@ -118,7 +118,10 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
+    if request.method == "POST":
+        return render_template("thank_you.html")
 
+    return render_template("intake.html")
    
 @app.route("/test-email")
 def test_email():
