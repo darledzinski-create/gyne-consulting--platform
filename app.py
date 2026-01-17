@@ -168,12 +168,12 @@ if errors:
     try:
         send_doctor_email(intake_data)
     except Exception as e:
-    print("WARNING: send_doctor_email failed:", str(e))
+      print("WARNING: send_doctor_email failed:", str(e))
 
     try:
         send_patient_email(intake_data)
     except Exception as e:
-    print("WARNING: send_patient_email failed:", str(e))
+      print("WARNING: send_patient_email failed:", str(e))
 
     print("STEP C - rendering thank you page")
         return render_template("thank_you.html")
