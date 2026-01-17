@@ -139,6 +139,29 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
+# ---- Basic server-side validation ----
+errors = []
+
+if not intake_data.get("full_name"):
+    errors.append("Full name is required.")
+
+if not intake_data.get("email"):
+    errors.append("Email address is required.")
+elif "@" not in intake_data["email"]:
+    errors.append("Email address is invalid.")
+
+if not intake_data.get("concern"):
+    errors.append("Please describe your concern.")
+
+if errors:
+    print("VALIDATION FAILED:", errors)
+    return render_template(
+        "intake.html",
+        errors=errors,
+        form_data=intake_data
+    )
+# ---- End validation ----
+
         print("STEP B - intak data built")
         print(intake_data)
  
