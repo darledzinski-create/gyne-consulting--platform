@@ -119,57 +119,7 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
 
-    if request.method == "GET":
-        return render_template("intake.html")
- 
-    # ---- POST logic below ----
-
-    intake_data = {
-        "full_name": request.form.get("full_name"),
-        "age_dob": request.form.get("age_dob"),
-        "country": request.form.get("country"),
-        "email": request.form.get("email"),
-        "phone": request.form.get("phone"),
-        "concern": request.form.get("concern"),
-        "duration": request.form.get("duration"),
-        "pregnant": bool(request.form.get("pregnant")),
-        "severe_pain": bool(request.form.get("severe_pain")),
-        "bleeding": bool(request.form.get("bleeding")),
-        "fever": bool(request.form.get("fever")),
-        "emergency": bool(request.form.get("emergency")),
-        "conditions": request.form.get("conditions"),
-        "medications": request.form.get("medications"),
-        "allergies": request.form.get("allergies"),
-    }
-
-    print("STEP B – intake data built")
-    print(intake_data)
-
-    # Validation
-    errors = []
-
-    if not intake_data.get("full_name"):
-        errors.append("Full name is required.")
-
-    if not intake_data.get("email"):
-        errors.append("Email address is required.")
-    elif "@" not in intake_data["email"]:
-        errors.append("Email address is invalid.")
-
-    if not intake_data.get("concern"):
-        errors.append("Please describe your concern.")
-
-    if errors:
-        print("VALIDATION FAILED:", errors)
-        return render_template(
-            "intake.html",
-            errors=errors,
-            form_data=intake_data
-        )
-
-    # Success path
-    return render_template("thank_you.html")
-    
+   
 @app.route("/test-email")
 def test_email():
     send_email(
