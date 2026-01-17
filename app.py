@@ -139,6 +139,9 @@ def intake():
             "allergies": request.form.get("allergies"),
         }
 
+        print("STEP B - intake databuilt")
+        print(intake_data)
+
         # ---- Basic server-side validation ----
         errors = []
 
@@ -154,33 +157,29 @@ def intake():
         errors.append("Please describe your concern.")
 
         if errors:
-    print("VALIDATION FAILED:", errors)
-    return render_template(
-        "intake.html",
-        errors=errors,
-        form_data=intake_data
-    )
-# ---- validation ends ----
+            print("VALIDATION FAILED:", errors)
+            return render_template(
+                 "intake.html",
+                 errors=errors,
+                 form_data=intake_data
+            )
+        # ---- validation ends ----
+        try:
+            send_doctor_email(intake_data)
+        except Exception as e:
+            print("WARNING: send_doctor_email failed:", str(e))
 
-    print("STEP B - intake data built")
-    print(intake_data)
- 
-try:
-    send_doctor_email(intake_data)
-except Exception as e:
-    print("WARNING: send_doctor_email failed:", str(e))
+        try:
+            send_patient_email(intake_data)
+        except Exception as e:
+            print("WARNING: send_patient_email failed:", str(e))
 
-try:
-    send_patient_email(intake_data)
-except Exception as e:
-    print("WARNING: send_patient_email failed:", str(e))
+        print("STEP C - rendering thank you page")
+        return render_template("thank_you.html")
 
-      print("STEP C - rendering thank you page")
-return render_template("thank_you.html")
-
-# ---- GET request ----
+    # ---- GET request ----
     print("STEP GET - rendering intake form")
-return render_template("intake.html")
+    return render_template("intake.html")
         
 @app.route("/test-email")
 def test_email():
