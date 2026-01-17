@@ -217,7 +217,7 @@ def triage_case(intake_data):
 
     try:
         send_patient_email(intake_data)
-        We've received your consultation request
+        body = "We've received your consultation request"
     except Exception as e:
         print("WARNING: send_patient_email failed:", str(e))
 
