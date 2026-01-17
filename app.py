@@ -211,7 +211,6 @@ def triage_case(intake_data):
     
     try:
         send_doctor_email(intake_data)
-        NEW GYNAECOLOGY CONSULTATION 
     except Exception as e:
         print("WARNING: send_doctor_email failed:", str(e))
 
