@@ -146,15 +146,15 @@ def intake():
         errors = []
 
         if not intake_data.get("full_name"):
-        errors.append("Full name is required.")
+            errors.append("Full name is required.")
 
         if not intake_data.get("email"):
-        errors.append("Email address is required.")
+            errors.append("Email address is required.")
         elif "@" not in intake_data["email"]:
-        errors.append("Email address is invalid.")
+            errors.append("Email address is invalid.")
 
         if not intake_data.get("concern"):
-        errors.append("Please describe your concern.")
+            errors.append("Please describe your concern.")
 
         if errors:
             print("VALIDATION FAILED:", errors)
