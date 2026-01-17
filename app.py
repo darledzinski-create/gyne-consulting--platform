@@ -120,6 +120,9 @@ def about_page():
 def intake():
     
     if request.method == "POST":
+        return "POST reached successfully", 200
+
+    return render_template("inake.html")
         
         intake_data = {
             "full_name": request.form.get("full_name"),
