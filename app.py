@@ -140,7 +140,7 @@ def intake():
         print("INTAKE RECEIVED:")
         print(intake_data)
 
-        return render_template("thank_you.html")
+        return "THANK YOU PAGE REACHED", 200
 
     return render_template("intake.html")
     return render_template("intake.html")
