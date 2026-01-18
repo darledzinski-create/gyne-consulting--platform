@@ -108,12 +108,36 @@ Please answer honestly. Your information will be reviewed before any consultatio
 
   <button type="submit">Submit</button>
 
-</form>
-
-<p style="margin-top:20px; font-size:0.9em;">
-If you are experiencing severe pain, heavy bleeding, or feel unwell,
-please seek urgent in-person medical care.
+    </form>
+  <p style="margin-top:20px; font-size:0.9em;">
+    If you are experiencing severe pain, heavy bleeding, or feel unwell,
+    please seek urgent in-person medical care.
 </p>
+
+   <script>
+    async function submitIntakeForm(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        const response = await fetch("/intake", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.redirect) {
+            window.location.href = data.redirect;
+        } else {
+            alert("Submission succeeded but no redirect was returned.");
+        }
+    }
+    </script>
 
 </body>
 </html>
+
+  
+
