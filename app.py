@@ -119,19 +119,13 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        # build intake data (safe, minimal)
-        intake_data = {
-             "full_name": request.form.get("full_name"),
-             "email": request.form.get("email"),
-             "phone": request.form.get("phone"),
-             "concern": request.form.get("concern"),
-             "emergency": bool(request.form.get("emergency")),
-        }
+        # data arrives here
+        "full_name": request.form.get("full_name"),
+        "email": request.form.get("email"),
+        "phone": request.form.get("phone"),
+        "concern": request.form.get("concern"),
 
-        # IMPORTANT: return JSON for fetch() redirect
-        return jsonify({"redirect": "/thank-you"})
-
-    # GET request
+        return redirect(url_for("thank_you"))
     return render_template("intake.html")
     
 @app.route("/thank-you")
