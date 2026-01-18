@@ -118,8 +118,10 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    if request.method == "GET":
-        return render_template("intake.html")
+    if request.method == "POST":
+        # You may laterprocess/save the data here
+        return jsonify{"redirect": "/thank -you"})
+    return render_template("intake.html")
 
     # ---------- POST ----------
     intake_data = {
