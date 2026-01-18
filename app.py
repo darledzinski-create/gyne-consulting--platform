@@ -119,25 +119,20 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        # You may laterprocess/save the data here
-        return jsonify{"redirect": "/thank -you"})
+        # build intake data (safe, minimal)
+        intake_data = {
+             "full_name": request.form.get("full_name"),
+             "email": request.form.get("email"),
+             "phone": request.form.get("phone"),
+             "concern": request.form.get("concern"),
+             "emergency": bool(request.form.get("emergency")),
+        }
+
+        # IMPORTANT: return JSON for fetch() redirect
+        return jsonify({"redirect": "/thank-you"})
+
+    # GET request
     return render_template("intake.html")
-
-    # ---------- POST ----------
-    intake_data = {
-        "full_name": request.form.get("full_name"),
-        "email": request.form.get("email"),
-        "phone": request.form.get("phone"),
-        "concern": request.form.get("concern"),
-        "emergency": bool(request.form.get("emergency")),
-    }
-
-    # (Optional) send emails here later — NOT now
-
-    # IMPORTANT: return JSON redirect
-    return jsonify({
-        "redirect": "/thank-you"
-    })
     
 @app.route("/thank-you")
 def thank_you():
