@@ -118,10 +118,24 @@ def about_page():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    if request.method == "POST":
-        return jsonify({"redirect": "/thank-you"}), 200
-       
-    return render_template("intake.html")
+    if request.method == "GET":
+        return render_template("intake.html")
+
+    # ---------- POST ----------
+    intake_data = {
+        "full_name": request.form.get("full_name"),
+        "email": request.form.get("email"),
+        "phone": request.form.get("phone"),
+        "concern": request.form.get("concern"),
+        "emergency": bool(request.form.get("emergency")),
+    }
+
+    # (Optional) send emails here later — NOT now
+
+    # IMPORTANT: return JSON redirect
+    return jsonify({
+        "redirect": "/thank-you"
+    })
     
 @app.route("/thank-you")
 def thank_you():
