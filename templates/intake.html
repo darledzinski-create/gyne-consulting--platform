@@ -106,38 +106,20 @@ Please answer honestly. Your information will be reviewed before any consultatio
     I consent to the review of my information for an online consultation.
   </label><br><br>
 
- <form method="post" action="/intake" onsubmit="submitINTAKEFORM(event)">
-    <!-- your fields -->
-    <button type="submit">Submit</button>
-</form>
+ <form method="Post" action="/intake">
+   <input type="text" name="full_name" placeholder="Email" required>
+   <input type="email" name="email" placeholder="Email" required>
+   <textarea name="concern" placeholder="Your concern" required></textarea>
+
+   <button type="submit">Submit</button>button>
+ </form>
   
   <p style="margin-top:20px; font-size:0.9em;">
     If you are experiencing severe pain, heavy bleeding, or feel unwell,
     please seek urgent in-person medical care.
 </p>
 
-   <script>
-    async function submitIntakeForm(event) {
-        event.preventDefault();
-
-        const form = event.target;
-        const formData = new FormData(form);
-
-        const response = await fetch("/intake", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (data.redirect) {
-            window.location.href = data.redirect;
-        } else {
-            alert("Submission succeeded but no redirect was returned.");
-        }
-    }
-    </script>
-
+   
 </body>
 </html>
 
