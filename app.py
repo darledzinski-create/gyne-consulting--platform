@@ -119,9 +119,13 @@ def about_page():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        return "THANK YOU PAGE REACHED", 200
+        return jsonify({"redirect": "/thank-you"}), 200
        
     return render_template("intake.html")
+    
+@app.route("/thank-you")
+def thank_you():
+    return render_template("thank_you.html")
    
 @app.route("/test-email")
 def test_email():
