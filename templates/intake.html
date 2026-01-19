@@ -35,41 +35,4 @@ async function submitIntakeForm(event) {
 </script>
 
 </body>
-</html><!DOCTYPE html>
-<html>
-<head>
-    <title>Consultation Intake</title>
-</head>
-<body>
-
-<form onsubmit="submitIntakeForm(event)">
-    <input name="full_name" placeholder="Full name" required><br>
-    <input name="email" type="email" placeholder="Email" required><br>
-    <input name="phone" placeholder="Phone"><br>
-    <textarea name="concern" placeholder="Describe your concern" required></textarea><br>
-    <button type="submit">Submit</button>
-</form>
-
-<script>
-async function submitIntakeForm(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    const response = await fetch("/intake", {
-        method: "POST",
-        body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.redirect) {
-        window.location.href = data.redirect;
-    } else {
-        alert("Submission succeeded but no redirect was returned.");
-    }
-}
-</script>
-
-</body>
 </html>
