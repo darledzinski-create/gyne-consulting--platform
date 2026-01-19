@@ -134,7 +134,12 @@ def intake():
 
         return render_templat("thank_you.html")
 
-    return render_template("intake.html")
+    return render_template("intake.html") 
+    
+
+@app.route("/thank-you")
+def thank_you():
+    return render_template("thank_you.html")
 
 def send_doctor_email(intake_data):
     print("ABOUT TO CALL send_doctor_email")
