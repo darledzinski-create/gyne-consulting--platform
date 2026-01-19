@@ -1,127 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Request for Online Gynecological Consultation</title>
+    <title>Consultation Intake</title>
 </head>
 <body>
 
-<h1>Request for Online Gynecological Consultation</h1>
+<form onsubmit="submitIntakeForm(event)">
+    <input name="full_name" placeholder="Full name" required><br>
+    <input name="email" type="email" placeholder="Email" required><br>
+    <input name="phone" placeholder="Phone"><br>
+    <textarea name="concern" placeholder="Describe your concern" required></textarea><br>
+    <button type="submit">Submit</button>
+</form>
 
-<p>
-This form is the first step in requesting an online gynecological consultation.
-Please answer honestly. Your information will be reviewed before any consultation is offered.
-</p>
+<script>
+async function submitIntakeForm(event) {
+    event.preventDefault();
 
-<form method="POST" action="/intake">
+    const formData = new FormData(event.target);
 
-  <h2>1. About You</h2>
+    const response = await fetch("/intake", {
+        method: "POST",
+        body: formData
+    });
 
-  <label>Full name</label><br>
-  <input type="text" name="full_name" required><br><br>
+    const data = await response.json();
 
-  <label>Age</label><br>
-  <input type="number" name="age" min="10" max="100" required><br><br>
+    if (data.redirect) {
+        window.location.href = data.redirect;
+    } else {
+        alert("Submission succeeded but no redirect was returned.");
+    }
+}
+</script>
 
-  <label>Country of residence</label><br>
-  <input type="text" name="country" required><br><br>
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <title>Consultation Intake</title>
+</head>
+<body>
 
-  <label>Email address</label><br>
-  <input type="email" name="email" required><br><br>
+<form onsubmit="submitIntakeForm(event)">
+    <input name="full_name" placeholder="Full name" required><br>
+    <input name="email" type="email" placeholder="Email" required><br>
+    <input name="phone" placeholder="Phone"><br>
+    <textarea name="concern" placeholder="Describe your concern" required></textarea><br>
+    <button type="submit">Submit</button>
+</form>
 
-  <hr>
+<script>
+async function submitIntakeForm(event) {
+    event.preventDefault();
 
-  <h2>2. Reason for Consultation</h2>
+    const formData = new FormData(event.target);
 
-  <label>
-    Please describe your concern in your own words
-  </label><br>
-  <textarea name="concern" rows="5" required></textarea><br><br>
+    const response = await fetch("/intake", {
+        method: "POST",
+        body: formData
+    });
 
-  <label>
-    How long has this been an issue?
-  </label><br>
-  <input type="text" name="duration"><br><br>
+    const data = await response.json();
 
-  <hr>
+    if (data.redirect) {
+        window.location.href = data.redirect;
+    } else {
+        alert("Submission succeeded but no redirect was returned.");
+    }
+}
+</script>
 
-  <h2>3. Important Safety Questions</h2>
-
-  <p><strong>Please tick any that apply:</strong></p>
-
-  <label>
-    <input type="checkbox" name="pregnant">
-    I am currently pregnant or may be pregnant
-  </label><br>
-
-  <label>
-    <input type="checkbox" name="severe_pain">
-    I have severe or worsening abdominal or pelvic pain
-  </label><br>
-
-  <label>
-    <input type="checkbox" name="bleeding">
-    I have heavy, unexpected, or persistent vaginal bleeding
-  </label><br>
-
-  <label>
-    <input type="checkbox" name="fever">
-    I have fever or feel generally unwell
-  </label><br>
-
-  <label>
-    <input type="checkbox" name="emergency">
-    I believe this may be an emergency
-  </label><br><br>
-
-  <hr>
-
-  <h2>4. Medical Background (brief)</h2>
-
-  <label>Relevant medical conditions (if any)</label><br>
-  <textarea name="conditions" rows="3"></textarea><br><br>
-
-  <label>Current medications</label><br>
-  <textarea name="medications" rows="3"></textarea><br><br>
-
-  <label>Drug allergies</label><br>
-  <textarea name="allergies" rows="2"></textarea><br><br>
-
-  <hr>
-
-  <h2>5. Important Information</h2>
-
-  <label>
-    <input type="checkbox" required>
-    I understand this service is not for emergencies.
-  </label><br>
-
-  <label>
-    <input type="checkbox" required>
-    I understand that online consultations have limitations.
-  </label><br>
-
-  <label>
-    <input type="checkbox" required>
-    I consent to the review of my information for an online consultation.
-  </label><br><br>
-
- <form method="Post" action="/intake">
-   <input type="text" name="full_name" placeholder="Email" required>
-   <input type="email" name="email" placeholder="Email" required>
-   <textarea name="concern" placeholder="Your concern" required></textarea>
-
-   <button type="submit">Submit</button>button>
- </form>
-  
-  <p style="margin-top:20px; font-size:0.9em;">
-    If you are experiencing severe pain, heavy bleeding, or feel unwell,
-    please seek urgent in-person medical care.
-</p>
-
-   
 </body>
 </html>
-
-  
-
