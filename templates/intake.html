@@ -5,34 +5,28 @@
 </head>
 <body>
 
-<form onsubmit="submitIntakeForm(event)">
-    <input name="full_name" placeholder="Full name" required><br>
-    <input name="email" type="email" placeholder="Email" required><br>
-    <input name="phone" placeholder="Phone"><br>
-    <textarea name="concern" placeholder="Describe your concern" required></textarea><br>
+<h2>Online Gynaecological Consultation</h2>
+
+<form method="POST" action="/intake">
+    <label>Full name</label><br>
+    <input type="text" name="full_name" required><br><br>
+
+    <label>Email</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Phone</label><br>
+    <input type="text" name="phone"><br><br>
+
+    <label>Your concern</label><br>
+    <textarea name="concern" required></textarea><br><br>
+
     <button type="submit">Submit</button>
 </form>
 
-<script>
-async function submitIntakeForm(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    const response = await fetch("/intake", {
-        method: "POST",
-        body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.redirect) {
-        window.location.href = data.redirect;
-    } else {
-        alert("Submission succeeded but no redirect was returned.");
-    }
-}
-</script>
+<p style="margin-top:20px; font-size:0.9em;">
+If you experience severe pain, heavy bleeding, or feel unwell,
+please seek urgent in-person medical care.
+</p>
 
 </body>
 </html>
