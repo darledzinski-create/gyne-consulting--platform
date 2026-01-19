@@ -121,7 +121,6 @@ from flask import request, render_template, jsonify
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        # Minimal safe intake capture
         intake_data = {
             "full_name": request.form.get("full_name"),
             "email": request.form.get("email"),
@@ -129,17 +128,12 @@ def intake():
             "concern": request.form.get("concern"),
         }
 
-        # Later: save to DB / send email
         print("INTAKE RECEIVED:", intake_data)
 
-        return render_templat("thank_you.html")
+        # ✅ THIS is the key line
+        return render_template("thank_you.html")
 
-    return render_template("intake.html") 
-    
-
-@app.route("/thank-you")
-def thank_you():
-    return render_template("thank_you.html")
+    return render_template("intake.html")
 
 def send_doctor_email(intake_data):
     print("ABOUT TO CALL send_doctor_email")
