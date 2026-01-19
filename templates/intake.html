@@ -1,32 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Consultation Intake</title>
+    <meta charset="UTF-8">
+    <title>Online Gynaecological Consultation</title>
 </head>
 <body>
 
 <h2>Online Gynaecological Consultation</h2>
 
 <form method="POST" action="/intake">
-    <label>Full name</label><br>
-    <input type="text" name="full_name" required><br><br>
 
-    <label>Email</label><br>
-    <input type="email" name="email" required><br><br>
+    <label>
+        Full name:<br>
+        <input type="text" name="full_name" required>
+    </label><br><br>
 
-    <label>Phone</label><br>
-    <input type="text" name="phone"><br><br>
+    <label>
+        Email:<br>
+        <input type="email" name="email" required>
+    </label><br><br>
 
-    <label>Your concern</label><br>
-    <textarea name="concern" required></textarea><br><br>
+    <label>
+        Phone:<br>
+        <input type="text" name="phone">
+    </label><br><br>
+
+    <label>
+        Concern:<br>
+        <textarea name="concern"></textarea>
+    </label><br><br>
 
     <button type="submit">Submit</button>
-</form>
 
-<p style="margin-top:20px; font-size:0.9em;">
-If you experience severe pain, heavy bleeding, or feel unwell,
-please seek urgent in-person medical care.
-</p>
+</form>
 
 </body>
 </html>
