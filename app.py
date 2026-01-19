@@ -116,7 +116,7 @@ def ask_page():
 def about_page():
     return render_template("about.html")
 
-vfrom flask import request, render_template, jsonify
+from flask import request, render_template, jsonify
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
