@@ -129,11 +129,16 @@ def intake():
             "concern": request.form.get("concern"),
         }
 
-        # IMPORTANT: JSON response for fetch()
-        return jsonify({"redirect": "/thank-you"})
+        # Later: save to DB / send email
+        print("INTAKE RECEIVED:", intake_data)
 
-    # GET request
+        return render_templat("thank_you.html")
+
     return render_template("intake.html")
+
+@app.route("/thank-you")
+def thank_you():
+    return render_template("thank_you.html")
     
 @app.route("/test-email")
 def test_email():
