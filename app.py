@@ -136,25 +136,6 @@ def intake():
 
     return render_template("intake.html")
 
-@app.route("/thank-you")
-def thank_you():
-    return render_template("thank_you.html")
-    
-@app.route("/test-email")
-def test_email():
-    send_email(
-        to_email=os.environ.get("MAILJET_DOCTOR_EMAIL"),
-        subject="Test email – Doctor",
-        text="This is a test email to confirm Mailjet is working."
-    )
-
-    send_email(
-        to_email=os.environ.get("MAILJET_TEST_PATIENT_EMAIL"),
-        subject="Test email – Patient",
-        text="This is a test email to confirm patient notifications work."
-    )
-    return "Test emails sent successfully."
-
 def send_doctor_email(intake_data):
     print("ABOUT TO CALL send_doctor_email")
     print("SEND_DOCTOR_EMAIL called")
