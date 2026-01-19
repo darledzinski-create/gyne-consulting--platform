@@ -116,22 +116,43 @@ def ask_page():
 def about_page():
     return render_template("about.html")
 
+vfrom flask import request, render_template, jsonify
+
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        # data arrives here
-        "full_name": request.form.get("full_name"),
-        "email": request.form.get("email"),
-        "phone": request.form.get("phone"),
-        "concern": request.form.get("concern"),
+        # Minimal safe intake capture
+        intake_data = {
+            "full_name": request.form.get("full_name"),
+            "email": request.form.get("email"),
+            "phone": request.form.get("phone"),
+            "concern": request.form.get("concern"),
+        }
 
-        return redirect(url_for("thank_you"))
+        # IMPORTANT: JSON response for fetch()
+        return jsonify({"redirect": "/thank-you"})
+
+    # GET request
     return render_template("intake.html")
     
-@app.route("/thank-you")
-def thank_you():
-    return render_template("thank_you.html")
-   
+    
+from flask import request, render_template, jsonify
+@app.route("/intake", methods=["GET", "POST"])
+def intake():
+    if request.method == "POST":
+        # Minimal safe intake capture
+        intake_data = {
+            "full_name": request.form.get("full_name"),
+            "email": request.form.get("email"),
+            "phone": request.form.get("phone"),
+            "concern": request.form.get("concern"),
+        }
+
+        # IMPORTANT: JSON response for fetch()
+        return jsonify({"redirect": "/thank-you"})
+
+    # GET request
+    return render_template("intake.html")
 @app.route("/test-email")
 def test_email():
     send_email(
