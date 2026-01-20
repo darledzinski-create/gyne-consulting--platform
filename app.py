@@ -9,16 +9,17 @@ def home():
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
-        # Read form data (no processing yet)
-        full_name = request.form.get("full_name")
-        email = request.form.get("email")
-        phone = request.form.get("phone")
-        concern = request.form.get("concern")
+        intake_data = {
+            "full_name = request.form.get("full_name")
+            "email = request.form.get("email")
+            "phone = request.form.get("phone")
+            "concern = request.form.get("concern")
 
-        print("INTAKE RECEIVED:", full_name, email, phone, concern)
+        }
 
-        # ✅ SERVER-SIDE REDIRECT (Safari-safe)
-        return redirect(url_for("thank_you"))
+        print("INTAKE RECEIVED:", intake_data)
+
+        return render_templat("thank_you.html")
 
     return render_template("intake.html")
 
