@@ -1,38 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Online Gynaecological Consultation</title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block title %}Online Gynaecological Consultation{% endblock %}
+
+{% block content %}
 <h2>Online Gynaecological Consultation</h2>
 
 <form method="POST" action="/intake">
 
     <label>
-        Full name:<br>
+        Full name
         <input type="text" name="full_name" required>
-    </label><br><br>
+    </label>
 
     <label>
-        Email:<br>
+        Email
         <input type="email" name="email" required>
-    </label><br><br>
+    </label>
 
     <label>
-        Phone:<br>
+        Phone
         <input type="text" name="phone">
-    </label><br><br>
+    </label>
 
     <label>
-        Concern:<br>
-        <textarea name="concern"></textarea>
-    </label><br><br>
+        Concern
+        <textarea name="concern" rows="5"></textarea>
+    </label>
 
-    <button type="submit">Submit</button>
-
+    <button type="submit">Submit Consultation</button>
 </form>
 
-</body>
-</html>
+<p class="note">
+If you experience severe pain, heavy bleeding, or feel unwell,
+please seek urgent in-person medical care.
+</p>
+{% endblock %}
