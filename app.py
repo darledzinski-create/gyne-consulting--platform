@@ -10,10 +10,10 @@ def home():
 def intake():
     if request.method == "POST":
         intake_data = {
-            "full_name = request.form.get("full_name")
-            "email = request.form.get("email")
-            "phone = request.form.get("phone")
-            "concern = request.form.get("concern")
+            "full_name = request.form.get("full_name"),
+            "email = request.form.get("email"),
+            "phone = request.form.get("phone"),
+            "concern = request.form.get("concern"),
 
         }
 
