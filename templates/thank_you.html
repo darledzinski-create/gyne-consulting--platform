@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Thank You</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h2>Thank you</h2>
-<p>Your request has been received.</p>
+{% block title %}Thank You{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<h2>Thank you for your submission</h2>
+
+<p>
+Your consultation request has been received successfully.
+</p>
+
+<p>
+Dr Dariusz will review your information and contact you by email.
+</p>
+
+<p class="note">
+If your condition worsens or becomes urgent, please seek immediate medical attention.
+</p>
+{% endblock %}
