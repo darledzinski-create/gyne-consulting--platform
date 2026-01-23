@@ -6,6 +6,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route("/first-consultation")
+def first_consultation():
+    return render_template("first-consultation.html")
+
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
     if request.method == "POST":
