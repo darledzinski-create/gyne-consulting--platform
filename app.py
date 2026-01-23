@@ -19,7 +19,9 @@ def intake():
             "phone": request.form.get("phone"),
             "concern": request.form.get("concern"),
         }
-    if emergency:
+
+        emergency = request.form.get("emergency")
+        if emergency:
             send_emergency_sms(
                 full_name=intake_data["full_name"],
                 phone=intake_data["phone"],
