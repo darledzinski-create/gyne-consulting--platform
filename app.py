@@ -17,7 +17,7 @@ def intake():
         }
 
         print("INTAKE RECEIVED:", intake_data)
-        return render_templat("thank_you.html")
+        return render_template("thank_you.html")
 
     return render_template("intake.html")
 
