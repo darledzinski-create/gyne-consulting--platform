@@ -18,6 +18,13 @@ def intake():
             "email": request.form.get("email"),
             "phone": request.form.get("phone"),
             "concern": request.form.get("concern"),
+
+    if emergency:
+            send_emergency_sms(
+                full_name=intake_data["full_name"],
+                phone=intake_data["phone"],
+                concern=intake_data["concern"]
+            )
         }
 
         print("INTAKE RECEIVED:", intake_data)
