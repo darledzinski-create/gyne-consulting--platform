@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "<h1>Home OK</h1><a href='/intake'>Go to intake</a>"
+    return render_template?("home.html")
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
