@@ -31,7 +31,7 @@ def intake():
         print("INTAKE RECEIVED:", intake_data)
 
         # ALWAYS retun a page after POST
-        return render_template("thank_you.html")
+        return redirect(url_for("thank_you.html")
 
     return render_template("intake.html")
 
