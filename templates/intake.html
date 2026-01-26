@@ -5,6 +5,10 @@
 {% block content %}
 <h2>Online Gynaecological Consultation</h2>
 
+This secure form allows you to describe your concern in your own words.
+You will receive a response from Dr Dariusz after review.
+If your matter is urgent, please indicate this below.
+
 <form method="POST" action="/intake">
 
     <label>
@@ -26,11 +30,21 @@
         Concern
         <textarea name="concern" rows="5"></textarea>
     </label>
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="emergency" value="yes">
+        This is urgent
+      </label>
 
-    <label>
-        <input types="checkbox" names="emergency"value="yes">
-        This is urgent / emergency
-    </label>
+      <p class="help-text">
+        Tick this only if you believe your situation requires urgent attention
+        (for example: severe pain, heavy bleeding, or sudden worsening of symptoms).
+      </p>
+
+      <p class="help-text">
+        This service does not replace emergency medical services.
+      </p>
+    </div>
 
     <button type="submit">Submit Consultation</button>
 </form>
