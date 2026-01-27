@@ -25,20 +25,20 @@ def intake():
 if emergency:
     try:
         send_emergency_sms(
-        full_name=intake_data["full_name"],
-        phone=intake_data["phone"],
-        concern=intake_data["concern"]
-               )
+            full_name=intake_data["full_name"],
+            phone=intake_data["phone"],
+            concern=intake_data["concern"]
+        )
     except Exception as e:
-    print("! Emergency SMS failed:", e)
+        print("! Emergency SMS failed:", e)
             
     return redirect(url_for("emergency_notice"))
            
-        # Non-emergency flow
-        print("INTAKE RECEIVED:", intake_data)
-        return redirect(url_for("thank_you"))
-    # Get request
-    return render_template("intake.html")
+else:
+    print("INTAKE RECEIVED:", intake_data)
+    return redirect(url_for("thank_you"))
+# Get request
+return render_template("intake.html")
 
 @app.route("/emergency")
 def emergency_notice():
