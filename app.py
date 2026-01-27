@@ -31,11 +31,11 @@ def intake():
             # 🚨 ENFORCEMENT: stop normal flow
             return redirect(url_for("emergency_notice"))
     
-           # Non-emergency flow
-           print("INTAKE RECEIVED:", intake_data)
-           return redirect(url_for("thank_you"))
-       # Get request
-       return render_template("intake.html")
+        # Non-emergency flow
+        print("INTAKE RECEIVED:", intake_data)
+        return redirect(url_for("thank_you"))
+    # Get request
+    return render_template("intake.html")
 
 @app.route("/emergency")
 def emergency_notice():
