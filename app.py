@@ -22,22 +22,20 @@ def intake():
 
         emergency = request.form.get("emergency")
 
-if emergency:
-    send_emergency_sms(
-        full_name=intake_data["full_name"],
-        phone=intake_data["phone"],
-        concern=intake_data["concern"]
-    )
-
-    # 🚨 ENFORCEMENT: stop normal flow
-    return redirect(url_for("emergency_notice"))
+        if emergency:
+            send_emergency_sms(
+                full_name=intake_data["full_name"],
+                phone=intake_data["phone"],
+                concern=intake_data["concern"]
+            )
+            # 🚨 ENFORCEMENT: stop normal flow
+            return redirect(url_for("emergency_notice"))
     
-        print("INTAKE RECEIVED:", intake_data)
-
-        # ALWAYS retun a page after POST
-        return redirect(url_for("thank_you"))
-
-    return render_template("intake.html")
+           # Non-emergency flow
+           print("INTAKE RECEIVED:", intake_data)
+           return redirect(url_for("thank_you"))
+       # Get request
+       return render_template("intake.html")
 
 @app.route("/emergency")
 def emergency_notice():
