@@ -26,7 +26,7 @@ if emergency:
     try:
         send_emergency_sms(
         full_name=intake_data["full_name"],
-        phone=intake_data["phone"]
+        phone=intake_data["phone"],
         concern=intake_data["concern"]
                )
     except Exception as e:
