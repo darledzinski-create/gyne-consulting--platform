@@ -23,11 +23,12 @@ def intake():
         emergency = request.form.get("emergency")
 
         if emergency:
-            send_emergency_sms(
-                full_name=intake_data["full_name"],
-                phone=intake_data["phone"],
-                concern=intake_data["concern"]
-            )
+            # TEMP: disable SMS to test routing
+            # send_emergency_sms(
+            #     full_name=intake_data["full_name"],
+            #     phone=intake_data["phone"],
+            #     concern=intake_data["concern"]
+            # )
             # 🚨 ENFORCEMENT: stop normal flow
             return redirect(url_for("emergency_notice"))
     
