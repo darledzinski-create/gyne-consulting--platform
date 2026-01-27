@@ -31,7 +31,7 @@ def intake():
                )
            except Exception as e:
                print("! Emergency SMS failed:", e)
-
+            
            return redirect(url_for("emergency_notice"))
            
         # Non-emergency flow
