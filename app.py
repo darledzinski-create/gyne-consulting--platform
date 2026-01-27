@@ -23,16 +23,16 @@ def intake():
         emergency = request.form.get("emergency")
 
        if emergency:
-    try:
-        send_emergency_sms(
-            full_name=intake_data["full_name"],
-            phone=intake_data["phone"],
-            concern=intake_data["concern"]
-        )
-    except Exception as e:
-        print("⚠️ Emergency SMS failed:", e)
+           try:
+               send_emergency_sms(
+                   full_name=intake_data["full_name"],
+                   phone=intake_data["phone"],
+                   concern=intake_data["concern"]
+               )
+           except Exception as e:
+               print("⚠️ Emergency SMS failed:", e)
 
-    return redirect(url_for("emergency_notice"))
+           return redirect(url_for("emergency_notice"))
     
         # Non-emergency flow
         print("INTAKE RECEIVED:", intake_data)
