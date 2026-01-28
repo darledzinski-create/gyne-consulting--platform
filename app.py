@@ -2,6 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
+def send_emergency_sms(full_name, phone, concern):
+    print("🚨 EMERGENCY ALERT")
+    print("Name:", full_name)
+    print("Phone:", phone)
+    print("Concern:", concern)
+    
 @app.route("/")
 def home():
     return render_template("index.html")
