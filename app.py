@@ -37,12 +37,16 @@ def intake():
                 )
             except Exception as e:
                 print("! Emergency SMS failed:", e)
-            
-            return redirect(url_for("emergency_notice"))
-           
-        print("INTAKE RECEIVED:", intake_data)
-        return redirect(url_for("thank_you"))
 
+            # Emergency path - Always stop here
+            return redirect(url_for("emergency_notice"))
+
+        else:
+            # Non-emergency path
+            print("INTAKE RECEIVED:", intake_data)
+            return redirect(url_for("thank_you"))
+
+    #GET request
     return render_template("intake.html")
 
 @app.route("/emergency")
