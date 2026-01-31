@@ -1,0 +1,33 @@
+/* Global page background */
+body {
+  background: #f6f7f9;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Centered content container */
+.page-container {
+  max-width: 720px;
+  margin: 4rem auto;
+  padding: 2.5rem 3rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+h1 {
+  margin-top: 0;
+  color: #8b0000;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+/* Notes / disclaimers */
+.note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #555;
+}
