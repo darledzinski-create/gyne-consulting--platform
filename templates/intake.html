@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
-{% block content %}
-
 {% block title%}
 Online Gynaecological Consultation{
 % endblock %}
 
 {% block content %}
+
 <h2>Online Gynaecological Consultation</h2>
 
 <p><
@@ -17,45 +16,45 @@ If your matter is urgent, please indicate this below.
 
 <form method="POST" action="/intake">
 
-    <label>
-        Full name
-        <input type="text" name="full_name" required>
-    </label>
+  <label>
+    Full name
+    <input type="text" name="full_name" required>
+  </label>
 
-    <label>
-        Email
-        <input type="email" name="email" required>
-    </label>
+  <label>
+    Email
+    <input type="email" name="email" required>
+  </label>
 
-    <label>
-        Phone
-        <input type="text" name="phone">
-    </label>
+  <label>
+    Phone
+    <input type="text" name="phone">
+  </label>
 
-    <label>
-        Concern
-        <textarea name="concern" rows="5"></textarea>
-    </label>
-    <div class="form-group">
-      <label>
-        <input type="checkbox" name="emergency" value="yes">
-        This is urgent
-      </label>
+  <label>
+    Concern
+    <textarea name="concern" rows="5"></textarea>
 
-      <p class="help-text">
-        Tick this only if you believe your situation requires urgent attention
-        (for example: severe pain, heavy bleeding, or sudden worsening of symptoms).
-      </p>
+  <label>
+    <input type=""checkbox" name="emergency" value="yes">
+    This is urgent
+  </label>
+    
+  <p class="help-text">
+    Tick this only if you believe your situation requires urgent attention
+    (for example: severe pain, heavy bleeding, or sudden worsening of symptoms).
+  </p>
 
-    <p class="help-text">
-        <strong>Do not use this service</strong> if you require immediate emergency care.
-    </p>
-    </div>
-    <button type="submit">Submit Consultation</button>
+  <p class="help-text">
+    <strong>Do not use this service</strong> if you require immediate emergency care.
+  </p>
+
+  <button type="submit">Submit Consultation</button>
 </form>
 
 <p class="note">
 If you experience severe pain, heavy bleeding, or feel unwell,
 please seek urgent in-person medical care.
 </p>
+
 {% endblock %}
