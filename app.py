@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
+app.debug = True   # ADD THIS LINE
 
 def send_emergency_sms(full_name, phone, concern):
     print("🚨 EMERGENCY ALERT")
