@@ -18,37 +18,38 @@ def first_consultation():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    if request.method == "POST":
-        intake_data = {
-            "full_name": request.form.get("full_name"),
-            "email": request.form.get("email"),
-            "phone": request.form.get("phone"),
-            "concern": request.form.get("concern"),
-        }
 
-        emergency = request.form.get("emergency")
+    # ✅ ALWAYS handle GET first
+    if request.method == "GET":
+        return render_template("intake.html")
 
-        if emergency:
-            try:
-                send_emergency_sms(
-                    full_name=intake_data["full_name"],
-                    phone=intake_data["phone"],
-                    concern=intake_data["concern"]
-                )
-            except Exception as e:
-                print("! Emergency SMS failed:", e)
+    # ✅ POST logic starts here
+    intake_data = {
+        "full_name": request.form.get("full_name"),
+        "email": request.form.get("email"),
+        "phone": request.form.get("phone"),
+        "concern": request.form.get("concern"),
+    }
 
-            # Emergency path - Always stop here
-            return redirect(url_for("emergency_notice"))
+    emergency = request.form.get("emergency")
 
-        else:
-            # Non-emergency path
-            print("INTAKE RECEIVED:", intake_data)
-            return redirect(url_for("thank_you"))
+    if emergency:
+        try:
+            send_emergency_sms(
+                full_name=intake_data["full_name"],
+                phone=intake_data["phone"],
+                concern=intake_data["concern"],
+            )
+        except Exception as e:
+            print("! Emergency SMS failed:", e)
 
-    #GET request
-    return render_template("intake.html")
+        # Emergency path always exits
+        return redirect(url_for("emergency_notice"))
 
+    # Non-emergency path
+    print("INTAKE RECEIVED:", intake_data)
+    return redirect(url_for("thank_you"))
+    
 @app.route("/emergency")
 def emergency_notice():
     return render_template("emergency.html")
