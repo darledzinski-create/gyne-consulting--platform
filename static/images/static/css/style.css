@@ -6,7 +6,7 @@ body {
 }
 
 /* Centered content container */
-.page-container {
+.container {
   max-width: 720px;
   margin: 4rem auto;
   padding: 2.5rem 3rem;
