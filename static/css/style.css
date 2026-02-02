@@ -1,6 +1,8 @@
 /* Global page background */
 body {
-  background: red !important;
+   background: #f6f7f9;
+   margin: 0;
+   font-family: Arial, Helvetica, sans-serif;
 }
   
 /* Centered content container */
