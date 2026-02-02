@@ -1,7 +1,4 @@
-/* ===============================
-   Global foundation
-   =============================== */
-
+/* ===== Global ===== */
 body {
     margin: 0;
     background: #f3f5f7;
@@ -10,10 +7,7 @@ body {
     color: #2f2f2f;
 }
 
-/* ===============================
-   Main consultation card
-   =============================== */
-
+/* ===== Main card ===== */
 .container {
     max-width: 760px;
     margin: 5rem auto;
@@ -21,14 +15,11 @@ body {
     background: #ffffff;
     border-radius: 14px;
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.06),
-        0 4px 10px rgba(0, 0, 0, 0.04);
+        0 20px 40px rgba(0,0,0,0.06),
+        0 4px 10px rgba(0,0,0,0.04);
 }
 
-/* ===============================
-   Headings & intro
-   =============================== */
-
+/* ===== Headings ===== */
 h2 {
     margin: 0 0 1.2rem 0;
     font-size: 1.6rem;
@@ -43,16 +34,12 @@ p {
     color: #4a4a4a;
 }
 
-/* ===============================
-   Form structure
-   =============================== */
-
+/* ===== Form ===== */
 label {
     display: block;
     margin-top: 1.4rem;
     font-weight: 600;
     font-size: 0.9rem;
-    color: #2f2f2f;
 }
 
 input[type="text"],
@@ -70,21 +57,9 @@ textarea {
 
 textarea {
     min-height: 110px;
-    resize: vertical;
 }
 
-/* ===============================
-   Checkbox row
-   =============================== */
-
-label input[type="checkbox"] {
-    margin-right: 0.5rem;
-}
-
-/* ===============================
-   Submit button
-   =============================== */
-
+/* ===== Submit ===== */
 button,
 input[type="submit"] {
     margin-top: 2.2rem;
@@ -103,10 +78,7 @@ input[type="submit"]:hover {
     background: #16222c;
 }
 
-/* ===============================
-   Disclaimers / notes
-   =============================== */
-
+/* ===== Notes ===== */
 .note {
     margin-top: 2.2rem;
     padding-top: 1.2rem;
