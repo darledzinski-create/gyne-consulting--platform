@@ -1,4 +1,4 @@
-/* ===== Global ===== */
+/* ===== Page background ===== */
 body {
     margin: 0;
     background: #f3f5f7;
@@ -7,26 +7,29 @@ body {
     color: #2f2f2f;
 }
 
-/* ===== Main card ===== */
+/* ===== Main consultation card ===== */
 .container {
     max-width: 760px;
     margin: 5rem auto;
     padding: 3rem 3.5rem;
+
     background: #ffffff;
-    border-radius: 14px;
+    border-radius: 16px;
+
     box-shadow:
-        0 20px 40px rgba(0,0,0,0.06),
-        0 4px 10px rgba(0,0,0,0.04);
+        0 24px 48px rgba(0,0,0,0.06),
+        0 6px 14px rgba(0,0,0,0.05);
 }
 
 /* ===== Headings ===== */
 h2 {
-    margin: 0 0 1.2rem 0;
-    font-size: 1.6rem;
+    margin: 0 0 1.4rem 0;
+    font-size: 1.7rem;
     font-weight: 600;
     color: #1f2d3a;
 }
 
+/* ===== Text ===== */
 p {
     margin: 0 0 1.6rem 0;
     line-height: 1.65;
@@ -34,7 +37,7 @@ p {
     color: #4a4a4a;
 }
 
-/* ===== Form ===== */
+/* ===== Form labels ===== */
 label {
     display: block;
     margin-top: 1.4rem;
@@ -42,34 +45,46 @@ label {
     font-size: 0.9rem;
 }
 
+/* ===== Inputs ===== */
 input[type="text"],
 input[type="email"],
 textarea {
     width: 100%;
     margin-top: 0.45rem;
-    padding: 0.55rem 0.65rem;
+    padding: 0.6rem 0.7rem;
+
     font-size: 0.95rem;
     border-radius: 6px;
     border: 1px solid #cfd4d9;
     background: #fafafa;
+
     box-sizing: border-box;
 }
 
 textarea {
-    min-height: 110px;
+    min-height: 120px;
 }
 
-/* ===== Submit ===== */
+/* ===== Checkbox spacing ===== */
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+/* ===== Submit button ===== */
 button,
 input[type="submit"] {
-    margin-top: 2.2rem;
-    padding: 0.7rem 1.8rem;
-    font-size: 0.9rem;
+    margin-top: 2.4rem;
+    padding: 0.75rem 1.9rem;
+
+    font-size: 0.95rem;
     font-weight: 500;
+
     border-radius: 6px;
     border: none;
+
     background: #1f2d3a;
     color: #ffffff;
+
     cursor: pointer;
 }
 
@@ -78,11 +93,5 @@ input[type="submit"]:hover {
     background: #16222c;
 }
 
-/* ===== Notes ===== */
-.note {
-    margin-top: 2.2rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid #e3e6ea;
-    font-size: 0.85rem;
-    color: #666;
-}
+
+
