@@ -1,10 +1,8 @@
 /* Global page background */
 body {
-  background: #f6f7f9;
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  background: red !important;
 }
-
+  
 /* Centered content container */
 .container {
   max-width: 720px;
