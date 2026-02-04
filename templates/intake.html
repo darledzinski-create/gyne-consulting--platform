@@ -1,64 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}
-Online Gynaecological Consultation
-{% endblock %}
+{% block title %}Online Gynaecological Consultation{% endblock %}
 
 {% block content %}
+<div class="page-wrapper">
 
-<h2>Online Gynaecological Consultation</h2>
+    <h2>Online Gynaecological Consultation</h2>
 
-<p>
-    This secure form allows you to describe your concern in your own words.
-    You will receive a response from Dr Dariusz after review.
-    If your matter is urgent, please indicate this below.
-</p>
+    <p>
+        This secure form allows you to describe your concern in your own words.
+        You will receive a response from Dr Dariusz after review.
+        If your matter is urgent, please indicate this below.
+    </p>
 
-<form method="POST" action="/intake">
+    <form method="POST" action="/intake">
 
-    <div class="form-group">
-        <label for="full_name">Full name</label>
-        <input id="full_name" type="text" name="full_name" required>
-    </div>
+        <label>Full name</label>
+        <input type="text" name="full_name" required>
 
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required>
-    </div>
+        <label>Email</label>
+        <input type="email" name="email" required>
 
-    <div class="form-group">
-        <label for="phone">Phone</label>
-        <input id="phone" type="text" name="phone">
-    </div>
+        <label>Phone</label>
+        <input type="text" name="phone">
 
-    <div class="form-group">
-        <label for="concern">Concern</label>
-        <textarea id="concern" name="concern" rows="5"></textarea>
-    </div>
+        <label>Concern</label>
+        <textarea name="concern" rows="5"></textarea>
 
-    <div class="form-group">
         <label>
             <input type="checkbox" name="emergency" value="yes">
             This is urgent
         </label>
-    </div>
 
-    <p class="note">
-        Tick this only if you believe your situation requires urgent attention
-        (for example: severe pain, heavy bleeding, or sudden worsening of symptoms).
-    </p>
+        <p class="form-note">
+            Do not use this service if you require immediate emergency care.
+        </p>
 
-    <p class="note">
-        <strong>Do not use this service if you require immediate emergency care.</strong>
-    </p>
+        <button type="submit">Submit Consultation</button>
 
-    <button type="submit">Submit Consultation</button>
+    </form>
 
-</form>
-
-<p class="note">
-    If you experience severe pain, heavy bleeding, or feel unwell,
-    please seek urgent in-person medical care.
-</p>
-
+</div>
 {% endblock %}
