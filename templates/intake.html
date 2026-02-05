@@ -3,8 +3,9 @@
 {% block title %}Online Gynaecological Consultation{% endblock %}
 
 {% block content %}
+<section class="form-section">
 
-    <h2>Online Gynaecological Consultation</h2>
+  <h2>Online Gynaecological Consultation</h2>
 
     <p>
         This secure form allows you to describe your concern in your own words.
@@ -26,7 +27,7 @@
         <label>Concern</label>
         <textarea name="concern" rows="5"></textarea>
 
-        <label>
+        <label> class="checkbox-label">
             <input type="checkbox" name="emergency" value="yes">
             This is urgent
         </label>
@@ -38,5 +39,6 @@
         <button type="submit">Submit Consultation</button>
 
     </form>
+  </section>
 
 {% endblock %}
