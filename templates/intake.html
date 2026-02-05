@@ -3,42 +3,40 @@
 {% block title %}Online Gynaecological Consultation{% endblock %}
 
 {% block content %}
-<section class="form-section">
 
-  <h2>Online Gynaecological Consultation</h2>
+<h2>Online Gynaecological Consultation</h2>
 
-    <p>
-        This secure form allows you to describe your concern in your own words.
-        You will receive a response from Dr Dariusz after review.
-        If your matter is urgent, please indicate this below.
-    </p>
+<p>
+  This secure form allows you to describe your concern in your own words.
+  You will receive a response from Dr Dariusz after review.
+  If your matter is urgent, please indicate this below.
+</p>
 
-    <form method="POST" action="/intake">
+<form method="POST" action="/intake">
 
-        <label>Full name</label>
-        <input type="text" name="full_name" required>
+  <label>Full name</label>
+  <input type="text" name="full_name" required>
 
-        <label>Email</label>
-        <input type="email" name="email" required>
+  <label>Email</label>
+  <input type="email" name="email" required>
 
-        <label>Phone</label>
-        <input type="text" name="phone">
+  <label>Phone</label>
+  <input type="text" name="phone">
 
-        <label>Concern</label>
-        <textarea name="concern" rows="5"></textarea>
+  <label>Concern</label>
+  <textarea name="concern" rows="5"></textarea>
 
-        <label> class="checkbox-label">
-            <input type="checkbox" name="emergency" value="yes">
-            This is urgent
-        </label>
+  <label> class="checkbox-label">
+    <input type="checkbox" name="emergency" value="yes">
+    This is urgent
+  </label>
 
-        <p class="form-note">
-            Do not use this service if you require immediate emergency care.
-        </p>
+  <p class="form-note">
+    Do not use this service if you require immediate emergency care.
+  </p>
 
-        <button type="submit">Submit Consultation</button>
+  <button type="submit">Submit Consultation</button>
 
-    </form>
-  </section>
-
+</form>
+  
 {% endblock %}
