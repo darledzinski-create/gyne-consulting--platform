@@ -4,39 +4,42 @@
 
 {% block content %}
 
-<h2>Online Gynaecological Consultation</h2>
+<section class="form-section">
 
-<p>
-  This secure form allows you to describe your concern in your own words.
-  You will receive a response from Dr Dariusz after review.
-  If your matter is urgent, please indicate this below.
-</p>
+  <h2>Online Gynaecological Consultation</h2>
 
-<form method="POST" action="/intake">
-
-  <label>Full name</label>
-  <input type="text" name="full_name" required>
-
-  <label>Email</label>
-  <input type="email" name="email" required>
-
-  <label>Phone</label>
-  <input type="text" name="phone">
-
-  <label>Concern</label>
-  <textarea name="concern" rows="5"></textarea>
-
-  <label class="checkbox-label">
-    <input type="checkbox" name="emergency" value="yes">
-    This is urgent
-  </label>
-
-  <p class="form-note">
-    Do not use this service if you require immediate emergency care.
+  <p>
+    This secure form allows you to describe your concern in your own words.
+    You will receive a response from Dr Dariusz after review.
+    If your matter is urgent, please indicate this below.
   </p>
 
-  <button type="submit">Submit Consultation</button>
+  <form method="POST" action="/intake">
 
-</form>
+    <label>Full name</label>
+    <input type="text" name="full_name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Phone</label>
+    <input type="text" name="phone">
+
+    <label>Concern</label>
+    <textarea name="concern" rows="5"></textarea>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="emergency" value="yes">
+      This is urgent
+    </label>
+
+    <p class="form-note">
+      Do not use this service if you require immediate emergency care.
+    </p>
+
+    <button type="submit">Submit Consultation</button>
+
+  </form>
+</section>
 
 {% endblock %}
