@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}Online Gynaecological Consultation{% endblock %}
+
+{% block content %}
+
 <h2>Online Gynaecological Consultation</h2>
 
 <p>
@@ -22,7 +26,7 @@
   <label>Concern</label>
   <textarea name="concern" rows="5"></textarea>
 
-  <label> class="checkbox-label">
+  <label class="checkbox-label">
     <input type="checkbox" name="emergency" value="yes">
     This is urgent
   </label>
@@ -34,5 +38,5 @@
   <button type="submit">Submit Consultation</button>
 
 </form>
-  
+
 {% endblock %}
