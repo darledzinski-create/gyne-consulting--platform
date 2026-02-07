@@ -49,7 +49,7 @@ def intake():
 
     # Non-emergency path
     print("INTAKE RECEIVED:", intake_data)
-    return render _template("intake.html")
+    return render_template("intake.html")
     
 @app.route("/emergency")
 def emergency_notice():
