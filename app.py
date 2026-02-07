@@ -23,6 +23,9 @@ def intake():
     # ✅ ALWAYS handle GET first
     if request.method == "GET":
         return render_template("intake.html")
+       
+    # 🔴 DEBUG LINE — INSERT EXACTLY HERE
+    print("POST RECEIVED:", request.form)
 
     # ✅ POST logic starts here
     intake_data = {
