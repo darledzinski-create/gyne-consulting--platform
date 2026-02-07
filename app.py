@@ -45,11 +45,11 @@ def intake():
             print("! Emergency SMS failed:", e)
 
         # Emergency path always exits
-        return redirect(url_for("emergency_notice"))
+        return render_template("intake.html")
 
     # Non-emergency path
     print("INTAKE RECEIVED:", intake_data)
-    return redirect(url_for("thank_you"))
+    return render _template("intake.html")
     
 @app.route("/emergency")
 def emergency_notice():
