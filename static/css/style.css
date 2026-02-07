@@ -73,3 +73,12 @@ button:hover {
   margin-top: 20px;
   font-weight: normal;
 }
+
+/* Intake form containment fix */
+.form-section {
+    max-width: 100%;
+}
+
+.form-section form {
+    max-width: 100%;
+}
