@@ -82,3 +82,11 @@ button:hover {
 .form-section form {
     max-width: 100%;
 }
+
+/* Normalize checkbox appearance */
+.checkbox-label input[type="checkbox"] {
+    margin: 0;
+    transform: scale(1.1);
+}
+
+
