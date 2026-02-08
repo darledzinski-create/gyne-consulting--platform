@@ -19,6 +19,9 @@ def first_consultation():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
+    print("=== INTAKE ROUTE HIT ===")
+    print("METHOD:", request.method)
+    print("FORM DATA:", request.form)
 
     # ✅ ALWAYS handle GET first
     if request.method == "GET":
