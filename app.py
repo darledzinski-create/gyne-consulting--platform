@@ -21,8 +21,7 @@ def first_consultation():
 def intake():
     print("=== INTAKE ROUTE HIT ===")
     print("METHOD:", request.method)
-    print("FORM DATA:", request.form)
-
+   
     # ✅ ALWAYS handle GET first
     if request.method == "GET":
         return render_template("intake.html")
@@ -30,7 +29,9 @@ def intake():
     # 🔴 DEBUG LINE — INSERT EXACTLY HERE
     print("POST RECEIVED:", request.form)
 
-    # ✅ POST logic starts here
+    # --- POST logic starts here ---
+    print("POST RECEIVED")
+    print("FORM DATA:", request.form)
     intake_data = {
         "full_name": request.form.get("full_name"),
         "email": request.form.get("email"),
@@ -40,21 +41,11 @@ def intake():
 
     emergency = request.form.get("emergency")
 
-    if emergency:
-        try:
-            send_emergency_sms(
-                full_name=intake_data["full_name"],
-                phone=intake_data["phone"],
-                concern=intake_data["concern"],
-            )
-        except Exception as e:
-            print("! Emergency SMS failed:", e)
-
-        # Emergency path always exits
-        return render_template("intake.html")
-
-    # Non-emergency path
     print("INTAKE RECEIVED:", intake_data)
+    print("EMERGENCY:", emergency)
+
+    if emergency:
+        return redirect(url_for("emergency_notice"))
     return redirect(url_for("thank_you"))
     
 @app.route("/emergency")
