@@ -55,7 +55,7 @@ def intake():
 
     # Non-emergency path
     print("INTAKE RECEIVED:", intake_data)
-    return render_template("intake.html")
+    return redirect(url_for("thank_you")
     
 @app.route("/emergency")
 def emergency_notice():
