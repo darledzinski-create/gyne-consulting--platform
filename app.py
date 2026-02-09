@@ -21,30 +21,16 @@ def first_consultation():
 def intake():
     print("=== INTAKE ROUTE HIT ===")
     print("METHOD:", request.method)
+    print("FORM DATA:", request.form)
    
-    # ✅ ALWAYS handle GET first
     if request.method == "GET":
         return render_template("intake.html")
        
-    # 🔴 DEBUG LINE — INSERT EXACTLY HERE
-    print("POST RECEIVED:", request.form)
-
-    # --- POST logic starts here ---
-    print("POST RECEIVED")
-    print("FORM DATA:", request.form)
-    intake_data = {
-        "full_name": request.form.get("full_name"),
-        "email": request.form.get("email"),
-        "phone": request.form.get("phone"),
-        "concern": request.form.get("concern"),
-    }
-
     emergency = request.form.get("emergency")
 
-    print("INTAKE RECEIVED:", intake_data)
-    print("EMERGENCY:", emergency)
+    print("EMERGENCY VALUE:", emergency)
 
-    if emergency:
+    if emergency == "yes":
         return redirect(url_for("emergency_notice"))
     return redirect(url_for("thank_you"))
     
