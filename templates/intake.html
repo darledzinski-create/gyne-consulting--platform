@@ -16,38 +16,58 @@
 
   <form method="POST" action="/intake">
 
-    <label>Full name</label>
-    <input type="text" name="full_name" required>
+    {% extends "base.html" %}
 
-    <label>Email</label>
-    <input type="email" name="email" required>
+{% block title %}Online Gynaecological Consultation{% endblock %}
 
-    <label>Phone</label>
-    <input type="text" name="phone">
+{% block content %}
 
-    <label>Concern</label>
-    <textarea name="concern" rows="5"></textarea>
+<section class="form-section">
 
-     <label>Is this urgent?</label>
+  <h2>Online Gynaecological Consultation</h2>
 
-    <div class="checkbox-label">
-        <input type="radio" name="emergency" value="yes">
+  <p>
+    This secure form allows you to describe your concern in your own words.
+    You will receive a response from Dr Dariusz after review.
+    If your matter is urgent, please indicate this below.
+  </p>
+
+  <form method="POST" action="/intake">
+
+    <label for="full_name">Full name</label>
+    <input id="full_name" type="text" name="full_name" required>
+
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" required>
+
+    <label for="phone">Phone</label>
+    <input id="phone" type="text" name="phone">
+
+    <label for="concern">Concern</label>
+    <textarea id="concern" name="concern" rows="5"></textarea>
+
+    <fieldset style="margin-top:20px;">
+      <legend><strong>Is this urgent?</strong></legend>
+
+      <label class="checkbox-label">
+        <input type="radio" name="emergency" value="yes" required>
         Yes
-    </label>
-</div>
+      </label>
 
-    <div class="checkbox-label">
-        <input type="radio" name="emergency" value="">
+      <label class="checkbox-label">
+        <input type="radio" name="emergency" value="no" required>
         No
-    </label>
-</div>
-    
+      </label>
+    </fieldset>
 
-    <button type="submit" name="submit" value="!">
-        Submit Consultation
-    </button>
+    <p class="form-note">
+      Do not use this service if you require immediate emergency care.
+    </p>
+
+    <button type="submit">Submit Consultation</button>
 
   </form>
+
 </section>
 
 {% endblock %}
