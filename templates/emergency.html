@@ -1,82 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Urgent Attention Required</title>
+{% extends "base.html" %}
 
-    <style>
-        body {
-            background: #f6f7f9;
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+{% block title %}Urgent Attention Required{% endblock %}
 
-        .emergency-container {
-            max-width: 720px;
-            margin: 4rem auto;
-            padding: 2.5rem 3rem;
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            line-height: 1.6;
-        }
+{% block content %}
+<div class="emergency-container">
 
-        .emergency-container h1 {
-            margin-top: 0;
-            color: #8b1e1e;
-        }
+  <h1>Urgent Attention Required</h1>
 
-        .emergency-container strong {
-            color: #8b1e1e;
-        }
+  <p>
+    Thank you for contacting Dr Dariusz Gynaecological Consults.
+  </p>
 
-        .emergency-container ul {
-            padding-left: 1.5rem;
-        }
+  <p>
+    Based on the information you provided, your situation may require
+    <strong>urgent in-person medical assessment</strong>.
+  </p>
 
-        .emergency-container li {
-            margin-bottom: 0.5rem;
-        }
+  <p>
+    <strong>This online service cannot provide emergency care.</strong>
+  </p>
 
-        .emergency-container p:last-child {
-            margin-top: 2rem;
-            font-size: 0.9em;
-            color: #555;
-        }
-    </style>
-</head>
+  <ul>
+    <li>Contact your nearest emergency department</li>
+    <li>Call local emergency services</li>
+    <li>Attend an urgent care or hospital facility</li>
+  </ul>
 
-<body>
+  <p class="form-note">
+    This message confirms receipt of your submission only.
+    It does not constitute medical advice or a diagnosis.
+  </p>
 
-    <div class="emergency-container">
-
-        <h1>Urgent Attention Required</h1>
-
-        <p>
-            Thank you for contacting Dr Dariusz Gynaecological Consults.
-        </p>
-
-        <p>
-            Based on the information you provided, your situation may require
-            <strong>urgent in-person medical assessment</strong>.
-        </p>
-
-        <p>
-            <strong>This online service cannot provide emergency care.</strong>
-        </p>
-
-        <ul>
-            <li>Contact your nearest emergency department</li>
-            <li>Call local emergency services</li>
-            <li>Attend an urgent care or hospital facility</li>
-        </ul>
-
-        <p>
-            This message confirms receipt of your submission only.
-            It does not constitute medical advice or a diagnosis.
-        </p>
-
-    </div>
-
-</body>
-</html>
+</div>
+{% endblock %}
