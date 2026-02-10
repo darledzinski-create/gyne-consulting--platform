@@ -1,13 +1,19 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    {% block head %}
     <title>{% block title %}Dr Dariusz Consults{% endblock %}</title>
-    <link rel="stylrsheet" href="{{ url_for('static', filename="css/style.css') }}">
-    </head>
-<body>
+    
+    {% endblock %}
+  </head>
+  <body>
+    
+    {% block body %}
     <div class="page-wrapper">
         {% block content %}{% endblock %}
     </div>
-</body>
-</html>
+    {% endblock %}
+  </body>
+  </html>
