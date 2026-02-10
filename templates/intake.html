@@ -17,37 +17,38 @@
 
   <form method="POST" action="/intake">
 
-  <label>Full name</label>
-  <input type="text" name="full_name" required>
+    <label for="full_name">Full name</label>
+    <input type="text" id="full_name" name="full_name required>
 
-  <label>Email</label>
-  <input type="email" name="email" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
 
-  <label>Phone</label>
-  <input type="text" name="phone">
+    <label for="phone">Phone</label>
+    <input type="text" id="name="phone" name="phone">
 
-  <label>Concern</label>
-  <textarea name="concern" rows="5"></textarea>
+    <label> for="concern">Concern</label>
+    <textarea id="concern" name="concer" rows="5"></textarea>
 
-  <hr>
+    <hr>
 
-  <p><strong>Is this urgent?</strong></p>
+    <p><strong>Is this urgent?</strong></p>
   
-  <label>
-    <input type="radio" name="emergency" value="yes" required>
-    Yes - I need urgent attention
-  </label><br>
+    <label>
+      <input type="radio" name="emergency" value="yes" required>
+      Yes - I need urgent attention
+    </label>
+    <br>
     
-  <label>
+    <label>
       <input type="radio" name="emergency" value="no">
       No - this is not urgent
-  </label>
+    </label>
   
-  <p class="form-note">
-    Do not use this service if you require immediate emergency care.
-  </p>
+    <p class="form-note">
+      Do not use this service if you require immediate emergency care.
+    </p>
 
-  <button type="submit">Submit Consultation</button>
+    <button type="submit">Submit Consultation</button>
 
   </form>
 
