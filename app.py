@@ -19,19 +19,14 @@ def first_consultation():
 
 @app.route("/intake", methods=["GET", "POST"])
 def intake():
-    print("=== INTAKE ROUTE HIT ===")
-    print("METHOD:", request.method)
-    print("FORM DATA:", request.form)
-   
     if request.method == "GET":
         return render_template("intake.html")
        
     emergency = request.form.get("emergency")
 
-    print("EMERGENCY VALUE:", emergency)
-
     if emergency == "yes":
         return redirect(url_for("emergency_notice"))
+    
     return redirect(url_for("thank_you"))
     
 @app.route("/emergency")
