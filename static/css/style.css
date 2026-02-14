@@ -28,14 +28,20 @@ button {
     background-color: #2f7f7f;
     color: white;
     border: none;
-    padding: 12px 22px;
-    border-radius: 6px;
+    padding: 12px 24px;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    transitio: background-color 0.2s ease, transform o.05s ease;
 }
 
 button:hover {
     background-color: #256666;
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 input, textarea {
@@ -73,5 +79,21 @@ body {
 .form-note {
     font-size: 14px;
     color: #666;
+}
+
+h1, h2 {
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    font-weight: 600
+{
+
+p {
+    font-size: 16px;
+}
+
+ul {
+    padding-left: 20px:
 }
 
