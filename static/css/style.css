@@ -97,3 +97,26 @@ ul {
     padding-left: 20px:
 }
 
+.credibility-block {
+    margin-top: 40px;
+    padding: 25px;
+    background-color: #f4f6f8;
+    border-left: 4px solid #2c3e50;
+    border-radius: 6px;
+}
+
+.site-footer {
+    margin-top: 60px;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #555;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.confidential-note {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
