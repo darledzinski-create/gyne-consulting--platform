@@ -1,172 +1,45 @@
+{% extends "base.html" %}
 
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dr Dariusz Gynaecological Consults</title>
-<
+{% block title %}Home{% endblock %}
 
-<ul>
-    <li>Your submission has been securely received.</li>
-    <li>You will receive a response within 24 hours.</li>
-    <li>If urgent symptoms develop, seek emergency medical care immediately.</li>
-</ul>
+{% block content %}
+<div class="container">
+{% extends "base.html" %}
 
-<ul>
-    <li>Your submission has been securely received.</li>
-    <li>You will receive a response within 24 hours.</li>
-    <li>If urgent symptoms develop, seek emergency medical care immediately.</li>
-</ul>
+{% block title %}Home{% endblock %}
 
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+<div class="container">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: url("/static/images/1.jpg") no-repeat center center fixed;
-            background-size: cover;
-            color: #333;
-        }
+    <h1>Welcome to Dr Dariusz Gynaecological Consults</h1>
 
-        /* Navigation bar */
-        nav {
-            background: rgba(255, 255, 255, 0.92);
-            padding: 14px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #6b2d5c;
-        }
-
-        nav a {
-            margin-left: 16px;
-            text-decoration: none;
-            font-weight: 500;
-            color: #333;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Main content wrapper */
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 80px 20px;
-        }
-
-        /* White panel */
-        .homepage-panel {
-            background: rgba(255, 255, 255, 0.94);
-            max-width: 720px;
-            width: 100%;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-            text-align: center;
-        }
-
-        .homepage-panel h1 {
-            margin-top: 0;
-            color: #6b2d5c;
-        }
-
-        .homepage-panel p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-           margin-top: 20px;
-        }
-
-        .btn {
-             display: inline-block;
-             padding: 12px 20px;
-             margin: 8px;
-             text-decoration: none;
-             border-radius: 6px;
-             font-weight: 600;
-        }
-
-        .btn-primary {
-            background-color: #6b2c91;
-            color: white;
-        }
-
-        .btn-secondary {
-            border: 2px solid #6b2c91;
-            color: #6b2c91;
-        }
-    </style>
-
-<meta name="description"content="Confidential onlinegynaecological consultation with Dr Darius. Professioal, patien-centred care fromm the comfortof you own home.">
-<meta name="vieport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<footer style="text-align:center; padding:20px;font-size:0.9em;color:#666;">
-      Dr Dariusz Gynaecological Consults
-</footer>
-
-<body>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">
-            Dr Dariusz Gynaecological Consults
-        <div>
-            <a href="/">Home</a>
-            <a href="/about">About the Doctor</a>
-            <a href="/prescriptions">Prescriptions</a>
-            <a href="/referral">Referral Notice</a>
-            <a href="/communication">Communication Policy</a>
-            <a href="/consent">Consent</a>
-            <a href="/disclaimer">Disclaimer</a>
-        </div>
-    </nav>
-
-    <!-- Main content -->
-    <div class="content">
-        <div class="homepage-panel">
-            <h1>Welcome to Dr Dariusz Gynaecological Consults</h1>
-            <p>
-                Warm, confidential, and professional care — from the comfort of your home.
-            </p>
-
-<section class="credibility-block">
-    <h2>About Dr Dariusz</h2>
     <p>
-        Dr Dariusz is a retired Consultant Obstetrician and Gynaecologist with decades of clinical experience in women’s health.
-        This platform offers thoughtful, confidential online advisory consultations designed to guide patients with clarity and care.
+        Warm, confidential, and professional care — from the comfort of your home.
     </p>
-</section>
-     <div class="cta-buttons">
-         <a href="/first-consultation" class="btn btn-primary">
-             Start First Consultation
-         </a>
 
-         <a href="/intake" class="btn btn-secondary">
-             Ask a Question
-         </a>
-     </div>
-              
-            <p>
-                This service is currently under development and will be available soon.
-            </p>
-        </div>
+    <h2>About Dr Dariusz</h2>
+
+    <p>
+        Dr Dariusz is a retired Consultant Obstetrician and Gynaecologist
+        with decades of clinical experience in women's health.
+        This platform offers thoughtful, confidential online advisory
+        consultations designed to guide patients with clarity and care.
+    </p>
+
+    <div style="margin-top: 30px;">
+        <a href="{{ url_for('first_consultation') }}">
+            <button>Start First Consultation</button>
+        </a>
+
+        <a href="{{ url_for('intake') }}" style="margin-left: 15px;">
+            <button>Ask a Question</button>
+        </a>
     </div>
 
-</body>
-</html>
+    <p style="margin-top: 25px; font-size: 14px; color: #666;">
+        This service is currently under development and will be available soon.
+    </p>
+
+</div>
+{% endblock %}
+    
