@@ -4,19 +4,29 @@
     <meta charset="UTF-8">
     <title>{% block title %}Dr Dariusz Consults{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
 
-<footer class="site-footer">
-    <p>
-        This online consultation service provides remote medical guidance only and does not replace in-person examination.
-        If you are experiencing urgent or severe symptoms, seek immediate emergency medical care.
-    </p>
-</footer>
-
 <body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('first_consultation') }}">First Consultation</a>
+            <a href="{{ url_for('intake') }}">Ask a Question</a>
+        </div>
+    </nav>
+
     <div class="page-wrapper">
         {% block content %}{% endblock %}
     </div>
+
+    <footer class="site-footer">
+        <p>
+            This online consultation service provides remote medical guidance only
+            and does not replace in-person examination.
+            If you are experiencing urgent symptoms, seek immediate medical care.
+        </p>
+    </footer>
+
 </body>
 </html>
