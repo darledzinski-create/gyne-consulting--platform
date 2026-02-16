@@ -148,3 +148,49 @@ ul {
     color: #666;
 }
 
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(to bottom, #f7f9fc, #ffffff);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #1c2a39;
+    margin-bottom: 20px;
+}
+
+.hero-subtext {
+    font-size: 1.2rem;
+    color: #4a5a6a;
+    margin-bottom: 40px;
+}
+
+.hero-buttons .btn-primary,
+.hero-buttons .btn-secondary {
+    display: inline-block;
+    padding: 14px 28px;
+    margin: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #2c5d8a;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #244c72;
+}
+
+.btn-secondary {
+    background-color: #e6eef5;
+    color: #1c2a39;
+}
+
+.btn-secondary:hover {
+    background-color: #d3e2ef;
+}
