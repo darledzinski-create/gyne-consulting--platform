@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
 
 <section class="hero">
@@ -9,12 +11,14 @@
     </p>
 
     <div class="hero-buttons">
-        <a href="/first-consultation" class="btn-primary">Start First Consultation</a>
-        <a href="/intake" class="btn-secondary">Ask a Question</a>
+        <a href="{{ url_for('first_consultation') }}" class="btn-primary">
+            Start First Consultation
+        </a>
+
+        <a href="{{ url_for('intake') }}" class="btn-secondary">
+            Ask a Question
+        </a>
     </div>
 </section>
 
 {% endblock %}
-
-
-    
