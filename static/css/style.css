@@ -146,11 +146,11 @@ ul {
     margin-right: auto;
 }
 
-.hero-buttons .btn-primary,
-.hero-buttons .btn-secondary {
+.btn-primary,
+.btn-secondary {
     display: inline-block;
     padding: 16px 32px;
-    margin: 10px; 12px;
+    margin: 12px; 10px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
