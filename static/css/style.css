@@ -173,3 +173,15 @@ ul {
     background-color: #d5e8e8;
     transform: translateY(-2px);
 }
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+{
+
+a:hover {
+    text-decoration: none;
+}
