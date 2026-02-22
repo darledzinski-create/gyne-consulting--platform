@@ -128,8 +128,8 @@ ul {
 
 .hero {
     text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(to bottom, #f7f9fc, #ffffff);
+    padding: 120px 20px;
+    background: linear-gradient(to bottom, #e9f3f1 0%, #f6fbfa 60%, #ffffff 100%);
 }
 
 .hero h1 {
@@ -178,6 +178,15 @@ ul {
 .hero .btn-secondary:hover {
     background-color: #d5e8e8;
     transform: translateY(-2px);
+}
+
+.hero-buttons {
+    margin-top: 40px;
+}
+
+.hero-buttons a {
+    display: inline-block;
+    min-width: 240px;
 }
 
 a {
