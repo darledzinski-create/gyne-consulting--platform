@@ -6,6 +6,12 @@
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
+.hero .container {
+    background: transparent;
+    box-shadow: none;
+    margin: 0 auto;
+    padding: 100px 20px;
+}
 
 h1, h2 {
     color: #2f7f7f;
