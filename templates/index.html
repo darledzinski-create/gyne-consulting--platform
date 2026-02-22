@@ -1,31 +1,40 @@
 {% extends "base.html" %}
 
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
 
-<div class="container">
-    <section class="hero">
-    <h1>
-    Professional Online Gynaecological Consultation
-    </h1>
-    <p class="hero-subtext">
-        Confidential. Structured. Personally reviewed by Dr Dariusz Ledzinski.
-    </p>
+<section class="hero">
+    <div class="container">
+   
+        <h1>
+            Professional Online Gynaecological Consultation
+        </h1>
+        
+        <p class="hero-subtext">
+            Confidential. Structured. Personally reviewed by Dr Dariusz Ledzinski.
+        </p>
 
-    <div class="hero-buttons">
-        <a href="{{ url_for('first_consultation') }}" class="btn-primary">
-            Start First Consultation
-        </a>
+        <div class="hero-buttons">
+            <a href="{{ url_for('first_consultation') }}" class="btn-primary">
+                Start First Consultation
+            </a>
 
-        <a href="{{ url_for('intake') }}" class="btn-secondary">
-            Ask a Question
-        </a>
+            <a href="{{ url_for('intake') }}" class="btn-secondary">
+                Ask a Question
+            </a>
+        </div>
+
     </div>
 </section>
-    <section class="credibility-strip">
+<section class="credibility-strip">
+    <div class="container">
         <p>
             Over 30 years of clinical experience in Obstetrics & Gynaecology.
             Structured consultation process. Personally reviewed by Dr Dariusz Ledzinski
+        </p>
+    </div>
+</section>
 
 {% endblock %}
