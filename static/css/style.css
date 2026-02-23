@@ -217,12 +217,16 @@ a:hover {
 }
 
 .hero-warm {
-    background-image: url("/static/images/1.jpg");
-    background-size: cover;
-    background-position: center;
-    padding: 120px 20px;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh;
+
+    
+    background-image: url("/static/images/1.jpg");
+    position: relative;
+    
 }
 
 .hero-card {
