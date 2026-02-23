@@ -129,8 +129,11 @@ ul {
 .hero {
     text-align: center;
     padding: 120px 20px;
-    background: linear-gradient(to bottom, #e9f3f1 0%, #f6fbfa 60%, #ffffff 100%);
-}
+    background-image: url("../images/1.jpg");
+    bakcground-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 
 .hero h1 {
     font-size: 2.8rem;
