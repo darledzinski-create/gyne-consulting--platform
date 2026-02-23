@@ -132,6 +132,8 @@ ul {
     background-image: url("/static//images/1.jpg") center center / cover no-repeat;
     position: relative;
     color: white;
+    min-height: 70vh;
+    align-items: center;
 }
 
 .hero:before {
@@ -220,11 +222,11 @@ a:hover {
     background-position: center;
     padding: 120px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: center
 }
 
 .hero-card {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.80);
     padding: 60px 50px;
     max-width: 750px;
     border-radius: 16px;
