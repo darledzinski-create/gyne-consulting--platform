@@ -126,7 +126,7 @@ ul {
     color: #666;
 }
 
-.hero {
+.hero-warm {
     text-align: center;
     padding: 140px 20px;
     background-image: url("/static//images/1.jpg") center center / cover no-repeat;
@@ -196,12 +196,10 @@ ul {
     min-width: 240px;
 }
 
-.hero h1 {
-    color: white
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    letter-spacing: 0px;
+.hero-warm h1 {
+    color: #1f4f46;
+    font-size: 2.6rem;
+    margin-bottom: 15px;
 }
 
 a {
