@@ -126,14 +126,14 @@ ul {
     color: #666;
 }
 
-.hero:before {
+.hero-warm::before {
     content: '';
     position: absolute;
     inset: 0
         background: rgba(0,0,0,0.45);
 }
 
-.hero >* {
+.hero-warm >* {
     position: relative;
     z-index: 2;}
 
@@ -148,8 +148,8 @@ ul {
     margin-right: auto;
 }
 
-.hero .btn-primary,
-.hero .btn-secondary {
+.hero-warm .btn-primary,
+.her-warm .btn-secondary {
     display: inline-block;
     padding: 16px 32px;
     margin: 12px; 10px;
