@@ -126,16 +126,6 @@ ul {
     color: #666;
 }
 
-.hero-warm {
-    text-align: center;
-    padding: 140px 20px;
-    background-image: url("/static//images/1.jpg") center center / cover no-repeat;
-    position: relative;
-    color: white;
-    min-height: 70vh;
-    align-items: center;
-}
-
 .hero:before {
     content: '';
     position: absolute;
@@ -220,11 +210,10 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     min-height: 80vh;
+    padding: 120px 20px;
 
-    
-    background-image: url("/static/images/1.jpg");
+    background-image: url("/static/images/1.jpg") center/ cover no-repeat;
     position: relative;
     
 }
