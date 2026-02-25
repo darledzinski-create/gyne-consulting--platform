@@ -155,7 +155,8 @@ ul {
 
 /* Card */
 .hero-card {
-    background: rgba(255,255,255, 0.95);
+    background: rgba(255,255,255, 0.88);
+    backdrop-filter: blur(6px);
     padding: 60px 50px;
     max-width: 750px;
     border-radius: 16px;
@@ -164,7 +165,7 @@ ul {
 }
 
 /* Title */
-her-card h1 {
+hero-card h1 {
     font-size: 2.6rem;
     font-weight: 700;
     color: #153f3f;
