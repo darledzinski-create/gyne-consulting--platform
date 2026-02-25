@@ -206,7 +206,7 @@ hero-warm .btn-secondary {
     color: #153f3f;
 }
 
-hero-warm .btn-secondary:hover {
+.hero-warm .btn-secondary:hover {
     background-color: #d5e8e8;
     transform: translateY(-2PX);
 }
