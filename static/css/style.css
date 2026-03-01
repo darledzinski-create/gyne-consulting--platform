@@ -175,7 +175,7 @@ hero-card h1 {
 /* Subtext */
 .hero-subtext {
     font-size: 1.25rem;
-    color: #4a4a4a;
+    color: #444;
     margin-bottom: 45px;
 }
 
@@ -204,16 +204,24 @@ hero-warm .btn-secondary {
 
 .hero-warm .btn-primary:hover {
     background-color:#134242;
-    traansform: translateY(-2px);
+    transform: translateY(-2px);
 }
 
 .hero-warm .btn-secondary {
-    background-color: #e8f2f2;
-    color: #153f3f;
+    background-color: #transparent;
+    color: #of5c4f;
+    border: 2px solid #of5c4f;
+    padding: 16px 12px;
+    border-radius: 10px;
+    text-decoration: none;
 }
 
 .hero-warm .btn-secondary:hover {
     background-color: #d5e8e8;
     transform: translateY(-2PX);
+}
+ 
+.hero-buttons {
+    margin-top: 30px;
 }
     
