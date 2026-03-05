@@ -140,7 +140,6 @@ padding: 30px 20px;
     text-align: center;
     paddiing: 60px 20px;
     background: url("/static/images/1.jpg") center center / cover no-repeat;
-    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
