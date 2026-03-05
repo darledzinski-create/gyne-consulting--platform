@@ -106,9 +106,11 @@ ul {
     padding: 40px; 20px;
     border-radius: 6px;
     font-size: 1.05rem;
-    max-width: 650px;
+    max-width: 750px;
     margin-left: auto
     margin-right: auto
+    color: #444;
+    margin:: 30px auto 40px auto;
 }
 
 .page-wraper {
@@ -154,7 +156,7 @@ padding: 30px 20px;
     content: "";
     position: absolute;
     insett: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.25);
 }
 
 /* Ensure content sits above overlay */
