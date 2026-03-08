@@ -88,12 +88,10 @@ hr {
 }
 
 body {
-   body {
     background-image: url("/static/images/wood-bg.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-}
 }
 
 .form-note {
