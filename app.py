@@ -21,14 +21,37 @@ def first_consultation():
 def intake():
     if request.method == "GET":
         return render_template("intake.html")
-       
+
+    @app.route("/intake", methods=["GET","POST"])
+def intake():
+    if request.method == "GET":
+        return render_template("intake.html")
+
+    full_name = request.form.get("full_name")
+    email = request.form.get("email")
+    phone = request.form.get("phone")
+    concern = request.form.get("concern")
+    emergency = request.form.get("emergency")
+
+    print("NEW CONSULTATION")
+    print("Name:", full_name)
+    print("Email:", email)
+    print("Phone:", phone)
+    print("Concern:", concern)
+    print("Emergency:", emergency)
+
+    if emergency == "yes":
+        return redirect(url_for("emergency_notice"))
+
+    return redirect(url_for("thank_you"))
+
     emergency = request.form.get("emergency")
 
     if emergency == "yes":
         return redirect(url_for("emergency_notice"))
-    
-    return redirect(url_for("thank_you"))
-    
+
+    return redirect(url_for("thank-you"))
+       
 @app.route("/emergency")
 def emergency_notice():
     return render_template("emergency.html")
