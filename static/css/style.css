@@ -155,10 +155,10 @@ padding: 30px 20px;
 .hero-warm {
     position: relative;
     text-align: center;
-    paddiing: 140px 20px;
-    min-height: 80px;
-    background: url("/static/images/1.jpg") center center / cover no-repeat;
-    
+    paddiing: 120px 20px;
+    min-height: 100px;
+}
+   
 .hero-warm .authority-note {
     color: #555;
     font-weight: 500;
