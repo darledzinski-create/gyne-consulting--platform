@@ -38,7 +38,7 @@ def intake():
     if emergency == "yes":
         return redirect(url_for("emergency_notice"))
     
-    return redirect(url_for("thank-you"))
+    return redirect(url_for("thank_you"))
        
 @app.route("/emergency")
 def emergency_notice():
