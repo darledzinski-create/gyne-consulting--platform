@@ -42,14 +42,7 @@ def intake():
 
     if emergency == "yes":
         return redirect(url_for("emergency_notice"))
-
-    return redirect(url_for("thank_you"))
-
-    emergency = request.form.get("emergency")
-
-    if emergency == "yes":
-        return redirect(url_for("emergency_notice"))
-
+    
     return redirect(url_for("thank-you"))
        
 @app.route("/emergency")
