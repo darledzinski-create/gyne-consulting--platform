@@ -88,9 +88,12 @@ hr {
 }
 
 body {
-    background: #f5f5f5;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+   body {
+    background-image: url("/static/images/wood-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 }
 
 .form-note {
@@ -153,7 +156,7 @@ padding: 30px 20px;
 .hero-warm {
     position: relative;
     text-align: center;
-    paddiing: 60px 20px;
+    paddiing: 140px 20px;
     background: url("/static/images/1.jpg") center center / cover no-repeat;
     
 .hero-warm .authority-note {
@@ -178,11 +181,11 @@ padding: 30px 20px;
 
 /* Card */
 .hero-card {
-    background: rgba(255,255,255, 0.92);
+    background: white;
     backdrop-filter: blur(8px);
     padding: 35px 45px;
     max-width: 750px;
-    border-radius: 18px;
+    border-radius: 12px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     text-align: center;
 }
