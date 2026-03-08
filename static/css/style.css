@@ -17,6 +17,7 @@ body {
 
 main {
     flex: 1;
+    background: transparent;
 }
 
 .hero .container {
