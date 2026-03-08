@@ -17,11 +17,9 @@ def home():
 def first_consultation():
     return render_template("first-consultation.html")
 
-@app.route("/intake", methods=["GET","POST"])
+@app.route("/intake", methods=["POST"])
 def intake():
-    if request.method == "GET":
-        return render_template("intake.html")
-
+    
     full_name = request.form.get("full_name")
     email = request.form.get("email")
     phone = request.form.get("phone")
