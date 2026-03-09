@@ -95,12 +95,7 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    min-height: 100px;
-}
-
-.form-note {
-    font-size: 14px;
-    color: #666;
+    margin: o;
 }
 
 h1, h2 {
