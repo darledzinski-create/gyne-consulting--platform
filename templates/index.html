@@ -5,28 +5,25 @@
 
 {% block content %}
 
-<section class="hero-warm">
+<section class="hero">
     <div class="hero-card">
 
-        <h1>
-            Compassionate Online Gynaecological Care
-        </h1>
+        <h1>Compassionate Online Gynaecological Care</h1>
 
         <p class="hero-subtext">
             Confidential. Thoughtful. Personally reviewed by Dr Dariusz Ledzinski.
         </p>
 
-        <div class="hero-buttons">
-            
-            <a href="{{ url_for('first_consultation') }}" class="btn-primary hero-cta">
-                Start First Consultation
-            </a>
-            
-            </div>
+        <a href="{{ url_for('first_consultation') }}" class="btn-primary">
+            Start First Consultation
+        </a>
 
-<section class="credibility-strip">
-        <p>
-        30+ years clinical experience in Obstetrics & Gynaecology · Every consultation personally reviewed by Dr Dariusz · Confidential and respectful care
+        <p class="authority-note">
+            30+ years clinical experience in Obstetrics & Gynaecology ·
+            Every consultation personally reviewed by Dr Dariusz ·
+            Confidential and respectful care
         </p>
+
+    </div>
 </section>
 {% endblock %}
