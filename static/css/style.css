@@ -13,6 +13,8 @@ html, body {
 body {
     display: flex;
     flex-direction: column
+
+    background: url("/static/images/1.jpg") center center / cover no-repeat fixed;
 }
 
 main {
