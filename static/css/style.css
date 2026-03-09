@@ -156,8 +156,8 @@ padding: 30px 20px;
 .hero-warm {
     position: relative;
     text-align: center;
-    paddiing: 120px 20px;
-    min-height: 100px;
+    paddiing: 140px 20px;
+    min-height: calc(100px - 140px);;
 }
    
 .hero-warm .authority-note {
