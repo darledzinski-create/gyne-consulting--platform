@@ -150,10 +150,8 @@ padding: 30px 20px;
 /* ==================== HERO SECTION =================== */
 
 .hero-warm {
-    position: relative;
-    justify-contnt: center;
-    align-items: center
-    paddiing: 120px 20px;
+    text-align: center
+    paddiing: 0;
 }
    
 .hero-warm .authority-note {
@@ -179,9 +177,9 @@ padding: 30px 20px;
 /* Card */
 .hero-card {
     background: white;
-    backdrop-filter: blur(8px);
-    padding: 35px 45px;
-    max-width: 850px;
+    padding: 40px 50px;
+    max-width: 900px;
+    margin: 120px auto
     border-radius: 12px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     text-align: center;
