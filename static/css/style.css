@@ -5,26 +5,23 @@
     
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
     margin: 0;
-
     background: url("/static/images/1.jpg") center center / cover no-repeat fixed;
 }
 
 main {
-    flex: 1;
     width: 100%;
 }
 
-.hero .container {
-    background: transparent;
-    box-shadow: none;
-    margin: 0 auto;
-    padding: 100px 20px;
+.hero-card {
+    background: white;
+    max-width: 900px;
+    margin: 120px auto;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    text-align: center;
 }
 
 h1 {
