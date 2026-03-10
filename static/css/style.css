@@ -144,10 +144,10 @@ padding: 30px 20px;
     padding: 140px 20px 200px 20px;
 }
    
-.hero-warm .authority-note {
-    color: #555;
-    font-weight: 500;
-    margin-top: 20px;
+ .authority-note {
+    max-width: 650px;
+     margin: 15px auto 0 auto;
+     line0height: 1.6;text-align: center;
 }
 
 /* Dark overlay */
@@ -192,47 +192,22 @@ padding: 30px 20px;
 }
 
 /* Buttons */
-hero-warm .btn-primary,
-hero-warm .btn-secondary {
-    text-decoration: none;
+.hero-warm .btn-primary,
+    .hero-warm .btn-primary {
     display: inline-block;
-    padding: 16px 32px;
-    margin: 12px 10px;
-    border-radius: 8px;
-    text-decoratiion: none;
+    background-color: #2f6f5e;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
     font-weight: 600;
-    transition: all 0.25s ease;
-}
-
-.hero-warm .btn-primary {
-    background-color: #1b5e53;
-    font-size: 1.1rem;
-    padding: 18px 36px;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    
+    margin-top: 15px;
 }
 
 .hero-warm .btn-primary:hover {
-    background-color:#134242;
-    transform: translateY(-2px);
+    background-color: #245647;
 }
 
-.hero-warm .btn-secondary {
-    background-color: #transparent;
-    color: #114d43;
-    border: 2px solid #114d43;
-    padding: 16px 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    margin-left; 12px;
-}
-
-.hero-warm .btn-secondary:hover {
-    background-color: #d5e8e8;
-    transform: translateY(-2PX);
-}
- 
 .hero-buttons {
     margin-top: 30px;
 }
@@ -245,6 +220,20 @@ hero-warm .btn-secondary {
     font-weight: 600;
     border-radius: 8px;
     text-decoration: none;
+}
+
+.hero-card .btn-primary {
+    background-color: #2f6f5e;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.hero-card .btn-primary:hover {
+    background-color: #245647;
 }
 
 .hero-cta:hover {
