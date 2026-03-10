@@ -10,9 +10,8 @@ html, body {
 
 body {
     margin: 0;
-{
+}
 
-main {
     main {
     min-height: 100vh;
 
@@ -20,19 +19,6 @@ main {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-}
-
-.hero-card {
-    .hero-card {
-    background: rgba(255,255,255,0.92);
-    max-width: 900px;
-    margin: 80px auto;
-    padding: 50px 60px;
-    border-radius: 12px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-    text-align: center;
-}
 }
 
 h1 {
@@ -44,7 +30,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-{
+   {
     line-height: 1.6;
     margin-bottom: 16px;
 }
@@ -94,14 +80,6 @@ hr {
 .form-note {
     font-size: 14px;
     color: #666;
-}
-
-body {
-    background-image: url("/static/images/wood-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    margin: o;
 }
 
 h1, h2 {
@@ -167,13 +145,13 @@ padding: 30px 20px;
 .hero-warm::before {
     content: "";
     position: absolute;
-    insett: 0;
+    inset: 0;
     background: rgba(0,0,0,0.25);
 }
 
 /* Ensure content sits above overlay */
 .hero-warm > *{
-    positonn: relative;
+    position: relative;
     z-index: 2;
 }
 
