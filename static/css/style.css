@@ -166,6 +166,7 @@ padding: 30px 20px;
 
 /* Card */
 .hero-card {
+    bordere: 5px solid red;
     background: rgba|(255,255,2550,9);;
     
     padding: 60px 70px;
