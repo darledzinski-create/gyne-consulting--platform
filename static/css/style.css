@@ -135,6 +135,7 @@ padding: 30px 20px;
 
 .hero-warm {
     min-height: 100vh;
+    
     background-image: url("/static/images/1.jpg");
     background-size: cover;
     background-position: center;
@@ -145,6 +146,8 @@ padding: 30px 20px;
     justify-content: center;
 
     padding: 120px 20px 200px 20px;
+
+    position: relative
 }
 
  .
@@ -160,9 +163,10 @@ padding: 30px 20px;
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.18);
 
     z-index: 1;
+    pointer-events: none;
 }
 
 /* Ensure content sits above overlay */
