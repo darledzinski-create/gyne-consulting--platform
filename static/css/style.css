@@ -147,10 +147,7 @@ padding: 30px 20px;
 
     padding: 120px 20px 200px 20px;
 
-    position: relative
 }
-
- .
    
  .authority-note {
      margin-top: 18px; 
@@ -166,16 +163,14 @@ padding: 30px 20px;
 
 /* Card */
 .hero-card {
-    bordere: 5px solid red;
-    background: rgba|(255,255,2550,9);;
     
-    padding: 60px 70px;
+    background: white;
+    padding: 40px 50px;
     
-    max-width: 1000px;
-    width: 90%;
+    margin: 120px auto;
     
-    border-radius: 14px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.18);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     
     text-align: center;
 }
