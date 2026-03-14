@@ -158,17 +158,6 @@ padding: 30px 20px;
      color: #666;
 }
 
-/* Dark overlay */
-.hero-warm::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.18);
-
-    z-index: 1;
-    pointer-events: none;
-}
-
 /* Ensure content sits above overlay */
 .hero-warm > *{
     position: relative;
