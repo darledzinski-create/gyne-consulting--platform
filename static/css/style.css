@@ -33,7 +33,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-   {
+ p {
     line-height: 1.6;
     margin-bottom: 16px;
 }
@@ -98,7 +98,7 @@ p {
 }
 
 ul {
-    padding-left: 20px:
+    padding-left: 20px;
 }
 
 .credibility-strip {
@@ -111,15 +111,14 @@ ul {
     margin-left: auto
     margin-right: auto
     color: #444;
-    margin:: 30px auto 40px auto;
 }
 
-.page-wraper {
+.page-wrapper {
 padding: 30px 20px;
 }
 
 .site-footer {
-    width: 100px;
+    width: 100%;
     clear: both;
     padding: 20px;
     text-align: center;
@@ -187,9 +186,9 @@ padding: 30px 20px;
     font-size: 19px;
     color: #444;
     margin-bottom: 22px;
+}
     
 /* Buttons */
-.hero-warm .btn-primary,
     .hero-warm .btn-primary {
     display: inline-block;
         
@@ -204,7 +203,7 @@ padding: 30px 20px;
     font-weight: 600;
         
     margin-top: 20px;
-    transition: 0.2 ease
+    transition: 0.2s ease
 }
 
 .hero-warm .btn-primary:hover {
