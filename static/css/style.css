@@ -113,14 +113,15 @@ padding: 30px 20px;
 }
 
 .site-footer {
-    max-width: 800px;
-    margin: 10px auto;
+    max-width: 700px;
+    margin: 5px auto;
     
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
     
-    padding: 15px;
+    padding: 8p 10px;
+    line-height: 1.4;
 }
 
 .confidential-note {
