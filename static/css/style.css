@@ -74,6 +74,11 @@ input, textarea {
     font-weight: 600;
 }
 
+.nav-container {
+    max-width:1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+
 /* Divider refinement */
 hr {
     border: none;
@@ -160,7 +165,6 @@ padding: 30px 20px;
     justify-content: center;
 
     padding: 40px 20px;
-
 }
    
  .authority-note {
