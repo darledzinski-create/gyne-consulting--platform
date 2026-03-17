@@ -123,17 +123,19 @@ padding: 30px 20px;
 }
 
 .site-footer {
-    flex-shrink: 0;
-    max-width: 700px;
-    margin: 10px auto;
-    
+    width: 100%;
+    background-color: #fafafa;
+
     text-align: center;
     font-size: 13px;
-    color: #666;
-    
-    padding: 10px;
-    line-height: 1.4;
+    color: #555;
+
+    padding: 15px 20px;
+    line-height: 1.5;
+
+    border-top: 1px solid #ddd;
 }
+
 
 .confidential-note {
     margin-top: 20px;
