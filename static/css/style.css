@@ -35,6 +35,7 @@ body {
 
    * {
        outline: 1px; solid red;
+   }
 
 h1 {
     color: #2f7f7f;
@@ -64,6 +65,7 @@ input, textarea {
 }
 
 .navbar {
+    width: 100%;
     background-color: rgb(255,255,255,0.95);
     padding: 18px 40px;
     border-bottom: 1px solid #ddd;
