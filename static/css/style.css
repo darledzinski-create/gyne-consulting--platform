@@ -134,6 +134,9 @@ padding: 30px 20px;
     line-height: 1.5;
 
     border-top: 1px solid #ddd;
+
+    overflow-wrap: 1px solid #add;
+    word-wrap: breake-word;
 }
 
 
