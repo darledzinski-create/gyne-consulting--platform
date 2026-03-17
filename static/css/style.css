@@ -33,10 +33,6 @@ body {
        box-sizing: border-box;
  }
 
-   * {
-       outline: 1px; solid red;
-   }
-
 h1 {
     color: #2f7f7f;
     margin-bottom: 20px;
