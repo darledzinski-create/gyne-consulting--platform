@@ -127,6 +127,17 @@ padding: 30px 20px;
     border-top: 1px solid #ddd;
 }
 
+/* TEMPORARY DEBUG */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    background: red;
+    color: white;
+    z-index: 9999;
+
 .footer-container {
     max-width: 800px;
     margin: 0 auto;
