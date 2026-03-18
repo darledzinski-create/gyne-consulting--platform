@@ -227,6 +227,21 @@ padding: 30px 20px;
     transform: translateY(-2px);
 }
 
+.btn-secondary {
+    display: inline-block;
+    margin-top: 30px;
+
+    padding: 12px 26px;
+    border-radius: 8px;
+
+    background-color: transparent;
+    border: 1px solid #2f6f5e;
+    color: #2f6f5e;
+
+    text-decoration: none;
+    font-weight: 500;
+}
+
 .hero-buttons {
     margin-top: 30px;
 }
@@ -280,12 +295,10 @@ padding: 30px 20px;
 }
 
 .how-it-works {
-    max: 100%;
-    max-width: 1000px;
-    margin: 60px auto;
-    padding: 20px;
-    text-align: center;
+    margin: 40px auto;
+    padding: 10px 20px;
 }
+    
 
 .how-it-works h2 {
     margin-bottom: 40px;
