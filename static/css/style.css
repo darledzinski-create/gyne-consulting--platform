@@ -24,8 +24,6 @@ body {
 
     main {
         flex: 1;
-        display: flex;
-        flex-drection: column;
 }
 
    * {
@@ -154,6 +152,7 @@ padding: 30px 20px;
 
 .hero-warm {
     min-height: 80vh;
+    width: 100%
     background-color: red;
     
     background-image: url("/static/images/1.jpg");
@@ -284,6 +283,7 @@ padding: 30px 20px;
 }
 
 .how-it-works {
+    max: 100%;
     max-width: 1000px;
     margin: 60px auto;
     padding: 20px;
