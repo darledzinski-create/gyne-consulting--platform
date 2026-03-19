@@ -150,7 +150,8 @@ padding: 30px 20px;
 /* ==================== HERO SECTION =================== */
 
 .hero-warm {
-    min-height: 70vh;
+    min-height: 90vh; !important;
+    background-color: blue !important;
     width: 100%;
     background-image: url("/static/images/1.jpg");
     background-size: cover;
