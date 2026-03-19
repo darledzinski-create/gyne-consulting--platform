@@ -121,6 +121,7 @@ padding: 30px 20px;
 }
 
 .site-footer {
+    margin-footer: 20px;
     width: 100%;
     background-color: #fafafa;
     padding: 10px 0;
@@ -295,7 +296,9 @@ padding: 30px 20px;
 }
 
 .how-it-works {
-    margin: 40px auto;
+    background-color: #f9fbfb;
+    border-radius: 10px;
+    margin: 30px auto 50px auto; /* extra space below */
     padding: 10px 20px;
 }
     
