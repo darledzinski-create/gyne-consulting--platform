@@ -14,7 +14,8 @@ body {
 }
 
     main {
-        padding-botto: 40px;
+        background-color: #f9fbfb;
+        padding: 0;
 }
 
    * {
