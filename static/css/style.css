@@ -150,9 +150,11 @@ padding: 30px 20px;
 /* ==================== HERO SECTION =================== */
 
 .hero-warm {
+    position: relative;  /* ADD THIS */
+    
     min-height: 90vh; !important;
-    background-color: blue !important;
     width: 100%;
+    
     background-image: url("/static/images/1.jpg");
     background-size: cover;
     background-position: center;
@@ -273,7 +275,7 @@ padding: 30px 20px;
 
 .hero-warm::before {
     content: "";
-    position: absolute;
+    position: relative;
     inset: 0;
     background: rgba(0,0,0,0.15);
 }
