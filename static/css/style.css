@@ -8,8 +8,6 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     font-size: 18px;
     line-height: 1.6;
-    background-color: blue !important;
-
     margin: 0;
 }
 
@@ -153,7 +151,7 @@ padding: 30px 20px;
 
 .hero-warm {
     min-height: 60vh;
-    width: 100%
+    width: 100vw;
     background-color: red;
     
     background-image: url("/static/images/1.jpg");
