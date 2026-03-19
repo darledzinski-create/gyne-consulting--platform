@@ -121,8 +121,10 @@ padding: 30px 20px;
 }
 
 .site-footer {
+    width: 100%
+    clear: both;
+    display: block;
     margin-footer: 20px;
-    width: 100%;
     background-color: #fafafa;
     padding: 10px 0;
     border-top: 1px solid #ddd;
