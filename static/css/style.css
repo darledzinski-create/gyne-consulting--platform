@@ -289,12 +289,13 @@ padding: 30px 20px;
 .how-it-works {
     border-radius: 10px;
     margin: 30px auto 50px auto; /* extra space below */
-    padding: 10px 20px;
+    padding-top: 1px;
+    padding: 40px 20px;
 }
     
 
 .how-it-works h2 {
-    margin: 30px auto;
+    margin-top: 0;
     padding:10px 20px;
     color: #2f7f7f;
 }
