@@ -333,4 +333,18 @@ padding: 30px 20px;
     margin-bottom: 15px;
     color: #1e2b27;
 }
+
+/* ===== DEBUG BORDERS (TEMPORARY) ===== */
+
+section {
+    border: 3px solid red;
+}
+
+main {
+    border: 5px solid blue;
+}
+
+body {
+    border: 5px solid green;
+}
     
