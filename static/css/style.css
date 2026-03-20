@@ -151,20 +151,8 @@ padding: 30px 20px;
 /* ==================== HERO SECTION =================== */
 
 .hero-warm {
-    position: relative;  /* ADD THIS */
-    
-    min-height: 90vh; !important;
-    width: 100%;
-    
-    background-image: url("/static/images/1.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    min-height: auto !important;
+    height: auto !important;
     padding: 40px 20px;
 }
    
