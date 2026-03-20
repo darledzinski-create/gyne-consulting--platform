@@ -299,9 +299,8 @@ padding: 30px 20px;
 
 .how-it-works {
     border-radius: 10px;
-    margin: 30px auto 50px auto; /* extra space below */
-    padding-top: 1px;
-    padding: 40px 20px;
+    margin: 40px auto; /* extra space below */
+    padding: 50px 20px;
 }
     
 
@@ -339,11 +338,11 @@ padding: 30px 20px;
 /* ===== DEBUG BORDERS (TEMPORARY) ===== */
 
 section {
-    border: 3px solid red;
+    border: 2px solid red;
 }
 
 main {
-    border: 5px solid blue;
+    outline: 2px solid blue;
 }
 
 body {
@@ -351,9 +350,10 @@ body {
 }
 
 main {
-    display: block !important;
-    height: auto !important;
-    min-height: auto !important;
-    overflow: visible !important;
+    display: block; 
+    height: auto; 
+    min-height: auto;
+    overflow: visible;
+    padding: 40px 0;
 }
     
