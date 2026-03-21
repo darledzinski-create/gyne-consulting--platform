@@ -13,8 +13,11 @@ body {
 }
 
     main {
-        background-color: #f9fbfb;
-        padding: 0;
+        display: block;
+        width: 100%
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
 }
 
    * {
@@ -298,17 +301,18 @@ padding: 30px 20px;
 }
 
 .how-it-works {
-    border-radius: 10px;
-    margin: 40px auto; /* extra space below */
-    padding: 50px 20px;
+    margin-top: 40px;
+    line-height: 1.6;
 }
     
 
 .how-it-works h2 {
-    margin-top: 0;
-    padding:10px 20px;
-    color: #2f7f7f;
     margin-bottom: 20px;
+}
+
+.how-it-works h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .steps {
@@ -335,25 +339,12 @@ padding: 30px 20px;
     color: #1e2b27;
 }
 
-/* ===== DEBUG BORDERS (TEMPORARY) ===== */
-
 section {
-    border: 2px solid red;
+   margin-bottom: 40px;
 }
 
-main {
-    outline: 2px solid blue;
-}
 
-body {
-    border: 5px solid green;
-}
 
-main {
-    display: block; 
-    height: auto; 
-    min-height: auto;
-    overflow: visible;
-    padding: 40px 0;
-}
+
+
     
