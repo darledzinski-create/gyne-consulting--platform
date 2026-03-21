@@ -12,12 +12,10 @@ body {
     margin: 0;
 }
 
-    main {
-        display: block;
-        width: 100%
-        max-width: 1000px;
-        margin: auto;
-        padding: 40px 20px;
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
    * {
