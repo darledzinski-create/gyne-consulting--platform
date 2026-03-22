@@ -1,25 +1,29 @@
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-app.debug = True   # ADD THIS LINE
+app.debug = True
+
 
 def send_emergency_sms(full_name, phone, concern):
     print("🚨 EMERGENCY ALERT")
     print("Name:", full_name)
     print("Phone:", phone)
     print("Concern:", concern)
-    
+
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
 
 @app.route("/first-consultation")
 def first_consultation():
     return render_template("first-consultation.html")
 
+
 @app.route("/intake", methods=["POST"])
 def intake():
-    
+
     full_name = request.form.get("full_name")
     email = request.form.get("email")
     phone = request.form.get("phone")
@@ -33,17 +37,16 @@ def intake():
     print("Concern:", concern)
     print("Emergency:", emergency)
 
-    if emergency == "yes";
+    if emergency == "yes":
         send_emergency_sms(full_name, phone, concern)
 
     return redirect(url_for("thank_you"))
-    
+
+
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
-    return redirect(url_for("thank_you"))
-                    
- if __name__ =="__main__";
-       app.run(debug=True)
-       
-    
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
