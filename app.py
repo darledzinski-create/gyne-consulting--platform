@@ -33,18 +33,18 @@ def intake():
     print("Concern:", concern)
     print("Emergency:", emergency)
 
-    if emergency == "yes":
-        return redirect(url_for("emergency_notice"))
+    return redirect(url_for("home"))
     
-    return redirect(url_for("thank_you"))
-       
 @app.route("/emergency")
-def emergency_notice():
-    return render_template("emergency.html")
+def emergency():
+    return "Emergency page coming soon"
 
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    return redirect(url_for("thank_you")
+                    
+ if__name__=="__main__";
+       app.run(debug=True)
+       
+    
