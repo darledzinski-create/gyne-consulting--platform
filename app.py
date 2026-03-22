@@ -35,14 +35,19 @@ def intake():
 
     return redirect(url_for("home"))
     
-@app.route("/emergency")
+@app.route("/emergency", methods=['POST"])
 def emergency():
-    return "Emergency page coming soon"
+    full_name = request.form.get("full_name")
+    phone = request.form.get("phone")
+    concern = request.form.get("concern")
 
+    send_emergency_sms(full_name, phone, concern)
+    return redirect(url_for("thank_you"))
+    
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
-    return redirect(url_for("thank_you")
+    return redirect(url_for("thank_you"))
                     
  if__name__=="__main__";
        app.run(debug=True)
