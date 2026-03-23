@@ -346,13 +346,13 @@ padding: 30px 20px;
     background: #ffffff;
     padding: 40px;
     border-radius: 12px;
-    box-shafow: 0 8px 30px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
 }
 
-.how -it-works h1 {
+.how-it-works h1 {
     font-size: 28px;
     margin-bottom: 30px;
-    fony-weight: 600;
+    font-weight: 600;
     color: #1a1a1a;
 }
     
