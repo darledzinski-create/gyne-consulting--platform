@@ -346,8 +346,12 @@ padding: 30px 20px;
 }
 
 .how-it-works {
-    background: red;
+    background: red; !important;
+    padding: 40px !important;
 }
+
+.container {
+    background: blue !important;
 
 .how-it-works h1 {
     font-size: 28px;
