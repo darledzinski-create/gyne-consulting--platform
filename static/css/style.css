@@ -11,16 +11,21 @@ body {
 
 body {
     background: lime;
+}
 
 nav {
-    padding: 20px;
-    background: #f5f5f5;
+    background: red;
+}
 
 main {
     max-width: 1000px;
     margin: auto;
     padding: 40px 20px;
 }
+
+main {
+    background:lime;
+    
 
 footer {
     padding: 20px;
