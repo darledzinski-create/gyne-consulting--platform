@@ -346,12 +346,32 @@ padding: 30px 20px;
 }
 
 .how-it-works {
-    background: red; !important;
-    padding: 40px !important;
+    background: #f9fafb;
+    padding: 60px 20px;
 }
 
-.container {
-    background: blue !important;
+.how-it-works .container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+.section-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    flex: 1;
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .how-it-works h1 {
