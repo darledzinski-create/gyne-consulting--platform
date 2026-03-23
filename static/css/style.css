@@ -383,13 +383,17 @@ padding: 30px 20px;
     
 
 .how-it-works h2 {
-    margin-bottom: 20px;
+    color: blue;
+    font-size: 30px;
 }
 
 .how-it-works h3 {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+.how-it-works {
+    background-color: yellow !important;
 
 .steps {
    margin-bottom: 25px;
