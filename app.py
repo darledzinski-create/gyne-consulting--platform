@@ -19,8 +19,6 @@ def home():
 @app.route("/first-consultation")
 def first_consultation():
     return render_template("first-consultation.html")
-
-
 @app.route("/intake", methods=["POST"])
 def intake():
 
