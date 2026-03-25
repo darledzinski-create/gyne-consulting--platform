@@ -39,6 +39,7 @@ def intake():
 
     if emergency == "yes":
         send_emergency_sms(full_name, phone, concern)
+        print("Redirecting to thank_you page")
 
     return redirect(url_for("thank_you"))
 
