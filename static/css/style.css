@@ -1,7 +1,57 @@
+/* Reset some ugly defaults */
 body {
-    background-color: #f0f8ff; /* very light blue */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
 }
 
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Section */
+.how-it-works {
+    padding: 50px 0;
+    text-align: center;
+}
+
+/* Title */
+.section-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+/* Cards layout */
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Individual card */
+.card {
+    background: white;
+    padding: 20px;
+    width: 280px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+/* Hover effect */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Headings inside cards */
+.card h3 {
+    margin-bottom: 10px;
+}
    
     
 
