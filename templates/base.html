@@ -62,28 +62,31 @@ window.addEventListener("scroll", function () {
 
 <body>
 
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-
-        <div class="logo">
-            Gyne Consulting
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Gyne Consulting</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a class="btn-nav" href="#">Book Consultation</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="menu-toggle" id="menu-toggle">
-            ☰
-        </div>
-
-        <div class="nav-links" id="nav-links">
-            <a href="/" class="active">Home</a>
-            <a href="/about">About</a>
-            <a href="/consultation" class="btn-nav">Book Consultation</a>
-        </div>
-
-    </div>
-</nav>
-   <main>
+    <!-- MAIN CONTENT -->
+    <main class="container">
         {% block content %}{% endblock %}
-   </main>
+    </main>
+
+    <!-- FOOTER (MUST BE LAST) -->
+    <footer class="footer">
+        <div class="container">
+            <p>Email: info@yourdomain.com</p>
+            <p>Available worldwide</p>
+            <p>© 2026 Gyne Consulting. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
