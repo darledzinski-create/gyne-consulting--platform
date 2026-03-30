@@ -6,13 +6,20 @@ body {
 
 /* NAVBAR BASE */
 .navbar {
-    position: sticky;
-    top: 0;
+    position: fixed;
     width: 100%;
-    background: #0b1c2c;
-    padding: 18px 0;
+    top: 0;
+    padding: 20px 0;
+    transition: all 0.3s ease;
     z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    background: transparent;
+}
+
+/* SCROLLED STATE */
+.navbar.scrolled {
+    background: #0b1c2c;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    padding: 12px 0;
 }
 
 /* CONTAINER */
@@ -30,39 +37,81 @@ body {
     color: white;
     font-size: 22px;
     font-weight: 600;
-    letter-spacing: 0.5px;
 }
 
 /* LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links a {
     color: #d1d9e6;
     text-decoration: none;
     margin-left: 25px;
     font-size: 15px;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
-/* HOVER EFFECT */
+/* ACTIVE LINK */
+.nav-links a.active {
+    color: #00c6d7;
+}
+
+/* HOVER */
 .nav-links a:hover {
     color: #00c6d7;
 }
 
-/* CTA BUTTON */
+/* CTA */
 .btn-nav {
     background: linear-gradient(135deg, #00c6d7, #0093a3);
     color: white !important;
     padding: 10px 18px;
     border-radius: 8px;
     margin-left: 30px;
-    font-weight: 500;
     box-shadow: 0 4px 12px rgba(0,198,215,0.3);
 }
 
-/* CTA HOVER */
 .btn-nav:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0,198,215,0.5);
 }
+
+/* MOBILE MENU */
+.menu-toggle {
+    display: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+/* MOBILE STYLES */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #0b1c2c;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        display: none;
+    }
+
+    .nav-links a {
+        padding: 15px 0;
+        margin: 0;
+        display: block;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
 
 /* HERO SECTION */
 .hero {
