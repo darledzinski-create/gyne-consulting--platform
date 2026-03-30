@@ -1,46 +1,79 @@
-/* Reset (important if not already there) */
+/* RESET */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
-/* Navbar background */
+/* NAVBAR BASE */
 .navbar {
-    background-color: #0a2540;
-    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 37, 64, 0.85);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
-/* THIS is the key fix */
+/* SCROLL EFFECT */
+.navbar.scrolled {
+    background: rgba(10, 37, 64, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* CONTAINER */
 .nav-container {
     max-width: 1200px;
-    margin: 0 auto;              /* centers navbar */
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between; /* pushes logo left, links right */
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 15px 20px;
 }
 
-/* Logo */
+/* LOGO */
 .logo a {
     color: white;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     text-decoration: none;
+    letter-spacing: 0.5px;
 }
 
-/* Links container */
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .nav-links a {
+    position: relative;
     color: white;
     text-decoration: none;
-    margin-left: 20px;
+    margin-left: 25px;
     font-size: 16px;
+    padding: 5px 0;
+    transition: color 0.3s ease;
 }
 
-/* Hover effect */
+/* HOVER UNDERLINE ANIMATION */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #00c2ff;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
 .nav-links a:hover {
-    text-decoration: underline;
+    color: #00c2ff;
 }
-
 /* HERO SECTION */
 .hero {
     background: linear-gradient(135deg, #0d1b2a, #1b263b);
