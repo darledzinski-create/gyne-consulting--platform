@@ -15,24 +15,44 @@ window.addEventListener("scroll", function () {
         navbar.classList.remove("scrolled");
     }
 });
+
+<script>
+    // Scroll effect
+    window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const toggle = document.getElementById("menu-toggle");
+    const links = document.getElementById("nav-links");
+
+    toggle.addEventListener("click", () => {
+        links.classList.toggle("show");
+    });
 </script>
 
 <body>
 
-   <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <div class="nav-container">
+
         <div class="logo">
             Gyne Consulting
         </div>
 
-        <div class="nav-links">
-            <a href="/">Home</a>
+        <div class="menu-toggle" id="menu-toggle">
+            ☰
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="/" class="active">Home</a>
             <a href="/about">About</a>
             <a href="/consultation" class="btn-nav">Book Consultation</a>
         </div>
+
     </div>
 </nav>
-
    <main>
         {% block content %}{% endblock %}
    </main>
