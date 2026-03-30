@@ -2,54 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Platform</title>
+    <title>Dr Dariusz Consultation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
-<script>
-window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".navbar");
-    if (window.scrollY > 20) {
-        navbar.classList.add("scrolled");
-    } else {
-        navbar.classList.remove("scrolled");
-    }
-});
-
-<script>
-    // Scroll effect
-    window.addEventListener("scroll", function () {
-        const navbar = document.getElementById("navbar");
-        navbar.classList.toggle("scrolled", window.scrollY > 50);
-    });
-
-    // Mobile menu toggle
-    const toggle = document.getElementById("menu-toggle");
-    const links = document.getElementById("nav-links");
-
-    toggle.addEventListener("click", () => {
-        links.classList.toggle("show");
-    });
-</script>
-
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">Gyne Consulting</div>
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a class="btn-nav" href="#">Book Consultation</a>
-            </div>
+<nav class="navbar">
+    <div class="container nav-content">
+        <strong>Dr Dariusz</strong>
+        <div>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#" class="btn-nav">Book Consultation</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="container">
-        {% block content %}{% endblock %}
-    </main>
+{% block content %}{% endblock %}
 
 </body>
 </html>
