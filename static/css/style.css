@@ -74,6 +74,26 @@ body {
 .nav-links a:hover {
     color: #00c2ff;
 }
+
+/* CTA BUTTON (put it HERE) */
+.btn-nav {
+    display: inline-block;
+    font-weight: 500;
+    margin-left: 25px;
+    padding: 8px 16px;
+    background: #00c2ff;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-nav:hover {
+    background: #009ed1;
+    transform: translateY(-2px);
+}
+
+
 /* HERO SECTION */
 .hero {
     background: linear-gradient(135deg, #0d1b2a, #1b263b);
