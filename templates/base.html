@@ -2,25 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gyne Consulting</title>
-
+    <title>My Platform</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-   <body>
-    <nav class="navbar">
-        <h2>Gyne Consulting</h2>
-        <div>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-        </div>
-    </nav>
+    <nav>
+       <h1>My Platform</h1>h1>
+       <div>
+           <a href="/">Home</a>
+       </div>
+   </nav>
 
-    <div class="container">
+   <main></main>
         {% block content %}{% endblock %}
-    </div>
-</body>
+   </main>
 
 </body>
 </html>
