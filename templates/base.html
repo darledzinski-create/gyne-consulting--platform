@@ -5,6 +5,18 @@
     <title>My Platform</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
+    <script>
+window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 20) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+});
+</script>
+
 <body>
 
    <nav class="navbar">
@@ -16,7 +28,7 @@
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+            <a href="/contact"> class="btn-nav">Contact</a>
         </div>
     </div>
 </nav>
