@@ -6,13 +6,23 @@ body {
 
 /* NAVBAR BASE */
 .navbar {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    padding: 20px 0;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+    padding: 15px 0;
+    
+}
+
+.nav-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+
+.btn-nav {
+    background: #00a6a6;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
 }
 
 /* SCROLLED STATE */
@@ -25,7 +35,7 @@ body {
 /* CONTAINER */
 .nav-container {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -122,14 +132,14 @@ body {
 }
 
 .hero h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
+    font-size: 36px;
+    margin-bottom: 15px;
 }
 
 .hero p {
     font-size: 18px;
     opacity: 0.9;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 /* BUTTON */
