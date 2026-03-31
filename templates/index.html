@@ -34,21 +34,25 @@
     </div>
 </section>
 
-<section id="consult" class="section">
-    <div class="container">
-        <h2>Start Your Consultation</h2>
+<section id="consultation" class="consultation-section">
 
-        <form method="POST" action="/">
+    <h2>Start Your Consultation</h2>
 
-    <input type="text" name="name" placeholder="Your Name" required>
+    <form method="POST" action="/" class="consultation-form">
 
-    <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="name" placeholder="Your Name" required>
 
-    <textarea name="message" placeholder="Your Message" required></textarea>
+        <input type="email" name="email" placeholder="Your Email" required>
 
-    <button type="submit">Submit Consultation</button>
+        <textarea name="message" placeholder="Describe your case..." required></textarea>
 
-</form>
+        <button type="submit" class="btn-primary">
+            Submit Consultation
+        </button>
+
+    </form>
+
+</section>
     </div>
 </section>
 
