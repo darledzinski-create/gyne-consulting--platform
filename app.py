@@ -7,7 +7,6 @@ def home():
     print("REQUEST METHOD:", request.method)
 
     if request.method == "POST":
-        return "POST WORKED"
         print("POST DETECTED ✅")
 
         name = request.form.get("name")
@@ -15,8 +14,9 @@ def home():
         message = request.form.get("message")
 
         print("DATA:", name, email, message)
+        return render_templat("index.html", success=True)
 
-    return render_template("index.html")
+    return render_template("index.html", success=False)
 
 
 if __name__ == "__main__":
