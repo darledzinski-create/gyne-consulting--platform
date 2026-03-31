@@ -14,7 +14,7 @@ def home():
         message = request.form.get("message")
 
         print("DATA:", name, email, message)
-        return render_templat("index.html", success=True)
+        return render_template("index.html", success=True)
 
     return render_template("index.html", success=False)
 
