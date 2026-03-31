@@ -80,20 +80,39 @@ body {
 }
 
 /* FORM */
-.consult-form {
+.consultation-section {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.consultation-form {
+    max-width: 500px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: 20px;
 }
 
-.consult-form input,
-.consult-form textarea {
-    padding: 10px;
+.consultation-form input,
+.consultation-form textarea {
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
 }
 
+.btn-primary {
+    background: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
 /* FOOTER */
 .footer {
     text-align: center;
