@@ -7,6 +7,7 @@ def home():
     print("REQUEST METHOD:", request.method)
 
     if request.method == "POST":
+        return "POST WORKED"
         print("POST DETECTED ✅")
 
         name = request.form.get("name")
