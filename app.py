@@ -1,3 +1,6 @@
+from flask import Flask, render_template,request
+app = (__name__) 
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     print("REQUEST METHOD:", request.method)
