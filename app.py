@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route("/"
+@app.route("/")
 def home():
     return "LOCAL TEST WORKING"
     print("REQUEST METHOD:", request.method)
