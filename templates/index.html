@@ -1,65 +1,21 @@
 {% extends "base.html" %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
-   
-<section class="hero">
-    <div class="container">
-        <h1>Confidential Gynecological Consultation</h1>
-        <p>Professional, discreet medical advice from Dr Dariusz</p>
 
-        <!-- FIXED LINK -->
-        <a href="#consultation" class="btn-primary">Start Consultation</a>
+<h1>Test Consultation Form</h1>
 
-        <p class="hero-trust">
-            ✔ Private & Secure &nbsp;&nbsp; ✔ Doctor Reviewed &nbsp;&nbsp; ✔ Fast Response
-        </p>
-    </div>
-</section>
+<form method="POST">
 
-<section class="section">
-    <div class="container">
-        <h2>How It Works</h2>
+    <input type="text" name="name" placeholder="Your Name" required><br><br>
 
-        <div class="steps">
-            <div class="card">
-                <h3>1. Share Your Concern</h3>
-                <p>Describe your symptoms and ask medical questions securely.</p>
-            </div>
+    <input type="email" name="email" placeholder="Your Email" required><br><br>
 
-            <div class="card">
-                <h3>2. Personal Review</h3>
-                <p>Your case is reviewed personally by Dr Dariusz.</p>
-            </div>
+    <textarea name="message" placeholder="Your message" required></textarea><br><br>
 
-            <div class="card">
-                <h3>3. Receive Guidance</h3>
-                <p>Clear, professional advice.</p>
-            </div>
-        </div>
-    </div>
-</section>
+    <button type="submit">Submit</button>
 
-<section id="consultation" class="consultation-section">
-    <div class="container">
-
-        <h2>Start Your Consultation</h2>
-
-        <form method="POST" action="{{ url_for('home') }}"
-
-            <input type="text" name="name" placeholder="Your Name" required>
-
-            <input type="email" name="email" placeholder="Your Email" required>
-
-            <textarea name="message" placeholder="Describe your case..." required></textarea>
-
-            <button type="submit">TEST SUBMIT</button>
-         </form>
-
-   </div>
-</section>
-
-<footer class="footer">
-    <p>© 2026 Gyne Consulting | Confidential Medical Services</p>
-</footer>
+</form>
 
 {% endblock %}
