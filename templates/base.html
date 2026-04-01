@@ -1,24 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Dr Dariusz Consultation</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{% block title %}Consultation{% endblock %}</title>
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="container nav-content">
-        <strong>Dr Dariusz</strong>
-        <div>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#" class="btn-nav">Book Consultation</a>
-        </div>
-    </div>
-</nav>
-
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 </body>
 </html>
