@@ -4,11 +4,18 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    print("REQUEST METHOD:", request.method)
+
     if request.method == "POST":
+        print("POST DETECTED")
+
         name = request.form.get("name")
         email = request.form.get("email")
         message = request.form.get("message")
 
-        print("FORM RECEIVED:", name, email, message)
+        print("DATA:", name, email, message)
+
+        # VERY IMPORTANT → return response
+        return render_template("index.html")
 
     return render_template("index.html")
