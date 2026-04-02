@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime   # ✅ MOVE THIS TO THE TOP
 
 app = Flask(__name__)
 
@@ -11,10 +12,9 @@ def home():
 
         print(name, email, message)  # debug
 
-        from datetime import datetime
-
-    with open("submissions.txt", "a") as f:
-    f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
+        # ✅ SAVE DATA (correct indentation)
+        with open("submissions.txt", "a") as f:
+            f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
         return redirect(url_for("thank_you"))
 
