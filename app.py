@@ -11,6 +11,11 @@ def home():
 
         print(name, email, message)  # debug
 
+        from datetime import datetime
+
+    with open("submissions.txt", "a") as f:
+    f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
+
         return redirect(url_for("thank_you"))
 
     return render_template("index.html")
