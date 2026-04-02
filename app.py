@@ -24,8 +24,8 @@ def home():
 
         msg = MIMEText(body)
         msg["Subject"] = subject
-        msg["From"] = "yourgmail@gmail.com"
-        msg["To"] = "yourgmail@gmail.com"
+        msg["From"] = "darledzinski@gmail.com"
+        msg["To"] = "darledzinski@gmail.com"
 
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
