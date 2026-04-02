@@ -31,9 +31,9 @@ def home():
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
                 server.login("darleddzinski@gmail.com", "glttpxgyezwnzozl")
                 server.send_message(msg)
-           print("✅ Email sent successfully")
+            print("✅ Email sent successfully")
        
-       except Exception as e:
+        except Exception as e:
            print("❌ Email failed:", e)
 
         return redirect(url_for("thank_you"))
