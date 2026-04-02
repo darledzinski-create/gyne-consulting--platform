@@ -27,11 +27,12 @@ def home():
         msg["From"] = "yourgmail@gmail.com"
         msg["To"] = "yourgmail@gmail.com"
 
-       try:
-           with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-               server.login("darleddzinski@gmail.com", "glttpxgyezwnzozl")
-               server.send_message(msg)
+        try:
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+                server.login("darleddzinski@gmail.com", "glttpxgyezwnzozl")
+                server.send_message(msg)
            print("✅ Email sent successfully")
+       
        except Exception as e:
            print("❌ Email failed:", e)
 
