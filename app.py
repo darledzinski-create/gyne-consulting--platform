@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime   # ✅ MOVE THIS TO THE TOP
+import smtplib
+from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
@@ -15,6 +17,23 @@ def home():
         # ✅ SAVE DATA (correct indentation)
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
+        
+        # ✅ ADD THIS EMAIL BLOCK HERE
+        subject = "New Consultation Submission"
+        body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+
+        msg = MIMEText(body)
+        msg["Subject"] = subject
+        msg["From"] = "yourgmail@gmail.com"
+        msg["To"] = "yourgmail@gmail.com"
+
+       try:
+           with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+               server.login("darleddzinski@gmail.com", "glttpxgyezwnzozl")
+               server.send_message(msg)
+           print("✅ Email sent successfully")
+       except Exception as e:
+           print("❌ Email failed:", e)
 
         return redirect(url_for("thank_you"))
 
