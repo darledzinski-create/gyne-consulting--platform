@@ -5,8 +5,12 @@ from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
-def home():
+@app.route("/")
+def homepage():
+    return render_template("home.html")
+
+@app.route("/consultation", methods=["GET", "POST"])
+def consultation():
     if request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
