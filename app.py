@@ -29,7 +29,7 @@ def home():
 
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darleddzinski@gmail.com", "glttpxgyezwnzozl")
+                server.login("darledzinski@gmail.com", "glttpxgyezwnzozl")
                 server.send_message(msg)
             print("✅ Email sent successfully")
        
