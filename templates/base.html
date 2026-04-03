@@ -2,17 +2,47 @@
 <html>
 <head>
     <title>{% block title %}Consultation{% endblock %}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+    </style>
+
 </head>
 <body>
 
-    <!-- ✅ ADD NAVIGATION HERE -->
     <nav>
-        <a href="/">Home</a> 
+        <a href="/">Home</a> |
         <a href="/consultation">Consultation</a>
     </nav>
-    <br>
 
-    {% block content %}{% endblock %}
+    <hr>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
 
 </body>
 </html>
