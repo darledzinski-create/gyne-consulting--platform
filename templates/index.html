@@ -4,17 +4,21 @@
 
 {% block content %}
 
-<h1>Test Consultation Form</h1>
+<h1>Consultation Request</h1>
+
+<p>
+Please provide accurate information so your casecan be reviewed properly.
+</p>
 
 <form method="POST" action="/consultation">
 
-    <input type="text" name="name" placeholder="Your Name" required><br><br>
+    <input type="text" name="name" placeholder="Your Name" required>
 
-    <input type="email" name="email" placeholder="Your Email" required><br><br>
+    <input type="email" name="email" placeholder="Your Email" required>
 
-    <textarea name="message" placeholder="Your message" required></textarea><br><br>
+    <textarea name="message" placeholder="Describe your symptoms or concern" required></textarea>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Consultation</button>
 
 </form>
 
