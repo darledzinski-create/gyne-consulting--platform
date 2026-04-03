@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="container">
-    <h1>Dr Dariusz Consulting</h1>
-    <p>Professional online consultation service.</p>
+{% block title %}Home{% endblock %}
 
-    <a href="/consultation" class="btn-primary">
-        Start Consultation
-    </a>
-</div>
+{% block content %}
+
+<h1>Dr Dariusz Consulting</h1>
+
+<p>
+    Professional online gynaecological consultation service.
+</p>
+
+<p>
+    Confidential, structured, and clinician-led guidance from the comfort of your home.
+</p>
+
+<br>
+
+<a href="/consultation">
+    <button>Start Consultation</button>
+</a>
+
 {% endblock %}
