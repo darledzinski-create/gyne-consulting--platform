@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Consultation{% endblock %}
+
+{% block content %}
+
+<div class="consultation-section">
+    <h1>Consultation Request</h1>
+
+    <p>Please provide accurate information so your case can be reviewed properly.</p>
+
+    <form method="POST" action="/consultation" class="consultation-form">
+
+        <input type="text" name="name" placeholder="Full Name" required>
+
+        <input type="email" name="email" placeholder="Email Address" required>
+
+        <textarea name="message" rows="5" placeholder="Describe your symptoms or concern" required></textarea>
+
+        <button type="submit" class="btn-primary">
+            Submit Consultation
+        </button>
+
+    </form>
+</div>
+
+{% endblock %}
