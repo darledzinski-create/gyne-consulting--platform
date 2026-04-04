@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    return render_template("home.html")
+    return render_template("index.html")
 
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
