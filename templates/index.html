@@ -4,28 +4,50 @@
 
 {% block content %}
 
-<h1>Consultation Request</h1>
+{% block content %}
 
-<p>Please provide accurate information so your case can be reviewed properly.</p>
+<div class="hero">
+    <div class="container">
 
-<form method="POST" action="/consultation">
+        <h1>Dr Dariusz Consulting</h1>
 
-    <label>Full Name</label>
-    <input type="text" name="name" required>
+        <p>
+            Professional online gynaecological consultation service.
+        </p>
 
-    <br><br>
+        <p class="hero-trust">
+            Confidential, structured, and clinician-led guidance from the comfort of your home.
+        </p>
 
-    <label>Email Address</label>
-    <input type="email" name="email" required>
+        <a href="/consultation" class="btn-primary">
+            Start Consultation
+        </a>
 
-    <br><br>
+    </div>
+</div>
 
-    <label>Describe your symptoms or concern</label>
-    <textarea name="message" rows="5" required></textarea>
+<!-- HOW IT WORKS -->
+<div class="section">
+    <div class="container">
+        <h2>How It Works</h2>
 
-    <br><br>
+        <div class="steps">
+            <div class="card">
+                <h3>1. Submit Consultation</h3>
+                <p>Provide your symptoms and medical concern through our secure form.</p>
+            </div>
 
-    <button type="submit">Submit Consultation</button>
+            <div class="card">
+                <h3>2. Doctor Review</h3>
+                <p>Your case is reviewed confidentially by a qualified clinician.</p>
+            </div>
 
-</form>
+            <div class="card">
+                <h3>3. Receive Guidance</h3>
+                <p>You receive structured medical advice within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
