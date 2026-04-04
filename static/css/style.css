@@ -46,6 +46,10 @@ header {
     padding: 60px 0;
 }
 
+.section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+
 /* HERO */
 .hero {
     padding: 100px 0;
@@ -104,8 +108,11 @@ header {
 
 /* FORM */
 .consultation-section {
-    padding: 60px 20px;
-    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    flex: 1;
+    box-shad0w: 0 5px 15px rgba(0,0,0,0.05);
+    background: white;
     text-align: center;
 }
 
@@ -129,4 +136,10 @@ header {
     text-align: center;
     padding: 20px;
     color: #777;
+}
+ 
+@media (max-width: 768px) {
+    .step {
+        flex-direction: column;
+    }
 }
