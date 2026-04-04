@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def homepage():
-    return render_template("first-consultation.html")
+    return render_template("home.html")
 
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
@@ -42,7 +42,7 @@ def consultation():
 
         return redirect(url_for("thank_you"))
 
-    return render_template("index.html")
+    return render_template("consultation.html")
 
 
 @app.route("/thank-you")
