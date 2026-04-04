@@ -24,7 +24,7 @@ def consultation():
 
         return redirect(url_for("thank_you"))
 
-    return render_template("index.html")  # ✅ DO NOT CHANGE THIS
+    return render_templateation("consultation.html")  
 
 
 @app.route("/thank-you")
