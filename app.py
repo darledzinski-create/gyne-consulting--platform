@@ -9,6 +9,7 @@ app = Flask(__name__)
 def homepage():
     return render_template("home.html")
 
+
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
     if request.method == "POST":
@@ -16,39 +17,16 @@ def consultation():
         email = request.form.get("email")
         message = request.form.get("message")
 
-        print(name, email, message)  # debug
+        print(name, email, message)
 
-        # ✅ SAVE DATA (correct indentation)
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
-        
-        # ✅ ADD THIS EMAIL BLOCK HERE
-        subject = "New Consultation Submission"
-        body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
-
-        msg = MIMEText(body)
-        msg["Subject"] = subject
-        msg["From"] = "darledzinski@gmail.com"
-        msg["To"] = "darledzinski@gmail.com"
-
-        try:
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "glttpxgyezwnzozl")
-                server.send_message(msg)
-            print("✅ Email sent successfully")
-       
-        except Exception as e:
-           print("❌ Email failed:", e)
 
         return redirect(url_for("thank_you"))
 
-    return render_template("consultation.html")
+    return render_template("index.html")  # ✅ DO NOT CHANGE THIS
 
 
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
