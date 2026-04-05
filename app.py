@@ -33,7 +33,7 @@ def consultation():
         msg["From"] = "darledzinski@gmail.com"
         msg["To"] = "darledzinski@gmail.com"
 
-       try:
+try:
     print("CONNECTING TO EMAIL SERVER")
     
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
