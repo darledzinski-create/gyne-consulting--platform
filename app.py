@@ -24,7 +24,7 @@ def consultation():
 
         return redirect(url_for("thank_you"))
 
-    return render_templateation("consultation.html")  
+    return render_template("consultation.html")  
 
 
 @app.route("/thank-you")
