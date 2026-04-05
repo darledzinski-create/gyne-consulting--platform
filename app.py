@@ -60,20 +60,20 @@ Kind regards,
 Dr Dariusz
 """
 
-               confirmation_msg = MIMEText(confirmation_body)
-               confirmation_msg["Subject"] = "We received your consultation request"
-               confirmation_msg["From"] = "darledzinski@gmail.com"
-               confirmation_msg["To"] = email
+        confirmation_msg = MIMEText(confirmation_body)
+        confirmation_msg["Subject"] = "We received your consultation request"
+        confirmation_msg["From"] = "darledzinski@gmail.com"
+        confirmation_msg["To"] = email
 
-               # ✅ 3. Send to client
-               server.send_message(confirmation_msg)
+        # ✅ 3. Send to client
+        server.send_message(confirmation_msg)
 
-           print("✅ Both emails sent successfully")
+    print("✅ Both emails sent successfully")
 
-       except Exception as e:
-           print("❌ EMAIL ERROR:", str(e))
+except Exception as e:
+    print("❌ EMAIL ERROR:", str(e))
         
-       return redirect(url_for("thank_you"))
+return redirect(url_for("thank_you"))
 
   return render_template("consultation.html")
 
