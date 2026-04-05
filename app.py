@@ -1,32 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
-from datetime import datetime   # ✅ MOVE THIS TO THE TOP
+from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 
-def send_email(name, email, message):
-    sender_email = "your_email@gmail.com"
-    app_password = "xebpbrfwyhztsevd"
-
-    msg = MIMEText(f"Name: {name}\nEmail: {email}\nMessage: {message}")
-    msg["Subject"] = "New Consultation Request"
-    msg["From"] = sender_email
-    msg["To"] = sender_email  # you receive it
-
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender_email, app_password)
-        server.send_message(msg)
-        server.quit()
-        print("✅ Email sent successfully")
-    except Exception as e:
-        print("❌ Email failed:", e)
-
 app = Flask(__name__)
+
 
 @app.route("/")
 def homepage():
     return render_template("home.html")
+
 
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
@@ -37,10 +20,11 @@ def consultation():
 
         print(name, email, message)
 
+        # Save to file
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
-        # ✅ CREATE EMAIL
+        # Email to YOU
         subject = "New Consultation Submission"
         body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
 
@@ -49,12 +33,40 @@ def consultation():
         msg["From"] = "darledzinski@gmail.com"
         msg["To"] = "darledzinski@gmail.com"
 
-        # ✅ INSERT TRY HERE
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
+                server.login("darledzinski@gmail.com", "YOUR_APP_PASSWORD")
+
+                # ✅ 1. Send to YOU
                 server.send_message(msg)
-            print("✅ Email sent successfully")
+
+                # ✅ 2. Send confirmation to CLIENT
+                confirmation_body = f"""
+Dear {name},
+
+Thank you for reaching out.
+
+Your message has been received and will be reviewed carefully and personally.
+
+Many concerns become clearer once they are properly discussed. This consultation is the first step toward clarity.
+
+If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
+
+You will receive a response within 24 hours.
+
+Kind regards,
+Dr Dariusz
+"""
+
+                confirmation_msg = MIMEText(confirmation_body)
+                confirmation_msg["Subject"] = "We received your consultation request"
+                confirmation_msg["From"] = "darledzinski@gmail.com"
+                confirmation_msg["To"] = email
+
+                # ✅ Send to client
+                server.send_message(confirmation_msg)
+
+            print("✅ Both emails sent successfully")
 
         except Exception as e:
             print("❌ EMAIL ERROR:", str(e))
@@ -63,6 +75,11 @@ def consultation():
 
     return render_template("consultation.html")
 
+
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
