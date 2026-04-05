@@ -52,7 +52,7 @@ def consultation():
         # ✅ INSERT TRY HERE
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "xebpbrfwyhztsevd")
+                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
                 server.send_message(msg)
             print("✅ Email sent successfully")
 
