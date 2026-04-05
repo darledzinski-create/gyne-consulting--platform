@@ -9,7 +9,6 @@ app = Flask(__name__)
 def homepage():
     return render_template("home.html")
 
-
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
     if request.method == "POST":
@@ -22,10 +21,28 @@ def consultation():
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
+        # ✅ CREATE EMAIL
+        subject = "New Consultation Submission"
+        body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+
+        msg = MIMEText(body)
+        msg["Subject"] = subject
+        msg["From"] = "darledzinski@gmail.com"
+        msg["To"] = "darledzinski@gmail.com"
+
+        # ✅ INSERT TRY HERE
+        try:
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+                server.login("darledzinski@gmail.com", "YOUR_APP_PASSWORD")
+                server.send_message(msg)
+            print("✅ Email sent successfully")
+
+        except Exception as e:
+            print("❌ EMAIL ERROR:", str(e))
+
         return redirect(url_for("thank_you"))
 
-    return render_template("consultation.html")  
-
+    return render_template("consultation.html")
 
 @app.route("/thank-you")
 def thank_you():
