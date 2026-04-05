@@ -33,15 +33,17 @@ def consultation():
         msg["From"] = "darledzinski@gmail.com"
         msg["To"] = "darledzinski@gmail.com"
 
-        try:
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "YOUR_APP_PASSWORD")
+       try:
+    print("CONNECTING TO EMAIL SERVER")
+    
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login("darledzinski@gmail.com", "umifeyujipwnweml")
 
-                # ✅ 1. Send to YOU
-                server.send_message(msg)
+        # ✅ 1. Send to YOU
+        server.send_message(msg)
 
-                # ✅ 2. Send confirmation to CLIENT
-                confirmation_body = f"""
+        # ✅ 2. Create confirmation email
+        confirmation_body = f"""
 Dear {name},
 
 Thank you for reaching out.
@@ -58,19 +60,18 @@ Kind regards,
 Dr Dariusz
 """
 
-                confirmation_msg = MIMEText(confirmation_body)
-                confirmation_msg["Subject"] = "We received your consultation request"
-                confirmation_msg["From"] = "darledzinski@gmail.com"
-                confirmation_msg["To"] = email
+        confirmation_msg = MIMEText(confirmation_body)
+        confirmation_msg["Subject"] = "We received your consultation request"
+        confirmation_msg["From"] = "darledzinski@gmail.com"
+        confirmation_msg["To"] = email
 
-                # ✅ Send to client
-                server.send_message(confirmation_msg)
+        # ✅ 3. Send to client
+        server.send_message(confirmation_msg)
 
-            print("✅ Both emails sent successfully")
+    print("✅ Both emails sent successfully")
 
-        except Exception as e:
-            print("❌ EMAIL ERROR:", str(e))
-
+except Exception as e:
+    print("❌ EMAIL ERROR:", str(e))
         return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
