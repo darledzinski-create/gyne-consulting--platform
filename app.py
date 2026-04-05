@@ -3,6 +3,25 @@ from datetime import datetime   # ✅ MOVE THIS TO THE TOP
 import smtplib
 from email.mime.text import MIMEText
 
+def send_email(name, email, message):
+    sender_email = "your_email@gmail.com"
+    app_password = "xebpbrfwyhztsevd"
+
+    msg = MIMEText(f"Name: {name}\nEmail: {email}\nMessage: {message}")
+    msg["Subject"] = "New Consultation Request"
+    msg["From"] = sender_email
+    msg["To"] = sender_email  # you receive it
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, app_password)
+        server.send_message(msg)
+        server.quit()
+        print("✅ Email sent successfully")
+    except Exception as e:
+        print("❌ Email failed:", e)
+
 app = Flask(__name__)
 
 @app.route("/")
