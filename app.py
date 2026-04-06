@@ -19,6 +19,10 @@ def consultation():
         name = request.form.get("name")
         email = request.form.get("email")
         message = request.form.get("message")
+        symptoms = request.form.get("symptoms")
+        duration = request.form.get("duration")
+        urgency = request.form.get("urgency")
+        history = request.form.get("history")
 
         print(name, email, message)
 
@@ -28,18 +32,25 @@ def consultation():
 
         # ✅ EMAIL TO YOU (DEFINE BODY FIRST)
         body = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif;">
-        <h2>New Consultation Request</h2>
+        NEW CONSULTATION REQUEST
 
-        <p><strong>Name:</strong> {name}</p>
-        <p><strong>Email:</strong> {email}</p>
+        Name: {name}
+        Email: {email}
 
-        <p><strong>Message:</strong></p>
-        <p>{message}</p>
+        Main Concern:
+        {message}
 
-        </body>
-        </html>
+        Symptoms:
+        {symptoms}
+
+        Duration:
+        {duration}
+
+        Urgency:
+        {urgency}
+
+        Medical History:
+        {history}
         """
 
         msg = MIMEText(body, "html")
