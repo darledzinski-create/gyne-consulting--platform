@@ -58,21 +58,60 @@ def consultation():
 
                 # ✅ CONFIRMATION EMAIL TO CLIENT
                 confirmation_body = f"""
-                <html>
-                <body style="font-family: Arial, sans-serif;">
-                <h2>Thank you for reaching out</h2>
+        <html>
+        <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
 
-                <p>Dear {name},</p>
+        <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+        <td align="center">
 
-                <p>Your message has been received and will be reviewed carefully.</p>
+        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
 
-                <p><strong>You will receive a response within 24 hours.</strong></p>
+        <tr>
+        <td style="background:#2c3e50; color:white; padding:15px;">
+        <strong>Dr Dariusz Consulting</strong>
+        </td>
+        </tr>
 
-                <p>Kind regards,<br>Dr Dariusz</p>
+        <tr>
+        <td style="padding:25px;">
 
-                </body>
-                </html>
-                """
+        <h2 style="color:#2c3e50;">Thank you for reaching out</h2>
+
+        <p>Dear {name},</p>
+
+        <p>Your message has been received and will be reviewed carefully and personally.</p>
+
+        <p>Many concerns become clearer once they are properly discussed.</p>
+
+        <p style="color:#c0392b; font-weight:bold;">
+        If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
+        </p>
+
+        <p><strong>You will receive a response within 24 hours.</strong></p>
+
+        <br>
+
+        <p>Kind regards,<br>Dr Dariusz</p>
+
+        <hr style="margin:25px 0;">
+
+        <p style="font-size:12px; color:#888;">
+        This is an automated confirmation email.
+        </p>
+
+        </td>
+        </tr>
+
+        </table>
+
+        </td>
+        </tr>
+        </table>
+
+        </body>
+        </html>
+        """
 
                 confirmation_msg = MIMEText(confirmation_body, "html")
                 confirmation_msg["Subject"] = "We received your consultation request"
