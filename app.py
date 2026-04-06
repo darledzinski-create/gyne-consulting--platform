@@ -27,7 +27,31 @@ def consultation():
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
         # Create email to YOU
-        msg = MIMEText(f"Name: {name}\nEmail: {email}\nMessage: {message}")
+        body = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6;">
+
+        <h2 style="color: #2c3e50;">New Consultation Request</h2>
+
+        <p><strong>Name:</strong> {name}</p>
+        <p><strong>Email:</strong> {email}</p>
+
+        <p><strong>Message:</strong></p>
+        <p style="background:#f4f4f4; padding:10px; border-radius:5px;">
+        {message}
+        </p>
+
+        <hr>
+
+        <p style="font-size:12px; color:gray;">
+        Submitted via website consultation form
+        </p>
+
+        </body>
+        </html>
+        """
+
+        msg = MIMEText(body, "html")
         msg["Subject"] = "New Consultation Submission"
         msg["From"] = "darledzinski@gmail.com"
         msg["To"] = "darledzinski@gmail.com"
