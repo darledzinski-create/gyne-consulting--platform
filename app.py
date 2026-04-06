@@ -26,53 +26,22 @@ def consultation():
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
+       
         # Create email to YOU
-        confirmation_body = f"""
+        body = f"""
         <html>
-        <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
+        <body style="font-family: Arial, sans-serif; line-height: 1.6;">
 
-        <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px;">
-        <tr>
-        <td align="center">
+        <h2 style="color: #2c3e50;">New Consultation Request</h2>
 
-        <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; padding:30px;">
+        <p><strong>Name:</strong> {name}</p>
+        <p><strong>Email:</strong> {email}</p>
 
-        <tr>
-        <td>
+        <p><strong>Message:</strong></p>
 
-        <h2 style="color:#2c3e50;">Thank you for reaching out</h2>
-
-        <p>Dear {name},</p>
-
-        <p>Your message has been received and will be reviewed carefully and personally.</p>
-
-        <p>Many concerns become clearer once they are properly discussed. This consultation is the first step toward clarity.</p>
-
-        <p style="color:#c0392b; font-weight:bold;">
-        If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
+        <p style="background:#f4f4f4; padding:10px; border-radius:5px;">
+        {message}
         </p>
-
-        <p><strong>You will receive a response within 24 hours.</strong></p>
-
-        <br>
-
-        <p>Kind regards,<br>
-        Dr Dariusz</p>
-
-        <hr style="margin:30px 0;">
-
-        <p style="font-size:12px; color:#888;">
-        This is an automated confirmation email.
-        </p>
-
-        </td>
-        </tr>
-
-        </table>
-
-        </td>
-        </tr>
-        </table>
 
         </body>
         </html>
@@ -82,7 +51,7 @@ def consultation():
         msg["Subject"] = "New Consultation Submission"
         msg["From"] = "darledzinski@gmail.com"
         msg["To"] = "darledzinski@gmail.com"
-
+        
         try:
             print("CONNECTING TO EMAIL SERVER")
 
