@@ -28,7 +28,7 @@ def consultation():
 
        
         # Create email to YOU
-        confirmation_body = f"""
+        body = f"""
         <html>
         <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
 
@@ -38,41 +38,23 @@ def consultation():
 
         <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
 
-        <!-- HEADER -->
         <tr>
         <td style="background:#2c3e50; color:white; padding:15px;">
-        <strong>Dr Dariusz Consulting</strong>
+        <strong>New Consultation Request</strong>
         </td>
         </tr>
 
-        <!-- CONTENT -->
         <tr>
-        <td style="padding:25px;">
+        <td style="padding:20px;">
 
-        <h2 style="color:#2c3e50;">Thank you for reaching out</h2>
+        <p><strong>Name:</strong><br>{name}</p>
+        <p><strong>Email:</strong><br>{email}</p>
 
-        <p>Dear {name},</p>
+        <p><strong>Message:</strong></p>
 
-        <p>Your message has been received and will be reviewed carefully and personally.</p>
-
-        <p>Many concerns become clearer once they are properly discussed.</p>
-
-        <p style="color:#c0392b; font-weight:bold;">
-        If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
-        </p>
-
-        <p><strong>You will receive a response within 24 hours.</strong></p>
-
-        <br>
-
-        <p>Kind regards,<br>
-        Dr Dariusz</p>
-
-        <hr style="margin:25px 0;">
-
-        <p style="font-size:12px; color:#888;">
-        This is an automated confirmation email.
-        </p>
+        <div style="background:#f0f2f5; padding:15px; border-radius:6px;">
+        {message}
+        </div>
 
         </td>
         </tr>
@@ -86,11 +68,6 @@ def consultation():
         </body>
         </html>
         """
-       
-        msg = MIMEText(body, "html")
-        msg["Subject"] = "New Consultation Submission"
-        msg["From"] = "darledzinski@gmail.com"
-        msg["To"] = "darledzinski@gmail.com"
         
         try:
             print("CONNECTING TO EMAIL SERVER")
@@ -119,7 +96,7 @@ Kind regards,
 Dr Dariusz
 """
 
-                confirmation_msg = MIMEText(confirmation_body)
+                confirmation_msg = MIMEText(confirmation_body, "html")
                 confirmation_msg["Subject"] = "We received your consultation request"
                 confirmation_msg["From"] = "darledzinski@gmail.com"
                 confirmation_msg["To"] = email
