@@ -62,54 +62,51 @@ def consultation():
             print("CONNECTING TO EMAIL SERVER")
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server: 
-                
-            # ✅ CONFIRMATION EMAIL TO CLIENT
-       
-            if priority == "Urgent":
-                confirmatiion_body = f"""
-                <html>
-                <body style="font-family: Arial, sans-serif;">
-                <h2 style="color;#c0392b;">Important</h2>
-                <p>Dear {name},</p>
-                <p>Your message has been received.</p>
-                <P>style="color:#c0392b; font-weighr:bold;">
-                Based on your selection,your conditionmay require urgent medical attention.
-                Pleas seek immediate in-person care.
-                </p>
-                <p>This platform is not suitablefor emergency management.</p>
-                <p>Kind regards ,<br>Dr Dariusz</p>
-                </body>
-                </html>
-                """
-            else:
-                confirmation_body = f"""
-                <html>
-                <body style="font-family: Arial,sans-serif;">
-                <h2>Thank you for  reaching out</h2>
-                <p>Dear {name},</p>
-                <p>Your message has been received and will be reviewed carefully.</p>
-                <p><strong>You will receive a response within 24 hours.</strong></p>
-                <p>Kind regards,<br>Dr Dariusz</p>
-                </body>
-                </html>
-                """
+                server.login("darledzinski@gmail>com", "umifeyujipmnweml")
 
-            confirmation_msg = MIMEText(confirmation_body, "html")
-            confirmation_msg["Subject"] = "We received your consultation request"
-            confirmation_msg["From"] = "darledzinski@gmail.com"
-            confirmation_msg["To"] = email
-
-            server.send_message(confirmation_msg)
-
-            print("SENDING CONFIRMATION TO:", email)
-
-            server.login("darledzinski@gmail.com", "umifeyujipwnweml")
-
-            # ✅ SEND TO YOU
+                # SEND TO YOU
                 server.send_message(msg)
+            
+                # ✅ CONFIRMATION EMAIL TO CLIENT
+       
+                if priority == "Urgent":
+                    confirmation_body = f"""
+                    <html>
+                    <body style="font-family: Arial, sans-serif;">
+                    <h2 style="color;#c0392b;">Important</h2>
+                    <p>Dear {name},</p>
+                    <p>Your message has been received.</p>
+                    <P>style="color:#c0392b; font-weight:bold;">
+                    Based on your selection,your condition may require urgent medical attention.
+                    Please seek immediate in-person care.
+                    </p>
+                    <p>This platform is not suitable for emergency management.</p>
+                    <p>Kind regards ,<br>Dr Dariusz</p>
+                    </body>
+                    </html>
+                    """
+                else:
+                    confirmation_body = f"""
+                    <html>
+                    <body style="font-family: Arial,sans-serif;">
+                    <h2>Thank you for reaching out</h2>
+                    <p>Dear {name},</p>
+                    <p>Your message has been received and will be reviewed carefully.</p>
+                    <p><strong>You will receive a response within 24 hours.</strong></p>
+                    <p>Kind regards,<br>Dr Dariusz</p>
+                    </body>
+                    </html>
+                    """
 
-           
-            print("✅ Both emails sent successfully")
+               confirmation_msg = MIMEText(confirmation_body, "html")
+               confirmation_msg["Subject"] = "We received your consultation request"
+               confirmation_msg["From"] = "darledzinski@gmail.com"
+               confirmation_msg["To"] = email
+
+               # SEND TO CLIENT
+               server.send_message(confirmation_msg)
+
+           print("✅ Both emails sent successfully")
 
         except Exception as e:
             print("❌ EMAIL ERROR:", str(e))
