@@ -98,15 +98,15 @@ def consultation():
                     </html>
                     """
 
-               confirmation_msg = MIMEText(confirmation_body, "html")
-               confirmation_msg["Subject"] = "We received your consultation request"
-               confirmation_msg["From"] = "darledzinski@gmail.com"
-               confirmation_msg["To"] = email
+                confirmation_msg = MIMEText(confirmation_body, "html")
+                confirmation_msg["Subject"] = "We received your consultation request"
+                confirmation_msg["From"] = "darledzinski@gmail.com"
+                confirmation_msg["To"] = email
 
-               # SEND TO CLIENT
-               server.send_message(confirmation_msg)
+                # SEND TO CLIENT
+                server.send_message(confirmation_msg)
 
-           print("✅ Both emails sent successfully")
+            print("✅ Both emails sent successfully")
 
         except Exception as e:
             print("❌ EMAIL ERROR:", str(e))
