@@ -62,14 +62,14 @@ def consultation():
             print("CONNECTING TO EMAIL SERVER")
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server: 
-                server.login("darledzinski@gmail>com", "umifeyujipmnweml")
+                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
 
                 # SEND TO YOU
                 server.send_message(msg)
             
                 # ✅ CONFIRMATION EMAIL TO CLIENT
        
-                if priority == "Urgent":
+                if urgency == "Urgent":
                     confirmation_body = f"""
                     <html>
                     <body style="font-family: Arial, sans-serif;">
