@@ -207,3 +207,6 @@ def consultation():
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
+
+if __name__=="__":
+    app.run(debug=True)
