@@ -73,10 +73,10 @@ def consultation():
                     confirmation_body = f"""
                     <html>
                     <body style="font-family: Arial, sans-serif;">
-                    <h2 style="color;#c0392b;">Important</h2>
+                    <h2 style="color\:#c0392b;">Important</h2>
                     <p>Dear {name},</p>
                     <p>Your message has been received.</p>
-                    <P>style="color:#c0392b; font-weight:bold;">
+                    <p>style="color:#c0392b; font-weight:bold;">
                     Based on your selection,your condition may require urgent medical attention.
                     Please seek immediate in-person care.
                     </p>
