@@ -16,6 +16,7 @@ def consultation():
     if request.method == "POST":
         print("FORM SUBMITTED")
 
+        # GET FORM DATA
         name = request.form.get("name")
         email = request.form.get("email")
         message = request.form.get("message")
@@ -26,11 +27,11 @@ def consultation():
 
         print(name, email, message)
 
-        # Save to file
+        # SAVE TO FILE
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
-        # ✅ EMAIL TO YOU (DEFINE BODY FIRST)
+        # EMAIL TO YOU
         body = f"""
         NEW CONSULTATION REQUEST
 
@@ -53,7 +54,7 @@ def consultation():
         {history}
         """
 
-        msg = MIMEText(body, "html")
+        msg = MIMEText(body, "plain")
         msg["Subject"] = "New Consultation Submission"
         msg["From"] = "darledzinski@gmail.com"
         msg["To"] = "darledzinski@gmail.com"
@@ -61,13 +62,15 @@ def consultation():
         try:
             print("CONNECTING TO EMAIL SERVER")
 
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server: 
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
                 server.login("darledzinski@gmail.com", "umifeyujipwnweml")
 
                 # SEND TO YOU
                 server.send_message(msg)
-            
-                # ✅ CONFIRMATION EMAIL TO CLIENT
+
+                # =========================
+                # CONFIRMATION EMAIL TO CLIENT
+                # =========================
 
                 if urgency == "Urgent":
                     confirmation_body = f"""
@@ -79,14 +82,12 @@ def consultation():
 
                     <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
 
-                    <!-- HEADER -->
                     <tr>
                     <td style="background:#c0392b; color:white; padding:18px;">
                     <strong>Dr Dariusz Consulting</strong>
                     </td>
                     </tr>
 
-                    <!-- CONTENT -->
                     <tr>
                     <td style="padding:25px;">
 
@@ -101,12 +102,10 @@ def consultation():
                     Please seek immediate in-person care or visit your nearest medical facility.
                     </p>
 
-                    <p>
-                    This platform is not suitable for emergency management.
-                    </p>
+                    <p>This platform is not suitable for emergency management.</p>
 
                     <p style="font-size:13px; color:#555;">
-                    Please note: consultations are handled via email. Phone calls are not accepted without prior arrangement.
+                    Please note: consultations are handled via email only.
                     </p>
 
                     <br>
@@ -116,7 +115,7 @@ def consultation():
                     <hr style="margin:25px 0;">
 
                     <p style="font-size:12px; color:#888;">
-                    This is an automated response. If your condition is urgent, do not wait for email correspondence.
+                    This is an automated response. Do not wait if urgent.
                     </p>
 
                     </td>
@@ -130,7 +129,6 @@ def consultation():
                     </body>
                     </html>
                     """
-
                 else:
                     confirmation_body = f"""
                     <html>
@@ -141,14 +139,12 @@ def consultation():
 
                     <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
 
-                    <!-- HEADER -->
                     <tr>
                     <td style="background:#2c3e50; color:white; padding:18px;">
                     <strong>Dr Dariusz Consulting</strong>
                     </td>
                     </tr>
 
-                    <!-- CONTENT -->
                     <tr>
                     <td style="padding:25px;">
 
@@ -158,8 +154,6 @@ def consultation():
 
                     <p>Your message has been received and will be reviewed carefully and personally.</p>
 
-                    <p>Many concerns become clearer once they are properly discussed.</p>
-
                     <p style="color:#c0392b; font-weight:bold;">
                     If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
                     </p>
@@ -167,7 +161,7 @@ def consultation():
                     <p><strong>You will receive a response within 24 hours.</strong></p>
 
                     <p style="font-size:13px; color:#555;">
-                    Please note: consultations are handled via email. Phone calls are not accepted without prior arrangement.
+                    Please note: consultations are handled via email only.
                     </p>
 
                     <br>
@@ -192,7 +186,7 @@ def consultation():
                     </html>
                     """
 
-                # CREATE MESSAGE
+                # CREATE CLIENT EMAIL
                 confirmation_msg = MIMEText(confirmation_body, "html")
                 confirmation_msg["Subject"] = "We received your consultation request"
                 confirmation_msg["From"] = "darledzinski@gmail.com"
@@ -209,10 +203,3 @@ def consultation():
         return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
-@app.route("/thank-you")
-def thank_you():
-    return render_template("thank_you.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
