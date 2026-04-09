@@ -63,8 +63,12 @@ def consultation():
             print("CONNECTING TO EMAIL SERVER")
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
+               import os
 
+               server.login(
+                   os.enviro.get("EMAIL_USER"),
+                   0S.ENVIRON.(EMAIL_PASS")
+               )
                 # SEND TO YOU
                 server.send_message(msg)
 
