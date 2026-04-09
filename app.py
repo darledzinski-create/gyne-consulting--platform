@@ -16,7 +16,6 @@ def consultation():
     if request.method == "POST":
         print("FORM SUBMITTED")
 
-        # GET FORM DATA
         name = request.form.get("name")
         email = request.form.get("email")
         message = request.form.get("message")
@@ -31,36 +30,40 @@ def consultation():
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
 
-        # EMAIL TO YOU
+        # EMAIL BODY TO YOU
         body = f"""
-        NEW CONSULTATION REQUEST
+NEW CONSULTATION REQUEST
 
-        Name: {name}
-        Email: {email}
+Name: {name}
+Email: {email}
 
-        Main Concern:
-        {message}
+Main Concern:
+{message}
 
-        Symptoms:
-        {symptoms}
+Symptoms:
+{symptoms}
 
-        Duration:
-        {duration}
+Duration:
+{duration}
 
-        Urgency:
-        {urgency}
+Urgency:
+{urgency}
 
-        Medical History:
-        {history}
-        """
-
-        msg = MIMEText(body, "plain")
-        msg["Subject"] = "New Consultation Submission"
-        msg["From"] = "darledzinski@gmail.com"
-        msg["To"] = "darledzinski@gmail.com"
+Medical History:
+{history}
+"""
 
         try:
+            import os
+            import smtlib
+            from email.mime.text import ,MIMEText
+
             print("CONNECTING TO EMAIL SERVER")
+
+            msg = MIMEText(body, "plain")
+            msg["Subject"] = "New Consultation Submission"
+            msg["From"] = "darledzinski@gmail.com"
+            msg["To"] = "darledzinski@gmail.com"
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
                 server.login(
@@ -70,141 +73,56 @@ def consultation():
                 # SEND TO YOU
                 server.send_message(msg)
 
-                # =========================
-                # CONFIRMATION EMAIL TO CLIENT
-                # =========================
-
-                if urgency == "Urgent":
+               
+                # ===== CLIENT EMAIL =====
+                IF urgency == "Urgent":
                     confirmation_body = f"""
-                    <html>
-                    <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
 
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                    <tr><td align="center">
+Dear {name},
 
-                    <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
+Your requestnhas been received.
 
-                    <tr>
-                    <td style="background:#c0392b; color:white; padding:18px;">
-                    <strong>Dr Dariusz Consulting</strong>
-                    </td>
-                    </tr>
+Based on your selection, your condition may require urgent medical attention.
 
-                    <tr>
-                    <td style="padding:25px;">
+Please seek immediate in-person care
 
-                    <h2 style="color:#c0392b;">Important — Please Read Carefully</h2>
+This platform is not suitable foremergencies.
 
-                    <p>Dear {name},</p>
+Kind regards,
+Dr Dariusz
+"""  
 
-                    <p>Your message has been received.</p>
+              else:
+                  confirmation_body = f"""
 
-                    <p style="color:#c0392b; font-weight:bold;">
-                    Based on your selection, your condition may require urgent medical attention.
-                    Please seek immediate in-person care or visit your nearest medical facility.
-                    </p>
+Dear {name},
 
-                    <p>This platform is not suitable for emergency management.</p>
+Thank you for reaching out.
 
-                    <p style="font-size:13px; color:#555;">
-                    Please note: consultations are handled via email only.
-                    </p>
+Your message has been received and will be reviewed carefully.
 
-                    <br>
+You will receive a response within 24 hours.
 
-                    <p>Kind regards,<br><strong>Dr Dariusz</strong></p>
+Kind regards,
+Dr Dariusz
+"""
 
-                    <hr style="margin:25px 0;">
+                if email:
+                    confirmation_msg = MIMEText(confirmation_body, "html")
+                    confirmation_msg["Subject"] = "We received your consultation request"
+                    confirmation_msg["From"] = "darledzinski@gmail.com"
+                    confirmation_msg["To"] = email
 
-                    <p style="font-size:12px; color:#888;">
-                    This is an automated response. Do not wait if urgent.
-                    </p>
+                    server.send_message(confirmation_msg)
 
-                    </td>
-                    </tr>
-
-                    </table>
-
-                    </td></tr>
-                    </table>
-
-                    </body>
-                    </html>
-                    """
-                else:
-                    confirmation_body = f"""
-                    <html>
-                    <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
-
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                    <tr><td align="center">
-
-                    <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
-
-                    <tr>
-                    <td style="background:#2c3e50; color:white; padding:18px;">
-                    <strong>Dr Dariusz Consulting</strong>
-                    </td>
-                    </tr>
-
-                    <tr>
-                    <td style="padding:25px;">
-
-                    <h2 style="color:#2c3e50;">Thank you for reaching out</h2>
-
-                    <p>Dear {name},</p>
-
-                    <p>Your message has been received and will be reviewed carefully and personally.</p>
-
-                    <p style="color:#c0392b; font-weight:bold;">
-                    If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
-                    </p>
-
-                    <p><strong>You will receive a response within 24 hours.</strong></p>
-
-                    <p style="font-size:13px; color:#555;">
-                    Please note: consultations are handled via email only.
-                    </p>
-
-                    <br>
-
-                    <p>Kind regards,<br><strong>Dr Dariusz</strong></p>
-
-                    <hr style="margin:25px 0;">
-
-                    <p style="font-size:12px; color:#888;">
-                    This is an automated confirmation email.
-                    </p>
-
-                    </td>
-                    </tr>
-
-                    </table>
-
-                    </td></tr>
-                    </table>
-
-                    </body>
-                    </html>
-                    """
-
-                # CREATE CLIENT EMAIL
-                confirmation_msg = MIMEText(confirmation_body, "html")
-                confirmation_msg["Subject"] = "We received your consultation request"
-                confirmation_msg["From"] = "darledzinski@gmail.com"
-                confirmation_msg["To"] = email
-
-                # SEND TO CLIENT
-                server.send_message(confirmation_msg)
-
-            print("✅ Both emails sent successfully")
+            print("EMAILS SENT")
 
         except Exception as e:
-            print("❌ EMAIL ERROR:", str(e))
+            print("EMAIL ERROR:", str(e))
 
         return redirect(url_for("thank_you"))
 
-    return render_template("consultation.html")
+    return render_template(consultation.html")
 
 @app.route("/thank-you")
 def thank_you():
