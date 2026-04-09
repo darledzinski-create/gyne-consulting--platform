@@ -56,7 +56,7 @@ Medical History:
         try:
             import os
             import smtlib
-            from email.mime.text import ,MIMEText
+            from email.mime.text import MIMEText
 
             print("CONNECTING TO EMAIL SERVER")
 
