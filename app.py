@@ -67,7 +67,7 @@ def consultation():
 
                server.login(
                    os.environ.get("EMAIL_USER"),
-                   os.environ.("EMAIL_PASS")
+                   os.environ.get("EMAIL_PASS")
                )
                 # SEND TO YOU
                 server.send_message(msg)
