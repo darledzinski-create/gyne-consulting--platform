@@ -60,15 +60,14 @@ Medical History:
             msg["To"] = "darledzinski@gmail.com"
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
+            server.login("darledzinski@gmail.com", "umifeyujipwnweml")
                    
-                # SEND TO YOU
-                server.send_message(msg)
+            # SEND TO YOU
+            server.send_message(msg)
 
-               
-# ===== CLIENT EMAIL =====
-if urgency == "Urgent":
-    confirmation_body = f"""Dear {name},
+            # ===== CLIENT EMAIL =====
+            if urgency == "Urgent":
+                confirmation_body = f"""Dear {name},
 
 Your request has been received.
 
@@ -81,8 +80,8 @@ This platform is not suitable for emergencies.
 Kind regards,
 Dr Dariusz
 """
-else:
-    confirmation_body = f"""Dear {name},
+            else:
+                confirmation_body = f"""Dear {name},
 
 Thank you for reaching out.
 
