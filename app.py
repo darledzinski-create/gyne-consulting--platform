@@ -69,29 +69,30 @@ Medical History:
                 if urgency == "Urgent":
                     confirmation_body = f"""Dear {name},
 
-Your request has been received.
+                    Your request has been received.
 
-Based on your selection, your condition may require urgent medical attention.
+                    Based on your selection, your condition may require urgent medical attention.
 
-Please seek immediate in-person care.
+                    Please seek immediate in-person care.
 
-This platform is not suitable for emergencies.
+                    This platform is not suitable for emergencies.
 
-Kind regards,
-Dr Dariusz
-"""
+                    Kind regards,
+                    Dr Dariusz
+                    """
+                
                 else:
                     confirmation_body = f"""Dear {name},
 
-Thank you for reaching out.
+                    Thank you for reaching out.
 
-Your message has been received and will be reviewed carefully.
+                    Your message has been received and will be reviewed carefully.
 
-You will receive a response within 24 hours.
+                    You will receive a response within 24 hours.
 
-Kind regards,
-Dr Dariusz
-"""
+                    Kind regards,
+                    Dr Dariusz
+                    """
 
             print("CLIENT EMAIL:", email)
             if email:
