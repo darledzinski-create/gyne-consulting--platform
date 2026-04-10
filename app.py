@@ -101,13 +101,13 @@ Kind regards,
 Dr Dariusz
 """
 
-                if email:
-                    confirmation_msg = MIMEText(confirmation_body, "html")
-                    confirmation_msg["Subject"] = "We received your consultation request"
-                    confirmation_msg["From"] = "darledzinski@gmail.com"
-                    confirmation_msg["To"] = email
+               if email:
+                   confirmation_msg = MIMEText(confirmation_body, "html")
+                   confirmation_msg["Subject"] = "We received your consultation request"
+                   confirmation_msg["From"] = "darledzinski@gmail.com"
+                   confirmation_msg["To"] = email
 
-                    server.send_message(confirmation_msg)
+                   server.send_message(confirmation_msg)
 
             print("EMAILS SENT")
 
