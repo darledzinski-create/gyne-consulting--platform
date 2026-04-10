@@ -109,10 +109,10 @@ Dr Dariusz
 
                    server.send_message(confirmation_msg)
 
-            print("EMAILS SENT")
+               print("EMAILS SENT")
 
-        except Exception as e:
-            print("EMAIL ERROR:", str(e))
+           except Exception as e:
+               print("EMAIL ERROR:", str(e))
 
         return redirect(url_for("thank_you"))
 
