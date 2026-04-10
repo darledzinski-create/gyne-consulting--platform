@@ -53,7 +53,6 @@ Medical History:
 """
 
         try:
-            
             print("CONNECTING TO EMAIL SERVER")
             msg = MIMEText(body, "plain")
             msg["Subject"] = "New Consultation Submission"
@@ -67,9 +66,9 @@ Medical History:
                 server.send_message(msg)
 
                
-                # ===== CLIENT EMAIL =====
-                if urgency == "Urgent":
-                    confirmation_body = f"""
+# ===== CLIENT EMAIL =====
+if urgency == "Urgent":
+    confirmation_body = f"""
 
 Dear {name},
 
@@ -85,8 +84,8 @@ Kind regards,
 Dr Dariusz
 """  
 
-               else:
-                   confirmation_body = f"""
+             else:
+                 confirmation_body = f"""
 
 Dear {name},
 
