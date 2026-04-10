@@ -115,5 +115,5 @@ Dr Dariusz
 def thank_you():
     return render_template("thank_you.html")
 
-if __name__ == "__"main__":
+if __name__ == "__main__":
     app.run(debug=True)
