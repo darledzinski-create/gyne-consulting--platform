@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
+impory os
 import smtplib
 from email.mime.text import MIMEText
 
@@ -54,11 +55,7 @@ Medical History:
 """
 
         try:
-            import os
-            import smtlib
-            from email.mime.text import MIMEText
-
-            print("CONNECTING TO EMAIL SERVER")
+           print("CONNECTING TO EMAIL SERVER")
 
             msg = MIMEText(body, "plain")
             msg["Subject"] = "New Consultation Submission"
@@ -75,7 +72,7 @@ Medical History:
 
                
                 # ===== CLIENT EMAIL =====
-                IF urgency == "Urgent":
+                if urgency == "Urgent":
                     confirmation_body = f"""
 
 Dear {name},
