@@ -1,16 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
-impory os
+import os
 import smtplib
 from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def homepage():
     return render_template("home.html")
-
 
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
@@ -56,41 +54,40 @@ Medical History:
 
         try:
            print("CONNECTING TO EMAIL SERVER")
+           msg = MIMEText(body, "plain")
+           msg["Subject"] = "New Consultation Submission"
+           msg["From"] = "darledzinski@gmail.com"
+           msg["To"] = "darledzinski@gmail.com"
 
-            msg = MIMEText(body, "plain")
-            msg["Subject"] = "New Consultation Submission"
-            msg["From"] = "darledzinski@gmail.com"
-            msg["To"] = "darledzinski@gmail.com"
-
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login(
-                    os.environ.get("EMAIL_USER"),
-                    os.environ.get("EMAIL_PASS")
-                )
-                # SEND TO YOU
-                server.send_message(msg)
+           with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+               server.login(
+                   os.environ.get("EMAIL_USER"),
+                   os.environ.get("EMAIL_PASS")
+               )
+               # SEND TO YOU
+               server.send_message(msg)
 
                
-                # ===== CLIENT EMAIL =====
-                if urgency == "Urgent":
-                    confirmation_body = f"""
+               # ===== CLIENT EMAIL =====
+               if urgency == "Urgent":
+                   confirmation_body = f"""
 
 Dear {name},
 
-Your requestnhas been received.
+Your request has been received.
 
 Based on your selection, your condition may require urgent medical attention.
 
-Please seek immediate in-person care
+Please seek immediate in-person care.
 
-This platform is not suitable foremergencies.
+This platform is not suitable for emergencies.
 
 Kind regards,
 Dr Dariusz
 """  
 
-              else:
-                  confirmation_body = f"""
+               else:
+                   confirmation_body = f"""
 
 Dear {name},
 
