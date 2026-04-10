@@ -63,7 +63,6 @@ Medical History:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
                 server.login("darledzinski@gmail.com", "umifeyujipwnweml")
                    
-                )
                 # SEND TO YOU
                 server.send_message(msg)
 
