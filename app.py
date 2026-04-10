@@ -68,9 +68,7 @@ Medical History:
                
 # ===== CLIENT EMAIL =====
 if urgency == "Urgent":
-    confirmation_body = f"""
-
-Dear {name},
+    confirmation_body = f"""Dear {name},
 
 Your request has been received.
 
@@ -82,12 +80,9 @@ This platform is not suitable for emergencies.
 
 Kind regards,
 Dr Dariusz
-"""  
-
-             else:
-                 confirmation_body = f"""
-
-Dear {name},
+"""
+else:
+    confirmation_body = f"""Dear {name},
 
 Thank you for reaching out.
 
@@ -99,7 +94,7 @@ Kind regards,
 Dr Dariusz
 """
 
-           print("CLIENT EMAIL:", email)
+            print("CLIENT EMAIL:", email)
             if email:
                 confirmation_msg = MIMEText(confirmation_body, "plain")
                 confirmation_msg["Subject"] = "We received your consultation request"
