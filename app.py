@@ -65,7 +65,7 @@ Medical History:
                    
                 )
                 # SEND TO YOU
-               server.send_message(msg)
+                server.send_message(msg)
 
                
                 # ===== CLIENT EMAIL =====
