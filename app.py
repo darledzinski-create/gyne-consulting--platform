@@ -114,9 +114,9 @@ Dr Dariusz
            except Exception as e:
                print("EMAIL ERROR:", str(e))
 
-        return redirect(url_for("thank_you"))
+           return redirect(url_for("thank_you"))
 
-    return render_template(consultation.html")
+       return render_template(consultation.html")
 
 @app.route("/thank-you")
 def thank_you():
