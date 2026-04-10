@@ -53,24 +53,24 @@ Medical History:
 """
 
         try:
-           print("CONNECTING TO EMAIL SERVER")
-           msg = MIMEText(body, "plain")
-           msg["Subject"] = "New Consultation Submission"
-           msg["From"] = "darledzinski@gmail.com"
-           msg["To"] = "darledzinski@gmail.com"
+            
+            print("CONNECTING TO EMAIL SERVER")
+            msg = MIMEText(body, "plain")
+            msg["Subject"] = "New Consultation Submission"
+            msg["From"] = "darledzinski@gmail.com"
+            msg["To"] = "darledzinski@gmail.com"
 
-           with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-               server.login(
-                   os.environ.get("EMAIL_USER"),
-                   os.environ.get("EMAIL_PASS")
-               )
-               # SEND TO YOU
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
+                   
+                )
+                # SEND TO YOU
                server.send_message(msg)
 
                
-               # ===== CLIENT EMAIL =====
-               if urgency == "Urgent":
-                   confirmation_body = f"""
+                # ===== CLIENT EMAIL =====
+                if urgency == "Urgent":
+                    confirmation_body = f"""
 
 Dear {name},
 
@@ -101,18 +101,19 @@ Kind regards,
 Dr Dariusz
 """
 
-               if email:
-                   confirmation_msg = MIMEText(confirmation_body, "html")
-                   confirmation_msg["Subject"] = "We received your consultation request"
-                   confirmation_msg["From"] = "darledzinski@gmail.com"
-                   confirmation_msg["To"] = email
+           print("CLIENT EMAIL:", email)
+            if email:
+                confirmation_msg = MIMEText(confirmation_body, "plain")
+                confirmation_msg["Subject"] = "We received your consultation request"
+                confirmation_msg["From"] = "darledzinski@gmail.com"
+                confirmation_msg["To"] = email
 
-                   server.send_message(confirmation_msg)
+                server.send_message(confirmation_msg)
 
-               print("EMAILS SENT")
+            print("EMAILS SENT")
 
         except Exception as e:
-               print("EMAIL ERROR:", str(e))
+            print("EMAIL ERROR:", str(e))
 
         return redirect(url_for("thank_you"))
 
@@ -122,5 +123,5 @@ Dr Dariusz
 def thank_you():
     return render_template("thank_you.html")
 
-if __name__=="__":
+if __name__ == "__"main__":
     app.run(debug=True)
