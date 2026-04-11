@@ -10,6 +10,7 @@ app = Flask(__name__)
 def homepage():
     return render_template("home.html")
 
+
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
     if request.method == "POST":
@@ -23,8 +24,6 @@ def consultation():
         urgency = request.form.get("urgency")
         history = request.form.get("history")
 
-        print(name, email, message)
-
         # SAVE TO FILE
         with open("submissions.txt", "a") as f:
             f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
@@ -36,7 +35,7 @@ NEW CONSULTATION REQUEST
 Name: {name}
 Email: {email}
 
-Main Concern:
+Message:
 {message}
 
 Symptoms:
@@ -48,70 +47,72 @@ Duration:
 Urgency:
 {urgency}
 
-Medical History:
+History:
 {history}
 """
 
         try:
             print("CONNECTING TO EMAIL SERVER")
-            msg = MIMEText(body, "plain")
-            msg["Subject"] = "New Consultation Submission"
-            msg["From"] = "darledzinski@gmail.com"
-            msg["To"] = "darledzinski@gmail.com"
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                server.login("darledzinski@gmail.com", "umifeyujipwnweml")
-                   
-                # SEND TO YOU
+                server.login(
+                    os.environ.get("EMAIL_USER"),
+                    os.environ.get("EMAIL_PASS")
+                )
+
+                # ✅ EMAIL TO YOU (ONLY ONCE)
+                msg = MIMEText(body, "plain")
+                msg["Subject"] = "New Consultation Submission"
+                msg["From"] = os.environ.get("EMAIL_USER")
+                msg["To"] = os.environ.get("EMAIL_USER")
+
                 server.send_message(msg)
 
-                # ===== CLIENT EMAIL =====
+                # ✅ BUILD CLIENT EMAIL
                 if urgency == "Urgent":
                     confirmation_body = f"""Dear {name},
 
-                    Your request has been received.
+Your request has been received.
 
-                    Based on your selection, your condition may require urgent medical attention.
+Based on your selection, your condition may require urgent medical attention.
 
-                    Please seek immediate in-person care.
+Please seek immediate in-person care.
 
-                    This platform is not suitable for emergencies.
+This platform is not suitable for emergencies.
 
-                    Kind regards,
-                    Dr Dariusz
-                    """
-                
+Kind regards,
+Dr Dariusz
+"""
                 else:
                     confirmation_body = f"""Dear {name},
 
-                    Thank you for reaching out.
+Thank you for reaching out.
 
-                    Your message has been received and will be reviewed carefully.
+Your message has been received and will be reviewed carefully.
 
-                    You will receive a response within 24 hours.
+You will receive a response within 24 hours.
 
-                    Kind regards,
-                    Dr Dariusz
-                    """
+Kind regards,
+Dr Dariusz
+"""
 
-            print("CLIENT EMAIL:", email)
-            if email:
-                confirmation_msg = MIMEText(confirmation_body, "plain")
-                confirmation_msg["Subject"] = "We received your consultation request"
-                confirmation_msg["From"] = "darledzinski@gmail.com"
-                confirmation_msg["To"] = email
+                # ✅ EMAIL TO CLIENT (ONLY ONCE)
+                if email:
+                    confirmation_msg = MIMEText(confirmation_body, "plain")
+                    confirmation_msg["Subject"] = "We received your consultation request"
+                    confirmation_msg["From"] = os.environ.get("EMAIL_USER")
+                    confirmation_msg["To"] = email
 
-                server.send_message(confirmation_msg)
+                    server.send_message(confirmation_msg)
 
-            print("EMAILS SENT")
+                print("✅ EMAILS SENT")
 
         except Exception as e:
-            print("EMAIL ERROR:", str(e))
+            print("❌ EMAIL ERROR:", str(e))
 
         return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
-
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
