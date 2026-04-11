@@ -55,6 +55,8 @@ History:
             print("CONNECTING TO EMAIL SERVER")
 
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+                print("EMAIL_USER:", os.environ.get("EMAIL_USER"))
+                print("EMAIL_PASS:", os.environ.get("EMAIL_PASS"))
                 server.login(
                     os.environ.get("EMAIL_USER"),
                     os.environ.get("EMAIL_PASS")
