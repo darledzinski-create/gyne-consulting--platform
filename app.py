@@ -22,6 +22,7 @@ def consultation():
         symptoms = request.form.get("symptoms")
         duration = request.form.get("duration")
         urgency = request.form.get("urgency")
+        print("URGENCY RECEIVED:", urgency)
         history = request.form.get("history")
 
         # SAVE TO FILE
@@ -71,7 +72,7 @@ History:
                 server.send_message(msg)
 
                 # ✅ BUILD CLIENT EMAIL
-                if urgency and urgency.lower() == "urgent":
+                if urgency == "urgent":
                     confirmation_body = f"""Dear {name},
 
 Your request has been received.
@@ -111,6 +112,7 @@ Dr Dariusz
 
         except Exception as e:
             print("❌ EMAIL ERROR:", str(e))
+            return f"ERROR: {str(e)}", 500
 
         return redirect(url_for("thank_you"))
 
