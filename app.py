@@ -71,7 +71,7 @@ History:
                 server.send_message(msg)
 
                 # ✅ BUILD CLIENT EMAIL
-                if urgency == "Urgent":
+                if urgency and urgency.lower() == "urgent":
                     confirmation_body = f"""Dear {name},
 
 Your request has been received.
