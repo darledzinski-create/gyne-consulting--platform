@@ -97,58 +97,29 @@ Please seek immediate in-person care.
 """
                 else:
                     confirmation_body = f"""
+<!DOCTYPE html>
 <html>
-<body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
+  <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
 
-<table width="100%" cellpadding="0" cellspacing="0">
-<tr><td align="center">
+    <div style="max-width:600px; margin:auto; background:white; padding:20px; border-radius:8px;">
 
-<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
+      <h2 style="color:#2c3e50;">Consultation Request Received</h2>
 
-<tr>
-<td style="background:#2c3e50; color:white; padding:18px;">
-<strong>Dr Dariusz Consulting</strong>
-</td>
-</tr>
+      <p>Dear {name},</p>
 
-<tr>
-<td style="padding:25px;">
+      <p>Thank you for reaching out.</p>
 
-<h2 style="color:#2c3e50;">Thank you for reaching out</h2>
+      <p>Your message has been received and will be reviewed carefully.</p>
 
-<p>Dear {name},</p>
+      <p>You will receive a response within <strong>24 hours</strong>.</p>
 
-<p>Your message has been received and will be reviewed carefully and personally.</p>
+      <hr style="margin:20px 0;">
 
-<p style="color:#c0392b; font-weight:bold;">
-If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
-</p>
+      <p style="color:#888;">Kind regards,<br>Dr Dariusz</p>
 
-<p><strong>You will receive a response within 24 hours.</strong></p>
+    </div>
 
-<p style="font-size:13px; color:#555;">
-Please note: consultations are handled via email only.
-</p>
-
-<br>
-
-<p>Kind regards,<br><strong>Dr Dariusz</strong></p>
-
-<hr style="margin:25px 0;">
-
-<p style="font-size:12px; color:#888;">
-This is an automated confirmation email.
-</p>
-
-</td>
-</tr>
-
-</table>
-
-</td></tr>
-</table>
-
-</body>
+  </body>
 </html>
 """
                
