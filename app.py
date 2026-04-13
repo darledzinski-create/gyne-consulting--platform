@@ -3,6 +3,7 @@ from datetime import datetime
 import os
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 
@@ -125,10 +126,20 @@ Please seek immediate in-person care.
                
                 # ✅ EMAIL TO CLIENT (ONLY ONCE)
                 if email:
-                    confirmation_msg = MIMEText(confirmation_body, "html")
+                    confirmation_msg = MIMEMultipart("alternative")
                     confirmation_msg["Subject"] = "We received your consultation request"
                     confirmation_msg["From"] = os.environ.get("EMAIL_USER")
                     confirmation_msg["To"] = email
+
+                # Plain version (fallback)
+                plain_text = f"Dear {name}, your consultation request has been received."
+
+                # HTML version
+                html_part = MIMEText(confirmation_body, "html")
+                text_part = MIMEText(plain_text, "plain")
+
+                    confirmation_msg.attach(text_part)
+                    confirmation_msg.attach(html_part)
 
                     server.send_message(confirmation_msg)
 
