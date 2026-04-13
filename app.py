@@ -72,7 +72,7 @@ History:
                 server.send_message(msg)
 
                 # ✅ BUILD CLIENT EMAIL
-                if urgency == "urgent":
+                if urgency and urgency.lower() == "urgent":
                    confirmation_body = f"""
 <html>
 <body style="font-family: Arial, sans-serif;">
