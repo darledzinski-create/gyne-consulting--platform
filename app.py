@@ -71,37 +71,90 @@ History:
 
                 server.send_message(msg)
 
-                # ✅ BUILD CLIENT EMAIL
-                if urgency == "urgent":
-                    confirmation_body = f"""Dear {name},
+               # ✅ BUILD CLIENT EMAIL
+               if urgency == "urgent":
+                   confirmation_body = f"""
+<html>
+<body style="font-family: Arial, sans-serif;">
 
-Your request has been received.
+<h2 style="color:#c0392b;">Important</h2>
 
+<p>Dear {name},</p>
+
+<p>Your request has been received.</p>
+
+<p style="color:#c0392b; font-weight:bold;">
 Based on your selection, your condition may require urgent medical attention.
-
 Please seek immediate in-person care.
+</p>
 
-This platform is not suitable for emergencies.
+<p>This platform is not suitable for emergencies.</p>
 
-Kind regards,
-Dr Dariusz
+<p>Kind regards,<br>Dr Dariusz</p>
+
+</body>
+</html>
 """
-                else:
-                    confirmation_body = f"""Dear {name},
+else:
+    confirmation_body = f"""
+<html>
+<body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
 
-Thank you for reaching out.
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr><td align="center">
 
-Your message has been received and will be reviewed carefully.
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden;">
 
-You will receive a response within 24 hours.
+<tr>
+<td style="background:#2c3e50; color:white; padding:18px;">
+<strong>Dr Dariusz Consulting</strong>
+</td>
+</tr>
 
-Kind regards,
-Dr Dariusz
+<tr>
+<td style="padding:25px;">
+
+<h2 style="color:#2c3e50;">Thank you for reaching out</h2>
+
+<p>Dear {name},</p>
+
+<p>Your message has been received and will be reviewed carefully and personally.</p>
+
+<p style="color:#c0392b; font-weight:bold;">
+If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.
+</p>
+
+<p><strong>You will receive a response within 24 hours.</strong></p>
+
+<p style="font-size:13px; color:#555;">
+Please note: consultations are handled via email only.
+</p>
+
+<br>
+
+<p>Kind regards,<br><strong>Dr Dariusz</strong></p>
+
+<hr style="margin:25px 0;">
+
+<p style="font-size:12px; color:#888;">
+This is an automated confirmation email.
+</p>
+
+</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+
+</body>
+</html>
 """
-
+               
                 # ✅ EMAIL TO CLIENT (ONLY ONCE)
                 if email:
-                    confirmation_msg = MIMEText(confirmation_body, "plain")
+                    confirmation_msg = MIMEText(confirmation_body, "html")
                     confirmation_msg["Subject"] = "We received your consultation request"
                     confirmation_msg["From"] = os.environ.get("EMAIL_USER")
                     confirmation_msg["To"] = email
