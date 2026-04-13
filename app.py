@@ -131,12 +131,12 @@ Please seek immediate in-person care.
                     confirmation_msg["From"] = os.environ.get("EMAIL_USER")
                     confirmation_msg["To"] = email
 
-                # Plain version (fallback)
-                plain_text = f"Dear {name}, your consultation request has been received."
+                    # Plain version (fallback)
+                    plain_text = f"Dear {name}, your consultation request has been received."
 
-                # HTML version
-                html_part = MIMEText(confirmation_body, "html")
-                text_part = MIMEText(plain_text, "plain")
+                    # HTML version
+                    html_part = MIMEText(confirmation_body, "html")
+                    text_part = MIMEText(plain_text, "plain")
 
                     confirmation_msg.attach(text_part)
                     confirmation_msg.attach(html_part)
