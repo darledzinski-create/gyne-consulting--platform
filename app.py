@@ -95,8 +95,8 @@ Please seek immediate in-person care.
 </body>
 </html>
 """
-               else:
-                   confirmation_body = f"""
+                else:
+                    confirmation_body = f"""
 <html>
 <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
 
