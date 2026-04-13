@@ -71,8 +71,8 @@ History:
 
                 server.send_message(msg)
 
-               # ✅ BUILD CLIENT EMAIL
-               if urgency == "urgent":
+                # ✅ BUILD CLIENT EMAIL
+                if urgency == "urgent":
                    confirmation_body = f"""
 <html>
 <body style="font-family: Arial, sans-serif;">
@@ -95,8 +95,8 @@ Please seek immediate in-person care.
 </body>
 </html>
 """
-else:
-    confirmation_body = f"""
+               else:
+                   confirmation_body = f"""
 <html>
 <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: Arial, sans-serif;">
 
