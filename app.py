@@ -97,13 +97,17 @@ Please seek immediate in-person care.
 </html>
 """
                 else:
-                    confirmation_body = f"""
-<!DOCTYPE html>
+                     confirmation_body = f"""
 <html>
-  <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
+   <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
 
-    <div style="max-width:600px; margin:auto; background:white; padding:20px; border-radius:8px;">
+    <table width="="100%"; cellpadding="0" cellspacing=")">
+    <tr>
+    <td align="center">
+    <table width="600" cellpadding="20" cellspacing="0" style="background:#ffffff; border-radius:8px;">
 
+    <tr>
+    <td>
       <h2 style="color:#2c3e50;">Consultation Request Received</h2>
 
       <p>Dear {name},</p>
@@ -116,11 +120,18 @@ Please seek immediate in-person care.
 
       <hr style="margin:20px 0;">
 
-      <p style="color:#888;">Kind regards,<br>Dr Dariusz</p>
+      <p style="color:#777;">Kind regards,<br>Dr Dariusz</p>
 
-    </div>
+      <td>
+      <tr>
 
-  </body>
+      </table>
+
+      </td>
+      </tr>
+      </table>
+      
+   </body>
 </html>
 """
                
