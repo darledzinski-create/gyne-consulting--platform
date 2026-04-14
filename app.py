@@ -56,20 +56,36 @@ History:
         try:
             print("CONNECTING TO EMAIL SERVER")
 
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-                print("EMAIL_USER:", os.environ.get("EMAIL_USER"))
-                print("EMAIL_PASS:", os.environ.get("EMAIL_PASS"))
-                server.login(
-                    os.environ.get("EMAIL_USER"),
-                    os.environ.get("EMAIL_PASS")
-                )
+            mailjet = Client(
+                auth=(
+                    os.environ.get("MAILJET_API_KEY")
+                    os.environ.get("MAILJET_SECRET_KEY")
+                ), 
+                version='V3.1'
+            )
+            data = {
+                "Messages"; [
+                    {
+                        "From" {
+                            "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                            "Name": " Dr Dariusz"
+                        },
+                        "To": [
+                            {
+                                "Email": email,
+                                "Name": name
+                             }
+                        ],
+                        "Subject": We received your consultation request",
+                        "HTMLPart": confirmation_body
+                    } 
+               ]
+          }
 
-                # ✅ EMAIL TO YOU (ONLY ONCE)
-                msg = MIMEText(body, "plain")
-                msg["Subject"] = "New Consultation Submission"
-                msg["From"] = os.environ.get("EMAIL_USER")
-                msg["To"] = os.environ.get("EMAIL_USER")
-
+          result = mailjet.send.create(data=data)
+          print("MAILJET STATUS:", result.status_code)
+            
+                            
                 server.send_message(msg)
 
                 # ✅ BUILD CLIENT EMAIL
