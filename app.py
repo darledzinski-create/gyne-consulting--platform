@@ -76,7 +76,7 @@ History:
                                 "Name": name
                              }
                         ],
-                        "Subject": We received your consultation request",
+                        "Subject": "We received your consultation request",
                         "HTMLPart": confirmation_body
                     } 
                ]
