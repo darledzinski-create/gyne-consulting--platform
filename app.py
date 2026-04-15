@@ -64,7 +64,7 @@ History:
                 version='V3.1'
             )
             data = {
-                "Messages"; [
+                "Messages": [
                     {
                         "From" {
                             "Email": os.environ.get("MAILJET_FROM_EMAIL"),
