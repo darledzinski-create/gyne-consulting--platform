@@ -82,37 +82,38 @@ History:
                   ]
               }
 
-              result = mailjet.send.create(data=data)
-              print("MAILJET STATUS:", result.status_code)
+            result = mailjet.send.create(data=data)
+            print("MAILJET STATUS:", result.status_code)
             
                             
                
               # ✅ BUILD CLIENT EMAIL
               if urgency and urgency.lower() == "urgent":
                   confirmation_body = f"""
-<html>
-<body style="font-family: Arial, sans-serif;">
+                  <html>
+                  <body style="font-family: Arial, sans-serif;">
 
-<h2 style="color:#c0392b;">Important</h2>
+                  <h2 style="color:#c0392b;">Important</h2>
 
-<p>Dear {name},</p>
+                  <p>Dear {name},</p>
 
-<p>Your request has been received.</p>
+                  <p>Your request has been received.</p>
 
-<p style="color:#c0392b; font-weight:bold;">
-Based on your selection, your condition may require urgent medical attention.
-Please seek immediate in-person care.
-</p>
+                  <p style="color:#c0392b; font-weight:bold;">
+                  Based on your selection, your condition may require urgent medical attention.
+                  Please seek immediate in-person care.
+                  </p>
 
-<p>This platform is not suitable for emergencies.</p>
+                  <p>This platform is not suitable for emergencies.</p>
 
-<p>Kind regards,<br>Dr Dariusz</p>
+                  <p>Kind regards,<br>Dr Dariusz</p>
 
-</body>
-</html>
-"""
+                  </body>
+                  </html>
+                  """
+              
               else:
-                   confirmation_body = f"""
+                  confirmation_body = f"""
 <html>
    <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
 
