@@ -58,7 +58,7 @@ History:
 
             mailjet = Client(
                 auth=(
-                    os.environ.get("MAILJET_API_KEY")
+                    os.environ.get("MAILJET_API_KEY"),
                     os.environ.get("MAILJET_SECRET_KEY")
                 ), 
                 version='V3.1'
@@ -68,7 +68,7 @@ History:
                     {
                         "From" {
                             "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                            "Name": " Dr Dariusz"
+                            "Name": "Dr Dariusz"
                         },
                         "To": [
                             {
