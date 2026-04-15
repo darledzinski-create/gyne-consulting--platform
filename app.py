@@ -66,7 +66,7 @@ History:
             data = {
                 "Messages": [
                     {
-                        "From" {
+                        "From": {
                             "Email": os.environ.get("MAILJET_FROM_EMAIL"),
                             "Name": "Dr Dariusz"
                         },
