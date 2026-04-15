@@ -78,18 +78,18 @@ History:
                         ],
                         "Subject": "We received your consultation request",
                         "HTMLPart": confirmation_body
-                    } 
-               ]
-          }
+                     } 
+                  ]
+              }
 
-          result = mailjet.send.create(data=data)
-          print("MAILJET STATUS:", result.status_code)
+              result = mailjet.send.create(data=data)
+              print("MAILJET STATUS:", result.status_code)
             
                             
                
-                # ✅ BUILD CLIENT EMAIL
-                if urgency and urgency.lower() == "urgent":
-                   confirmation_body = f"""
+              # ✅ BUILD CLIENT EMAIL
+              if urgency and urgency.lower() == "urgent":
+                  confirmation_body = f"""
 <html>
 <body style="font-family: Arial, sans-serif;">
 
@@ -111,8 +111,8 @@ Please seek immediate in-person care.
 </body>
 </html>
 """
-                else:
-                     confirmation_body = f"""
+              else:
+                   confirmation_body = f"""
 <html>
    <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
 
