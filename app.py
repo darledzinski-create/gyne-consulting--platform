@@ -86,8 +86,7 @@ History:
           print("MAILJET STATUS:", result.status_code)
             
                             
-                server.send_message(msg)
-
+               
                 # ✅ BUILD CLIENT EMAIL
                 if urgency and urgency.lower() == "urgent":
                    confirmation_body = f"""
