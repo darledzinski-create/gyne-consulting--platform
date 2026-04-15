@@ -53,80 +53,80 @@ History:
 {history}
 """
 
-      try:
-          print("CONNECTING TO EMAIL SERVER")
+        try:
+            print("CONNECTING TO EMAIL SERVER")
 
-          mailjet = Client(
-              auth=(
-                  os.environ.get("MAILJET_API_KEY"),
-                  os.environ.get("MAILJET_SECRET_KEY")
-              ),
-              version='v3.1'
-          )
+            mailjet = Client(
+                auth=(
+                    os.environ.get("MAILJET_API_KEY"),
+                    os.environ.get("MAILJET_SECRET_KEY")
+                ),
+                version='v3.1'
+            )
 
-          # ✅ BUILD EMAIL FIRST
-          if urgency and urgency.lower() == "urgent":
-              confirmation_body = f"""
-              <html>
-              <body style="font-family: Arial, sans-serif;">
-                  <h2 style="color:#c0392b;">Important</h2>
-                  <p>Dear {name},</p>
-                  <p>Your request has been received.</p>
-                  <p style="color:#c0392b; font-weight:bold;">
-                      Based on your selection, your condition may require urgent medical attention.
-                      Please seek immediate in-person care.
-                  </p>
-                  <p>This platform is not suitable for emergencies.</p>
-                  <p>Kind regards,<br>Dr Dariusz</p>
-              </body>
-              </html>
-              """
-    else:
-        confirmation_body = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
-            <div style="background:#ffffff; padding:20px; border-radius:8px;">
-                <h2 style="color:#2c3e50;">Consultation Request Received</h2>
-                <p>Dear {name},</p>
-                <p>Thank you for reaching out.</p>
-                <p>Your message has been received and will be reviewed carefully.</p>
-                <p>You will receive a response within <strong>24 hours</strong>.</p>
-                <hr>
-                <p style="color:#777;">Kind regards,<br>Dr Dariusz</p>
-            </div>
-        </body>
-        </html>
-        """
+            # ✅ BUILD EMAIL FIRST
+            if urgency and urgency.lower() == "urgent":
+                confirmation_body = f"""
+                <html>
+                <body style="font-family: Arial, sans-serif;">
+                    <h2 style="color:#c0392b;">Important</h2>
+                    <p>Dear {name},</p>
+                    <p>Your request has been received.</p>
+                    <p style="color:#c0392b; font-weight:bold;">
+                        Based on your selection, your condition may require urgent medical attention.
+                        Please seek immediate in-person care.
+                    </p>
+                    <p>This platform is not suitable for emergencies.</p>
+                    <p>Kind regards,<br>Dr Dariusz</p>
+                </body>
+                </html>
+                """
+            else:
+                confirmation_body = f"""
+                <html>
+                <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
+                    <div style="background:#ffffff; padding:20px; border-radius:8px;">
+                    <h2 style="color:#2c3e50;">Consultation Request Received</h2>
+                    <p>Dear {name},</p>
+                    <p>Thank you for reaching out.</p>
+                    <p>Your message has been received and will be reviewed carefully.</p>
+                    <p>You will receive a response within <strong>24 hours</strong>.</p>
+                    <hr>
+                    <p style="color:#777;">Kind regards,<br>Dr Dariusz</p>
+                </div>
+            </body>
+            </html>
+            """
 
-    # ✅ SEND EMAIL WITH MAILJET
-    data = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                    "Name": "Dr Dariusz"
-                },
-                "To": [
-                    {
-                        "Email": email,
-                        "Name": name
-                    }
-                ],
-                "Subject": "We received your consultation request",
-                "HTMLPart": confirmation_body
-            }
-        ]
-    }
+        # ✅ SEND EMAIL WITH MAILJET
+        data = {
+            "Messages": [
+                {
+                    "From": {
+                        "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                        "Name": "Dr Dariusz"
+                    },
+                    "To": [
+                        {
+                            "Email": email,
+                            "Name": name
+                        }
+                    ],
+                    "Subject": "We received your consultation request",
+                    "HTMLPart": confirmation_body
+                }
+            ]
+        }
 
-    result = mailjet.send.create(data=data)
-    print("MAILJET STATUS:", result.status_code)
+        result = mailjet.send.create(data=data)
+        print("MAILJET STATUS:", result.status_code)
 
-    print("✅ EMAIL SENT")
+        print("✅ EMAIL SENT")
 
-except Exception as e:
-    print("❌ EMAIL ERROR:", str(e))
-    return f"ERROR: {str(e)}", 500
-        return redirect(url_for("thank_you"))
+    except Exception as e:
+        print("❌ EMAIL ERROR:", str(e))
+        return f"ERROR: {str(e)}", 500
+            return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
 @app.route("/thank-you")
