@@ -94,12 +94,12 @@ History:
                     <hr>
                     <p style="color:#777;">Kind regards,<br>Dr Dariusz</p>
                 </div>
-            </body>
-            </html>
-            """
+                </body>
+                </html>
+                """
 
-                # ✅ SEND EMAIL WITH MAILJET
-                data = {
+             # ✅ SEND EMAIL WITH MAILJET
+             data = {
                      "Messages": [
                          {
                              "From": {
@@ -118,15 +118,15 @@ History:
                      ]
                  }
 
-                 result = mailjet.send.create(data=data)
-                 print("MAILJET STATUS:", result.status_code)
+             result = mailjet.send.create(data=data)
+             print("MAILJET STATUS:", result.status_code)
 
                 print("✅ EMAIL SENT")
 
-    except Exception as e:
-        print("❌ EMAIL ERROR:", str(e))
-        return f"ERROR: {str(e)}", 500
-            return redirect(url_for("thank_you"))
+        except Exception as e:
+            print("❌ EMAIL ERROR:", str(e))
+            return f"ERROR: {str(e)}", 500
+        return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
 @app.route("/thank-you")
