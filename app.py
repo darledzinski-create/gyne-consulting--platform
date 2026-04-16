@@ -124,8 +124,8 @@ History:
             print("✅ EMAIL SENT")
 
         except Exception as e:
-            print("❌ EMAIL ERROR:", str(e))
-            return f"ERROR: {str(e)}", 500
+            print("❌ FULL ERROR:", repr(e))
+            return f"ERROR: {repr(e)}", 500
         return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
