@@ -98,8 +98,8 @@ History:
                 </html>
                 """
 
-             # ✅ SEND EMAIL WITH MAILJET
-             data = {
+            # ✅ SEND EMAIL WITH MAILJET
+            data = {
                      "Messages": [
                          {
                              "From": {
@@ -118,10 +118,10 @@ History:
                      ]
                  }
 
-             result = mailjet.send.create(data=data)
-             print("MAILJET STATUS:", result.status_code)
+            result = mailjet.send.create(data=data)
+            print("MAILJET STATUS:", result.status_code)
 
-                print("✅ EMAIL SENT")
+            print("✅ EMAIL SENT")
 
         except Exception as e:
             print("❌ EMAIL ERROR:", str(e))
