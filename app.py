@@ -117,12 +117,14 @@ History:
                          }
                      ]
                  }
-
+            print("SENDING EMAIL WITH:", email)
+            print("BODY PREVIEW:", confirmation_body[:100])
+            
             result = mailjet.send.create(data=data)
+            
             print("MAILJET STATUS:", result.status_code)
-
-            print("✅ EMAIL SENT")
-
+            print("MAILJET RESPONSE:",result.json())
+            
         except Exception as e:
             print("❌ FULL ERROR:", repr(e))
             return f"ERROR: {repr(e)}", 500
