@@ -98,30 +98,30 @@ History:
             </html>
             """
 
-        # ✅ SEND EMAIL WITH MAILJET
-        data = {
-            "Messages": [
-                {
-                    "From": {
-                        "Email": os.environ.get("MAILJET_FROM_EMAIL"),
-                        "Name": "Dr Dariusz"
-                    },
-                    "To": [
-                        {
-                            "Email": email,
-                            "Name": name
-                        }
-                    ],
-                    "Subject": "We received your consultation request",
-                    "HTMLPart": confirmation_body
-                }
-            ]
-        }
+                # ✅ SEND EMAIL WITH MAILJET
+                data = {
+                     "Messages": [
+                         {
+                             "From": {
+                                 "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                                 "Name": "Dr Dariusz"
+                             },
+                             "To": [
+                                 {
+                                     "Email": email,
+                                     "Name": name
+                                 }
+                             ],
+                             "Subject": "We received your consultation request",
+                             "HTMLPart": confirmation_body
+                         }
+                     ]
+                 }
 
-        result = mailjet.send.create(data=data)
-        print("MAILJET STATUS:", result.status_code)
+                 result = mailjet.send.create(data=data)
+                 print("MAILJET STATUS:", result.status_code)
 
-        print("✅ EMAIL SENT")
+                print("✅ EMAIL SENT")
 
     except Exception as e:
         print("❌ EMAIL ERROR:", str(e))
