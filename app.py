@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import os
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from mailjet_rest import Client
 
 app = Flask(__name__)
 
@@ -19,6 +17,8 @@ def consultation():
 
         name = request.form.get("name")
         email = request.form.get("email")
+        if not email:
+            return "MISSING EMAIL", 400
         message = request.form.get("message")
         symptoms = request.form.get("symptoms")
         duration = request.form.get("duration")
