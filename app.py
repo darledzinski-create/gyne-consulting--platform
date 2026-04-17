@@ -23,7 +23,7 @@ def consultation():
         symptoms = request.form.get("symptoms")
         duration = request.form.get("duration")
         urgency = request.form.get("urgency")
-        print("URGENCY RECEIVED:", urgency)
+        print("URGENCY RAW:", repr(urgency))
         print("FINAL EMAIL:", "22mozorro@gmail.com")
         history = request.form.get("history")
 
@@ -66,7 +66,9 @@ History:
             )
 
             # ✅ BUILD EMAIL FIRST
-            if urgency and urgency.lower() == "urgent":
+            urgency_clean = (urgency or "").strip().lower()
+            print("CLEAN URGENCY:", urgency_clean)
+            if urgency_clean == "urgent":
                 confirmation_body = f"""
                 <html>
                 <body style="font-family: Arial, sans-serif;">
@@ -119,6 +121,7 @@ History:
                      ]
                  }
             print("SENDING EMAIL WITH:", email)
+            print("ENTERED NON-URGENT BRANCH")
             print("BODY PREVIEW:", confirmation_body[:100])
             
             result = mailjet.send.create(data=data)
