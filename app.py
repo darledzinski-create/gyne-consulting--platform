@@ -24,6 +24,7 @@ def consultation():
         duration = request.form.get("duration")
         urgency = request.form.get("urgency")
         print("URGENCY RECEIVED:", urgency)
+        print("FINAL EMAIL:", email)
         history = request.form.get("history")
 
         # SAVE TO FILE
