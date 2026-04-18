@@ -72,15 +72,11 @@ History:
                 print("ENTERED URGEN BRANCH")
                 confirmation_body = f"""
                 <html>
-                <body style="font-family: Arial, sans-serif;">
-                    <h2 style="color:#c0392b;">Important</h2>
+                <body style="font-family: Arial;">
+                    <h2 style="color:#2c3e50;">Consultation Received</h2>
                     <p>Dear {name},</p>
-                    <p>Your request has been received.</p>
-                    <p style="color:#c0392b; font-weight:bold;">
-                        Based on your selection, your condition may require urgent medical attention.
-                        Please seek immediate in-person care.
-                    </p>
-                    <p>This platform is not suitable for emergencies.</p>
+                    <p>Thank you for your message.</p>
+                    <p>We will review your case and respond within 24 hours.</p>
                     <p>Kind regards,<br>Dr Dariusz</p>
                 </body>
                 </html>
