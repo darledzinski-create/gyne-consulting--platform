@@ -131,13 +131,13 @@ History:
                            "From": {
                                 "Email": os.environ.get("MAILJET_FROM_EMAIL"),
                                "Name": "CONSULTATION SYSTEM"
-                           }
+                           },
                            "To": [
                                {
                                    "Email": "22mozorro@gmail.com",
                                    "Name": "Dr Dariusz"
                                }
-                           ]
+                           ],
                            "Subject": f"New Consultation ({urgency_clean})",
                            "TextPart": body
                              
