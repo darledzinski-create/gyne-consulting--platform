@@ -24,7 +24,7 @@ def consultation():
         duration = request.form.get("duration")
         urgency = request.form.get("urgency")
         print("URGENCY RAW:", repr(urgency))
-        print("FINAL EMAIL:", "22mozorro@gmail.com")
+        print("EMAIL:" "22mozorro@gmail.com")
         history = request.form.get("history")
 
         # SAVE TO FILE
@@ -69,6 +69,7 @@ History:
             urgency_clean = (urgency or "").strip().lower()
             print("CLEAN URGENCY:", urgency_clean)
             if urgency_clean == "urgent":
+                print("ENTERED URGEN BRANCH")
                 confirmation_body = f"""
                 <html>
                 <body style="font-family: Arial, sans-serif;">
@@ -85,6 +86,7 @@ History:
                 </html>
                 """
             else:
+                print("ENTERED NON-URGENT BRANCH")
                 confirmation_body = f"""
 
                 <html>
@@ -119,7 +121,7 @@ History:
                              },
                              "To": [
                                  {
-                                     "Email": email,
+                                     "Email": "22mozorro@gmail.com",
                                      "Name": name
                                  }
                              ],
@@ -129,8 +131,6 @@ History:
                      ]
                  }
             print("SENDING EMAIL WITH:", email)
-            print("ENTERED NON-URGENT BRANCH")
-            print("ENTERED URGENT BRANCH")
             print("BODY PREVIEW:", confirmation_body[:100])
             
             result = mailjet.send.create(data=data)
