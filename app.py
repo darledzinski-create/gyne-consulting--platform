@@ -86,19 +86,27 @@ History:
                 """
             else:
                 confirmation_body = f"""
+
                 <html>
-                <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
-                    <div style="background:#ffffff; padding:20px; border-radius:8px;">
-                    <h2 style="color:#2c3e50;">Consultation Request Received</h2>
-                    <p>Dear {name},</p>
-                    <p>Thank you for reaching out.</p>
-                    <p>Your message has been received and will be reviewed carefully.</p>
-                    <p>You will receive a response within <strong>24 hours</strong>.</p>
-                    <hr>
-                    <p style="color:#777;">Kind regards,<br>Dr Dariusz</p>
-                </div>
+
+                <body>
+
+                <h2 style="color:red;">Important</h2>
+
+                <p>Dear {name},</p>
+
+                <p>Your request has been received.</p>
+
+                <p><strong>Please seek immediate care.</strong></p>
+
+                <p>This platform is not for emergencies.</p>
+
+                <p>Kind regards,<br>Dr Dariusz</p>
+
                 </body>
+
                 </html>
+
                 """
 
             # ✅ SEND EMAIL WITH MAILJET
@@ -122,6 +130,7 @@ History:
                  }
             print("SENDING EMAIL WITH:", email)
             print("ENTERED NON-URGENT BRANCH")
+            print("ENTERED URGENT BRANCH")
             print("BODY PREVIEW:", confirmation_body[:100])
             
             result = mailjet.send.create(data=data)
