@@ -110,6 +110,7 @@ History:
             # ✅ SEND EMAIL WITH MAILJET
             data = {
                      "Messages": [
+                         #    EMAIL TO PATIENT
                          {
                              "From": {
                                  "Email": os.environ.get("MAILJET_FROM_EMAIL"),
@@ -117,15 +118,33 @@ History:
                              },
                              "To": [
                                  {
-                                     "Email": "22mozorro@gmail.com",
+                                     "Email": email,
                                      "Name": name
                                  }
                              ],
                              "Subject": "We received your consultation request",
                              "HTMLPart": confirmation_body
+                         },
+
+                         #  Email to you
+                         {
+                           "From": {
+                                "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                               "Name": "CONSULTATION SYSTEM"
+                           }
+                           "To": [
+                               {
+                                   "Email": "22mozorro@gmail.com",
+                                   "Name": "Dr Dariusz"
+                               }
+                           ]
+                           "Subject": f"New Consultation ({urgency_clean})",
+                           "TextPart": body
+                             
                          }
                      ]
                  }
+            
             print("SENDING EMAIL WITH:", email)
             print("BODY PREVIEW:", confirmation_body[:100])
             
