@@ -132,7 +132,7 @@ History:
         except Exception as e:
             print("❌ FULL ERROR:", repr(e))
             return f"ERROR: {repr(e)}", 500
-            return redirect(url_for("thank_you"))
+        return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
 @app.route("/thank-you")
