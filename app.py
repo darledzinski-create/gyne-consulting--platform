@@ -90,40 +90,47 @@ History:
 
                 ),
 
+                
                 version="v3.1"
 
             )
 
-            urgency_clean = (urgency or "").strip().lower()
+         urgency_clean = (urgency or "").strip().lower()
+         print("CLEAN URGENCY:", urgency_clean)
 
-            print("CLEAN URGENCY:", urgency_clean)
+         # ✅ CORRECT LOGIC
+         if urgency_clean == "urgent":
+             print("ENTERED URGENT BRANCH")
 
-            # --- Patient email ---
+             confirmation_body = f"""
+             <html>
+             <body>
+                 <h2 style="color:red;">Important</h2>
+                 <p>Dear {name},</p>
+                 <p>Your request has been received.</p>
+                 <p><strong>Please seek immediate in-person care.</strong></p>
+                 <p>This platform is not for emergencies.</p>
+                 <p>Kind regards,<br>Dr Dariusz</p>
+             </body>
+             </html>
+             """
 
-            confirmation_body = f"""
+         else:
+             print("ENTERED NON-URGENT BRANCH")
 
-<html>
-
-<body>
-
-    <h2>Consultation Received</h2>
-
-    <p>Dear {name},</p>
-
-    <p>We have received your request.</p>
-
-    <p>We will respond within 24 hours.</p>
-
-    <p>Kind regards,<br>Dr Dariusz</p>
-
-</body>
-
-</html>
-
-"""
+             confirmation_body = f"""
+             <html>
+             <body>
+                 <h2>Consultation Received</h2>
+                 <p>Dear {name},</p>
+                 <p>Thank you for your message.</p>
+                 <p>We will respond within 24 hours.</p>
+                 <p>Kind regards,<br>Dr Dariusz</p>
+             </body>
+             </html>
+             """
 
             data = {
-
                 "Messages": [
 
                     {
@@ -131,7 +138,6 @@ History:
                         "From": {
 
                             "Email": "contact@drdariuszconsults.com",
-
                             "Name": "Dr Dariusz"
 
                         },
@@ -141,15 +147,13 @@ History:
                             {
 
                                 "Email": email,
-
                                 "Name": name
 
                             }
 
                         ],
 
-                        "Subject": "Consultation received",
-
+                        "Subject": "We received your consultation request"
                         "HTMLPart": confirmation_body
 
                     },
@@ -157,9 +161,7 @@ History:
                     {
 
                         "From": {
-
                             "Email": "contact@drdariuszconsults.com",
-
                             "Name": "Consultation System"
 
                         },
@@ -169,7 +171,6 @@ History:
                             {
 
                                 "Email": "22mozorro@gmail.com",
-
                                 "Name": "Dr Dariusz"
 
                             }
@@ -177,7 +178,6 @@ History:
                         ],
 
                         "Subject": f"New Consultation ({urgency_clean})",
-
                         "TextPart": body
 
                     }
