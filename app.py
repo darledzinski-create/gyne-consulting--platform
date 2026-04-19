@@ -147,7 +147,7 @@ History:
             
             print("SENDING EMAIL WITH:", email)
             print("BODY PREVIEW:", confirmation_body[:100])
-            print("PATIENT EMAIL RAW:", REPR(EMAIL))
+            print("PATIENT EMAIL RAW:", repr(EMAIL))
             
             result = mailjet.send.create(data=data)
             
