@@ -203,3 +203,7 @@ History:
         return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
+
+@app.route("/thank-you")
+def thank_you():
+    return render_template("thank_you.html")
