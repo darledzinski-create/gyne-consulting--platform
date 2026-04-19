@@ -54,101 +54,100 @@ History:
 {history}
 """
 
-        try:
-            print("CONNECTING TO EMAIL SERVER")
+      try:
 
-            mailjet = Client(
-                auth=(
-                    os.environ.get("MAILJET_API_KEY"),
-                    os.environ.get("MAILJET_SECRET_KEY")
-                ),
-                version='v3.1'
-            )
+          print("CONNECTING TO EMAIL SERVER")
 
-            if urgency_clean == "urgent":
-                print("ENTERED URGENT BRANCH")
+          mailjet = Client(
 
-                #  EMERGENCY MESSAGE
-                confirmation_body = f"""
-                <html>
-                <body> 
-                    <h2 style="color:#red;">Important</>
-                    <p>Dear {name},</p>
-                    <p>Your request has been received.</p>
-                    <p><strong>Please seekimmediate care.</strong></p>
-                    <p>This platform is not for emergencies.</p>
-                    <p>Kind regards,<br>Dr Dariusz</p>
-                </body>
-                </html>
-                """
-            else:
-                print("ENTERED NON-URGENT BRANCH")
-                
-                #    NORMAL MESSAGE
-                confirmation_body = f"""
-                <html>
-                <body> style="font-family: Arial;">
-                     <h2 style="color:#2C3E50;">Consultation Received</h2>
-                     <p>Dear {name},</p>
-                     <p>Your request has been received.</p>
-                     <p><strong>Please seek immediate care.</strong></p>
-                     <p>This platform is not for emergencies.</p>
-                     <p>Kind regards,<br>Dr Dariusz</p>
-                </body>
-                </html>
-                """
+              auth=(
 
-            # ✅ SEND EMAIL WITH MAILJET
-            data = {
-                     "Messages": [
-                         #    EMAIL TO PATIENT
-                         {
-                             "From": {
-                                 "Email": "contact@drdariuszconsults.com",
-                                 "Name": "Dr Dariusz"
-                             },
-                             "To": [
-                                 {
-                                     "Email": email,
-                                     "Name": "Dr Dariusz"
-                                 }
-                             ],
-                             "Subject": "We received your consultation request",
-                             "HTMLPart": confirmation_body
-                         },
+                  os.environ.get("MAILJET_API_KEY"),
 
-                         #  Email to you
-                         {
-                           "From": {
-                                "Email": ("contact@drdariuszconsults.com"),
-                               "Name": "CONSULTATION SYSTEM"
-                           },
-                           "To": [
-                               {
-                                   "Email": "22mozorro@gmail.com",
-                                   "Name": "Dr Dariusz"
-                               }
-                           ],
-                           "Subject": f"New Consultation ({urgency_clean})",
-                           "TextPart": body
-                             
-                         }
-                     ]
-                 }
-            
-            print("SENDING EMAIL WITH:", email)
-            print("BODY PREVIEW:", confirmation_body[:100])
-            print("PATIENT EMAIL RAW:", repr(email))
-            
-            result = mailjet.send.create(data=data)
-            
-            print("MAILJET STATUS:", result.status_code)
-            print("MAILJET RESPONSE:",result.json())
-            
-        except Exception as e:
-            print("❌ FULL ERROR:", repr(e))
-            return f"ERROR: {repr(e)}", 500
-        return redirect(url_for("thank_you"))
+                  os.environ.get("MAILJET_SECRET_KEY")
+
+              ),
+
+              version='v3.1'
+
+          )
+
+          urgency_clean = (urgency or "").strip().lower()
+
+          print("CLEAN URGENCY:", urgency_clean)
+
+          # ✅ SIMPLE SAFE MESSAGE (no logic yet)
+
+          confirmation_body = f"""
+
+          <html>
+
+          <body>
+
+              <h2>Consultation Received</h2>
+
+              <p>Dear {name},</p>
+
+              <p>We received your request.</p>
+
+              <p>We will respond within 24 hours.</p>
+
+              <p>Kind regards,<br>Dr Dariusz</p>
+
+          </body>
+
+          </html>
+
+          """
+
+          data = {
+
+              "Messages": [
+
+                  {
+
+                      "From": {
+
+                          "Email": "contact@drdariuszconsults.com",
+
+                          "Name": "Dr Dariusz"
+
+                      },
+
+                      "To": [
+
+                          {
+
+                               "Email": email,
+
+                               "Name": name
+
+                          }
+
+                      ],
+
+                      "Subject": "Consultation received",
+
+                      "HTMLPart": confirmation_body
+
+                  }
+
+             ]
+
+        }
+
+        print("SENDING EMAIL TO:", email)
+
+        result = mailjet.send.create(data=data)
+
+        print("MAILJET STATUS:", result.status_code)
+
+        print("MAILJET RESPONSE:", result.json())
+
+    except Exception as e:
+        print("❌ FULL ERROR:", repr(e))
+        return f"ERROR: {repr(e)}", 500
+    return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
 @app.route("/thank-you")
