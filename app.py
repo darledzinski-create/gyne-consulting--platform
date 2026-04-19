@@ -125,7 +125,7 @@ History:
                            },
                            "To": [
                                {
-                                   "Email": "22mozorro@gmail.com"
+                                   "Email": "22mozorro@gmail.com",
                                    "Name": "Dr Dariusz"
                                }
                            ],
