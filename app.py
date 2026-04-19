@@ -55,79 +55,44 @@ History:
 """
 
       try:
-
           print("CONNECTING TO EMAIL SERVER")
-
           mailjet = Client(
-
               auth=(
-
                   os.environ.get("MAILJET_API_KEY"),
-
                   os.environ.get("MAILJET_SECRET_KEY")
-
               ),
-
               version='v3.1'
-
           )
 
           urgency_clean = (urgency or "").strip().lower()
-
           print("CLEAN URGENCY:", urgency_clean)
 
-          # ✅ SIMPLE SAFE MESSAGE (no logic yet)
-
           confirmation_body = f"""
-
           <html>
-
           <body>
-
               <h2>Consultation Received</h2>
-
               <p>Dear {name},</p>
-
               <p>We received your request.</p>
-
               <p>We will respond within 24 hours.</p>
-
               <p>Kind regards,<br>Dr Dariusz</p>
-
           </body>
-
           </html>
-
           """
 
           data = {
-
               "Messages": [
-
                   {
-
                       "From": {
-
                           "Email": "contact@drdariuszconsults.com",
-
                           "Name": "Dr Dariusz"
-
                       },
-
                       "To": [
-
                           {
-
                                "Email": email,
-
                                "Name": name
-
                           }
-
                       ],
-
                       "Subject": "Consultation received",
-
                       "HTMLPart": confirmation_body
 
                   }
@@ -141,7 +106,6 @@ History:
         result = mailjet.send.create(data=data)
 
         print("MAILJET STATUS:", result.status_code)
-
         print("MAILJET RESPONSE:", result.json())
 
     except Exception as e:
