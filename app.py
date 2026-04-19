@@ -113,13 +113,13 @@ History:
                          #    EMAIL TO PATIENT
                          {
                              "From": {
-                                 "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                                 "Email": "contact@drdariuszconsults.com",
                                  "Name": "Dr Dariusz"
                              },
                              "To": [
                                  {
-                                     "Email": email,
-                                     "Name": name
+                                     "Email": "22mozorro@gmail.com",
+                                     "Name": "Dr Dariusz"
                                  }
                              ],
                              "Subject": "We received your consultation request",
@@ -129,7 +129,7 @@ History:
                          #  Email to you
                          {
                            "From": {
-                                "Email": os.environ.get("MAILJET_FROM_EMAIL"),
+                                "Email": ("contact@drdariuszconsults.com"),
                                "Name": "CONSULTATION SYSTEM"
                            },
                            "To": [
@@ -147,6 +147,7 @@ History:
             
             print("SENDING EMAIL WITH:", email)
             print("BODY PREVIEW:", confirmation_body[:100])
+            print("PATIENT EMAIL RAW:", REPR(EMAIL))
             
             result = mailjet.send.create(data=data)
             
