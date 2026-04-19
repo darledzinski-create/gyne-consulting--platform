@@ -9,51 +9,71 @@
 
     <p>Please provide accurate information so your case can be reviewed properly.</p>
 
-    <form method="POST" action="/consultation" class="consultation-form">
+   <form method="POST" action="/consultation" class="consultation-form">
 
     <h2>Consultation Request</h2>
 
     <!-- Basic Info -->
+
     <input type="text" name="name" placeholder="Full Name" required>
+
     <input type="email" name="email" placeholder="Email Address" required>
 
     <!-- Main Concern -->
+
     <textarea name="message" placeholder="Briefly describe your main concern..." required></textarea>
 
     <!-- Symptoms -->
-    <textarea name="symptoms" placeholder="Describe your symptoms in more detail (duration, severity, pattern)"></textarea>
+
+    <textarea name="symptoms" placeholder="Describe your symptoms in more detail"></textarea>
 
     <!-- Duration -->
+
     <select name="duration">
+
         <option value="">How long have you had this issue?</option>
+
         <option>Less than 1 week</option>
+
         <option>1–4 weeks</option>
+
         <option>1–3 months</option>
+
         <option>More than 3 months</option>
+
     </select>
 
     <!-- Urgency -->
+
     <select name="urgency" required>
-    <option value="">How urgent is this?</option>
-    <option value="not_urgent">Not urgent</option>
-    <option value="moderate">Moderate concern</option>
-    <option value="urgent">Urgent</option>
+
+        <option value="">How urgent is this?</option>
+
+        <option value="not_urgent">Not urgent</option>
+
+        <option value="moderate">Moderate concern</option>
+
+        <option value="urgent">Urgent</option>
+
     </select>
 
     <!-- Medical History -->
-    <textarea name="history" placeholder="Relevant medical history, medications, or previous treatments"></textarea>
+
+    <textarea name="history" placeholder="Medical history"></textarea>
 
     <!-- Consent -->
-    <label style="font-size: 14px;">
-        <input type="checkbox" name="consent" value="yes" required>
-        I understand this is not an emergency service and communication is via email only.
+
+    <label>
+
+        <input type="checkbox" name="consent" required>
+
+        I understand this is not an emergency service.
+
     </label>
 
-    <button type="submit" id="submitBtn">
-    Submit Consultation
-    </button>
+    <button type="submit">Submit Consultation</button>
 
-    </form>
+</form>
 </div>
 
 {% endblock %}
