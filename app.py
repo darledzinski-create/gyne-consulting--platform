@@ -11,193 +11,65 @@ def homepage():
 
 
 @app.route("/consultation", methods=["GET", "POST"])
-
 def consultation():
-
+    
     if request.method == "POST":
-
         print("FORM SUBMITTED")
 
         # --- Get form data ---
-
         name = request.form.get("name")
-
         email = request.form.get("email")
-
         message = request.form.get("message")
-
         symptoms = request.form.get("symptoms")
-
         duration = request.form.get("duration")
-
         urgency = request.form.get("urgency")
-
-        history = request.form.get("history")
-
-        if not email:
-
-            return "MISSING EMAIL", 400
-
-        # --- Save to file ---
-
-        with open("submissions.txt", "a") as f:
-
-            f.write(f"{datetime.now()} | {name} | {email} | {message}\n")
-
-        # --- Email body (to you) ---
-
-        body = f"""
-
-NEW CONSULTATION REQUEST
-
-Name: {name}
-
-Email: {email}
-
-Message:
-
-{message}
-
-Symptoms:
-
-{symptoms}
-
-Duration:
-
-{duration}
-
-Urgency:
-
-{urgency}
-
-History:
-
-{history}
-
-"""
-
+       
         try:
-
             print("CONNECTING TO EMAIL SERVER")
 
             mailjet = Client(
-
                 auth=(
-
                     os.environ.get("MAILJET_API_KEY"),
-
                     os.environ.get("MAILJET_SECRET_KEY")
-
                 ),
-
-                
                 version="v3.1"
-
             )
 
-         urgency_clean = (urgency or "").strip().lower()
-         print("CLEAN URGENCY:", urgency_clean)
+            urgency_clean = (urgency or "").strip().lower()
+            print("CLEAN URGENCY:", urgency_clean)
 
-         # ✅ CORRECT LOGIC
-         if urgency_clean == "urgent":
-             print("ENTERED URGENT BRANCH")
-
-             confirmation_body = f"""
-             <html>
-             <body>
-                 <h2 style="color:red;">Important</h2>
-                 <p>Dear {name},</p>
-                 <p>Your request has been received.</p>
-                 <p><strong>Please seek immediate in-person care.</strong></p>
-                 <p>This platform is not for emergencies.</p>
-                 <p>Kind regards,<br>Dr Dariusz</p>
-             </body>
-             </html>
-             """
-
-         else:
-             print("ENTERED NON-URGENT BRANCH")
-
-             confirmation_body = f"""
-             <html>
-             <body>
-                 <h2>Consultation Received</h2>
-                 <p>Dear {name},</p>
-                 <p>Thank you for your message.</p>
-                 <p>We will respond within 24 hours.</p>
-                 <p>Kind regards,<br>Dr Dariusz</p>
-             </body>
-             </html>
-             """
-
+            if urgency_clean == "urgent":
+                print("ENTERED URGENT BRANCH")
+                confirmation_body = "<html><body><h2>URGENT</h2>,</body></html>"
+            else:
+                print("ENTERED NON-URGENT BRANCH")
+                confirmation_body = "<html><body><h2>NORMAL</h2></body></html>"
+             
             data = {
                 "Messages": [
-
                     {
-
                         "From": {
-
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Dr Dariusz"
-
                         },
-
                         "To": [
-
                             {
-
                                 "Email": email,
                                 "Name": name
-
                             }
-
                         ],
-
-                        "Subject": "We received your consultation request"
+                        "Subject": "Consultation",
                         "HTMLPart": confirmation_body
-
                     },
-
-                    {
-
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Consultation System"
-
-                        },
-
-                        "To": [
-
-                            {
-
-                                "Email": "22mozorro@gmail.com",
-                                "Name": "Dr Dariusz"
-
-                            }
-
-                        ],
-
-                        "Subject": f"New Consultation ({urgency_clean})",
-                        "TextPart": body
-
-                    }
 
                 ]
 
             }
 
-            print("SENDING EMAIL TO:", email)
-
             result = mailjet.send.create(data=data)
 
-            print("MAILJET STATUS:", result.status_code)
-
-            print("MAILJET RESPONSE:", result.json())
-
         except Exception as e:
-
             print("❌ ERROR:", repr(e))
-
             return f"ERROR: {repr(e)}", 500
 
         return redirect(url_for("thank_you"))
