@@ -65,46 +65,37 @@ History:
                 version='v3.1'
             )
 
-            # ✅ BUILD EMAIL FIRST
-            urgency_clean = (urgency or "").strip().lower()
-            print("CLEAN URGENCY:", urgency_clean)
             if urgency_clean == "urgent":
-                print("ENTERED URGEN BRANCH")
+                print("ENTERED URGENT BRANCH")
+
+                #  EMERGENCY MESSAGE
                 confirmation_body = f"""
                 <html>
-                <body style="font-family: Arial;">
-                    <h2 style="color:#2c3e50;">Consultation Received</h2>
+                <body> 
+                    <h2 style="color:#red;">Important</>
                     <p>Dear {name},</p>
-                    <p>Thank you for your message.</p>
-                    <p>We will review your case and respond within 24 hours.</p>
+                    <p>Your request has been received.</p>
+                    <p><strong>Please seekimmediate care.</strong></p>
+                    <p>This platform is not for emergencies.</p>
                     <p>Kind regards,<br>Dr Dariusz</p>
                 </body>
                 </html>
                 """
             else:
                 print("ENTERED NON-URGENT BRANCH")
+                
+                #    NORMAL MESSAGE
                 confirmation_body = f"""
-
                 <html>
-
-                <body>
-
-                <h2 style="color:red;">Important</h2>
-
-                <p>Dear {name},</p>
-
-                <p>Your request has been received.</p>
-
-                <p><strong>Please seek immediate care.</strong></p>
-
-                <p>This platform is not for emergencies.</p>
-
-                <p>Kind regards,<br>Dr Dariusz</p>
-
+                <body> style="font-family: Arial;">
+                     <h2 style="color:#2C3E50;">Consultation Received</h2>
+                     <p>Dear {name},</p>
+                     <p>Your request has been received.</p>
+                     <p><strong>Please seek immediate care.</strong></p>
+                     <p>This platform is not for emergencies.</p>
+                     <p>Kind regards,<br>Dr Dariusz</p>
                 </body>
-
                 </html>
-
                 """
 
             # ✅ SEND EMAIL WITH MAILJET
@@ -118,7 +109,7 @@ History:
                              },
                              "To": [
                                  {
-                                     "Email": "22mozorro@gmail.com",
+                                     "Email": email,
                                      "Name": "Dr Dariusz"
                                  }
                              ],
@@ -134,7 +125,7 @@ History:
                            },
                            "To": [
                                {
-                                   "Email": "22mozorro@gmail.com",
+                                   "Email": "22mozorro@gmail.com"
                                    "Name": "Dr Dariusz"
                                }
                            ],
