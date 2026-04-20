@@ -13,45 +13,34 @@ def homepage():
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
 
-if request.method == "POST":
+    if request.method == "POST":
+        try:
+            print("🔥 POST RECEIVED")
 
-    try:
+            name = request.form.get("name")
+            email = request.form.get("email")
+            urgency = request.form.get("urgency")
 
-        print("🔥 POST RECEIVED")
+            print("NAME:", repr(name))
+            print("EMAIL:", repr(email))
+            print("URGENCY:", repr(urgency))
 
-        name = request.form.get("name")
+            # CLEAN VALUE
 
-        email = request.form.get("email")
+            urgency_clean = (urgency or "").strip().lower()
 
-        urgency = request.form.get("urgency")
+            # SIMPLE LOGIC TEST
 
-        print("NAME:", repr(name))
+            if urgency_clean == "urgent":
+                print("🚨 URGENT CASE")
+            else:
+                print("🟢 NON-URGENT CASE")
 
-        print("EMAIL:", repr(email))
+            return redirect(url_for("thank_you"))
 
-        print("URGENCY:", repr(urgency))
-
-        # CLEAN VALUE
-
-        urgency_clean = (urgency or "").strip().lower()
-
-        # SIMPLE LOGIC TEST
-
-        if urgency_clean == "urgent":
-
-            print("🚨 URGENT CASE")
-
-        else:
-
-            print("🟢 NON-URGENT CASE")
-
-        return redirect(url_for("thank_you"))
-
-    except Exception as e:
-
-        print("❌ ERROR:", repr(e))
-
-        return "Internal Server Error", 500
+        except Exception as e:
+            print("❌ ERROR:", repr(e))
+            return "Internal Server Error", 500
 
     return render_template("consultation.html")
 @app.route("/thank-you")
