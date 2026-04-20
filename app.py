@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for
+from flask import request, redirect, url_for, render template
 from datetime import datetime
 import os
 from mailjet_rest import Client
@@ -22,8 +22,8 @@ def consultation():
             urgency = request.form.get("urgency")
 
             print("NAME:", repr(name))
-            print("EMAIL:", repr("email"))
-            print("URGENCY:", repr("urgency"))
+            print("EMAIL:", repr(email))
+            print("URGENCY:", repr(urgency))
 
             return redirect(url_for("thank_you"))
 
