@@ -13,7 +13,7 @@ def homepage():
 @app.route("/consultation", methods=["GET", "POST"])
 def consultation():
 
-    if request.method == "POST":
+if request.method == "POST":
 
     try:
 
