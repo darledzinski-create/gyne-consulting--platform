@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render template
+from flask import request, redirect, url_for, render_template
 from datetime import datetime
 import os
 from mailjet_rest import Client
