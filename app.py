@@ -14,23 +14,44 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
-        try:
-            print("🔥 POST RECEIVED")
-            print("=== CURRENT VERSION ===")
 
-            name = request.form.get("name")
-            email = request.form.get("email")
-            urgency = request.form.get("urgency")
+    try:
 
-            print("NAME:", repr(name))
-            print("EMAIL:", repr(email))
-            print("URGENCY:", repr(urgency))
+        print("🔥 POST RECEIVED")
 
-            return redirect(url_for("thank_you"))
+        name = request.form.get("name")
 
-        except Exeption as e:
-            print(" ERROR:", e )
-            return f"ERROR: {repr(e)}", 500
+        email = request.form.get("email")
+
+        urgency = request.form.get("urgency")
+
+        print("NAME:", repr(name))
+
+        print("EMAIL:", repr(email))
+
+        print("URGENCY:", repr(urgency))
+
+        # CLEAN VALUE
+
+        urgency_clean = (urgency or "").strip().lower()
+
+        # SIMPLE LOGIC TEST
+
+        if urgency_clean == "urgent":
+
+            print("🚨 URGENT CASE")
+
+        else:
+
+            print("🟢 NON-URGENT CASE")
+
+        return redirect(url_for("thank_you"))
+
+    except Exception as e:
+
+        print("❌ ERROR:", repr(e))
+
+        return "Internal Server Error", 500
 
     return render_template("consultation.html")
 @app.route("/thank-you")
