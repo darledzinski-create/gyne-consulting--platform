@@ -14,17 +14,22 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
-        print("🔥 POST RECEIVED")
+        try:
+            print("🔥 POST RECEIVED")
 
-        name = request.form.get("name")
-        email = request.form.get("email")
-        urgency = request.form.get("urgency")
+            name = request.form.get("name")
+            email = request.form.get("email")
+            urgency = request.form.get("urgency")
 
-        print("NAME:", repr(name))
-        print("EMAIL:", repr("email"))
-        print("URGENCY:", repr("urgency"))
+            print("NAME:", repr(name))
+            print("EMAIL:", repr("email"))
+            print("URGENCY:", repr("urgency"))
 
-        return redirect(url_for("thank_you"))
+            return redirect(url_for("thank_you"))
+
+        except EXCEPTION as e:
+            print(" ERROR:", e )
+            return f"ERROR: {E}", 500
 
     return render_template("consultation.html")
 @app.route("/thank-you")
