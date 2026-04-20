@@ -27,9 +27,9 @@ def consultation():
 
             return redirect(url_for("thank_you"))
 
-        except EXCEPTION as e:
+        except Exeption as e:
             print(" ERROR:", e )
-            return f"ERROR: {E}", 500
+            return f"ERROR: {repr(e)}", 500
 
     return render_template("consultation.html")
 @app.route("/thank-you")
