@@ -16,13 +16,15 @@
     <input type="email" name="email" placeholder="Email">
     <textarea name="message" placeholder="Your message"></textarea>
 
-    <select name="urgency">
+   <select name="urgency" required>
 
-        <option value="urgent">Urgent</option>
+    <option value="" disabled selected>Select urgency</option>
 
-        <option value="not_urgent">Not urgent</option>
+    <option value="urgent">Urgent</option>
 
-    </select>
+    <option value="not_urgent">Not urgent</option>
+
+</select>
 
     <button type="submit">TEST SUBMIT</button>
 
