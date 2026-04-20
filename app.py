@@ -18,7 +18,7 @@ def consultation():
 
         print("🔥 POST RECEIVED")
 
-        return "POST WORKED"
+        return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
 @app.route("/thank-you")
