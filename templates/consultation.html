@@ -9,71 +9,21 @@
 
     <p>Please provide accurate information so your case can be reviewed properly.</p>
 
-   <form method="POST" action="/consultation" class="consultation-form">
+   <form method="POST" action="/consultation">
 
-    <h2>Consultation Request</h2>
+    <input type="text" name="name" placeholder="Name">
 
-    <!-- Basic Info -->
+    <input type="email" name="email" placeholder="Email">
 
-    <input type="text" name="name" placeholder="Full Name" required>
-
-    <input type="email" name="email" placeholder="Email Address" required>
-
-    <!-- Main Concern -->
-
-    <textarea name="message" placeholder="Briefly describe your main concern..." required></textarea>
-
-    <!-- Symptoms -->
-
-    <textarea name="symptoms" placeholder="Describe your symptoms in more detail"></textarea>
-
-    <!-- Duration -->
-
-    <select name="duration">
-
-        <option value="">How long have you had this issue?</option>
-
-        <option>Less than 1 week</option>
-
-        <option>1–4 weeks</option>
-
-        <option>1–3 months</option>
-
-        <option>More than 3 months</option>
-
-    </select>
-
-    <!-- Urgency -->
-
-    <select name="urgency" required>
-
-        <option value="" disabled selected>How urgent is this?</option>
-
-        <option value="not_urgent">Not urgent</option>
-
-        <option value="moderate">Moderate concern</option>
+    <select name="urgency">
 
         <option value="urgent">Urgent</option>
 
+        <option value="not_urgent">Not urgent</option>
+
     </select>
 
-    <!-- Medical History -->
-
-    <textarea name="history" placeholder="Medical history"></textarea>
-
-    <!-- Consent -->
-
-    <label>
-
-        <input type="checkbox" name="consent" required>
-
-        I understand this is not an emergency service.
-
-    </label>
-
-    <button type="submit" onclick="alert('SUBMIT CLICKED')">
-        Submit Consultation
-    </button>button>
+    <button type="submit">TEST SUBMIT</button>
 
 </form>
 </div>
