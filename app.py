@@ -11,12 +11,18 @@ def homepage():
 
 
 @app.route("/consultation", methods=["GET", "POST"])
-
 def consultation():
 
     if request.method == "POST":
-
         print("🔥 POST RECEIVED")
+
+        name = request.form.get("name")
+        email = request.form.get("email")
+        urgency = request.form.get("urgency")
+
+        print("NAME:", repr(name))
+        print("EMAIL:", repr("email"))
+        print("URGENCY:", repr("urgency"))
 
         return redirect(url_for("thank_you"))
 
