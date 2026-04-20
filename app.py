@@ -16,6 +16,7 @@ def consultation():
     if request.method == "POST":
         try:
             print("🔥 POST RECEIVED")
+            print("=== CURRENT VERSION ===")
 
             name = request.form.get("name")
             email = request.form.get("email")
