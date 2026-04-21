@@ -98,6 +98,7 @@ def consultation():
                 print("❌ MAIL ERROR:", e)
 
     return render_template("consultation.html")
-@app.route("/thank-you")
-def thank_you():
-    return render_template("thank_you.html")
+
+    @app.route("/thank-you")
+    def thank_you():
+        return render_template("thank_you.html")
