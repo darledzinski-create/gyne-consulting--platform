@@ -48,12 +48,24 @@ def consultation():
             urgency_clean = (urgency or "").strip().lower()
 
             # SIMPLE MESSAGE
-            text_message = f"""
-            New consultation:
+            if urgency_clean == "urgent":
+                text_message = f"""
+            URGENT CONSULTATION
 
             Name: {name}
             Email: {email}
-            Urgency: {urgency_clean}
+
+           ⚠️ This case was marked as URGENT.
+            Advise immediate in-person care.
+            """
+            else:
+                text_message = f"""
+            New consultation received:
+
+            Name: {name}
+            Email: {email}
+
+            This is a non-urgent request.
             """
 
             print("📧 SENDING EMAIL NOW")
