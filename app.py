@@ -35,6 +35,52 @@ def consultation():
                 print("🚨 URGENT CASE")
             else:
                 print("🟢 NON-URGENT CASE")
+                # 📧 EMAIL SETUP
+
+            mailjet = Client(
+                auth=(
+                    os.environ.get("MAILJET_API_KEY"),
+                    os.environ.get("MAILJET_SECRET_KEY")
+                ),
+                version='v3.1'
+            )
+
+            urgency_clean = (urgency or "").strip().lower()
+
+            # SIMPLE MESSAGE
+            text_message = f"""
+            New consultation:
+
+            Name: {name}
+            Email: {email}
+            Urgency: {urgency_clean}
+            """
+
+            print("📧 SENDING EMAIL NOW")
+
+            data = {
+                "Messages": [
+                    {
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Consultation System"
+                        },
+                        "To": [
+                            {
+                                "Email": "22mozorro@gmail.com",
+                                "Name": "Dr Dariusz"
+                            }
+                        ],
+                        "Subject": "New Consultation",
+                        "TextPart": text_message
+                    }
+                ]
+            }
+
+            result = mailjet.send.create(data=data)
+
+            print("MAIL STATUS:", result.status_code)
+            print("MAIL RESPONSE:", result.json())
 
             return redirect(url_for("thank_you"))
 
