@@ -93,14 +93,9 @@ def consultation():
                 result = mailjet.send.create(data=data)
                 print("STATUS:", result.status_code)
                 print("BODY:", result.json())
+
             except Exception as e:
-            print("❌ ERROR:", mail_error)
-
-            return redirect(url_for("thank_you"))
-
-        except Exeption as e:
-            print("Error:", e)
-            return "Something went wrong", 500
+                print("❌ MAIL ERROR:", e)
 
     return render_template("consultation.html")
 @app.route("/thank-you")
