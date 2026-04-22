@@ -36,64 +36,81 @@ def consultation():
 
             urgency_clean = (urgency or "").strip().lower()
 
-            if urgency_clean == "urgent":
+           if urgency_clean == "urgent":
 
-                text_message = f"URGENT CASE\n{name}\n{email}"
+               patient_message = f"""
+               Dear {name},
 
-            else:
+               Your request has been received.
 
-                text_message = f"NON-URGENT CASE\n{name}\n{email}"
+               IMPORTANT:
+               Please seek immediate in-person medical care.
+               This platform is not suitable for urgent conditions.
 
-            # ✅ CREATE MAILJET CLIENT
+               Kind regards,
+               Dr Dariusz
+               """
 
-            mailjet = Client(
+               doctor_message = f"""
+               🚨 URGENT CASE
 
-                auth=(
+               Name: {name}
+               Email: {email}
+               """
+           else:
 
-                    os.environ.get("MAILJET_API_KEY"),
+               patient_message = f"""
+               Dear {name},
 
-                    os.environ.get("MAILJET_SECRET_KEY")
+               Thank you for your consultation request.
+               We will review your case and respond within 24 hours.
 
-                ),
+               Kind regards,
+               Dr Dariusz
+               """
 
-                version='v3.1'
+               doctor_message = f"""
+               NON-URGENT CASE
 
-            )
+               Name: {name}
+               Email: {email}
+               """
 
-            data = {
+           data = {
+               "Messages": [
 
-                "Messages": [
+                   # 📧 Email to YOU
+                   {
 
-                    {
-
-                        "From": {
-
-                            "Email": "contact@drdariuszconsults.com",
-
-                            "Name": "Consultation System"
-
-                        },
-
-                        "To": [
-
-                            {
-
-                                "Email": "22mozorro@gmail.com",
-
-                                "Name": "Dr Dariusz"
-
-                            }
-
-                        ],
-
-                        "Subject": "New Consultation",
-
-                        "TextPart": text_message
-
-                    }
-
-                ]
-
+                       "From": {
+                           "Email": "contact@drdariuszconsults.com",
+                           "Name": "Consultation System"
+                       },
+                       "To": [
+                           {
+                               "Email": "22mozorro@gmail.com",
+                               "Name": "Dr Dariusz"
+                           }
+                       ],
+                       "Subject": f"New Consultation ({urgency_clean})",
+                       "TextPart": doctor_message
+                   },
+                   # 📧 Email to PATIENT
+                   {
+                       "From": {
+                           "Email": "contact@drdariuszconsults.com",
+                           "Name": "Dr Dariusz"
+                       },
+                       "To": [
+                           {
+                               "Email": email,
+                               "Name": name
+                           }
+                       ],
+                       "Subject": "Consultation Request Received",
+                       "TextPart": patient_message
+                   }
+               ]
             }
 
             try:
