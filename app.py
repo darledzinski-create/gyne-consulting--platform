@@ -28,7 +28,7 @@ def consultation():
             urgency_clean = (urgency or "").strip().lower()
 
             if urgency_clean == "urgent":
-                text_message = f"URGENT CASE\N{name}\n{email}"
+                text_message = f"URGENT CASE\n{name}\n{email}"
             else:
                 text_message = f"NON-URGENT CASE\n{name}\n{mail}"
            
