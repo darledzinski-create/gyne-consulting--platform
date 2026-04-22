@@ -25,51 +25,13 @@ def consultation():
             print("EMAIL:", repr(email))
             print("URGENCY:", repr(urgency))
 
-            # CLEAN VALUE
-
             urgency_clean = (urgency or "").strip().lower()
 
-            # SIMPLE LOGIC TEST
-
             if urgency_clean == "urgent":
-                print("🚨 URGENT CASE")
+                text_message = f"URGENT CASE\N{name}\n{email}"
             else:
-                print("🟢 NON-URGENT CASE")
-                # 📧 EMAIL SETUP
-
-            mailjet = Client(
-                auth=(
-                    os.environ.get("MAILJET_API_KEY"),
-                    os.environ.get("MAILJET_SECRET_KEY")
-                ),
-                version='v3.1'
-            )
-
-            urgency_clean = (urgency or "").strip().lower()
-
-            # SIMPLE MESSAGE
-            if urgency_clean == "urgent":
-                text_message = f"""
-            URGENT CONSULTATION
-
-            Name: {name}
-            Email: {email}
-
-           ⚠️ This case was marked as URGENT.
-            Advise immediate in-person care.
-            """
-            else:
-                text_message = f"""
-            New consultation received:
-
-            Name: {name}
-            Email: {email}
-
-            This is a non-urgent request.
-            """
-
-            print("📧 SENDING EMAIL NOW")
-
+                text_message = f"NON-URGENT CASE\n{name}\n{mail}"
+           
             data = {
                 "Messages": [
                     {
@@ -93,9 +55,14 @@ def consultation():
                 result = mailjet.send.create(data=data)
                 print("STATUS:", result.status_code)
                 print("BODY:", result.json())
-
             except Exception as e:
                 print("❌ MAIL ERROR:", e)
+
+            return redirect(url_for("thank_you"))
+
+        except Exception as e:
+            print("ERROR:", e)
+            return "Something went wrong", 500
 
     return render_template("consultation.html")
 
