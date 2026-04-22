@@ -36,81 +36,81 @@ def consultation():
 
             urgency_clean = (urgency or "").strip().lower()
 
-           if urgency_clean == "urgent":
+            if urgency_clean == "urgent":
 
-               patient_message = f"""
-               Dear {name},
+                patient_message = f"""
+                Dear {name},
 
-               Your request has been received.
+                Your request has been received.
 
-               IMPORTANT:
-               Please seek immediate in-person medical care.
-               This platform is not suitable for urgent conditions.
+                IMPORTANT:
+                Please seek immediate in-person medical care.
+                This platform is not suitable for urgent conditions.
 
-               Kind regards,
-               Dr Dariusz
-               """
+                Kind regards,
+                Dr Dariusz
+                """
 
-               doctor_message = f"""
-               🚨 URGENT CASE
+                doctor_message = f"""
+                🚨 URGENT CASE
 
-               Name: {name}
-               Email: {email}
-               """
-           else:
+                Name: {name}
+                Email: {email}
+                """
+            else:
 
-               patient_message = f"""
-               Dear {name},
+                patient_message = f"""
+                Dear {name},
 
-               Thank you for your consultation request.
-               We will review your case and respond within 24 hours.
+                Thank you for your consultation request.
+                We will review your case and respond within 24 hours.
 
-               Kind regards,
-               Dr Dariusz
-               """
+                Kind regards,
+                Dr Dariusz
+                """
 
-               doctor_message = f"""
-               NON-URGENT CASE
+                doctor_message = f"""
+                NON-URGENT CASE
 
-               Name: {name}
-               Email: {email}
-               """
+                Name: {name}
+                Email: {email}
+                """
 
-           data = {
-               "Messages": [
+            data = {
+                "Messages": [
 
-                   # 📧 Email to YOU
-                   {
+                    # 📧 Email to YOU
+                    {
 
-                       "From": {
-                           "Email": "contact@drdariuszconsults.com",
-                           "Name": "Consultation System"
-                       },
-                       "To": [
-                           {
-                               "Email": "22mozorro@gmail.com",
-                               "Name": "Dr Dariusz"
-                           }
-                       ],
-                       "Subject": f"New Consultation ({urgency_clean})",
-                       "TextPart": doctor_message
-                   },
-                   # 📧 Email to PATIENT
-                   {
-                       "From": {
-                           "Email": "contact@drdariuszconsults.com",
-                           "Name": "Dr Dariusz"
-                       },
-                       "To": [
-                           {
-                               "Email": email,
-                               "Name": name
-                           }
-                       ],
-                       "Subject": "Consultation Request Received",
-                       "TextPart": patient_message
-                   }
-               ]
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Consultation System"
+                        },
+                        "To": [
+                            {
+                                "Email": "22mozorro@gmail.com",
+                                "Name": "Dr Dariusz"
+                            }
+                        ],
+                        "Subject": f"New Consultation ({urgency_clean})",
+                        "TextPart": doctor_message
+                    },
+                    # 📧 Email to PATIENT
+                    {
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Dr Dariusz"
+                        },
+                        "To": [
+                            {
+                                "Email": email,
+                                "Name": name
+                            }
+                        ],
+                        "Subject": "Consultation Request Received",
+                        "TextPart": patient_message
+                    }
+                ]
             }
 
             try:
