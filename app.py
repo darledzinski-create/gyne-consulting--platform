@@ -39,8 +39,20 @@ def consultation():
             print("URGENCY:", repr(urgency))
 
             urgency_clean = (urgency or "").strip().lower()
+            print("STEP 1 - before urgency_clean")
+
+            urgency_clean = (urgency or "").strip().lower()
+
+            print("STEP 2 - after urgency_clean:", urgency_clean)
 
             if urgency_clean == "urgent":
+                print("STEP 3 - urgent branch")
+                text_message = f"URGENT CASE\n{name}\n{email}"
+            else:
+                print("STEP 4 - non-urgent branch")
+                text_message = f"NON-URGENT CASE\n{name}\n{email}"
+            
+            print("STEP 5 - after message build")
 
                 patient_message = f"""
                 Dear {name},
