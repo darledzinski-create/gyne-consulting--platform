@@ -54,7 +54,7 @@ def consultation():
             
             print("STEP 5 - after message build")
 
-                patient_message = f"""
+            patient_message = f"""
                 Dear {name},
 
                 Your request has been received.
