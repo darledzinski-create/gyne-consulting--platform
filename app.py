@@ -38,7 +38,6 @@ def consultation():
 
             print("URGENCY:", repr(urgency))
 
-            urgency_clean = (urgency or "").strip().lower()
             print("STEP 1 - before urgency_clean")
 
             urgency_clean = (urgency or "").strip().lower()
@@ -54,21 +53,18 @@ def consultation():
             
             print("STEP 5 - after message build")
 
-            patient_message = f"""
-                Dear {name},
+            patient_message = f"""Dear {name},
 
-                Your request has been received.
+            Your request has been received.
 
-                IMPORTANT:
-                Please seek immediate in-person medical care.
-                This platform is not suitable for urgent conditions.
+            IMPORTANT:
+            Please seek immediate in-person medical care.
+            This platform is not suitable for urgent conditions.
 
-                Kind regards,
-                Dr Dariusz
-                """
-
-                doctor_message = f"""
-                🚨 URGENT CASE
+            Kind regards,
+            Dr Dariusz
+            """
+                doctor_message = f""" URGENT CASE
 
                 Name: {name}
                 Email: {email}
