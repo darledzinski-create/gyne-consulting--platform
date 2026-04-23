@@ -64,15 +64,14 @@ def consultation():
             Kind regards,
             Dr Dariusz
             """
-                doctor_message = f""" URGENT CASE
+            doctor_message = f"""URGENT CASE
 
-                Name: {name}
-                Email: {email}
-                """
+            Name: {name}
+            Email: {email}
+            """
             else:
 
-                patient_message = f"""
-                Dear {name},
+                patient_message = f"""Dear {name},
 
                 Thank you for your consultation request.
                 We will review your case and respond within 24 hours.
