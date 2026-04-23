@@ -45,16 +45,9 @@ def consultation():
             print("STEP 2 - after urgency_clean:", urgency_clean)
 
             if urgency_clean == "urgent":
-                print("STEP 3 - urgent branch")
-                text_message = f"URGENT CASE\n{name}\n{email}"
-            else:
-                print("STEP 4 - non-urgent branch")
-                text_message = f"NON-URGENT CASE\n{name}\n{email}"
-            
-            print("STEP 5 - after message build")
-
-            patient_message = f"""Dear {name},
-
+                
+                patient_message = f"""Dear {name},
+      
             Your request has been received.
 
             IMPORTANT:
@@ -64,7 +57,7 @@ def consultation():
             Kind regards,
             Dr Dariusz
             """
-            doctor_message = f"""URGENT CASE
+                doctor_message = f"""URGENT CASE
 
             Name: {name}
             Email: {email}
@@ -73,19 +66,18 @@ def consultation():
 
                 patient_message = f"""Dear {name},
 
-                Thank you for your consultation request.
-                We will review your case and respond within 24 hours.
+            Thank you for your consultation request.
+            We will review your case and respond within 24 hours.
 
-                Kind regards,
-                Dr Dariusz
-                """
+            Kind regards,
+            Dr Dariusz
+            """
 
-                doctor_message = f"""
-                NON-URGENT CASE
+                doctor_message = f"""NON-URGENT CASE
 
-                Name: {name}
-                Email: {email}
-                """
+            Name: {name}
+            Email: {email}
+            """
 
             data = {
                 "Messages": [
