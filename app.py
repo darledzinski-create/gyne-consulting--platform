@@ -92,7 +92,7 @@ def consultation():
                                 "Name": "Dr Dariusz"
                             }
                         ],
-                        "Subject": f"New Consultation ({urgency_clean})",
+                        "Subject": f"New Consultation",
                         "TextPart": doctor_message
                     },
                     # 📧 Email to PATIENT
@@ -108,7 +108,7 @@ def consultation():
                             }
                         ],
                         "Subject": "Consultation Request Received",
-                        "TextPart": patient_message
+                        "TextPart": "We have received your request and will respond shortly."
                     }
                 ]
             }
