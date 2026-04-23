@@ -115,8 +115,13 @@ def consultation():
 
             try:
 
+                print("📧 ABOUT TO SEND EMAIL")
+
                 result = mailjet.send.create(data=data)
 
+                print("📧 MAIL STATUS:", result.status_code)
+
+                print("📧 MAIL RESPONSE:", result.json())
                 print("STATUS:", result.status_code)
 
                 print("BODY:", result.json())
