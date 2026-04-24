@@ -123,7 +123,14 @@ def consultation():
 
                 print("📧 ABOUT TO SEND EMAIL")
 
-                result = mailjet.send.create(data=data)
+                # Send doctor email
+
+                result1 = mailjet.send.create(data=data_doctor)
+                print("DOCTOR STATUS:", result1.status_code)
+
+                # Send patient email
+                result2 = mailjet.send.create(data=data_patient)
+                print("PATIENT STATUS:", result2.status_code)
 
                 print("📧 MAIL STATUS:", result.status_code)
 
