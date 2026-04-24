@@ -95,7 +95,7 @@ def consultation():
                                 "Name": "Dr Dariusz"
                             }
                         ],
-                        "Subject": f"New Consultation - URGENT"  # if urgent
+                        "Subject": f"New Consultation - {'URGENT' if urgency_clean == 'urgent' else 'NON URGENT'}",
                         "TextPart": doctor_message
                     },
                     # 📧 Email to PATIENT
