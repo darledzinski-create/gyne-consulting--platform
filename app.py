@@ -79,10 +79,8 @@ def consultation():
             Email: {email}
             """
 
-            data = {
+            data_doctor =  {
                 "Messages": [
-
-                    # 📧 Email to YOU
                     {
 
                         "From": {
@@ -98,8 +96,11 @@ def consultation():
                         "Subject": f"New Consultation - {'URGENT' if urgency_clean == 'urgent' else 'NON URGENT'}",
                         "TextPart": doctor_message
                     },
-                    # 📧 Email to PATIENT
-                    {
+                ]
+            }
+            data_patient = {
+                "Messages": [
+                        
                         "From": {
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Dr Dariusz"
