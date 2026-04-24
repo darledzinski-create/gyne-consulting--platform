@@ -98,8 +98,10 @@ def consultation():
                     },
                 ]
             }
+            
             data_patient = {
                 "Messages": [
+                    {
                         
                         "From": {
                             "Email": "contact@drdariuszconsults.com",
