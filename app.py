@@ -114,7 +114,25 @@ def consultation():
                             }
                         ],
                         "Subject": "Consultation Request Received",
-                        "TextPart": patient_message
+                        "HTMLPart": f"""
+                        <html>
+                        <body style="font-family: Arial, sans-serif; background-color:#f5f7fa; padding:20px;">
+                          <div style="max-width:600px; margin:auto; background:white; padding:20px; border-radius:8px;">
+
+                            <h2 style="color:#2c3e50;">Consultation Request Received</h2>
+
+                            <p>Dear {name},</p>
+
+                            {"<p style='color:#c0392b; font-weight:bold;'>Please seek immediate in-person medical care. This platform is not suitable for urgent conditions.</p>" if urgency_clean == "urgent" else "<p>Thank you for your consultation request. We will review your case and respond within 24 hours.</p>"}
+
+                            <hr>
+
+                            <p style="color:#777;">Kind regards,<br>Dr Dariusz</p>
+
+                         </div>
+                       </body>
+                       </html>
+                       """
                     }
                 ]
             }
