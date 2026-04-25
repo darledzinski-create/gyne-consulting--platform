@@ -94,7 +94,23 @@ def consultation():
                             }
                         ],
                         "Subject": f"New Consultation - {'URGENT' if urgency_clean == 'urgent' else 'NON URGENT'}",
-                        "TextPart": doctor_message
+                        "HTMLPart": f"""
+                        <html>
+                        <body style="font-family: Arial, sans-serif;">
+                        <h2 style="color:#2c3e50;">New Consultation - {urgency_clean.upper()}</h2>
+
+                        <p><strong>Name:</strong> {name}</p>
+                        <p><strong>Email:</strong> {email}</p>
+
+                        <hr>
+
+                        <p style="color:#555;">
+                        This is an internal notification sent to you.
+                        </p>
+
+                        </body>
+                        </html>
+                        """
                     },
                 ]
             }
