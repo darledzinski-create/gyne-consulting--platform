@@ -3,12 +3,6 @@ from datetime import datetime
 import os
 import time
 
-if "last_submit" in session:
-    if time.time() - session["last_submit"] < 3:
-        return redirect(url_for("thank_you"))
-
-session["last_submit"] = time.time()
-
 from mailjet_rest import Client
 mailjet = Client(
     auth=(os.environ.get("MAILJET_API_KEY"), os.environ.get("MAILJET_SECRET_KEY")),
@@ -32,6 +26,13 @@ def consultation():
 
         try:
             print("🔥 POST RECEIVED")
+
+            # ✅ ADD IT HERE (CORRECT PLACE)
+            if "last_submit" in session:
+                if time.time() - session["last_submit"] < 3:
+                    return redirect(url_for("thank_you"))
+
+            session["last_submit"] = time.time()
 
             name = request.form.get("name")
 
