@@ -21,9 +21,9 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
+        print("  NEW REQUEST  ")
 
         try:
-
             print("🔥 POST RECEIVED")
 
             name = request.form.get("name")
@@ -82,7 +82,6 @@ def consultation():
             data_doctor =  {
                 "Messages": [
                     {
-
                         "From": {
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Consultation System"
@@ -97,16 +96,10 @@ def consultation():
                         "HTMLPart": f"""
                         <html>
                         <body style="font-family: Arial, sans-serif;">
-                        <h2 style="color:#2c3e50;">New Consultation - {urgency_clean.upper()}</h2>
+                        <h2> New Consultation - {urgency_clean.upper()}</h2>
 
                         <p><strong>Name:</strong> {name}</p>
                         <p><strong>Email:</strong> {email}</p>
-
-                        <hr>
-
-                        <p style="color:#555;">
-                        This is an internal notification sent to you.
-                        </p>
 
                         </body>
                         </html>
@@ -118,7 +111,6 @@ def consultation():
             data_patient = {
                 "Messages": [
                     {
-                        
                         "From": {
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Dr Dariusz"
@@ -160,18 +152,11 @@ def consultation():
                 # Send doctor email
 
                 result1 = mailjet.send.create(data=data_doctor)
-                print("DOCTOR STATUS:", result1.status_code)
+                print("DOCTOR RESPONSE:", result1.json())
 
                 # Send patient email
                 result2 = mailjet.send.create(data=data_patient)
-                print("PATIENT STATUS:", result2.status_code)
-
-                print("📧 MAIL STATUS:", result.status_code)
-
-                print("📧 MAIL RESPONSE:", result.json())
-                print("STATUS:", result.status_code)
-
-                print("BODY:", result.json())
+                print("PATIENT RESPONSE:", result2.json())
 
             except Exception as e:
 
