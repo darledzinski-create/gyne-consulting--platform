@@ -1,6 +1,13 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, session
 from datetime import datetime
 import os
+import time
+
+if "last_submit" in session:
+    if time.time() - session["last_submit"] < 3:
+        return redirect(url_for("thank_you"))
+
+session["last_submit"] = time.time()
 
 from mailjet_rest import Client
 mailjet = Client(
