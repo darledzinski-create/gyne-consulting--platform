@@ -3,6 +3,14 @@ from datetime import datetime
 import os
 import time
 
+now = time.time()
+
+if session.get("last_submit") and now - session["last_submit"] < 5:
+    print("⚠️ Duplicate submission blocked")
+    return redirect(url_for("thank_you"))
+
+session["last_submit"] = now
+
 from mailjet_rest import Client
 mailjet = Client(
     auth=(os.environ.get("MAILJET_API_KEY"), os.environ.get("MAILJET_SECRET_KEY")),
