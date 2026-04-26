@@ -24,17 +24,19 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
-        print("  NEW REQUEST  ")
+
         now = time.time()
 
-        if session.get("last_submit") and now - session["last_submit"] < 5:
-            print("⚠️ Duplicate submission blocked")
-            return redirect(url_for("thank_you"))
+        # Only block if a previous submission exists
+        if session.get("last_submit") is not None:
+            if now - session["last_submit"] < 5:
+                print("⚠️ Duplicate blocked")
+                return redirect(url_for("thank_you"))
 
+        print("🔥 POST RECEIVED")
+
+        # 👇 IMPORTANT: set this AFTER passing the check
         session["last_submit"] = now
-
-        print(" POST RECEIVED")
-
 
         # Prevent double submission (refresh / double click)
         if "last_submit" in session:
@@ -207,6 +209,7 @@ def consultation():
             try:
 
                 print("📧 ABOUT TO SEND EMAIL")
+                print(" SENDING EMAILS")
 
                 # Send doctor email
 
