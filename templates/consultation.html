@@ -11,27 +11,22 @@
 
    <form method="POST" action="/consultation">
 
-    <input type="text" name="name" placeholder="Name">
-    <input type="submit" value="TEST SUBMIT">
+       <input type="text" name="name" placeholder="Your Name" required>
+       <input type="email" name="email" placeholder="Your Email"required>
 
-    <input type="email" name="email" placeholder="Email">
-    <textarea name="message" placeholder="Your message"></textarea>
+       <select name="urgency" required>
+           <option value="">Select urgency</option>
+           <option value="urgent">Urgent</option>
+           <option value="not_urgent">Not Urgent</option>
+       </select>
 
-<select name="urgency" required>
+       <textarea name="message" placeholder="Describe your case..."required></textarea>
 
-    <option value="" disabled selected>Select urgency</option>
+       <button type="submit">Submit Consultation</button>
+           Submit Consultation
+       </button>
 
-    <option value="urgent">Urgent</option>
-
-    <option value="not_urgent">Not urgent</option>
-
-</select>
-
-    <button type="submit">Submit Cosultation</button>
-        Submit Consultation
-    </button>
-
-</form>
-</div>
+   </form>
+   </div>
 
 {% endblock %}
