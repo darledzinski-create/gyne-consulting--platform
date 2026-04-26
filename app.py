@@ -11,6 +11,8 @@ mailjet = Client(
 
 app = Flask(__name__)
 
+app.secret_key = supersecretkey123"
+
 @app.route("/")
 
 def homepage():
@@ -24,15 +26,19 @@ def consultation():
     if request.method == "POST":
         print("  NEW REQUEST  ")
 
+        # Prevent double submission (refresh / double click)
+        if "last_submit" in session:
+            if time.time() - session["last_submit"] < 3:
+                print("⚠️ Duplicate submission blocked")
+                return redirect(url_for("thank_you"))
+
+        session["last_submit"] = time.time()
+
         try:
             print("🔥 POST RECEIVED")
 
             # ✅ ADD IT HERE (CORRECT PLACE)
-            if "last_submit" in session:
-                if time.time() - session["last_submit"] < 3:
-                    return redirect(url_for("thank_you"))
-
-            session["last_submit"] = time.time()
+            
 
             name = request.form.get("name")
 
