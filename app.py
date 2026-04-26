@@ -11,7 +11,7 @@ mailjet = Client(
 
 app = Flask(__name__)
 
-app.secret_key = supersecretkey123"
+app.secret_key = "supersecretkey123"
 
 @app.route("/")
 
