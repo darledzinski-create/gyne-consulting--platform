@@ -50,6 +50,7 @@ def consultation():
             print("STEP 2 - after urgency_clean:", urgency_clean)
 
             if urgency_clean == "urgent":
+                print("FINAL URGENCY VALUE:", urgency_clean)
                 
                 patient_message = f"""Dear {name},
       
@@ -91,9 +92,7 @@ def consultation():
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Consultation System"
                         },
-                        "To": [
-                            {
-                                "Email": "22mozorro@gmail.com",
+                        "To": [{"Email": "22mozorro@gmail.com"}]
                                 "Name": "Dr Dariusz"
                             }
                         ],
@@ -137,9 +136,7 @@ def consultation():
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Dr Dariusz"
                         },
-                        "To": [
-                            {
-                                "Email": email,
+                        "To": [{"Email": email}]
                                 "Name": name
                             }
                         ],
