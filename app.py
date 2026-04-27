@@ -25,12 +25,6 @@ def consultation():
 
     if request.method == "POST":
 
-        if session.get("submitted"):
-            print("⚠️ Duplicate submission blocked")
-            return redirect(url_for("thank_you"))
-                            
-        session["submitted"] = True
-
         try:
             print("🔥 POST RECEIVED")
 
@@ -193,7 +187,15 @@ def consultation():
 
             try:
 
-                print(" SENDING DOCTOR EMAIL")  
+                # Prevent duplicate submission
+                if session.get("just_sent"):
+                    print("⚠️ Duplicate blocked")
+                    return redirect(url_for("thank_you"))
+
+                session["just_sent"] = True
+
+                # Send doctor email
+                print("SENDING DOCTOR EMAIL")
                 result1 = mailjet.send.create(data=data_doctor)
                 print("DOCTOR RESPONSE:", result1.json())
 
