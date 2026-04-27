@@ -125,9 +125,9 @@ def consultation():
                         </body>
                         </html>
                         """
-                                }
-                            ]
-                        }
+                    }
+                ]
+            }
             
             data_patient = {
                 "Messages": [
