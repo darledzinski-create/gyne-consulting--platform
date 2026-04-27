@@ -92,8 +92,10 @@ def consultation():
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Consultation System"
                         },
-                        "To": [{"Email": "22mozorro@gmail.com"}]
-                                "Name": "Dr Dariusz"
+                        "To": [
+                            {
+                                  "Email": "22mozorro@gmail.com",
+                                  "Name": "Dr Dariusz"
                             }
                         ],
                         "Subject": f"New Consultation - {'URGENT' if urgency_clean == 'urgent' else 'NON URGENT'}",
@@ -136,8 +138,11 @@ def consultation():
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Dr Dariusz"
                         },
-                        "To": [{"Email": email}]
-                                "Name": name
+                        "To": [
+                            {
+                        
+                                "Email": "email",
+                                "Name": "name"
                             }
                         ],
                         "Subject": "Consultation Request Received",
