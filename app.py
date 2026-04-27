@@ -27,7 +27,7 @@ def consultation():
 
         if session.get("submitted"):
             print("⚠️ Duplicate submission blocked")
-            return redirect(url_for("thank_you")
+            return redirect(url_for("thank_you"))
                             
         session["submitted"] = True
 
