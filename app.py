@@ -197,11 +197,12 @@ def consultation():
                 print(" SENDING EMAILS")
 
                 # Send doctor email
-
+                print(" SENDING DOCTOR EMAIL")  
                 result1 = mailjet.send.create(data=data_doctor)
                 print("DOCTOR RESPONSE:", result1.json())
 
                 # Send patient email
+                print(" SENDING PATIENT EMAIL")
                 result2 = mailjet.send.create(data=data_patient)
                 print("PATIENT RESPONSE:", result2.json())
 
