@@ -133,22 +133,15 @@ def consultation():
                 # --- CLEAN EMAIL LOGIC ENDS HERE ---
 
            
-            except Exception as e:
+        except Exception as e:
                 print("❌ MAIL ERROR:", e)
 
-            session.pop("submitted", None)
+        session.pop("submitted", None)
 
-            return redirect(url_for("thank_you"))
-
-        except Exception as e:
-
-            print("ERROR:", e)
-
-            return "Something went wrong", 500
+        return redirect(url_for("thank_you"))
 
     return render_template("consultation.html")
 
-# ✅ MUST BE OUTSIDE
 
 @app.route("/thank-you")
 
