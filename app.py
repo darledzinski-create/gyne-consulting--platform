@@ -83,54 +83,54 @@ def consultation():
                 Email: {email}
                 """
 
-                # --- DOCTOR EMAIL ---
-                data_doctor = {
-                    "Messages": [
-                        {
-                            "From": {
-                                "Email": "contact@drdariuszconsults.com",
-                                "Name": "Consultation System"
-                            },
-                            "To": [
-                                {
-                                    "Email": "22mozorro@gmail.com",
-                                    "Name": "Dr Dariusz"
-                                }
-                            ],
-                            "Subject": f"New Consultation - {urgency_clean.upper()}",
-                            "TextPart": doctor_text
-                        }
-                    ]
-                }
-
-                # --- PATIENT EMAIL ---
-                data_patient = {
-                    "Messages": [
-                        {
-                            "From": {
-                                "Email": "contact@drdariuszconsults.com",
+            # --- DOCTOR EMAIL ---
+            data_doctor = {
+                "Messages": [
+                    {
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Consultation System"
+                        },
+                        "To": [
+                            {
+                                "Email": "22mozorro@gmail.com",
                                 "Name": "Dr Dariusz"
-                            },
-                            "To": [
-                                {
-                                    "Email": email,
-                                    "Name": name
-                                }
-                            ],
-                            "Subject": "Consultation Request Received",
-                            "TextPart": patient_text
-                        }
-                    ]
-                }
+                            }
+                        ],
+                        "Subject": f"New Consultation - {urgency_clean.upper()}",
+                        "TextPart": doctor_text
+                    }
+                ]
+            }
 
-                # --- SEND EMAILS ---
-                print("SENDING DOCTOR EMAIL")
-                mailjet.send.create(data=data_doctor)
+            # --- PATIENT EMAIL ---
+            data_patient = {
+                "Messages": [
+                    {
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Dr Dariusz"
+                        },
+                        "To": [
+                            {
+                                "Email": email,
+                                "Name": name
+                            }
+                        ],
+                        "Subject": "Consultation Request Received",
+                        "TextPart": patient_text
+                    }
+                ]
+            }
 
-                print("SENDING PATIENT EMAIL")
-                mailjet.send.create(data=data_patient)
+            # --- SEND EMAILS ---
+            print("SENDING DOCTOR EMAIL")
+            mailjet.send.create(data=data_doctor)
 
-                # --- CLEAN EMAIL LOGIC ENDS HERE ---
+            print("SENDING PATIENT EMAIL")
+            mailjet.send.create(data=data_patient)
+
+            # --- CLEAN EMAIL LOGIC ENDS HERE ---
 
            
         except Exception as e:
