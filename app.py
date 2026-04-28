@@ -45,166 +45,94 @@ def consultation():
 
             print("STEP 1 - before urgency_clean")
 
+            # --- CLEAN EMAIL LOGIC STARTS HERE ---
+
+            # Normalize urgency
             urgency_clean = (urgency or "").strip().lower()
 
-            print("STEP 2 - after urgency_clean:", urgency_clean)
-
+            # Patient message
             if urgency_clean == "urgent":
-                print("FINAL URGENCY VALUE:", urgency_clean)
-                
-                patient_message = f"""Dear {name},
-      
-            Your request has been received.
+                patient_text = f"""
+                Dear {name},
 
-            IMPORTANT:
-            Please seek immediate in-person medical care.
-            This platform is not suitable for urgent conditions.
+                Your request has been received.
 
-            Kind regards,
-            Dr Dariusz
-            """
-                doctor_message = f"""URGENT CASE
+                IMPORTANT:
+                Please seek immediate in-person medical care.
+                This platform is not suitable for urgent conditions.
 
-            Name: {name}
-            Email: {email}
-            """
+                Kind regards,
+                Dr Dariusz
+                """
             else:
+                patient_text = f"""
+                Dear {name},
 
-                patient_message = f"""Dear {name},
+                Thank you for your consultation request.
+                We will review your case and respond within 24 hours.
 
-            Thank you for your consultation request.
-            We will review your case and respond within 24 hours.
+                Kind regards,
+                Dr Dariusz
+                """
 
-            Kind regards,
-            Dr Dariusz
-            """
+                # Doctor message
+                doctor_text = f"""
+                New Consultation ({urgency_clean.upper()})
 
-                doctor_message = f"""NON-URGENT CASE
+                Name: {name}
+                Email: {email}
+                """
 
-            Name: {name}
-            Email: {email}
-            """
+                # --- DOCTOR EMAIL ---
+                data_doctor = {
+                    "Messages": [
+                        {
+                            "From": {
+                                "Email": "contact@drdariuszconsults.com",
+                                "Name": "Consultation System"
+                            },
+                            "To": [
+                                {
+                                    "Email": "22mozorro@gmail.com",
+                                    "Name": "Dr Dariusz"
+                                }
+                            ],
+                            "Subject": f"New Consultation - {urgency_clean.upper()}",
+                            "TextPart": doctor_text
+                        }
+                    ]
+                }
 
-            data_doctor =  {
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Consultation System"
-                        },
-                        "To": [
-                            {
-                                  "Email": "22mozorro@gmail.com",
-                                  "Name": "Dr Dariusz"
-                            }
-                        ],
-                        "Subject": f"New Consultation - {'URGENT' if urgency_clean == 'urgent' else 'NON URGENT'}",
-                        "HTMLPart": f"""
-                        <html>
-                        <body style="font-family: Arial, sans-serif; background-color:#f4f6f8; padding:20px;">
-                          <div style="max-width:600px; margin:auto; background:white; padding:25px; border-radius:10px;">
+                # --- PATIENT EMAIL ---
+                data_patient = {
+                    "Messages": [
+                        {
+                            "From": {
+                                "Email": "contact@drdariuszconsults.com",
+                                "Name": "Dr Dariusz"
+                            },
+                            "To": [
+                                {
+                                    "Email": email,
+                                    "Name": name
+                                }
+                            ],
+                            "Subject": "Consultation Request Received",
+                            "TextPart": patient_text
+                        }
+                    ]
+                }
 
-                            <h2 style="color:#2c3e50; margin-bottom:10px;">
-                              New Consultation Request
-                            </h2>
-
-                            <p style="color:{'#c0392b' if urgency_clean == 'urgent' else '#2c3e50'}; font-weight:bold;">
-                              {'URGENT CASE' if urgency_clean == 'urgent' else 'NON-URGENT CASE'}
-                            </p>
-
-                            <hr>
-
-                            <p><strong>Patient Name:</strong> {name}</p>
-                            <p><strong>Email:</strong> {email}</p>
-
-                            <hr>
-
-                            <p style="font-size:12px; color:#888;">
-                              Sent from Dr Dariusz Consulting Platform
-                            </p>
-
-                          </div>
-                        </body>
-                        </html>
-                        """
-                    }
-                ]
-            }
-            
-            data_patient = {
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Dr Dariusz"
-                        },
-                        "To": [
-                            {
-                        
-                                "Email": "email",
-                                "Name": "name"
-                            }
-                        ],
-                        "Subject": "Consultation Request Received",
-                        "HTMLPart": f"""
-                        <html>
-                        <body style="font-family: Arial, sans-serif; background-color:#f4f6f8; padding:20px;">
-                          <div style="max-width:600px; margin:auto; background:white; padding:25px; border-radius:10px;">
-
-                            <h2 style="color:#2c3e50;">
-                              Consultation Request Received
-                            </h2>
-                            <p>Dear {name},</p>
-                            {
-                            "<p style='color:#c0392b; font-weight:bold;'>"
-                            "Your request has been marked as URGENT.<br>"
-                            "Please seek immediate in-person medical care.<br>"
-                            "This platform is not suitable for emergency conditions."
-                            "</p>"
-                            if urgency_clean == "urgent"
-                            else
-                            "<p>"
-                            "Thank you for your consultation request.<br>"
-                            "We will review your case and respond within 24 hours."
-                            "<p>"
-                            }
-
-                            <hr>
-                                
-                            <p style="color:#555;">
-                            This is an automated confirmation. Please do not reply to this email.
-                            </p>
-                            <p style="margin-top:20px;">
-                              Kind regards,<br>
-                              <strong>Dr Dariusz</strong>
-                            </p>
-
-                          </div>
-                        </body>
-                        </html>
-                        """
-                     }
-                ]  
-            }
-
-            try:
-
-                # Prevent duplicate submission
-                if session.get("just_sent"):
-                    print("⚠️ Duplicate blocked")
-                    return redirect(url_for("thank_you"))
-
-                session["just_sent"] = True
-
-                # Send doctor email
+                # --- SEND EMAILS ---
                 print("SENDING DOCTOR EMAIL")
-                result1 = mailjet.send.create(data=data_doctor)
-                print("DOCTOR RESPONSE:", result1.json())
+                mailjet.send.create(data=data_doctor)
 
-                print(" SENDING PATIENT EMAIL")
-                result2 = mailjet.send.create(data=data_patient)
-                print("PATIENT RESPONSE:", result2.json())
+                print("SENDING PATIENT EMAIL")
+                mailjet.send.create(data=data_patient)
 
+                # --- CLEAN EMAIL LOGIC ENDS HERE ---
+
+           
             except Exception as e:
                 print("❌ MAIL ERROR:", e)
 
