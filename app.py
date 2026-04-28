@@ -136,7 +136,7 @@ def consultation():
             except Exception as e:
                 print("❌ MAIL ERROR:", e)
 
-                session.pop("submitted",None)
+            session.pop("submitted", None)
 
             return redirect(url_for("thank_you"))
 
