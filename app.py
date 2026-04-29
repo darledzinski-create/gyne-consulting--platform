@@ -125,6 +125,10 @@ def consultation():
                 ]
             }
 
+            # THEN send
+            print("SENDING DOCTOR EMAIL")
+            mailjet.send.create(data=data_doctor)
+
             # --- PATIENT EMAIL ---
             data_patient = {
                 "Messages": [
