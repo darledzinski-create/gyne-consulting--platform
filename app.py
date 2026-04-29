@@ -50,8 +50,25 @@ def consultation():
             # Normalize urgency
             urgency_clean = (urgency or "").strip().lower()
 
-            # Patient message
+            print("DEBUG URGENCY:", urgency_clean)
+
+            # ALWAYS send emails — do NOT split logic
             if urgency_clean == "urgent":
+                print("🚨 URGENT CASE")
+            else:
+                print("🟢 NON-URGENT CASE")
+            # Patient message
+
+            # decide message only
+            if urgency_clean == "urgent":
+                subject = "URGENT CONSULTATION"
+            else:
+                subject = "Consultation Request"
+
+            # ALWAYS send emails (outside the if)
+            mailjet.send.create(data=data_doctor)
+            mailjet.send.create(data=data_patient)
+
                 patient_text = f"""
                 Dear {name},
 
