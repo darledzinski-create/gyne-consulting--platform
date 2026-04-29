@@ -124,14 +124,19 @@ def consultation():
             }
 
             # --- SEND EMAILS ---
+
             print("SENDING DOCTOR EMAIL")
-            mailjet.send.create(data=data_doctor)
+            result1 = mailjet.send.create(data=data_doctor)
+            print("DOCTOR RESPONSE:", result1.status_code)
 
             print("SENDING PATIENT EMAIL")
-            mailjet.send.create(data=data_patient)
+            result2 = mailjet.send.create(data=data_patient)
+            print("PATIENT RESPONSE:", result2.status_code)
 
-            # --- CLEAN EMAIL LOGIC ENDS HERE ---
+            # prevent duplicate submission
+            session.pop("submitted", None)
 
+            return redirect(url_for("thank_you"))
            
         except Exception as e:
                 print("❌ MAIL ERROR:", e)
