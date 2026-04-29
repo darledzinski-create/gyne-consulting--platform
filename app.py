@@ -59,38 +59,43 @@ def consultation():
                 print("🟢 NON-URGENT CASE")
             # Patient message
 
-            # decide message only
+            # Decide subject
             if urgency_clean == "urgent":
                 subject = "URGENT CONSULTATION"
             else:
                 subject = "Consultation Request"
 
-            # ALWAYS send emails (outside the if)
-            mailjet.send.create(data=data_doctor)
-            mailjet.send.create(data=data_patient)
-
+            # Patient message (THIS is where if/else belongs)
+            if urgency_clean == "urgent":
                 patient_text = f"""
-                Dear {name},
+            Dear {name},
 
-                Your request has been received.
+            Your request has been received.
 
-                IMPORTANT:
-                Please seek immediate in-person medical care.
-                This platform is not suitable for urgent conditions.
+            IMPORTANT:
+            Please seek immediate in-person medical care.
+            This platform is not suitable for urgent conditions.
 
-                Kind regards,
-                Dr Dariusz
-                """
+            Kind regards,
+            Dr Dariusz
+            """
             else:
                 patient_text = f"""
-                Dear {name},
+            Dear {name},
 
-                Thank you for your consultation request.
-                We will review your case and respond within 24 hours.
+            Thank you for your consultation request.
+            We will review your case and respond within 24 hours.
 
-                Kind regards,
-                Dr Dariusz
-                """
+            Kind regards,
+            Dr Dariusz
+            """
+
+            # NOW send emails (outside if)
+            print("SENDING DOCTOR EMAIL")
+            mailjet.send.create(data=data_doctor)
+
+            print("SENDING PATIENT EMAIL")
+            mailjet.send.create(data=data_patient)
 
                 # Doctor message
                 doctor_text = f"""
