@@ -97,13 +97,13 @@ def consultation():
             print("SENDING PATIENT EMAIL")
             mailjet.send.create(data=data_patient)
 
-                # Doctor message
-                doctor_text = f"""
-                New Consultation ({urgency_clean.upper()})
+            # Doctor message
+            doctor_text = f"""
+            New Consultation ({urgency_clean.upper()})
 
-                Name: {name}
-                Email: {email}
-                """
+            Name: {name}
+            Email: {email}
+            """
 
             # --- DOCTOR EMAIL ---
             data_doctor = {
