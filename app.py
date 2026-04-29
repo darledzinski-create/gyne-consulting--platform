@@ -141,10 +141,7 @@ def consultation():
         except Exception as e:
                 print("❌ MAIL ERROR:", e)
 
-        session.pop("submitted", None)
-
-        return redirect(url_for("thank_you"))
-
+       
     return render_template("consultation.html")
 
 
