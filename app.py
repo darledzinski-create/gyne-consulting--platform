@@ -27,6 +27,15 @@ def consultation():
         try:
             print("🔥 POST RECEIVED")
 
+            now = time.time()
+            last_submit = session.get("last_submit", 0)
+
+            if now - last_submit < 5:
+                print("Duplicate submission blocked")
+                return redirect(url_for("thank_you"))
+
+            session["last_submit"] = now
+
             name = request.form.get("name")
             email = request.form.get("email")
             urgency = request.form.get("urgency")
