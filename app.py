@@ -25,148 +25,177 @@ def consultation():
 
     if request.method == "POST":
 
-        try:
-            print("🔥 POST RECEIVED")
+    try:
 
-            # ✅ ADD IT HERE (CORRECT PLACE)
-            
+        print("🔥 POST RECEIVED")
 
-            name = request.form.get("name")
+        name = request.form.get("name")
 
-            email = request.form.get("email")
+        email = request.form.get("email")
 
-            urgency = request.form.get("urgency")
+        urgency = request.form.get("urgency")
 
-            print("NAME:", repr(name))
+        urgency_clean = (urgency or "").strip().lower()
 
-            print("EMAIL:", repr(email))
+        print("DEBUG URGENCY:", urgency_clean)
 
-            print("URGENCY:", repr(urgency))
+        # ----------------------------
 
-            print("STEP 1 - before urgency_clean")
+        # 1. Decide subject
 
-            # --- CLEAN EMAIL LOGIC STARTS HERE ---
+        # ----------------------------
 
-            # Normalize urgency
-            urgency_clean = (urgency or "").strip().lower()
+        if urgency_clean == "urgent":
 
-            print("DEBUG URGENCY:", urgency_clean)
+            subject = "URGENT CONSULTATION"
 
-            # ALWAYS send emails — do NOT split logic
-            if urgency_clean == "urgent":
-                print("🚨 URGENT CASE")
-            else:
-                print("🟢 NON-URGENT CASE")
-            # Patient message
+        else:
 
-            # Decide subject
-            if urgency_clean == "urgent":
-                subject = "URGENT CONSULTATION"
-            else:
-                subject = "Consultation Request"
+            subject = "Consultation Request"
 
-            # Patient message (THIS is where if/else belongs)
-            if urgency_clean == "urgent":
-                patient_text = f"""
-            Dear {name},
+        # ----------------------------
 
-            Your request has been received.
+        # 2. Patient message
 
-            IMPORTANT:
-            Please seek immediate in-person medical care.
-            This platform is not suitable for urgent conditions.
+        # ----------------------------
 
-            Kind regards,
-            Dr Dariusz
-            """
-            else:
-                patient_text = f"""
-            Dear {name},
+        if urgency_clean == "urgent":
 
-            Thank you for your consultation request.
-            We will review your case and respond within 24 hours.
+            patient_text = f"""
 
-            Kind regards,
-            Dr Dariusz
-            """
+Dear {name},
 
-            # NOW send emails (outside if)
-            print("SENDING DOCTOR EMAIL")
-            mailjet.send.create(data=data_doctor)
+Your request has been received.
 
-            print("SENDING PATIENT EMAIL")
-            mailjet.send.create(data=data_patient)
+IMPORTANT:
 
-            # Doctor message
-            doctor_text = f"""
-            New Consultation ({urgency_clean.upper()})
+Please seek immediate in-person medical care.
 
-            Name: {name}
-            Email: {email}
-            """
+This platform is not suitable for urgent conditions.
 
-            # --- DOCTOR EMAIL ---
-            data_doctor = {
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Consultation System"
-                        },
-                        "To": [
-                            {
-                                "Email": "22mozorro@gmail.com",
-                                "Name": "Dr Dariusz"
-                            }
-                        ],
-                        "Subject": f"New Consultation - {urgency_clean.upper()}",
-                        "TextPart": doctor_text
-                    }
-                ]
-            }
+Kind regards,
 
-            # THEN send
-            print("SENDING DOCTOR EMAIL")
-            mailjet.send.create(data=data_doctor)
+Dr Dariusz
 
-            # --- PATIENT EMAIL ---
-            data_patient = {
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Dr Dariusz"
-                        },
-                        "To": [
-                            {
-                                "Email": email,
-                                "Name": name
-                            }
-                        ],
-                        "Subject": "Consultation Request Received",
-                        "TextPart": patient_text
-                    }
-                ]
-            }
+"""
 
-            # --- SEND EMAILS ---
+        else:
 
-            print("SENDING DOCTOR EMAIL")
-            result1 = mailjet.send.create(data=data_doctor)
-            print("DOCTOR RESPONSE:", result1.status_code)
+            patient_text = f"""
 
-            print("SENDING PATIENT EMAIL")
-            result2 = mailjet.send.create(data=data_patient)
-            print("PATIENT RESPONSE:", result2.status_code)
+Dear {name},
 
-            # prevent duplicate submission
-            session.pop("submitted", None)
+Thank you for your consultation request.
 
-            return redirect(url_for("thank_you"))
-           
-        except Exception as e:
-                print("❌ MAIL ERROR:", e)
+We will review your case and respond within 24 hours.
 
+Kind regards,
+
+Dr Dariusz
+
+"""
+
+        # ----------------------------
+
+        # 3. Doctor message
+
+        # ----------------------------
+
+        doctor_text = f"""
+
+New Consultation ({urgency_clean.upper()})
+
+Name: {name}
+
+Email: {email}
+
+"""
+
+        # ----------------------------
+
+        # 4. Build email payloads
+
+        # ----------------------------
+
+        data_doctor = {
+
+            "Messages": [
+
+                {
+
+                    "From": {
+
+                        "Email": "contact@drdariuszconsults.com",
+
+                        "Name": "Consultation System"
+
+                    },
+
+                    "To": [{"Email": "your@email.com"}],
+
+                    "Subject": subject,
+
+                    "TextPart": doctor_text
+
+                }
+
+            ]
+
+        }
+
+        data_patient = {
+
+            "Messages": [
+
+                {
+
+                    "From": {
+
+                        "Email": "contact@drdariuszconsults.com",
+
+                        "Name": "Dr Dariusz"
+
+                    },
+
+                    "To": [{"Email": email}],
+
+                    "Subject": subject,
+
+                    "TextPart": patient_text
+
+                }
+
+            ]
+
+        }
+
+        # ----------------------------
+
+        # 5. Send emails
+
+        # ----------------------------
+
+        print("SENDING DOCTOR EMAIL")
+
+        mailjet.send.create(data=data_doctor)
+
+        print("SENDING PATIENT EMAIL")
+
+        mailjet.send.create(data=data_patient)
+
+        # ----------------------------
+
+        # 6. Redirect
+
+        # ----------------------------
+
+        return redirect(url_for("thank_you"))
+
+    except Exception as e:
+
+        print("❌ ERROR:", e)
+
+        return "Something went wrong", 500
        
     return render_template("consultation.html")
 
