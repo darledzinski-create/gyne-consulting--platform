@@ -61,7 +61,7 @@ def consultation():
      Kind regards,
      Dr Dariusz
      """
-             else:
+            else:
                  patient_text = f"""
      Dear {name},
 
