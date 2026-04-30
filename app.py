@@ -118,16 +118,16 @@ Email: {email}
             print("SENDING PATIENT EMAIL")
             mailjet.send.create(data=data_patient)
 
-        # ----------------------------
-        # 6. Redirect
-        # ----------------------------
-        return redirect(url_for("thank_you"))
+            # ----------------------------
+            # 6. Redirect
+            # ----------------------------
+            return redirect(url_for("thank_you"))
 
-    except Exception as e:
-        print("❌ ERROR:", e)
-        return "Something went wrong", 500
+        except Exception as e:
+            print("❌ ERROR:", e)
+            return "Something went wrong", 500
        
-return render_template("consultation.html")
+    return render_template("consultation.html")
 
 
 @app.route("/thank-you")
