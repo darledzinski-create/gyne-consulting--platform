@@ -85,50 +85,48 @@ def consultation():
                 Email: {email}
             """
 
-             # ----------------------------
-             # 4. Build email payloads
-             # ----------------------------
-             data_doctor = {
-                 "Messages": [
-                     {
-                         "From": {
-                             "Email": "contact@drdariuszconsults.com",
-                             "Name": "Consultation System"
-                         },
-                         "To": [{"Email": "your@email.com"}],
-                         "Subject": subject,
-                         "TextPart": doctor_text
-                     }
-                 ]
-             }
+            
+            data_doctor = {
+                "Messages": [
+                    {
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Consultation System"
+                        },
+                        "To": [{"Email": "your@email.com"}],
+                        "Subject": subject,
+                        "TextPart": doctor_text
+                    }
+                ]
+            }
 
-             data_patient = {
-                 "Messages": [
-                     {
-                         "From": {
-                             "Email": "contact@drdariuszconsults.com",
-                             "Name": "Dr Dariusz"
-                             },
-                             "To": [{"Email": email}],
-                             "Subject": subject,
-                             "TextPart": patient_text
-                     }
-                 ]
+            data_patient = {
+                "Messages": [
+                    {
+                        "From": {
+                            "Email": "contact@drdariuszconsults.com",
+                            "Name": "Dr Dariusz"
+                            },
+                            "To": [{"Email": email}],
+                            "Subject": subject,
+                            "TextPart": patient_text
+                    }
+                ]
 
-             }
+            }
 
-             print("SENDING DOCTOR EMAIL")
-             mailjet.send.create(data=data_doctor)
+            print("SENDING DOCTOR EMAIL")
+            mailjet.send.create(data=data_doctor)
 
-             print("SENDING PATIENT EMAIL")
-             mailjet.send.create(data=data_patient)
+            print("SENDING PATIENT EMAIL")
+            mailjet.send.create(data=data_patient)
 
-             session.pop("submitted", None)
-             return redirect(url_for("thank_you"))
+            session.pop("submitted", None)
+            return redirect(url_for("thank_you"))
 
-         except Exception as e:
-             print("❌ ERROR:", e)
-             return "Something went wrong", 500
+        except Exception as e:
+            print("❌ ERROR:", e)
+            return "Something went wrong", 500
        
     return render_template("consultation.html")
 
