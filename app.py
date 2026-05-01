@@ -78,13 +78,12 @@ def consultation():
                     Dr Dariusz
                 """
 
-               doctor_text = f"""
+            doctor_text = f"""
+                New Consultation ({urgency_clean.upper()})
 
-     New Consultation ({urgency_clean.upper()})
-
-     Name: {name}
-     Email: {email}
-     """
+                Name: {name}
+                Email: {email}
+            """
 
              # ----------------------------
              # 4. Build email payloads
