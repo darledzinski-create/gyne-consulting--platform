@@ -56,8 +56,7 @@ def consultation():
 
             if urgency_clean == "urgent":
                 patient_text = f"""
-
-     Dear {name},
+                    Dear {name},
 
      Your request has been received.
 
@@ -70,14 +69,14 @@ def consultation():
      """
             else:
                 patient_text = f"""
-     Dear {name},
+                    Dear {name},
 
-     Thank you for your consultation request.
-     We will review your case and respond within 24 hours.
+                    Thank you for your consultation request.
+                    We will review your case and respond within 24 hours.
 
-     Kind regards,
-     Dr Dariusz
-     """
+                    Kind regards,
+                    Dr Dariusz
+                """
 
                doctor_text = f"""
 
