@@ -26,10 +26,11 @@ def consultation():
     if request.method == "POST":
 
         if session.get("submitted"):
-            print("⚠️ BLOCKED duplicate request")
+            print("⚠️ DUPLICATE BLAOCKED EARLY")
             return redirect(url_for("thank_you"))
-
+        #    LOCK IMMEDIATELY
         session["submitted"] = True
+        session.modified = True
      
         try:
             print("🔥 POST RECEIVED")
