@@ -24,17 +24,15 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
+
+        if session.get("submitted"):
+            print("⚠️ BLOCKED duplicate request")
+            return redirect(url_for("thank_you"))
+
+        session["submitted"] = True
+     
         try:
             print("🔥 POST RECEIVED")
-
-            now = time.time()
-            last_submit = session.get("last_submit", 0)
-
-            if now - last_submit < 5:
-                print("Duplicate submission blocked")
-                return redirect(url_for("thank_you"))
-
-            session["last_submit"] = now
 
             name = request.form.get("name")
             email = request.form.get("email")
@@ -57,84 +55,85 @@ def consultation():
             # ----------------------------
 
             if urgency_clean == "urgent":
-                patient_text = f"""Dear {name},
+                patient_text = f"""
 
-Your request has been received.
+     Dear {name},
 
-IMPORTANT:
-Please seek immediate in-person medical care.
-This platform is not suitable for urgent conditions.
+     Your request has been received.
 
-Kind regards,
-Dr Dariusz
-"""
+     IMPORTANT:
+     Please seek immediate in-person medical care.
+     This platform is not suitable for urgent conditions.
+
+     Kind regards,
+     Dr Dariusz
+     """
             else:
-                patient_text = f"""Dear {name},
-     
-Thank you for your consultation request.
-We will review your case and respond within 24 hours.
+                 patient_text = f"""
+     Dear {name},
 
-Kind regards,
-Dr Dariusz
-"""
-            # ----------------------------
-            # 3. Doctor message
-            # ----------------------------
-            doctor_text = f"""New Consultation ({urgency_clean.upper()})
+     Thank you for your consultation request.
+     We will review your case and respond within 24 hours.
 
-Name: {name}
-Email: {email}
-"""
-            # ----------------------------
-            # 4. Build email payloads
-            # ----------------------------
-            data_doctor = {
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Consultation System"
-                        },
-                        "To": [{"Email": "your@email.com"}],
-                        "Subject": subject,
-                        "TextPart": doctor_text
-                    }
-                ]
-            }
+     Kind regards,
+     Dr Dariusz
+     """
 
-            data_patient = {
-                "Messages": [
-                    {
-                        "From": {
-                            "Email": "contact@drdariuszconsults.com",
-                            "Name": "Dr Dariusz"
-                            },
-                            "To": [{"Email": email}],
-                            "Subject": subject,
-                            "TextPart": patient_text
-                    }
-                ]
+             # ----------------------------
+             # 3. Doctor message
+             # ----------------------------
+             doctor_text = f"""
 
-            }
+     New Consultation ({urgency_clean.upper()})
 
-            # ----------------------------
-            # 5. Send emails
-            # ----------------------------
+     Name: {name}
+     Email: {email}
+     """
 
-            print("SENDING DOCTOR EMAIL")
-            mailjet.send.create(data=data_doctor)
+             # ----------------------------
+             # 4. Build email payloads
+             # ----------------------------
+             data_doctor = {
+                 "Messages": [
+                     {
+                         "From": {
+                             "Email": "contact@drdariuszconsults.com",
+                             "Name": "Consultation System"
+                         },
+                         "To": [{"Email": "your@email.com"}],
+                         "Subject": subject,
+                         "TextPart": doctor_text
+                     }
+                 ]
+             }
 
-            print("SENDING PATIENT EMAIL")
-            mailjet.send.create(data=data_patient)
+             data_patient = {
+                 "Messages": [
+                     {
+                         "From": {
+                             "Email": "contact@drdariuszconsults.com",
+                             "Name": "Dr Dariusz"
+                             },
+                             "To": [{"Email": email}],
+                             "Subject": subject,
+                             "TextPart": patient_text
+                     }
+                 ]
 
-            # ----------------------------
-            # 6. Redirect
-            # ----------------------------
-            return redirect(url_for("thank_you"))
+             }
 
-        except Exception as e:
-            print("❌ ERROR:", e)
-            return "Something went wrong", 500
+             print("SENDING DOCTOR EMAIL")
+             mailjet.send.create(data=data_doctor)
+
+             print("SENDING PATIENT EMAIL")
+             mailjet.send.create(data=data_patient)
+
+             session.pop("submitted", None)
+             return redirect(url_for("thank_you"))
+
+         except Exception as e:
+             print("❌ ERROR:", e)
+             return "Something went wrong", 500
        
     return render_template("consultation.html")
 
