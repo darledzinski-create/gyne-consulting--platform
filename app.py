@@ -34,6 +34,14 @@ def consultation():
      
         try:
             print("🔥 POST RECEIVED")
+            form_token = request.form.get("token")
+
+            if not form_token or form_token != session.get("form_token"):
+                print("⚠️ DUPLICATE OR INVALID SUBMISSION")
+                return redirect(url_for("thank_you"))
+
+            # Mark as used
+            session["form_token"] = None
 
             name = request.form.get("name")
             email = request.form.get("email")
@@ -128,6 +136,9 @@ def consultation():
         except Exception as e:
             print("❌ ERROR:", e)
             return "Something went wrong", 500
+
+    #  Generate unique form token
+    session ["form_token"] = str(datetime.now().timestamp())
        
     return render_template("consultation.html")
 
