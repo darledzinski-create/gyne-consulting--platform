@@ -64,7 +64,10 @@ def consultation():
             # ----------------------------
 
             if urgency_clean == "urgent":
-                patient_text = f"""
+                patient_text = "urgent version"
+            else:
+                patient_text = "normal version"
+                    
                     Dear {name},
 
      Your request has been received.
@@ -88,10 +91,9 @@ def consultation():
                 """
 
             doctor_text = f"""
-                New Consultation ({urgency_clean.upper()})
-
-                Name: {name}
-                Email: {email}
+            New Consultation ({urgency_clean.upper()})
+            Name: {name}
+            Email: {email}
             """
 
             
