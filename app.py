@@ -69,7 +69,7 @@ def consultation():
      Dr Dariusz
      """
             else:
-                 patient_text = f"""
+                patient_text = f"""
      Dear {name},
 
      Thank you for your consultation request.
@@ -79,10 +79,7 @@ def consultation():
      Dr Dariusz
      """
 
-             # ----------------------------
-             # 3. Doctor message
-             # ----------------------------
-             doctor_text = f"""
+               doctor_text = f"""
 
      New Consultation ({urgency_clean.upper()})
 
