@@ -123,12 +123,13 @@ def consultation():
 
             }
 
-            print("SENDING DOCTOR EMAIL")
-            mailjet.send.create(data=data_doctor)
+            result_doctor = mailjet.send.create(data=data_doctor)
+            print("DOCTOR STATUS:", result_doctor.status_code)
+            print("DOCTOR RESPONSE:", result_doctor.json())
 
-            print("SENDING PATIENT EMAIL")
-            mailjet.send.create(data=data_patient)
-
+            result_patient = mailjet.send.create(data=data_patient)
+            print("PATIENT STATUS:", result_patient.status_code)
+            print("PATIENT RESPONSE:", result_patient.json())
             session.pop("submitted", None)
             return redirect(url_for("thank_you"))
 
