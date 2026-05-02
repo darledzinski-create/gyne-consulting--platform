@@ -68,7 +68,7 @@ def consultation():
             else:
                 patient_text = "normal version"
                     
-                    Dear {name},
+     Dear {name},
 
      Your request has been received.
 
