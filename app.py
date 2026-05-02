@@ -138,5 +138,5 @@ def consultation():
 
 def thank_you():
     urgency = request.args.get("urgency")
-    print("THANK YOU PAGE RECEIVED:", URGENCY)
+    print("THANK YOU PAGE RECEIVED:", urgency)
     return render_template("thank_you.html", urgency=urgency)
