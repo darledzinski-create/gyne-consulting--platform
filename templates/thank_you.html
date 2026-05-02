@@ -4,7 +4,12 @@
 
 {% block content %}
 <div class="container">
-    <h2>Thank you for reaching out.</h2>
+    {% if urgency == "urgent" %}
+        <h2 style="color:red;">⚠️ This platform is not suitable for urgent conditions</h2>
+        <p>Please seek immediate in-person medical care.</p>
+    {% else %}
+        <h2>Thank you for reaching out.</h2>
+    {% endif %}
 
 <p>Your message has been received and will be reviewed carefully and personally.</p>
 
@@ -13,6 +18,8 @@ This consultation is the first step toward clarity.</p>
 
 <p>If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.</p>
 
-<p><strong>You will receive a response within 24 hours.</strong></p>
+{% if urgency != "urgent" %}
+    <p><strong>You will receive a response within 24 hours.</strong></p>
+{% endif %}
 </div>
 {% endblock %}
