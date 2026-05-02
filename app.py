@@ -124,6 +124,7 @@ def consultation():
             print("PATIENT STATUS:", result_patient.status_code)
             session.pop("submitted", None)
             print("REDIRECT WITH:", urgency_clean)
+            print("REDIRECTING WITH:", urgency_clean)
             return redirect(url_for("thank_you", urgency=urgency_clean))
 
         except Exception as e:
@@ -137,4 +138,5 @@ def consultation():
 
 def thank_you():
     urgency = request.args.get("urgency")
+    print("THANK YOU PAGE RECEIVED:", URGENCY)
     return render_template("thank_you.html", urgency=urgency)
