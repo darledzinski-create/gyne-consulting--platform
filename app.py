@@ -123,7 +123,7 @@ def consultation():
             result_patient = mailjet.send.create(data=data_patient)
             print("PATIENT STATUS:", result_patient.status_code)
             session.pop("submitted", None)
-            return redirect(url_for("thank_you"))
+            return redirect(url_for("thank_you", urgency=urgencu_clean))
 
         except Exception as e:
             print("❌ ERROR:", e)
@@ -135,5 +135,5 @@ def consultation():
 @app.route("/thank-you")
 
 def thank_you():
-
-    return render_template("thank_you.html")
+    urgency = request.args.get("urgency")
+    return render_template("thank_you.html", urgency=urgency)
