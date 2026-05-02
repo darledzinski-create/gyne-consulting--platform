@@ -23,12 +23,23 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
+        if session.get("submitted"):
+            return redirect(url_for("thank_you"))
+
+        session["submitted"] = True
+        
         try:
             print("🔥 POST RECEIVED")
             
             name = request.form.get("name")
             email = request.form.get("email")
             urgency = request.form.get("urgency")
+
+            if not name or not email or not urgency:
+                return "Missing required fields", 400
+
+            if "@" not in email:
+                return "Invalid email", 400
 
             urgency_clean = (urgency or "").strip().lower()
             print("DEBUG URGENCY:", urgency_clean)
@@ -111,7 +122,7 @@ def consultation():
             print("SENDING PATIENT EMAIL")
             result_patient = mailjet.send.create(data=data_patient)
             print("PATIENT STATUS:", result_patient.status_code)
-            
+            session.pop("submitted", None)
             return redirect(url_for("thank_you"))
 
         except Exception as e:
