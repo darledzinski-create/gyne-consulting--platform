@@ -39,36 +39,36 @@ def consultation():
 
             if urgency_clean == "urgent":
                 subject = "URGENT CONSULTATION"
-            else:
+                
+                patient_text = f"""
+            Dear {name},
+
+            Your request has been received.
+
+            IMPORTANT:
+            Please seek immediate in-patient medical care.
+            This platform is not suitable for urgent conditions.
+
+            Kind regards,
+            Dr Dariusz
+            """
+            
+            elif urgency_clean == "not_urgent":
                 subject = "Consultation Request"
 
-            #  --------------------------------
-            # 2. Patient message
-            # ---------------------------------
-
-            if urgency_clean == "urgent":
                 patient_text = f"""
-Dear {name},
+            Dear {name},
 
-Your request has been received.
+            Thank you for your consultation request.
+            We will review your case and respond within 24 hours.
 
-IMPORTANT:
-Please seek immediate in-patient medical care.
-This platform is not suitable for urgent conditions.
-
-Kind regards,
-Dr Dariusz
-"""
+            Kind regards,
+            Dr Dariusz
+            """
             else:
-                patient_text = f"""
-Dear {name},
-
-Thank you for your consultation request.
-We will review your case and respond within 24 hours.
-
-Kind regards,
-Dr Dariusz
-"""
+                print(" UNKNOWN URGENCY:", urgency_clean)
+                return "Invalid submission", 400
+            
             doctor_text = f"""
 New Consultation ({urgency_clean.upper()})
 Name: {name}
