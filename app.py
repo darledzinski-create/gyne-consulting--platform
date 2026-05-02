@@ -67,18 +67,17 @@ def consultation():
                 patient_text = "urgent version"
             else:
                 patient_text = "normal version"
+                    Dear {name},
                     
-     Dear {name},
+                    Your request has been received.
 
-     Your request has been received.
+                    IMPORTANT:
+                    Please seek immediate in-person medical care.
+                    This platform is not suitable for urgent conditions.
 
-     IMPORTANT:
-     Please seek immediate in-person medical care.
-     This platform is not suitable for urgent conditions.
-
-     Kind regards,
-     Dr Dariusz
-     """
+                    Kind regards,
+                    Dr Dariusz
+                """
             else:
                 patient_text = f"""
                     Dear {name},
