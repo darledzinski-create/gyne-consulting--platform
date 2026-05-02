@@ -70,10 +70,11 @@ def consultation():
                 return "Invalid submission", 400
             
             doctor_text = f"""
-New Consultation ({urgency_clean.upper()})
-Name: {name}
-Email: {email}
-"""
+            New Consultation ({urgency_clean.upper()})
+            Name: {name}
+            Email: {email}
+            """
+            
             data_doctor = {
                 "Messages": [
                     {
