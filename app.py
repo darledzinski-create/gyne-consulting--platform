@@ -20,29 +20,12 @@ def homepage():
     return render_template("home.html")
 
 @app.route("/consultation", methods=["GET", "POST"])
-
 def consultation():
 
     if request.method == "POST":
-
-        if session.get("submitted"):
-            print("⚠️ DUPLICATE BLAOCKED EARLY")
-            return redirect(url_for("thank_you"))
-        #    LOCK IMMEDIATELY
-        session["submitted"] = True
-        session.modified = True
-     
         try:
             print("🔥 POST RECEIVED")
-            form_token = request.form.get("token")
-
-            if not form_token or form_token != session.get("form_token"):
-                print("⚠️ DUPLICATE OR INVALID SUBMISSION")
-                return redirect(url_for("thank_you"))
-
-            # Mark as used
-            session["form_token"] = None
-
+            
             name = request.form.get("name")
             email = request.form.get("email")
             urgency = request.form.get("urgency")
@@ -65,35 +48,32 @@ def consultation():
 
             if urgency_clean == "urgent":
                 patient_text = f"""
-            Dear {name},
+Dear {name},
 
-            Your request has been received.
+Your request has been received.
 
-            IMPORTANT:
-            Please seek immediate in-patient medical care.
-            This platform is not suitable for urgent conditions.
+IMPORTANT:
+Please seek immediate in-patient medical care.
+This platform is not suitable for urgent conditions.
 
-            Kind regards,
-            Dr Dariusz
-            """
-            
+Kind regards,
+Dr Dariusz
+"""
             else:
                 patient_text = f"""
-            Dear {name},
+Dear {name},
 
-            Thank you for your consultation request.
-            We will review your case and respond within 24 hours.
+Thank you for your consultation request.
+We will review your case and respond within 24 hours.
 
-            Kind regards,
-            Dr Dariusz
-            """
-            
+Kind regards,
+Dr Dariusz
+"""
             doctor_text = f"""
-            New Consultation ({urgency_clean.upper()})
-            Name: {name}
-            Email: {email}
-            """
-
+New Consultation ({urgency_clean.upper()})
+Name: {name}
+Email: {email}
+"""
             data_doctor = {
                 "Messages": [
                     {
@@ -101,7 +81,7 @@ def consultation():
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Consultation System"
                         },
-                        "To": [{"Email": "your@email.com"}],
+                        "To": [{"Email": "your_real_@email.com"}],
                         "Subject": subject,
                         "TextPart": doctor_text
                     }
@@ -122,24 +102,21 @@ def consultation():
                 ]
 
             }
-
+            
+            print("SENDING DOCTOR EMAIL")
             result_doctor = mailjet.send.create(data=data_doctor)
             print("DOCTOR STATUS:", result_doctor.status_code)
-            print("DOCTOR RESPONSE:", result_doctor.json())
-
+            
+            print("SENDING PATIENT EMAIL")
             result_patient = mailjet.send.create(data=data_patient)
             print("PATIENT STATUS:", result_patient.status_code)
-            print("PATIENT RESPONSE:", result_patient.json())
-            session.pop("submitted", None)
+            
             return redirect(url_for("thank_you"))
 
         except Exception as e:
             print("❌ ERROR:", e)
             return "Something went wrong", 500
 
-    #  Generate unique form token
-    session ["form_token"] = str(datetime.now().timestamp())
-       
     return render_template("consultation.html")
 
 
