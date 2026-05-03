@@ -125,6 +125,7 @@ def consultation():
             session.pop("submitted", None)
             print("REDIRECT WITH:", urgency_clean)
             print("REDIRECTING WITH:", urgency_clean)
+            print("🔥 NEW VERSION ACTIVE 🔥", urgency_clean)
             return redirect(url_for("thank_you", urgency=urgency_clean))
 
         except Exception as e:
