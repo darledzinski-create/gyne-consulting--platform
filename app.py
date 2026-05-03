@@ -26,7 +26,7 @@ def consultation():
 
     if request.method == "POST":
         if session.get("submitted"):
-            return redirect(url_for("thank_you"))
+            return redirect(url_for("thank_you", urgency=session.get("urgency")))
 
         session["submitted"] = True
         
@@ -47,6 +47,7 @@ def consultation():
                 return "Invalid email", 400
 
             urgency_clean = (urgency or "").strip().lower()
+            session["urgency"] = urgency_clean
             print("DEBUG URGENCY:", urgency_clean)
 
             # ----------------------------
