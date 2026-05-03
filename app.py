@@ -9,6 +9,8 @@ mailjet = Client(
     version='v3.1'
 )
 
+print("🚀 NEW VERSION ACTIVE 🚀")
+
 app = Flask(__name__)
 
 app.secret_key = "supersecretkey123"
