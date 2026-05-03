@@ -38,6 +38,8 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
 
+            print("RAW URGENCY FFORM:", urgency)
+
             if not name or not email or not urgency:
                 return "Missing required fields", 400
 
@@ -136,7 +138,6 @@ def consultation():
             return "Something went wrong", 500
 
     return render_template("consultation.html")
-
 
 @app.route("/thank-you")
 
