@@ -29,6 +29,7 @@ def consultation():
         session["submitted"] = True
         
         try:
+            print("🚀 NEW VERSION ACTIVE 🚀")
             print("🔥 POST RECEIVED")
             
             name = request.form.get("name")
