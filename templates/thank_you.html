@@ -5,10 +5,15 @@
 {% block content %}
 <div class="container">
     {% if urgency == "urgent" %}
-        <h2 style="color:red;">⚠️ This platform is not suitable for urgent conditions</h2>
-        <p>Please seek immediate in-person medical care.</p>
-    {% else %}
+        <h2 style="color:red;">
+            ⚠️ This platform is not suitable for urgent conditions
+        </h2>
+
+    {% elif urgency == "not_urgent" %}
         <h2>Thank you for reaching out.</h2>
+
+    {% else %}
+        <h2>Invalid submission</h2>
     {% endif %}
 
 <p>Your message has been received and will be reviewed carefully and personally.</p>
