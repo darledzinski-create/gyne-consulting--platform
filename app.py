@@ -38,13 +38,7 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
 
-            print("RAW URGENCY FFORM:", urgency)
-
-            if not name or not email or not urgency:
-                return "Missing required fields", 400
-
-            if "@" not in email:
-                return "Invalid email", 400
+            print("RAW URGENCY FORM:", repr(urgency))
 
             urgency_clean = (urgency or "").strip().lower()
             urgency_clean = urgency_clean.replace("","_")
