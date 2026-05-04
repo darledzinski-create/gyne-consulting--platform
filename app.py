@@ -37,6 +37,7 @@ def consultation():
             name = request.form.get("name")
             email = request.form.get("email")
             urgency = request.form.get("urgency")
+            urgency = (urgency or "").replace("+", "_")
 
             print("RAW URGENCY FORM:", repr(urgency))
 
