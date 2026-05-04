@@ -70,20 +70,20 @@ def consultation():
             Dr Dariusz
             """
             
-            elif urgency_clean == "not_urgent":
+            if "urgent" in urgency_clean and "not" not in urgency_clean:
+                # urgent case
+                subject = "URGENT CONSULTATION"
+
+                patient_text = f"""..."""
+
+            elif "not" in urgency_clean:
+                # non-urgent case
                 subject = "Consultation Request"
 
-                patient_text = f"""
-            Dear {name},
+                patient_text = f"""..."""
 
-            Thank you for your consultation request.
-            We will review your case and respond within 24 hours.
-
-            Kind regards,
-            Dr Dariusz
-            """
             else:
-                print(" UNKNOWN URGENCY:", urgency_clean)
+                print("UNKNOWN URGENCY:", repr(urgency_clean))
                 return "Invalid submission", 400
             
             doctor_text = f"""
