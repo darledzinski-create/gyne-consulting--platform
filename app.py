@@ -47,6 +47,7 @@ def consultation():
                 return "Invalid email", 400
 
             urgency_clean = (urgency or "").strip().lower()
+            urgency_clean = urgency_clean.replace("","_")
             session["urgency"] = urgency_clean
             print("DEBUG URGENCY:", urgency_clean)
 
