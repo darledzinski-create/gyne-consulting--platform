@@ -54,22 +54,7 @@ def consultation():
             # 1. Decide subject
             # ----------------------------
 
-            if urgency_clean == "urgent":
-                subject = "URGENT CONSULTATION"
-                
-                patient_text = f"""
-            Dear {name},
-
-            Your request has been received.
-
-            IMPORTANT:
-            Please seek immediate in-patient medical care.
-            This platform is not suitable for urgent conditions.
-
-            Kind regards,
-            Dr Dariusz
-            """
-            
+           
             if "urgent" in urgency_clean and "not" not in urgency_clean:
                 # urgent case
                 subject = "URGENT CONSULTATION"
