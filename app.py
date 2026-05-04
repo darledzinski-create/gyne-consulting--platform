@@ -40,10 +40,10 @@ def consultation():
 
             print("RAW URGENCY FORM:", repr(urgency))
 
-            urgency_clean = (urgency or "").strip().lower()
-            urgency_clean = urgency_clean.replace("","_")
+            urgency_clean = urgency
             session["urgency"] = urgency_clean
             print("DEBUG URGENCY:", urgency_clean)
+            print("FINAL URGENCY:", repr(urgency_clean))
 
             # ----------------------------
             # 1. Decide subject
