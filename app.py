@@ -25,11 +25,7 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
-        if session.get("submitted"):
-            return redirect(url_for("thank_you", urgency=session.get("urgency", "")))
-
-        session["submitted"] = True
-        
+      
         try:
             print("🔥🔥🔥 NEW CODE VERSION 2 ACTIVE 🔥🔥🔥")
             print("🚀 NEW VERSION ACTIVE 🚀")
