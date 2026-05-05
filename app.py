@@ -25,6 +25,10 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
+        if session.get("submitted"):
+            return redirect(url_for("thank_you", urgency=session.get("urgency", "")))
+
+        session["submitted"] = True
       
         try:
             print("🔥🔥🔥 NEW CODE VERSION 2 ACTIVE 🔥🔥🔥")
@@ -111,7 +115,7 @@ def consultation():
             print("SENDING PATIENT EMAIL")
             result_patient = mailjet.send.create(data=data_patient)
             print("PATIENT STATUS:", result_patient.status_code)
-            session.pop("submitted", None)
+            
             print("REDIRECT WITH:", urgency_clean)
             print("REDIRECTING WITH:", urgency_clean)
             print("🔥 NEW VERSION ACTIVE 🔥", urgency_clean)
