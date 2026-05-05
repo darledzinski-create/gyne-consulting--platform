@@ -38,24 +38,16 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
 
-            print("RAW URGENCY FORM:", repr(urgency))
-            print("LEN:", len(urgency or ""))
+            print("RAW URGENCY:", repr(urgency))
 
-            # 🔥 CLEAN PROPERLY
             urgency_clean = (urgency or "").strip().lower()
-            urgency_clean = urgency_clean.replace("_", "").replace(" ", "")
 
-            # normalize
-            if urgency_clean == "urgent":
-                urgency_clean = "urgent"
-            elif urgency_clean == "noturgent":
-                urgency_clean = "not_urgent"
-            else:
-                urgency_clean = "invalid"
-
-            session["urgency"] = urgency_clean
+            # 🔥 THIS IS THE MISSING PIECE
+            urgency_clean = urgency_clean.replace(" ", "_")
 
             print("FINAL URGENCY:", repr(urgency_clean))
+
+            session["urgency"] = urgency_clean
 
             return redirect(url_for("thank_you", urgency=urgency_clean))
             # ----------------------------
