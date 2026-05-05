@@ -41,17 +41,23 @@ def consultation():
             print("RAW URGENCY FORM:", repr(urgency))
             print("LEN:", len(urgency or ""))
 
-            urgency_clean = "".join((urgency or "").split()).lower()
+            # 🔥 CLEAN PROPERLY
+            urgency_clean = (urgency or "").strip().lower()
+            urgency_clean = urgency_clean.replace("_", "").replace(" ", "")
 
-            if urgency_clean == "noturgent":
+            # normalize
+            if urgency_clean == "urgent":
+                urgency_clean = "urgent"
+            elif urgency_clean == "noturgent":
                 urgency_clean = "not_urgent"
+            else:
+                urgency_clean = "invalid"
 
             session["urgency"] = urgency_clean
 
             print("FINAL URGENCY:", repr(urgency_clean))
 
             return redirect(url_for("thank_you", urgency=urgency_clean))
-
             # ----------------------------
             # 1. Decide subject
             # ----------------------------
