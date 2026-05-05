@@ -47,7 +47,7 @@ def consultation():
             session["urgency"] = urgency_clean
             print("REDIRECTING WITH:", repr(urgency_clean))
            
-            return redirect(url_for("thank_you", urgency=urgency_clean))
+            
             # ----------------------------
             # 1. Decide subject
             # ----------------------------
