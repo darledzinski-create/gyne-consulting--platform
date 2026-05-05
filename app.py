@@ -39,7 +39,7 @@ def consultation():
             urgency = request.form.get("urgency")
             urgency = (urgency or "").replace("+", "_")
 
-            print("RAW URGENCY FORM:", repr(urgency), "LEN":", len(urgency))
+            print("RAW URGENCY FORM:", repr(urgency), "LEN":", len(urgency or ""))
 
             urgency_clean = "",join((urgency or "").split()).lower()
 
