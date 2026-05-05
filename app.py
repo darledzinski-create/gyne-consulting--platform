@@ -132,6 +132,6 @@ from flask import request
 @app.route("/thank-you")
 
 def thank_you():
-    urgency = request.args.get("urgency")
-    print("THANK YOU PAGE RECEIVED:", repr(urgency))
+    urgency = request.args.get("urgency", '')
+    print("THANK YOU PAGE RECEIVED:", urgency)
     return render_template("thank_you.html", urgency=urgency)
