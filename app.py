@@ -82,7 +82,7 @@ def consultation():
                             "Email": "contact@drdariuszconsults.com",
                             "Name": "Consultation System"
                         },
-                        "To": [{"Email": darledzinski@email.com"}],
+                        "To": [{"Email": darledzinski@gmail.com"}],
                         "Subject": subject,
                         "TextPart": doctor_text
                     }
