@@ -79,7 +79,7 @@ def consultation():
                 "Messages": [
                     {
                         "From": {
-                            "Email": "contact@drdariuszconsults.com",
+                            "Email": "your_verified_email@gmail.com",
                             "Name": "Consultation System"
                         },
                         "To": [{"Email": "your_real_@email.com"}],
@@ -93,7 +93,7 @@ def consultation():
                 "Messages": [
                     {
                         "From": {
-                            "Email": "contact@drdariuszconsults.com",
+                            "Email": "your_verified_email@email.com",
                             "Name": "Dr Dariusz"
                             },
                             "To": [{"Email": email}],
