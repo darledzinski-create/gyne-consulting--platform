@@ -41,11 +41,11 @@ def consultation():
 
             print("RAW URGENCY FORM:", repr(urgency))
 
-            urgency_clean = (urgency or ""),strip().lower().replace(" ", "_")
+            urgency_clean = (urgency or "").strip().lower().replace(" ", "_")
             session["urgency"] = urgency_clean
             print("DEBUG URGENCY:", urgency_clean)
             print("FINAL URGENCY:", repr(urgency_clean))
-            return redirect(url_foor("thank_you", urgency=urgency_clean))
+            return redirect(url_for("thank_you", urgency=urgency_clean))
 
             # ----------------------------
             # 1. Decide subject
