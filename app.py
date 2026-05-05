@@ -26,7 +26,7 @@ def consultation():
 
     if request.method == "POST":
         if session.get("submitted"):
-            return redirect(url_for("thank_you", urgency=session.get("urgency")))
+            return redirect(url_for("thank_you", urgency=session.get("urgency", "")))
 
         session["submitted"] = True
         
@@ -49,7 +49,8 @@ def consultation():
             print("FINAL URGENCY:", repr(urgency_clean))
 
             session["urgency"] = urgency_clean
-
+            print("REDIRECTING WITH:", repr(urgency_clean))
+           
             return redirect(url_for("thank_you", urgency=urgency_clean))
             # ----------------------------
             # 1. Decide subject
@@ -130,5 +131,5 @@ def consultation():
 
 def thank_you():
     urgency = request.args.get("urgency")
-    print("THANK YOU PAGE RECEIVED:", urgency)
+    print("THANK YOU PAGE RECEIVED:", repr(urgency))
     return render_template("thank_you.html", urgency=urgency)
