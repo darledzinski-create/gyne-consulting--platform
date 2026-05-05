@@ -31,6 +31,7 @@ def consultation():
         session["submitted"] = True
         
         try:
+            print("🔥🔥🔥 NEW CODE VERSION 2 ACTIVE 🔥🔥🔥")
             print("🚀 NEW VERSION ACTIVE 🚀")
             print("🔥 POST RECEIVED")
             
