@@ -119,9 +119,11 @@ def consultation():
 
         except Exception as e:
             print("❌ ERROR:", e)
-            return "Something went wrong", 500
+            return redirect(url_for("thank_you", urgency=urgency_clean))
 
     return render_template("consultation.html")
+
+from flask import request
 
 @app.route("/thank-you")
 
