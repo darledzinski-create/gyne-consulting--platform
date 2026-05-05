@@ -39,11 +39,14 @@ def consultation():
             urgency = request.form.get("urgency")
             urgency = (urgency or "").replace("+", "_")
 
-            print("RAW URGENCY FORM:", repr(urgency))
+            print("RAW URGENCY FORM:", repr(urgency), "LEN":", len(urgency))
 
-            urgency_clean = (urgency or "").strip().lower().replace(" ", "_")
+            urgency_clean = "",join((urgency or "").split()).lower()
+
+            if urgency_clean == "noturgent":
+                urgency_clean = "not_urgent"
             session["urgency"] = urgency_clean
-            print("DEBUG URGENCY:", urgency_clean)
+           
             print("FINAL URGENCY:", repr(urgency_clean))
             return redirect(url_for("thank_you", urgency=urgency_clean))
 
