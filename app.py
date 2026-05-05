@@ -45,6 +45,7 @@ def consultation():
             session["urgency"] = urgency_clean
             print("DEBUG URGENCY:", urgency_clean)
             print("FINAL URGENCY:", repr(urgency_clean))
+            return redirect(url_foor("thank_you", urgency=urgency_clean))
 
             # ----------------------------
             # 1. Decide subject
