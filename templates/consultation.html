@@ -11,8 +11,6 @@
 
    <form method="POST" action="/consultation">
        
-       <input type="hidden" name="token" value="{{ session.get('form_token') }}">
-
        <input type="text" name="name" placeholder="Your Name" required>
        <input type="email" name="email" placeholder="Your Email"required>
 
