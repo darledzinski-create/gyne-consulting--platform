@@ -25,11 +25,7 @@ def homepage():
 def consultation():
 
     if request.method == "POST":
-        if session.get("submitted"):
-            return redirect(url_for("thank_you", urgency=session.get("urgency", "")))
-
-        session["submitted"] = True
-      
+        
         try:
             print("🔥🔥🔥 NEW CODE VERSION 2 ACTIVE 🔥🔥🔥")
             print("🚀 NEW VERSION ACTIVE 🚀")
@@ -48,7 +44,6 @@ def consultation():
 
             print("FINAL URGENCY:", repr(urgency_clean))
 
-            session["urgency"] = urgency_clean
             print("REDIRECTING WITH:", repr(urgency_clean))
            
             
@@ -57,13 +52,13 @@ def consultation():
             # ----------------------------
 
            
-            if "urgent" in urgency_clean and "not" not in urgency_clean:
+            if urgency_clean == "urgent":
                 # urgent case
                 subject = "URGENT CONSULTATION"
 
                 patient_text = f"""..."""
 
-            elif "not" in urgency_clean:
+            elif urgency_clean == "not_urgent":
                 # non-urgent case
                 subject = "Consultation Request"
 
@@ -123,11 +118,9 @@ def consultation():
 
         except Exception as e:
             print("❌ ERROR:", e)
-            return redirect(url_for("thank_you", urgency=urgency_clean))
-
+            return "Something went wrong", 500
     return render_template("consultation.html")
 
-from flask import request
 
 @app.route("/thank-you")
 
