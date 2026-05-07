@@ -41,7 +41,7 @@ def consultation():
            
             if urgency_clean == "urgent":
                 # urgent case
-                subject = "URGENT CONSULTATION"
+                subject = "CONSULTATION REQUEST"
 
                 patient_text = f"""
                 Thank you for your submission.
