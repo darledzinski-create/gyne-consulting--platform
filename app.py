@@ -1,15 +1,11 @@
 from flask import Flask, request, redirect, url_for, render_template, session
-from datetime import datetime
-import os
-import time
-
 from mailjet_rest import Client
+import os
+
 mailjet = Client(
     auth=(os.environ.get("MAILJET_API_KEY"), os.environ.get("MAILJET_SECRET_KEY")),
     version='v3.1'
 )
-
-print("🚀 NEW VERSION ACTIVE 🚀")
 
 app = Flask(__name__)
 
@@ -27,26 +23,14 @@ def consultation():
     if request.method == "POST":
         
         try:
-            print("🔥🔥🔥 NEW CODE VERSION 2 ACTIVE 🔥🔥🔥")
-            print("🚀 NEW VERSION ACTIVE 🚀")
-            print("🔥 POST RECEIVED")
-            
             name = request.form.get("name")
             email = request.form.get("email")
             urgency = request.form.get("urgency")
 
-            print("RAW URGENCY:", repr(urgency))
-
             urgency_clean = (urgency or "").strip().lower()
 
-            # 🔥 THIS IS THE MISSING PIECE
             urgency_clean = urgency_clean.replace(" ", "_")
 
-            print("FINAL URGENCY:", repr(urgency_clean))
-
-            print("REDIRECTING WITH:", repr(urgency_clean))
-           
-            
             # ----------------------------
             # 1. Decide subject
             # ----------------------------
@@ -105,20 +89,15 @@ def consultation():
             
             print("SENDING DOCTOR EMAIL")
             result_doctor = mailjet.send.create(data=data_doctor)
-            print("DOCTOR STATUS:", result_doctor.status_code)
             
             print("SENDING PATIENT EMAIL")
             result_patient = mailjet.send.create(data=data_patient)
-            print("PATIENT STATUS:", result_patient.status_code)
             
-            print("REDIRECT WITH:", urgency_clean)
-            print("REDIRECTING WITH:", urgency_clean)
-            print("🔥 NEW VERSION ACTIVE 🔥", urgency_clean)
             return redirect(url_for("thank_you", urgency=urgency_clean))
 
         except Exception as e:
-            print("❌ ERROR:", e)
-            return "Something went wrong", 500
+            print("  ERROR:", e)
+           return "Something went wrong", 500
     return render_template("consultation.html")
 
 
@@ -126,5 +105,4 @@ def consultation():
 
 def thank_you():
     urgency = request.args.get("urgency", '')
-    print("THANK YOU PAGE RECEIVED:", urgency)
     return render_template("thank_you.html", urgency=urgency)
