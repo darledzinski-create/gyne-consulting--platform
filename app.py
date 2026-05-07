@@ -40,48 +40,55 @@ def consultation():
 
            
             if urgency_clean == "urgent":
-                # urgent case
-                subject = "CONSULTATION REQUEST"
+
+                subject = "URGENT CONSULTATION"
 
                 patient_text = f"""
-                Thank you for your submission.
+            Your urgent consultation request has been received.
 
-                Your consultation has been marked as URGENT.
+            This platform is not suitable for medical emergencies.
 
-                This platform is not intended for emergencies.
-                If your symptoms are severe, worsening, or urgent,
-                please seek immediate in-person medical attention.
+            Please seek immediate in-person medical care if necessary.
 
-                Dr Dariusz
-                """
+            Dr Dariusz
+            """
 
-            elif urgency_clean == "not_urgent":
-                # non-urgent case
-                subject = "Consultation Request"
+                doctor_text = f"""
+            URGENT CONSULTATION
 
-                patient_text = f"""
-                Thank you for your consultation request.
-
-                Your message has been received successfully.
-
-                You should receive a response within 24 hours.
-
-                Dr Dariusz
-                """
-
-            else:
-                print("UNKNOWN URGENCY:", repr(urgency_clean))
-                return "Invalid submission", 400
-            
-            doctor_text = f"""
-            New Consultation ({urgency_clean.upper()})
             Name: {name}
             Email: {email}
 
             Message:
             {message}
             """
-            
+
+            elif urgency_clean == "not_urgent":
+
+                subject = "Consultation Request"
+
+                patient_text = f"""
+            Thank you for your consultation request.
+
+            Your message has been received and will be reviewed carefully.
+
+            Dr Dariusz
+            """
+
+                doctor_text = f"""
+            Consultation Request
+
+            Name: {name}
+            Email: {email}
+
+            Message:
+            {message}
+            """
+
+            else:
+                print("UNKNOWN URGENCY:", repr(urgency_clean))
+                return "Invalid submission", 400
+                
             data_doctor = {
                 "Messages": [
                     {
