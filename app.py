@@ -26,6 +26,7 @@ def consultation():
             name = request.form.get("name")
             email = request.form.get("email")
             urgency = request.form.get("urgency")
+            message = request.form.get("message")
 
             if not name or not email or not urgency or not message:
                 return "All fields are required", 400
