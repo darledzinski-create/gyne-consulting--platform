@@ -43,13 +43,31 @@ def consultation():
                 # urgent case
                 subject = "URGENT CONSULTATION"
 
-                patient_text = f"""..."""
+                patient_text = f"""
+                Thank you for your submission.
+
+                Your consultation has been marked as URGENT.
+
+                This platform is not intended for emergencies.
+                If your symptoms are severe, worsening, or urgent,
+                please seek immediate in-person medical attention.
+
+                Dr Dariusz
+                """
 
             elif urgency_clean == "not_urgent":
                 # non-urgent case
                 subject = "Consultation Request"
 
-                patient_text = f"""..."""
+                patient_text = f"""
+                Thank you for your consultation request.
+
+                Your message has been received successfully.
+
+                You should receive a response within 24 hours.
+
+                Dr Dariusz
+                """
 
             else:
                 print("UNKNOWN URGENCY:", repr(urgency_clean))
