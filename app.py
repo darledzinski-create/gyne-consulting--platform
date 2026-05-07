@@ -27,6 +27,8 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
 
+            if not name or not email or not urgency or not message:
+                return "All fields are required", 400
             urgency_clean = (urgency or "").strip().lower()
 
             urgency_clean = urgency_clean.replace(" ", "_")
@@ -55,7 +57,10 @@ def consultation():
             doctor_text = f"""
             New Consultation ({urgency_clean.upper()})
             Name: {name}
-            Email: {email}
+            Email: {email)
+
+            Message:
+            {message}
             """
             
             data_doctor = {
@@ -89,9 +94,11 @@ def consultation():
             
             print("SENDING DOCTOR EMAIL")
             result_doctor = mailjet.send.create(data=data_doctor)
+            print("DOCTOR STATUS:", result_doctor.status_code)
             
             print("SENDING PATIENT EMAIL")
             result_patient = mailjet.send.create(data=data_patient)
+            print("PATIENT STATUS:", result_patient.status_code)
             
             return redirect(url_for("thank_you", urgency=urgency_clean))
 
