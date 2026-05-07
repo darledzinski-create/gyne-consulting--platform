@@ -97,7 +97,7 @@ def consultation():
 
         except Exception as e:
             print("  ERROR:", e)
-           return "Something went wrong", 500
+            return "Something went wrong", 500
     return render_template("consultation.html")
 
 
