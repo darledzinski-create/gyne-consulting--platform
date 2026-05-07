@@ -57,7 +57,7 @@ def consultation():
             doctor_text = f"""
             New Consultation ({urgency_clean.upper()})
             Name: {name}
-            Email: {email)
+            Email: {email}
 
             Message:
             {message}
