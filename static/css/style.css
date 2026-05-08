@@ -13,12 +13,19 @@ body {
 
 /* HERO */
 .hero {
-    padding: 80px 0;
+    min-height: 72vh
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding: 40px 20px;
 }
 
 .hero h1 {
-    font-size: 36px;
+    font-size: 72px;
+    line-height: 1.05;
+    margin-bottom: 20px;
 }
 
 /* BUTTON */
