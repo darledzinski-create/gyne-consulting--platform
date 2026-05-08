@@ -55,15 +55,16 @@ body {
 .features {
     display: flex;
     justify-content: center;
+    align-items: stretch
     gap: 30px;
     margin-top: 80px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .feature-card {
     background: white;
     padding: 30px;
-    width: 280px;
+    width: 240px;
     border-radius: 14px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     text-align: center;
