@@ -64,7 +64,10 @@ body {
     justify-content: center;
     align-items: stretch
     gap: 30px;
-    margin-top: 80px;
+    margin-top: 100px;
+    padding: 80px 40px;
+    background: #f7f8fb
+    border-radius: 24px;
     flex-wrap: nowrap;
 }
 
@@ -75,6 +78,11 @@ body {
     border-radius: 14px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     text-align: center;
+    transition: transform o.2s ease;
+}
+
+.feature-card: hoover {
+    transform: translateY(-5px);
 }
 
 .feature-card h3 {
