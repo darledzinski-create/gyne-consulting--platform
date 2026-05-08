@@ -6,66 +6,146 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
 
-        .container {
-            max-width: 600px;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f7f9fc;
+        color: #1f2937;
+        line-height: 1.6;
+    }
 
-        header {
-            margin-bottom: 10px;
-        }
+    /* TOP BAR */
 
-        nav {
-            margin-bottom: 20px;
-        }
+    .top-bar {
+        background: white;
+        padding: 20px 40px;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 
-        nav a {
-            text-decoration: none;
-            margin-right: 15px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1e293b;
+    }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+    /* NAVIGATION */
 
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    nav {
+        display: flex;
+        gap: 25px;
+    }
 
-        label {
-            font-weight: bold;
-        }
+    nav a {
+        text-decoration: none;
+        font-weight: 600;
+        color: #334155;
+        transition: color 0.2s ease;
+    }
 
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
+    nav a:hover {
+        color: #0f172a;
+    }
 
-        button {
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-        }
+    /* MAIN CONTAINER */
 
-        button:hover {
-            background-color: #1a252f;
-        }
-        
-    </style>
+    .container {
+        max-width: 900px;
+        margin: 80px auto;
+        padding: 0 20px;
+    }
 
+    /* HEADINGS */
+
+    h1 {
+        font-size: 52px;
+        margin-bottom: 20px;
+        color: #0f172a;
+
+    }
+
+    h2 {
+        color: #0f172a;
+    }
+
+    p {
+        font-size: 18px;
+        color: #475569;
+        margin-bottom: 20px;
+    }
+
+    /* FORMS */
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: 14px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+        background: white;
+    }
+
+    textarea {
+        min-height: 140px;
+    }
+
+    /* BUTTONS */
+
+    button {
+        background-color: #1e293b;
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.2s ease,
+                    transform 0.1s ease;
+    }
+
+    button:hover {
+        background-color: #0f172a;
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+
+        .top-bar {
+            padding: 20px;
+    }
+
+    .container {
+        margin: 50px auto;
+
+    }
+
+    h1 {
+        font-size: 38px;
+
+    }
+
+    nav {
+        margin-top: 15px;
+
+    }
+
+}
+
+</style>
 </head>
 
 <body>
