@@ -64,8 +64,8 @@ body {
     justify-content: center;
     align-items: stretch
     gap: 30px;
-    margin-top: 100px;
-    padding: 80px 40px;
+    margin-top: 50px;
+    padding: 40px 30px;
     background: #f7f8fb
     border-radius: 24px;
     flex-wrap: nowrap;
