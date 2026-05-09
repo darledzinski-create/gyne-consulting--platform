@@ -35,19 +35,20 @@ body {
 /* BUTTON */
 .btn-primary {
     display: inline-block;
-    margin-top: 20px;
-    background: #007BFF;
+    margin-top: 30px;
+    background: #1e293b;
     color: white;
-    padding: 12px 20px;
-    border-radius: 6px;
+    padding: 16px 36px;
+    border-radius: 10px;
     text-decoration: none;
-
-    transition: all 0.2 ease;
+    font-size: 18px;
+    font-weight: 600;
+    transition: 0.3s ease;
 }
 
 .btn-primary:hover {
+    background: #334155;
     transform: translateY(-2px);
-    opacity: 0.92
 }
 
 .section {
