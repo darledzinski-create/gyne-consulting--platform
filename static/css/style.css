@@ -84,6 +84,7 @@ body {
     width: 240px;
     border-radius: 18px;
     flex: 1;
+    min-width: 260px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     text-align: center;
     transition: transform o.2s ease;
@@ -127,7 +128,7 @@ body {
 
 nav {
     display: flex;
-    gap: 30px;
+    gap: 20px;
 }
 
 nav a {
