@@ -13,12 +13,13 @@ body {
 
 /* HERO */
 .hero {
-    min-height: 72vh
+    min-height: 100vh
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    min-height: 85vh;
     padding: 40px 20px;
 }
 
