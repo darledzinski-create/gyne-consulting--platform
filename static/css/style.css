@@ -147,3 +147,63 @@ nav a:hover {
     opacity: 0.65;
 }
 
+.consultation-section {
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.consultation-container {
+    width: 100%;
+    max-width: 700px;
+    background: white;
+    padding: 50px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.consultation-container h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 42px;
+}
+
+.consultation-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #475569;
+    line-height: 1.7;
+}
+
+.consultation-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.consultation-form label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.consultation-form input,
+.consultation-form textarea {
+    margin-bottom: 24px;
+    padding: 16px;
+    border: 1px solid #dbe2ea;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.consultation-form textarea {
+    resize: vertical;
+}
+
+.privacy-note {
+    margin-top: 30px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+
+}
+
