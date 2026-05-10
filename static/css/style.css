@@ -202,7 +202,7 @@ nav a:hover {
 }
 
 .consultation-form textarea {
-    min-height: 140px;
+    min-height: 110px;
 }
 
 .privacy-note {
@@ -210,5 +210,9 @@ nav a:hover {
     text-align: center;
     color: #64748b;
     font-size: 14px;
+}
+
+.consultation-form button {
+    margin-top: 5px;
 }
 
