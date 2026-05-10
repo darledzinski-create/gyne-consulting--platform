@@ -148,29 +148,31 @@ nav a:hover {
 }
 
 .consultation-section {
-    padding: 40px 20px;
+    padding: 15px 20px 25px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .consultation-container {
     width: 100%;
     max-width: 700px;
     background: white;
-    padding: 35px;
+    padding: 28px 35px;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
 .consultation-container h1 {
     text-align: center;
-    margin-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 10px;
     font-size: 42px;
 }
 
 .consultation-intro {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
     color: #475569;
     line-height: 1.7;
 }
