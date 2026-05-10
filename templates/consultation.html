@@ -4,29 +4,40 @@
 
 {% block content %}
 
-<div class="consultation-section">
-    <h1>Consultation Request</h1>
+<section class="consultation-section">
 
-    <p>Please provide accurate information so your case can be reviewed properly.</p>
+    <div class="consultation-container">
 
-   <form method="POST" action="/consultation">
-       
-       <input type="text" name="name" placeholder="Your Name" required>
-       <input type="email" name="email" placeholder="Your Email"required>
+        <h1>Private Online Consultation</h1>
 
-       <select name="urgency" required>
-           <option value="">Select urgency</option>
-           <option value="urgent">Urgent</option>
-           <option value="not_urgent">Not Urgent</option>
-       </select>
+        <p class="consultation-intro">
+            Please provide your details and medical concerns below.
+            All consultations are handled confidentially and professionally.
+        </p>
 
-       <textarea name="message" placeholder="Describe your case..."required></textarea>
+        <form method="POST" class="consultation-form">
 
-       <button type="submit" class="btn-primary">
-           Submit Consultation
-       </button>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
 
-   </form>
-   </div>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Describe Your Concern</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button type="submit" class="btn-primary">
+                Submit Consultation
+            </button>
+
+        </form>
+
+        <p class="privacy-note">
+            Your information remains confidential and is handled with discretion.
+        </p>
+
+    </div>
+
+</section>
 
 {% endblock %}
