@@ -148,7 +148,7 @@ nav a:hover {
 }
 
 .consultation-section {
-    padding: 80px 20px;
+    padding: 40px 20px;
     display: flex;
     justify-content: center;
 }
@@ -157,7 +157,7 @@ nav a:hover {
     width: 100%;
     max-width: 700px;
     background: white;
-    padding: 50px;
+    padding: 35px;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
@@ -199,11 +199,14 @@ nav a:hover {
     resize: vertical;
 }
 
+.consultation-form textarea {
+    min-height: 140px;
+}
+
 .privacy-note {
     margin-top: 30px;
     text-align: center;
     color: #64748b;
     font-size: 14px;
-
 }
 
