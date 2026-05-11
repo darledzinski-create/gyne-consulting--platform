@@ -31,6 +31,10 @@ def consultation():
             urgency = request.form.get("urgency")
             message = request.form.get("message")
 
+            website = request.form.get("website")
+            if website:
+                return "Spam detected", 400
+
             if not name or not email or not urgency or not message:
                 return "All fields are required", 400
             urgency_clean = (urgency or "").strip().lower()
