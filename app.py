@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, url_for, render_template, session
 from mailjet_rest import Client
 from flask_wtf.csrf import CSRFProtect
+from datetime import datetime
 import os
 
 
@@ -30,6 +31,7 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
             message = request.form.get("message")
+            timestamp = datetime.now().strftime("%d %B %Y, %H:%M")
 
             website = request.form.get("website")
             if website:
@@ -84,6 +86,9 @@ def consultation():
 
                 doctor_text = f"""
             Consultation Request
+
+            Sunbmitted:
+            {timestamp}
 
             Name: {name}
             Email: {email}
