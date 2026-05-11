@@ -1,6 +1,8 @@
 from flask import Flask, request, redirect, url_for, render_template, session
 from mailjet_rest import Client
+from flask_wtf.csrf import CSRFProtect
 import os
+
 
 mailjet = Client(
     auth=(os.environ.get("MAILJET_API_KEY"), os.environ.get("MAILJET_SECRET_KEY")),
@@ -8,6 +10,7 @@ mailjet = Client(
 )
 
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
 app.secret_key = os.environ.get("SECRET_KEY")
 
