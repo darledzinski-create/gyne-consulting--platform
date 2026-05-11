@@ -16,6 +16,8 @@
         </p>
 
         <form method="POST" class="consultation-form">
+            <input type="POST" action="/consultation">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required>
