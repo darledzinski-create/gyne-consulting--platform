@@ -18,6 +18,10 @@
         <form method="POST" class="consultation-form">
             <input type="POST" action="/consultation">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div style="display:none;">
+                <label>Leave this field empty</label>
+                <input type="text" name="website">
+            </div>
 
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required>
