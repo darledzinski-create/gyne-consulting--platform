@@ -65,6 +65,9 @@ def consultation():
                 doctor_text = f"""
             CONSULTATIOIN REQUEST
 
+            Submitted:
+            {timestamp}
+
             Name: {name}
             Email: {email}
 
