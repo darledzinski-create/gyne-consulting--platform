@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, url_for, render_template, session
 from mailjet_rest import Client
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
+import sqlite
 import os
 
 
