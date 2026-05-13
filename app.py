@@ -16,6 +16,11 @@ csrf = CSRFProtect(app)
 
 app.secret_key = os.environ.get("SECRET_KEY")
 
+def get_db_connection():
+    conn = sqlite3.connect("consultations.db")
+    conn.row_factory = sqlite3.Row
+    return conn
+
 @app.route("/")
 
 def homepage():
