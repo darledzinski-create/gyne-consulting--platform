@@ -38,6 +38,11 @@ def create_table():
     conn.commit()
     conn.close()
 
+    import os
+
+    if os.path.exists("consultations.db"):
+        os.remove("consultations.db")
+
     create_table()
 
 @app.route("/")
