@@ -58,6 +58,17 @@ def consultation():
             message = request.form.get("message")
             timestamp = datetime.now().strftime("%d %B %Y, %H:%M")
 
+            conn = get_db_connection()
+
+            conn.execute("""
+                INSERT INTO consultations
+                (name, email, urgency, message, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            """, (name, email, urgency, message, timestamp))
+
+            conn.commit()
+            conn.close()
+
             website = request.form.get("website")
             if website:
                 return "Spam detected", 400
