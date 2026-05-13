@@ -21,6 +21,25 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def create_table():
+    conn = get_db_connection()
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS consultations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            urgency TEXT NOT NULL,
+            message TEXT NOT NULL,
+            timestamp TEXT NOT NULL
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+    create_table()
+
 @app.route("/")
 
 def homepage():
