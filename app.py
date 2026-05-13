@@ -22,7 +22,7 @@ def get_db_connection():
     return conn
 
 def create_table():
-    conn = get_db_connection()
+    conn = sqlite3.connect("consultations.db")
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS consultations (
@@ -38,12 +38,7 @@ def create_table():
     conn.commit()
     conn.close()
 
-    import os
-
-    if os.path.exists("consultations.db"):
-        os.remove("consultations.db")
-
-    create_table()
+create_table()
 
 @app.route("/")
 
