@@ -202,7 +202,7 @@ def authenticate():
     return Response(
         "Access denied",
         401,
-        {"WWW-Authenticate":
+        {"WWW-Authenticate": 'Basic realm="Login Required"'}
     )
 
 @app.route("/admin")
