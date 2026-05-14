@@ -54,6 +54,12 @@
 
             <p>{{ consultation.message }}</p>
 
+            <a href="/delete/{{ consultation.id }}"
+               class="btn-primary"
+               style="background:red; margin-top:15px;">
+                Delete Consultation
+            </a>
+
         </div>
 
         {% endfor %}
