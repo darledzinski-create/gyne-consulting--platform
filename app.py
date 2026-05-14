@@ -215,9 +215,24 @@ def admin():
         ORDER BY id DESC
     """).fetchall()
 
+    total_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations"
+    ).fetchone()[0]
+
+    urgent_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
+    ).fetchone()[0]
+
+    non_urgent_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
+    ).fetchone()[0]
+
     conn.close()
 
     return render_template(
         "admin.html",
-        consultations=consultations
+        consultations=consultations,
+        total_count=total_count,
+        urgent_count=urgent_count,
+        non_urgent_count=non_urgent_count
     )
