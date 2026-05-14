@@ -8,6 +8,20 @@
 
         <h1>Consultation Records</h1>
 
+        <div class="feature-card" style="margin-bottom: 30px;">
+
+            <p><strong>Total Consultations:</strong> {{ total_count }}</p>
+
+            <p style="color:red;">
+                <strong>Urgent:</strong> {{ urgent_count }}
+            </p>
+
+            <p style="color:green;">
+                <strong>Non-Urgent:</strong> {{ non_urgent_count }}
+            </p>
+
+        </div>
+
         {% for consultation in consultations %}
 
         <div class="feature-card" style="margin-bottom: 25px;">
