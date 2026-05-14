@@ -190,3 +190,20 @@ def consultation():
 def thank_you():
     urgency = request.args.get("urgency", '')
     return render_template("thank_you.html", urgency=urgency)
+
+@app.route("/admin")
+def admin():
+
+    conn = get_db_connection()
+
+    consultations = conn.execute("""
+        SELECT * FROM consultations
+        ORDER BY id DESC
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "admin.html",
+        consultations=consultations
+    )
