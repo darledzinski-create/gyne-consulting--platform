@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, url_for, render_template, session
 from mailjet_rest import Client
 from flask_wtf.csrf import CSRFProtect
+from flask import Response
 from datetime import datetime
 import sqlite3
 import os
@@ -15,6 +16,9 @@ app = Flask(__name__)
 csrf = CSRFProtect(app)
 
 app.secret_key = os.environ.get("SECRET_KEY")
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "DrDariusz1952"
 
 def get_db_connection():
     conn = sqlite3.connect("consultations.db")
@@ -190,6 +194,16 @@ def consultation():
 def thank_you():
     urgency = request.args.get("urgency", '')
     return render_template("thank_you.html", urgency=urgency)
+
+def check_auth(username, password):
+    return username == ADMIN_USERNAME and password == ADMIN_PASSWORD
+
+def authenticate():
+    return Response(
+        "Access denied",
+        401,
+        {"WWW-Authenticate":
+    )
 
 @app.route("/admin")
 def admin():
