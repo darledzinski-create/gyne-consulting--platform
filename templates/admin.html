@@ -20,8 +20,22 @@
 
             <p><strong>Email:</strong> {{ consultation.email }}</p>
 
-            <p><strong>Urgency:</strong> {{ consultation.urgency }}</p>
-
+           {% if consultation["urgency"] == "urgent" %}
+               <p>
+                   <strong>Urgency:</strong>
+                   <span style="color: red; font-weight: bold;">
+                       URGENT
+                   </span>
+               </p>
+           {% else %}
+               <p>
+                   <strong>Urgency:</strong>
+                   <span style="color: green; font-weight: bold;">
+                       NON-URGENT
+                   </span>
+               </p>
+           {% endif %}
+            
             <p><strong>Message:</strong></p>
 
             <p>{{ consultation.message }}</p>
