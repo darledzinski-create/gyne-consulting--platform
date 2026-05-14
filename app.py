@@ -236,3 +236,23 @@ def admin():
         urgent_count=urgent_count,
         non_urgent_count=non_urgent_count
     )
+
+@app.route("/delete/<int:id>")
+def delete_consultation(id):
+
+    auth = request.authorization
+
+    if not auth or not check_auth(auth.username, auth.password):
+        return authenticate()
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "DELETE FROM consultations WHERE id = ?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
