@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="consultation-section">
+
+    <div class="consultation-container">
+
+        <h1>Consultation Records</h1>
+
+        {% for consultation in consultations %}
+
+        <div class="feature-card" style="margin-bottom: 25px;">
+
+            <p><strong>ID:</strong> {{ consultation.id }}</p>
+
+            <p><strong>Submitted:</strong> {{ consultation.timestamp }}</p>
+
+            <p><strong>Name:</strong> {{ consultation.name }}</p>
+
+            <p><strong>Email:</strong> {{ consultation.email }}</p>
+
+            <p><strong>Urgency:</strong> {{ consultation.urgency }}</p>
+
+            <p><strong>Message:</strong></p>
+
+            <p>{{ consultation.message }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
