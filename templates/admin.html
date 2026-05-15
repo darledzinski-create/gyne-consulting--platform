@@ -52,6 +52,26 @@
                    <strong>Status:</strong>
                    {{ consultation.status }}
                </p>
+             <div style="margin-top:15px;">
+
+                 <a href="/update-status/{{ consultation.id }}/New"
+                 class="btn-primary">
+                 New
+              </a>
+
+              <a href="/update-status/{{ consultation.id }}/In Progress"
+                 class="btn-primary"
+                 style="background:orange;">
+                 In Progress
+              </a>
+
+              <a href="/update-status/{{ consultation.id }}/Completed"
+                 class="btn-primary"
+                 style="background:green;">
+                 Completed
+              </a>
+ 
+          </div>
             
            {% endif %}
             
