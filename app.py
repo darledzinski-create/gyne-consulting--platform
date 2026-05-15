@@ -36,7 +36,7 @@ def create_table():
             urgency TEXT NOT NULL,
             message TEXT NOT NULL,
             timestamp TEXT NOT NULL,
-            status TEXT NOT NULL DEFAULT
+            status TEXT NOT NULL DEFAULT 'New'
         )
     """)
 
