@@ -79,13 +79,28 @@
             <p><strong>Message:</strong></p>
 
             <p>{{ consultation.message }}</p>
-            <p><strong>Doctor Notes:</strong></p>
+            
+            <form method="POST"
+                  action="/update-notes/{{ consultation.id }}">
 
-            <textarea rows="5"
-                      style="width:100%; padding:10px; margin-top:10px;">
-            {{ consultation.doctor_notes or '' }}
-            </textarea>
+                 <input type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}">
 
+                 <p><strong>Doctor Notes:</strong></p>
+
+                 <textarea name="doctor_notes"
+                           rows="5"
+                           style="width:100%; padding:10px; margin-top:10px;">{{ consultation.doctor_notes or '' }}</textarea>
+
+                 <button type="submit"
+                         class="btn-primary"
+                         style="margin-top:10px; width:auto;">
+                      Save Notes
+                  </button>
+
+              </form>
+            
             <a href="/delete/{{ consultation.id }}"
                class="btn-primary"
                style="background:red; margin-top:15px;"
