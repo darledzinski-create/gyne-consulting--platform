@@ -219,6 +219,21 @@ def authenticate():
         {"WWW-Authenticate": 'Basic realm="Login Required"'}
     )
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        password = request.form.get("password")
+
+        if password == "DrDariusz1952":
+
+            session["admin_logged_in"] = True
+
+            return redirect(url_for("admin"))
+
+    return render_template("login.html")
+
 @app.route("/admin")
 def admin():
 
