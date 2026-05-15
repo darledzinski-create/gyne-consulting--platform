@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="consultation-section">
+
+    <div class="consultation-container">
+
+        <h1>Admin Login</h1>
+
+        <form method="POST">
+
+            <input type="password"
+
+                   name="password"
+
+                   placeholder="Enter Admin Password"
+
+                   required>
+
+            <button type="submit" class="btn-primary">
+
+                Login
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
