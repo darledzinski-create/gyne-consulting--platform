@@ -237,6 +237,9 @@ def login():
 @app.route("/admin")
 def admin():
 
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
     conn = get_db_connection()
 
     consultations = conn.execute("""
