@@ -230,3 +230,11 @@ nav a:hover {
     flex-wrap: wrap;
 }
 
+.status-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
