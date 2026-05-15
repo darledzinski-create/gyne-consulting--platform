@@ -52,26 +52,27 @@
                    <strong>Status:</strong>
                    {{ consultation.status }}
                </p>
-             <div style="margin-top:15px;">
+            <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
 
-                 <a href="/update-status/{{ consultation.id }}/New"
-                 class="btn-primary">
-                 New
-              </a>
+                <a href="/update-status/{{ consultation.id }}/New"
+                   class="btn-primary"
+                   style="width:auto; padding:10px 20px;">
+                   New
+                </a>
 
-              <a href="/update-status/{{ consultation.id }}/In Progress"
-                 class="btn-primary"
-                 style="background:orange;">
-                 In Progress
-              </a>
+                <a href="/update-status/{{ consultation.id }}/In Progress"
+                   class="btn-primary"
+                   style="background:orange; width:auto; padding:10px 20px;">
+                   In Progress
+                </a>
 
-              <a href="/update-status/{{ consultation.id }}/Completed"
-                 class="btn-primary"
-                 style="background:green;">
-                 Completed
-              </a>
- 
-          </div>
+                <a href="/update-status/{{ consultation.id }}/Completed"
+                   class="btn-primary"
+                   style="background:green; width:auto; padding:10px 20px;">
+                   Completed
+                </a>
+
+            </div>
             
            {% endif %}
             
