@@ -57,6 +57,18 @@ except:
 
 conn.close()
 
+conn = get_db_connection()
+
+try:
+    conn.execute(
+        "ALTER TABLE consultations ADD COLUMN doctor_notes TEXT"
+    )
+    conn.commit()
+except:
+    pass
+
+conn.close()
+
 
 @app.route("/")
 
