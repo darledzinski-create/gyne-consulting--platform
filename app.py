@@ -253,6 +253,27 @@ def logout():
 
     return redirect(url_for("login"))
 
+@app.route("/update-notes/<int:id>", methods=["POST"])
+def update_notes(id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    doctor_notes = request.form.get("doctor_notes")
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "UPDATE consultations SET doctor_notes = ? WHERE id = ?",
+        (doctor_notes, id)
+    )
+
+    conn.commit()
+
+    conn.close()
+
+    return redirect(url_for("admin"))
+
 @app.route("/admin")
 def admin():
 
