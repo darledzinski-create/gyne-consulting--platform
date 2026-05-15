@@ -79,6 +79,12 @@
             <p><strong>Message:</strong></p>
 
             <p>{{ consultation.message }}</p>
+            <p><strong>Doctor Notes:</strong></p>
+
+            <textarea rows="5"
+                      style="width:100%; padding:10px; margin-top:10px;">
+            {{ consultation.doctor_notes or '' }}
+            </textarea>
 
             <a href="/delete/{{ consultation.id }}"
                class="btn-primary"
