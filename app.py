@@ -35,7 +35,8 @@ def create_table():
             email TEXT NOT NULL,
             urgency TEXT NOT NULL,
             message TEXT NOT NULL,
-            timestamp TEXT NOT NULL
+            timestamp TEXT NOT NULL,
+            status TEXT NOT NULL DEFAULT
         )
     """)
 
@@ -43,6 +44,19 @@ def create_table():
     conn.close()
 
 create_table()
+
+conn = get_db_connection()
+
+try:
+    conn.execute(
+        "ALTER TABLE consultations ADD COLUMN status TEXT NOT NULL DEFAULT 'New'"
+    )
+    conn.commit()
+except:
+    pass
+
+conn.close()
+
 
 @app.route("/")
 
