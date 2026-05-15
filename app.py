@@ -270,3 +270,23 @@ def delete_consultation(id):
     conn.close()
 
     return redirect("/admin")
+
+@app.route("/update-status/<int:id>/<status>")
+def update_status(id, status):
+
+    auth = request.authorization
+
+    if not auth or not check_auth(auth.username, auth.password):
+        return authenticate()
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "UPDATE consultations SET status = ? WHERE id = ?",
+        (status, id)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/admin")
