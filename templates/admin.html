@@ -20,6 +20,7 @@
              </button>
 
          </form>
+        {% for consultation in consultations %}
 
         <div class="feature-card"
              style="
@@ -63,6 +64,8 @@
                <p><strong>Email:</strong> {{ consultation.email }}</p>
 
            </div>
+
+           {% endfor %}
 
            {% if consultation["urgency"] == "urgent" %}
                <p>
