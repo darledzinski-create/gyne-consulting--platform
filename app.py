@@ -295,7 +295,6 @@ def admin():
     consultations = conn.execute("""
         SELECT * FROM consultations
         ORDER BY id DESC
-
     """).fetchall()
 
     total_count = conn.execute(
@@ -303,13 +302,11 @@ def admin():
     ).fetchone()[0]
 
     urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations
-        WHERE urgency='urgent'"
+        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
     ).fetchone()[0]
 
     non_urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations
-        WHERE urgency='not_urgent'"
+        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
     ).fetchone()[0]
 
     conn.close()
