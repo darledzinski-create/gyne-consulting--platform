@@ -282,6 +282,19 @@ def admin():
 
     conn = get_db_connection()
 
+   search = request.args.get("search")
+
+   if search:
+
+       consultations = conn.execute("""
+           SELECT * FROM consultations
+           WHERE name LIKE ?
+           OR email LIKE ?
+           ORDER BY id DESC
+       """, (f"%{search}%", f"%{search}%")).fetchall()
+
+else:
+
     consultations = conn.execute("""
         SELECT * FROM consultations
         ORDER BY id DESC
