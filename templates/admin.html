@@ -21,7 +21,16 @@
 
          </form>
 
-        <div class="feature-card" style="margin-bottom: 30px;">
+        <div class="feature-card"
+             style="
+             margin-bottom:25px;
+             border-left:
+             {% if consultation['urgency'] == 'urgent' %}
+             8px solid red
+             {% else %}
+             8px solid green
+             {% endif %};
+        ">
 
             <p><strong>Total Consultations:</strong> {{ total_count }}</p>
 
