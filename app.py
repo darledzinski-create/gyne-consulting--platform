@@ -297,25 +297,11 @@ def admin():
 
         consultations = conn.execute("""
             SELECT * FROM consultations
-            ORDER BY
-            CASE
-                WHEN status = 'New' THEN 1
-                WHEN status = 'In Progress' THEN 2
-                WHEN status = 'Completed' THEN 3
-            END,
-            id DESC
+            ORDER BY id DESC
         """).fetchall()
-
+        
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
-    ).fetchone()[0]
-
-    urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
-    ).fetchone()[0]
-
-    non_urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
     ).fetchone()[0]
 
     conn.close()
