@@ -292,11 +292,10 @@ def admin():
 
     conn = get_db_connection()
 
-    search = request.args.get("search")
-
     consultations = conn.execute("""
-      SELECT * FROM consultations
-      ORDER BY id DESC
+        SELECT * FROM consultations
+        ORDER BY id DESC
+
     """).fetchall()
 
     total_count = conn.execute(
@@ -304,11 +303,13 @@ def admin():
     ).fetchone()[0]
 
     urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
+        "SELECT COUNT(*) FROM consultations
+        WHERE urgency='urgent'"
     ).fetchone()[0]
 
     non_urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
+        "SELECT COUNT(*) FROM consultations
+        WHERE urgency='not_urgent'"
     ).fetchone()[0]
 
     conn.close()
@@ -320,7 +321,6 @@ def admin():
         urgent_count=urgent_count,
         non_urgent_count=non_urgent_count
     )
-
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
 
