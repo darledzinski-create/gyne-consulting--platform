@@ -297,7 +297,13 @@ def admin():
 
         consultations = conn.execute("""
             SELECT * FROM consultations
-            ORDER BY id DESC
+            ORDER BY
+            CASE
+                WHEN status = 'New' THEN 1
+                WHEN status = 'In Progress' THEN 2
+                WHEN status = 'Completed' THEN 3
+            END,
+            id DESC
         """).fetchall()
 
     total_count = conn.execute(
