@@ -270,7 +270,17 @@ def update_notes(id):
 
     conn.commit()
 
+    urgent_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
+    ).fetchone()[0]
+
     conn.close()
+
+    non_urgent_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
+    ).fetchone()[0]
+
+    
 
     return redirect(url_for("admin"))
 
