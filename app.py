@@ -341,6 +341,8 @@ def delete_consultation(id):
 @app.route("/update-status/<int:id>/<status>")
 def update_status(id, status):
 
+    status = status.replace("_", " ")
+
     conn = get_db_connection()
 
     conn.execute(
