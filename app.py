@@ -341,11 +341,6 @@ def delete_consultation(id):
 @app.route("/update-status/<int:id>/<status>")
 def update_status(id, status):
 
-    auth = request.authorization
-
-    if not auth or not check_auth(auth.username, auth.password):
-        return authenticate()
-
     conn = get_db_connection()
 
     conn.execute(
