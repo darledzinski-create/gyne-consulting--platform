@@ -294,10 +294,10 @@ def admin():
 
     search = request.args.get("search")
 
-  consultations = conn.execute("""
+    consultations = conn.execute("""
       SELECT * FROM consultations
       ORDER BY id DESC
-  """).fetchall()
+    """).fetchall()
 
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
