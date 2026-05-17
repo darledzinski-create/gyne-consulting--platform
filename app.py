@@ -332,11 +332,11 @@ def admin():
 
     urgent_count = conn.execute(
         "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
-    ).fetchone()[0]
+    ).fetchall()[0]
 
     non_urgent_count = conn.execute(
         "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
-    ).fetchone()[0]
+    ).fetchall()[0]
 
     conn.close()
 
