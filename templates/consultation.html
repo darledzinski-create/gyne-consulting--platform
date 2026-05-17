@@ -16,7 +16,7 @@
         </p>
 
         <form method="POST" class="consultation-form">
-            <input type="POST" action="/consultation">
+            <form method="POST" action="/consultation">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div style="display:none;">
                 <label>Leave this field empty</label>
