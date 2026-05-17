@@ -293,31 +293,37 @@ def admin():
 
     conn = get_db_connection()
 
-    search = request.args.get("search", "").strip()
+    search = request.args.get("search", "").strip().lower()
 
     if search:
-
         consultations = conn.execute("""
             SELECT * FROM consultations
-            WHERE name LIKE ?
-            OR email LIKE ?
-            ORDER BY id DESC
-        """, (f"%{search}%", f"%{search}%")).fetchall()
+            WHERE LOWER(name) LIKE ?
+            OR LOWER(email) LIKE ?
+            OR LOWER(message) LIKE ?
+            ORDER BY
+                CASE
+                    WHEN status = 'New' THEN 1
+                    WHEN status = 'In Progress' THEN 2
+                    WHEN status = 'Completed' THEN 3
+                END,
+                id DESC
+        """, (
+            f"%{search}%",
+            f"%{search}%",
+            f"%{search}%"
+        )).fetchall()
 
     else:
-
         consultations = conn.execute("""
             SELECT * FROM consultations
-
             ORDER BY
-
-            CASE
-                WHEN status = 'New' THEN 1
-                WHEN status = 'In Progress' THEN 2
-                WHEN status = 'Completed' THEN 3
-            END,
-
-            id DESC
+                CASE
+                    WHEN status = 'New' THEN 1
+                    WHEN status = 'In Progress' THEN 2
+                    WHEN status = 'Completed' THEN 3
+                END,
+                id DESC
         """).fetchall()
     
     total_count = conn.execute(
