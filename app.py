@@ -106,6 +106,18 @@ def consultation():
 
             if not name or not email or not urgency or not message:
                 return "All fields are required", 400
+            
+            conn = get_db_connection()
+
+            conn.execute("""
+                INSERT INTO consultations
+                (name, email, urgency, message, timestamp)
+                VALUES (?, ?, ?, ?, ?)
+            """, (name, email, urgency, message, timestamp))
+
+            conn.commit()
+            conn.close()
+            
             urgency_clean = (urgency or "").strip().lower()
 
             urgency_clean = urgency_clean.replace(" ", "_")
