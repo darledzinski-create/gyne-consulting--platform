@@ -293,6 +293,8 @@ def update_notes(id):
         "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
     ).fetchone()[0]
 
+     conn.close()
+
     
 
     return redirect(url_for("admin"))
