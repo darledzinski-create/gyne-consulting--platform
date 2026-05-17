@@ -82,11 +82,26 @@
                    </span>
                </p>
               <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;">
+<p>
+    <strong>Status:</strong>
 
-                  <p>
-                      <strong>Status:</strong>
-                      {{ consultation.status }}
-                  </p>
+    {% if consultation.status == "New" %}
+        <span style="color: blue; font-weight: bold;">
+            New
+        </span>
+
+    {% elif consultation.status == "In Progress" %}
+        <span style="color: orange; font-weight: bold;">
+            In Progress
+        </span>
+
+    {% elif consultation.status == "Completed" %}
+        <span style="color: green; font-weight: bold;">
+            Completed
+        </span>
+
+    {% endif %}
+</p>
 
               </div>
             
