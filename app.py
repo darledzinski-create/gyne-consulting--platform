@@ -293,19 +293,30 @@ def admin():
 
     conn = get_db_connection()
 
-    consultations = conn.execute("""
-        SELECT * FROM consultations
+    if search:
 
-        ORDER BY
+        consultations = conn.execute("""
+            SELECT * FROM consultations
+            WHERE name LIKE ?
+            OR email LIKE ?
+            ORDER BY id DESC
+        """, (f"%{search}%", f"%{search}%")).fetchall()
 
-        CASE
-            WHEN status = 'New' THEN 1
-            WHEN status = 'In Progress' THEN 2
-            WHEN status = 'Completed' THEN 3
-        END,
+    else:
 
-        id DESC
-    """).fetchall()
+        consultations = conn.execute("""
+            SELECT * FROM consultations
+
+            ORDER BY
+
+            CASE
+                WHEN status = 'New' THEN 1
+                WHEN status = 'In Progress' THEN 2
+                WHEN status = 'Completed' THEN 3
+            END,
+
+            id DESC
+        """).fetchall()
     
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
@@ -337,6 +348,8 @@ def delete_consultation(id):
         return authenticate()
 
     conn = get_db_connection()
+
+    search = request.args.get("search", '').strip()
 
     conn.execute(
         "DELETE FROM consultations WHERE id = ?",
