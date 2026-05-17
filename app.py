@@ -293,6 +293,8 @@ def admin():
 
     conn = get_db_connection()
 
+    search = request.args.get("search", "").strip()
+
     if search:
 
         consultations = conn.execute("""
