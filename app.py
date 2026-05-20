@@ -311,7 +311,7 @@ def admin():
             f"%{search}%",
             f"%{search}%",
             f"%{search}%"
-        )).fetchall()
+        )).fetchone()[0]
 
     else:
         consultations = conn.execute("""
@@ -323,15 +323,15 @@ def admin():
                     WHEN status = 'Completed' THEN 3
                 END,
                 id DESC
-        """).fetchall()
+        """).fetchone()[0]
     
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
-    ).fetchone()[0]
+    ).fetchall()
 
     urgent_count = conn.execute(
         "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
-    ).fetchall()[0]
+    ).fetchall()
 
     non_urgent_count = conn.execute(
         "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
