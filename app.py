@@ -315,7 +315,7 @@ def admin():
             f"%{search}%",
             f"%{search}%",
             f"%{search}%"
-        )).fetchall()
+        )).fetchall()[0]
 
     else:
         consultations = conn.execute("""
@@ -327,7 +327,7 @@ def admin():
                     WHEN status = 'Completed' THEN 3
                 END,
                 id DESC
-        """).fetchall()
+        """).fetchall()[0]
     
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
