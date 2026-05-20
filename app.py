@@ -311,7 +311,7 @@ def admin():
             f"%{search}%",
             f"%{search}%",
             f"%{search}%"
-        """).fetchone()
+        )).fetchall()
 
     else:
         consultations = conn.execute("""
