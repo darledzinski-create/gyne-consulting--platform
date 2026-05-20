@@ -276,15 +276,11 @@ def update_notes(id):
         "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
     ).fetchone()[0]
 
-    conn.close()
-
     non_urgent_count = conn.execute(
         "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
     ).fetchone()[0]
 
     conn.close()
-
-    
 
     return redirect(url_for("admin"))
 
@@ -315,7 +311,7 @@ def admin():
             f"%{search}%",
             f"%{search}%",
             f"%{search}%"
-        )).fetchall()[0]
+        )).fetchall()
 
     else:
         consultations = conn.execute("""
@@ -327,7 +323,7 @@ def admin():
                     WHEN status = 'Completed' THEN 3
                 END,
                 id DESC
-        """).fetchall()[0]
+        """).fetchall()
     
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
