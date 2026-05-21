@@ -3,6 +3,7 @@ from mailjet_rest import Client
 from flask_wtf.csrf import CSRFProtect
 from flask import Response
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import sqlite3
 import os
 
@@ -87,8 +88,7 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
             message = request.form.get("message")
-            timestamp = datetime.now().strftime("%d %B %Y, %H:%M")
-
+            timestamp = datetime.zone(ZoneInfo("Africa/Johannesburg")).strftime("%d %B %Y, %H:%M")
             website = request.form.get("website")
             if website:
                 return "Spam detected", 400
