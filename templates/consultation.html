@@ -29,14 +29,18 @@
             <label for="email">Email Address</label>
             <input type="email" id="email" name="email" required>
 
-            <label>Urgency</label>
+            <label for="urgency">Consultation Priority</label>
 
-            <select name="urgency" required>
-                <option value="">Select urgency</option>
-                <option value="urgent">Urgent</option>
-                <option value="not_urgent">Not Urgent</option>
+            <select id="urgency" name="urgency" required class="urgency-select">
+                <option value="">Select consultation priority</option>
+                <option value="urgent">🔴 Urgent — symptoms need prompt attention</option>
+                <option value="not_urgent">🟢 Standard — non-urgent consultation</option>
             </select>
 
+            <p class="form-note">
+                Urgent consultations are prioritised for faster clinical review.
+            </p>
+                
             <label for="message">Describe Your Concern</label>
             <textarea id="message" name="message" rows="6" required></textarea>
 
