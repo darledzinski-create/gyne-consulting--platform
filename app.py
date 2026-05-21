@@ -88,7 +88,7 @@ def consultation():
             email = request.form.get("email")
             urgency = request.form.get("urgency")
             message = request.form.get("message")
-            timestamp = datetime.zone(ZoneInfo("Africa/Johannesburg")).strftime("%d %B %Y, %H:%M")
+            timestamp = datetime.now(ZoneInfo("Africa/Johannesburg")).strftime("%d %B %Y, %H:%M")
             website = request.form.get("website")
             if website:
                 return "Spam detected", 400
