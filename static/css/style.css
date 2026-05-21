@@ -332,3 +332,53 @@ textarea:focus {
 
 }
 
+.footer {
+
+    background: #111827;
+
+    color: white;
+
+    padding: 60px 20px;
+
+    margin-top: 100px;
+
+    text-align: center;
+
+}
+
+.footer-content {
+
+    max-width: 800px;
+
+    margin: auto;
+
+}
+
+.footer h3 {
+
+    font-size: 28px;
+
+    margin-bottom: 15px;
+
+}
+
+.footer p {
+
+    color: #d1d5db;
+
+}
+
+.footer-note {
+
+    margin-top: 25px;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    opacity: 0.8;
+
+}
+
