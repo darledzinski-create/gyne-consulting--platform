@@ -238,3 +238,19 @@ nav a:hover {
     flex-wrap: wrap;
 }
 
+select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: white;
+}
+
+select:focus {
+    outline: none;
+    border-color: #7c5cff;
+    box-shadow: 0 0 5px rgba(124, 92, 255, 0.3);
+}
+
