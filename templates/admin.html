@@ -79,20 +79,40 @@
     <strong>Status:</strong>
 
     {% if consultation.status == "New" %}
-        <span style="color: blue; font-weight: bold;">
-            New
+        <span style="
+            background:#007bff;
+            color:white;
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:14px;
+            font-weight:bold;
+        ">
+            NEW
         </span>
 
     {% elif consultation.status == "In Progress" %}
-        <span style="color: orange; font-weight: bold;">
-            In Progress
+        <span style="
+            background:#ff9800;
+            color:white;
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:14px;
+            font-weight:bold;
+        ">
+            IN PROGRESS
         </span>
 
-    {% elif consultation.status == "Completed" %}
-        <span style="color: green; font-weight: bold;">
-            Completed
+    {% else %}
+        <span style="
+            background:#28a745;
+            color:white;
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:14px;
+            font-weight:bold;
+        ">
+            COMPLETED
         </span>
-
     {% endif %}
 </p>
 
