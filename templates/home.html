@@ -1,40 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
-
 {% block content %}
 
-<section class="hero">
+<section class="hero-premium">
 
-   <div class="hero-text">
+    <div class="hero-overlay">
 
-       <h1 style="
-           font-size:56px;
-           line-height:1.1;
-           margin-bottom:25px;
-           color:#1a1a1a;
-        ">
-           Professional Online<br>
-           Gynaecological Consultation
-       </h1>
+        <h1>Dr Dariusz Consulting</h1>
 
-       <p style="
-           font-size:20px;
-           color:#555;
-           line-height:1.8;
-           max-width:750px;
-       ">
-           Confidential, clinician-led medical guidance designed for women
-           seeking clarity, discretion, and professional support from the
-           comfort of their home.
-       </p>
-        <a href="/consultation">
-            <button class="btn-primary">
-                Start Consultation
-            </button>
+        <p class="hero-subtitle">
+
+            Professional online gynaecological consultation service.
+
+        </p>
+
+        <p class="hero-text">
+
+            Confidential, structured, and clinician-led medical guidance
+
+            from the comfort of your home.
+
+        </p>
+
+        <a href="/consultation" class="btn-primary">
+
+            Start Consultation
+
         </a>
-        <section class="features">
 
+    </div>
+
+</section>
+
+<section class="features">
             <div class="feature-card">
                 <h3>Confidential</h3>
                 <p>
@@ -63,71 +61,4 @@
 
 </section>
 
-<section class="trust-section">
-
-    <div class="trust-card">
-
-        <h2>Private & Confidential</h2>
-
-        <p>
-
-            Every consultation is handled with strict discretion
-
-            and secure data protection principles.
-
-        </p>
-
-    </div>
-
-    <div class="trust-card">
-
-        <h2>Clinician-Led Guidance</h2>
-
-        <p>
-
-            Receive structured medical guidance from an experienced
-
-            healthcare professional.
-
-        </p>
-
-    </div>
-
-    <div class="trust-card">
-
-        <h2>Accessible From Anywhere</h2>
-
-        <p>
-
-            Obtain professional consultation support without the
-
-            need for travel or clinic waiting times.
-
-        </p>
-
-    </div>
-
-</section>
-
-<footer class="footer">
-
-    <div class="footer-content">
-
-        <h3>Dr Dariusz Consulting</h3>
-
-        <p>
-
-            Professional online gynaecological consultation service.
-
-        </p>
-
-        <p class="footer-note">
-
-            Confidential • Professional • Accessible
-
-        </p>
-
-    </div>
-
-</footer>
 {% endblock %}
