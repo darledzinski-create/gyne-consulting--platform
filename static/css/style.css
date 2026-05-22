@@ -50,8 +50,10 @@ body {
 
     border-radius: 28px;
 
-    padding: 110px 90px;
-
+    padding: 70px 90px;
+    
+    margin-bottom: 40px;
+    
     margin: 60px auto 40px;
 
     max-width: 1200px;
