@@ -32,6 +32,68 @@ body {
     margin-bottom: 12px;
 }
 
+.hero-premium {
+
+    background: linear-gradient(
+
+        135deg,
+
+        #0f172a,
+
+        #1e293b,
+
+        #334155
+
+    );
+
+    color: white;
+
+    border-radius: 28px;
+
+    padding: 90px 70px;
+
+    margin: 60px auto 40px;
+
+    max-width: 1100px;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+
+}
+
+.hero-premium h1 {
+
+    font-size: 56px;
+
+    margin-bottom: 20px;
+
+    color: white;
+
+}
+
+.hero-subtitle {
+
+    font-size: 22px;
+
+    opacity: 0.92;
+
+    margin-bottom: 18px;
+
+}
+
+.hero-text {
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    max-width: 700px;
+
+    margin-bottom: 35px;
+
+    opacity: 0.88;
+
+}
+
 /* BUTTON */
 .btn-primary {
     display: inline-block;
