@@ -414,6 +414,32 @@ textarea:focus {
 
 }
 
+.trust-bar {
+
+    width: 88%;
+
+    max-width: 920px;
+
+    margin: 18px auto 40px auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 18px 28px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+
+    font-weight: 600;
+
+    color: #1e293b;
+
+}
+
 .footer {
 
     background: #111827;
