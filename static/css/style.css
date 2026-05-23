@@ -55,6 +55,20 @@ body {
     box-shadow: 0 20px 45px rgba(0,0,0,0.12);
 
 }
+
+.hero-overlay {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+.hero-premium::before {
+
+    opacity: 0.15;
+
+}
 .hero-premium h1 {
 
     font-size: 64px;
