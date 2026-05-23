@@ -164,19 +164,14 @@ body {
 
     justify-content: center;
 
-    gap: 25px;
+    gap: 15px;
 
-    margin-top: 30px;
+    margin-top: 40px;
 
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
     align-items: stretch;
 
-}
-    
-   
-    flex-wrap: nowrap;
-    margin-top: 12px;
 }
 
 .feature-card {
@@ -187,7 +182,7 @@ body {
 
     padding: 30px;
 
-    width: 240px;
+    width: 210px;
 
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 
