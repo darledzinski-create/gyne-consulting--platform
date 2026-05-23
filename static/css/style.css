@@ -164,9 +164,9 @@ body {
 
     justify-content: center;
 
-    gap: 24px;
+    gap: 25px;
 
-    margin-top: 16px;
+    margin-top: 30px;
 
     flex-wrap: wrap;
 
@@ -179,15 +179,15 @@ body {
 
 .feature-card {
 
-    background: #ffffff;
+    background: white;
 
-    border-radius: 22px;
+    border-radius: 18px;
 
-    padding: 28px 24px;
+    padding: 30px;
 
     width: 280px;
 
-    box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 
     text-align: center;
 
