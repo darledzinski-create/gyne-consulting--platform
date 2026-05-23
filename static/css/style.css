@@ -170,6 +170,8 @@ body {
 
     flex-wrap: wrap;
 
+    align-items: stretch;
+
 }
     
    
@@ -185,13 +187,11 @@ body {
 
     padding: 30px;
 
-    width: 280px;
+    width: 240px;
 
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 
     text-align: center;
-
-    transition: transform 0.2s ease;
 
 }
 
