@@ -158,38 +158,6 @@ body {
     flex: 1;
 }
 
-.features {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    margin-top: 40px;
-
-    flex-wrap: nowrap;
-
-    align-items: stretch;
-
-}
-
-.feature-card {
-
-    background: white;
-
-    border-radius: 18px;
-
-    padding: 30px;
-
-    width: 210px;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-
-    text-align: center;
-
-}
-
 .feature-card:hover {
 
     transform: translateY(-4px);
