@@ -538,3 +538,33 @@ textarea:focus {
 
 }
 
+.features {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-top: 40px;
+
+    flex-wrap: wrap;
+}
+    
+
+.feature-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    width: 280px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+
+    text-align: center;
+}
+
+
