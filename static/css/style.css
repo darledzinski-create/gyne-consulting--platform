@@ -66,7 +66,7 @@ body {
 
 .hero-premium::before {
 
-    opacity: 0.15;
+    opacity: 1;
 
 }
 .hero-premium h1 {
@@ -100,10 +100,19 @@ body {
     max-width: 680px;
 
     margin-bottom: 35px;
-    
-    color: rgba(255,255,255,0.085);
-    
-   font-weight: 400;
+
+    color: #ffffff !important;
+
+    opacity: 1 !important;
+
+    font-weight: 400;
+
+}
+
+.hero-text p {
+
+    color: #ffffff !important;
+
 }
 
 /* BUTTON */
