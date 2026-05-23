@@ -72,9 +72,9 @@ body {
 
     margin-bottom: 18px;
 
-    opacity: 0.92;
-    
     color: rgba(255,255,255,0.92);
+
+    font-weight: 500;
 }
 
 .hero-text {
@@ -89,8 +89,7 @@ body {
     
     color: rgba(255,255,255,0.085);
     
-    opacity: 0.88;
-
+   font-weight: 400;
 }
 
 /* BUTTON */
