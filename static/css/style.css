@@ -126,12 +126,14 @@ body {
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
-    transition: 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .btn-primary:hover {
     background: #334155;
     transform: translateY(-2px);
+    box-shadow: 0 12px 25pxrgba(0,0,0,0.18);
+    opacity; 0.96;
 }
 
 .section {
