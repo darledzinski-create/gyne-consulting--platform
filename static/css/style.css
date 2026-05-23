@@ -159,13 +159,20 @@ body {
 }
 
 .features {
+
     display: flex;
+
     justify-content: center;
-    align-items: stretch;
-    gap: 30px;
-    padding: 40px 30px;
-    background: #f7f8fb;
-    border-radius: 24px;
+
+    gap: 24px;
+
+    margin-top: 16px;
+
+    flex-wrap: wrap;
+
+}
+    
+   
     flex-wrap: nowrap;
     margin-top: 12px;
 }
