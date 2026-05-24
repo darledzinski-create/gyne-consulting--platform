@@ -62,21 +62,19 @@ body {
 
     max-width: 920px;
 
-    min-height: 380px;
+    min-height: 240px;
 
-    margin: 40px auto 25px auto;
+    margin: 28px auto 16px auto;
 
     border-radius: 28px;
 
-    padding: 42px 55px;
+    padding: 28px 40px;
 
     background: linear-gradient(135deg, #111827, #1e293b);
 
     display: flex;
 
-    align-items: center;
-
-    margin-bottom: 18px;
+    align-items: flex-start;
 
     box-shadow: 0 20px 45px rgba(0,0,0,0.12);
 
