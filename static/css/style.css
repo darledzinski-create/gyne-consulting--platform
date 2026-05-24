@@ -29,7 +29,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     line-height: 1.1;
     font-weight: 700;
     margin-bottom: 25px;
@@ -167,7 +167,8 @@ body {
 
 .card {
     background: white;
-    padding: 20px;
+    padding: 30px 20px;
+    min-height: 180px;
     border-radius: 8px;
     flex: 1;
 }
@@ -180,9 +181,9 @@ body {
 
 .feature-card h3 {
 
-    font-size: 34px;
+    font-size: 1.8rem;
 
-    margin-bottom: 14px;
+    margin-bottom: 15px;
 
     color: #1f1f1f;
 
@@ -190,7 +191,7 @@ body {
 
 .feature-card p {
 
-    font-size: 17px;
+    font-size: 1rem;
 
     line-height: 1.6;
 
