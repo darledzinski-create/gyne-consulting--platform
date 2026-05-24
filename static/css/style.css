@@ -19,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 280px;
+    min-height: 220px;
     box-shadow:
         0 20px 50px rgba(0,0,0,0.25),
         inset 0 1px 0 rgba(255,255,255,0.04);
@@ -28,7 +28,7 @@ body {
         #1e2b4a 0%,
         #24385c 100%
     );
-    padding: 32px 40px;
+    padding: 24px 36px;
     max-width: 760px;
     margin: 0 auto;
 }
@@ -37,7 +37,7 @@ body {
     font-size: 2.3rem;
     line-height: 1.1;
     font-weight: 700;
-    margin-bottom: 25px;
+    margin-bottom: 14px;
     color: white
     max-width: 580px;
     
@@ -46,6 +46,8 @@ body {
 .hero p {
 
     font-size: 1.3rem;
+
+    margin_top: 10px;
 
     line-height: 1.8;
 
@@ -137,7 +139,7 @@ body {
     border: 1px solid rgba(255,255,255,0.12);
     backdrop-filter: blur(6px);
     color: white;
-    padding: 14px 32px;
+    padding: 8px 18px;
     border-radius: 14px;
     font-size: 1rem;
     font-weight: 600;
