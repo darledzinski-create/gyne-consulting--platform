@@ -19,7 +19,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    min-height: 520px;
+    min-height: 560px;
     box-shadow:
         0 20px 50px rgba(0,0,0,0.25),
         inset 0 1px 0 rgba(255,255,255,0.04);
@@ -30,11 +30,25 @@ body {
 }
 
 .hero h1 {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.92);
+    font-size: 3.8rem;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: white
     max-width: 580px;
     
+}
+
+.hero p {
+
+    font-size: 1.3rem;
+
+    line-height: 1.8;
+
+    color: rgba(255,255,255,0.92);
+
+    max-width: 580px;
+
 }
 
 .hero-premium {
@@ -111,12 +125,6 @@ body {
     opacity: 1 !important;
 
     font-weight: 400;
-
-}
-
-.hero-text p {
-
-    color: #ffffff !important;
 
 }
 
