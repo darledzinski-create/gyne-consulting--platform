@@ -468,51 +468,91 @@ textarea:focus {
 
 .footer {
 
-    background: #111827;
+    background: linear-gradient(135deg, #0f172a, #1e293b);;
 
     color: white;
 
-    padding: 60px 20px;
+    padding: 45px 20px;
 
-    margin-top: 100px;
+    margin-top: 60px;
 
     text-align: center;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
 
 }
 
 .footer-content {
 
-    max-width: 800px;
+    max-width: 900px;
 
-    margin: auto;
+    margin: 0 auto;
 
 }
 
 .footer h3 {
 
-    font-size: 28px;
+    font-size: 1.5rem;
 
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+
+    font-weight: 700;
 
 }
 
 .footer p {
 
-    color: #d1d5db;
+    color: rgba(255,255,255,0.78);
+
+    margin-bottom: 25px;
+
+    line-height: 1.6;
 
 }
 
-.footer-note {
+.footer-links {
 
-    margin-top: 25px;
+    display: flex;
 
-    font-size: 14px;
+    justify-content: center;
 
-    letter-spacing: 2px;
+    gap: 30px;
 
-    text-transform: uppercase;
+    margin-bottom: 30px;
 
-    opacity: 0.8;
+    flex-wrap: wrap;
+
+}
+
+.footer-links a {
+
+    color: rgba(255,255,255,0.9);
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: 0.3s;
+
+}
+
+.footer-links a:hover {
+
+    color: #ffffff;
+
+    opacity: 0.7;
+
+}
+
+.footer-bottom {
+
+    font-size: 0.9rem;
+
+    color: rgba(255,255,255,0.55);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    padding-top: 20px;
 
 }
 
