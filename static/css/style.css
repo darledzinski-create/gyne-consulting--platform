@@ -200,39 +200,68 @@ body {
 }
 
 .top-bar {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
-    padding: 22px 60px;
-    background-color: white;
-    border-bottom: 1px solid #ececec;
+
+    padding: 18px 60px;
+
+    background: rgba(255,255,255,0.92);
+
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+
+    backdrop-filter: blur(8px);
+
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
+
 }
 
 .logo {
-    font-size: 20px;
+
+    font-size: 1.7rem;
+
     font-weight: 700;
-    color: #1d2736;
+
+    color: #111827;
+
+    letter-spacing: -0.5px;
+
 }
 
 nav {
+
     display: flex;
-    gap: 20px;
+
+    gap: 34px;
+
 }
 
 nav a {
+
     text-decoration: none;
-    color: #1d2736;
+
+    color: #1f2937;
+
     font-weight: 600;
-    transition: opacity 0.2s ease;
+
+    font-size: 0.96rem;
+
+    transition: all 0.25s ease;
+
 }
 
 nav a:hover {
-    opacity: 0.65;
-}
 
+    color: #2563eb;
+
+}
 .consultation-section {
     padding: 15px 20px 25px;
     display: flex;
