@@ -688,4 +688,40 @@ textarea:focus {
 
 }
 
+.form-submit {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #111827, #1e293b);
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+
+    box-shadow: 0 10px 24px rgba(15,23,42,0.12);
+
+}
+
+.form-submit:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 16px 32px rgba(15,23,42,0.18);
+
+}
+
 
