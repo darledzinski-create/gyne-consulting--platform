@@ -167,13 +167,19 @@ body {
 
     padding: 13px 26px;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     background: rgba(255,255,255,0.08);
 
     border: 1px solid rgba(255,255,255,0.16);
 
     color: white;
+
+    witdth: auto;
+
+    min-width: 260px;
+
+    display: inline-block;
 
     font-weight: 600;
 
