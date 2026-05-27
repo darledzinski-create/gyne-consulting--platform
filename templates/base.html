@@ -55,5 +55,31 @@
 
 </footer>
 
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.querySelector(".consultation-form");
+
+    const button = document.querySelector(".submit-btn");
+
+    if (form && button) {
+
+        form.addEventListener("submit", function () {
+
+            button.disabled = true;
+
+            button.innerHTML = "Submitting Consultation...";
+
+            button.style.opacity = "0.75";
+
+        });
+
+    }
+
+});
+
+</script>
+
 </body>
 </html>
