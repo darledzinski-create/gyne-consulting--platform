@@ -3,28 +3,65 @@
 {% block title %}Thank You{% endblock %}
 
 {% block content %}
-<div class="container">
-    {% if urgency == "urgent" %}
-        <h2 style="color:red;">
-            ⚠️ This platform is not suitable for urgent conditions
-        </h2>
+<div class="thank-you-section">
 
-    {% elif urgency == "not_urgent" %}
-        <h2>Thank you for reaching out.</h2>
+    <div class="thank-you-box">
 
-    {% else %}
-        <h2>Invalid submission</h2>
-    {% endif %}
+        {% if urgency == "urgent" %}
 
-<p>Your message has been received and will be reviewed carefully and personally.</p>
+            <div class="success-icon urgent-icon">⚠️</div>
 
-<p>Many concerns become clearer once properly discussed.  
-This consultation is the first step toward clarity.</p>
+            <h1>Urgent Consultation Received</h1>
 
-<p>If your symptoms are severe, worsening, or urgent, please seek immediate in-person medical care.</p>
+            <p class="thank-message">
 
-{% if urgency != "urgent" %}
-    <p><strong>You will receive a response within 24 hours.</strong></p>
-{% endif %}
+                Your urgent consultation request has been submitted successfully.
+
+            </p>
+
+            <p class="thank-subtext">
+
+                This platform is not suitable for medical emergencies.
+
+                If your symptoms are severe or worsening,
+
+                please seek immediate in-person medical care.
+
+            </p>
+
+        {% elif urgency == "not_urgent" %}
+
+            <div class="success-icon">✓</div>
+
+            <h1>Consultation Submitted Successfully</h1>
+
+            <p class="thank-message">
+
+                Thank you for reaching out.
+
+            </p>
+
+            <p class="thank-subtext">
+
+                Your consultation has been received securely and will be reviewed carefully and confidentially.
+
+                You will receive a response within 24 hours.
+
+            </p>
+
+        {% else %}
+
+            <h1>Invalid Submission</h1>
+
+        {% endif %}
+
+        <a href="/" class="btn-primary">
+
+            Return Home
+
+        </a>
+
+    </div>
+
 </div>
 {% endblock %}
