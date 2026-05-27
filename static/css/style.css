@@ -678,17 +678,15 @@ textarea:focus {
 
     display: inline-block;
 
-    width: fit-content;
+    padding: 14px 30px;
 
-    padding: 14px 28px;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
 
-    background: #2563eb;
+    color: white;
 
-    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.15);
 
-    border: none;
-
-    border-radius: 12px;
+    border-radius: 14px;
 
     font-size: 1rem;
 
@@ -698,7 +696,9 @@ textarea:focus {
 
     cursor: pointer;
 
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
+
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
 
     margin-top: 20px;
 
@@ -706,9 +706,11 @@ textarea:focus {
 
 .btn-primary:hover {
 
-    background: #1d4ed8;
+    transform: translateY(-2px);
 
-    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
 
 }
 .form-submit {
