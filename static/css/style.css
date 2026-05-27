@@ -676,18 +676,41 @@ textarea:focus {
 
 .btn-primary {
 
+    display: inline-block;
+
+    width: fit-content;
+
+    padding: 14px 28px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
     transition: all 0.25s ease;
+
+    margin-top: 20px;
 
 }
 
 .btn-primary:hover {
 
-    transform: translateY(-2px);
+    background: #1d4ed8;
 
-    box-shadow: 0 10px 25px rgba(15,23,42,0.18);
+    transform: translateY(-1px);
 
 }
-
 .form-submit {
 
     width: 100%;
