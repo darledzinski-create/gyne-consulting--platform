@@ -109,8 +109,7 @@ def consultation():
             
             urgency_clean = (urgency or "").strip().lower()
 
-            urgency_clean = urgency_clean.replace(" ", "_")
-
+           
             # ----------------------------
             # 1. Decide subject
             # ----------------------------
