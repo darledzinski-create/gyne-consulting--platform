@@ -327,7 +327,8 @@ nav a:hover {
 
 .consultation-container {
     width: 100%;
-    max-width: 700px;
+    max-width: 1200px;
+    margin: auto;
     background: white;
     padding: 28px 35px;
     border-radius: 18px;
@@ -390,6 +391,7 @@ nav a:hover {
 .feature-card {
     max-width: 900px;
     width: 100%;
+    padding: 30px;
     margin: 0 auto;
 }
 
