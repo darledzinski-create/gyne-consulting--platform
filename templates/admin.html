@@ -82,7 +82,7 @@
 
            </div>
 
-          {% if consultation["urgency"] == "urgent" %}
+       {% if consultation.urgency == "urgent" %}
 
 <p>
 
@@ -139,34 +139,80 @@
 </p>
 
 {% endif %}
-            
-    {% elif consultation.status == "In Progress" %}
+
+<p>
+
+    <strong>Status:</strong>
+
+    {% if consultation.status == "New" %}
+
         <span style="
-            background:#ff9800;
+
+            background:#007bff;
+
             color:white;
+
             padding:6px 12px;
+
             border-radius:20px;
+
             font-size:14px;
+
             font-weight:bold;
+
         ">
+
+            NEW
+
+        </span>
+
+    {% elif consultation.status == "In Progress" %}
+
+        <span style="
+
+            background:#ff9800;
+
+            color:white;
+
+            padding:6px 12px;
+
+            border-radius:20px;
+
+            font-size:14px;
+
+            font-weight:bold;
+
+        ">
+
             IN PROGRESS
+
         </span>
 
     {% else %}
-        <span style="
-            background:#28a745;
-            color:white;
-            padding:6px 12px;
-            border-radius:20px;
-            font-size:14px;
-            font-weight:bold;
-        ">
-            COMPLETED
-        </span>
-    {% endif %}
-</p>
 
-              </div>
+        <span style="
+
+            background:#28a745;
+
+            color:white;
+
+            padding:6px 12px;
+
+            border-radius:20px;
+
+            font-size:14px;
+
+            font-weight:bold;
+
+        ">
+
+            COMPLETED
+
+        </span>
+
+    {% endif %}
+
+</p>
             
             <div class="status-buttons">
 
