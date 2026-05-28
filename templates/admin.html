@@ -60,36 +60,64 @@
 
            </div>
 
-           {% if consultation["urgency"] == "urgent" %}
-               <p>
-                   <strong>Urgency:</strong>
-                   <span style="color: red; font-weight: bold;">
-                       URGENT
-                   </span>
-               </p>
-           {% else %}
-               <p>
-                   <strong>Urgency:</strong>
-                   <span style="color: green; font-weight: bold;">
-                       NON-URGENT
-                   </span>
-               </p>
-              <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;">
+          {% if consultation["urgency"] == "urgent" %}
+
 <p>
-    <strong>Status:</strong>
 
-    {% if consultation.status == "New" %}
-        <span style="
-            background:#007bff;
-            color:white;
-            padding:6px 12px;
-            border-radius:20px;
-            font-size:14px;
-            font-weight:bold;
-        ">
-            NEW
-        </span>
+    <strong>Urgency:</strong>
 
+    <span style="
+
+        background:#dc3545;
+
+        color:white;
+
+        padding:6px 12px;
+
+        border-radius:20px;
+
+        font-size:14px;
+
+        font-weight:bold;
+
+    ">
+
+        URGENT
+
+    </span>
+
+</p>
+
+{% else %}
+
+<p>
+
+    <strong>Urgency:</strong>
+
+    <span style="
+
+        background:#28a745;
+
+        color:white;
+
+        padding:6px 12px;
+
+        border-radius:20px;
+
+        font-size:14px;
+
+        font-weight:bold;
+
+    ">
+
+        NON-URGENT
+
+    </span>
+
+</p>
+
+{% endif %}
+            
     {% elif consultation.status == "In Progress" %}
         <span style="
             background:#ff9800;
