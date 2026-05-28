@@ -296,22 +296,14 @@ def admin():
     if search:
         consultations = conn.execute("""
             SELECT * FROM consultations
-            WHERE LOWER(name) LIKE ?
-            OR LOWER(email) LIKE ?
-            OR LOWER(message) LIKE ?
             ORDER BY
                 CASE
-                    WHEN status = 'New' THEN 1
-                    WHEN status = 'In Progress' THEN 2
-                    WHEN status = 'Completed' THEN 3
+                    WHEN urgency = 'urgent' THEN 0
+                    ELSE 1
                 END,
                 id DESC
-        """, (
-            f"%{search}%",
-            f"%{search}%",
-            f"%{search}%"
-        )).fetchall()
-
+        """).fetchall()
+        
     else:
         consultations = conn.execute("""
             SELECT * FROM consultations
