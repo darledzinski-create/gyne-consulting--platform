@@ -300,6 +300,15 @@ def admin():
 
     conn = get_db_connection()
 
+    all_rows = conn.execute("""
+        SELECT id, name, email
+        FROM consultations
+    """).fetchall()
+
+    print("DATABASE CONTENTS:")
+    for row in all_rows:
+        print(row["id"], row["name"], row["email"])
+
     search = request.args.get("search", "").strip().lower()
 
     if search:
