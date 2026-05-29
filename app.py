@@ -61,6 +61,8 @@ conn.close()
 
 conn = get_db_connection()
 
+
+
 try:
     conn.execute(
         "ALTER TABLE consultations ADD COLUMN doctor_notes TEXT"
@@ -308,14 +310,25 @@ def admin():
 
     conn = get_db_connection()
 
+    import os
+    print("CURRENT DIRECTORY:", os.getcwd())
+    print("DATABASE FILE EXISTS:", os.path.exists("consultations.db"))
+    print("DATABASE FILE SIZE:", os.path.getsize("consultations.db"))
+
     all_rows = conn.execute("""
         SELECT id, name, email
         FROM consultations
     """).fetchall()
 
-    print("DATABASE CONTENTS:")
+    print("DATABASE ROW COUNT:", len(all_rows))
+
     for row in all_rows:
-        print(row["id"], row["name"], row["email"])
+        print(
+            "ROW:",
+            row["id"],
+            row["name"],
+            row["email"]
+    )
 
     search = request.args.get("search", "").strip().lower()
 
