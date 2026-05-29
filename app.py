@@ -325,6 +325,9 @@ def admin():
 
     print("SEARCH TERM:", search)
     print("RESULTS FOUND:", len(consultations))
+
+    for c in consultations:
+        print("FOUND:", c["id"], c["name"], c["email"])
     
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
