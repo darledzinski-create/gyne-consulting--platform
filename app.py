@@ -100,6 +100,10 @@ def consultation():
             
             conn = get_db_connection()
 
+            import os
+
+            print("CONSULTATION DB:", os.path.abspath("consultations.db"))
+
             conn.execute("""
                 INSERT INTO consultations
                 (name, email, urgency, message, timestamp)
@@ -309,6 +313,8 @@ def admin():
         return redirect(url_for("login"))
 
     conn = get_db_connection()
+
+    print("ADMIN DB:", os.path.abspath("consultations.db"))
 
     import os
     print("CURRENT DIRECTORY:", os.getcwd())
