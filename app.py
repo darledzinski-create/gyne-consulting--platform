@@ -323,8 +323,8 @@ def admin():
                 id DESC
         """).fetchall()
 
-           print("SEARCH TERM:", search)
-           print("RESULTS FOUND:", len(consultations))
+    print("SEARCH TERM:", search)
+    print("RESULTS FOUND:", len(consultations))
     
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
