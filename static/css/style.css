@@ -195,6 +195,20 @@ body {
     
 }
 
+.status-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin: 20px 0;
+
+}
+
 .section {
     margin-top: 60px;
     text-align: center;
