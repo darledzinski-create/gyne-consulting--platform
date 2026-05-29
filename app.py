@@ -104,6 +104,15 @@ def consultation():
                 VALUES (?, ?, ?, ?, ?)
             """, (name, email, urgency, message, timestamp))
 
+            all_rows = conn.execute("""
+                SELECT id, name, email
+                FROM consultations
+                ORDER BY id DESC
+            """).fetchall()
+
+            for row in all_rows:
+                print(row["id"], row["name"], row["email"])
+
             conn.commit()
             conn.close()
             
