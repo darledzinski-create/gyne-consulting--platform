@@ -46,15 +46,20 @@
 
        <div class="feature-card"
             style="
-               margin-bottom:25px;
+                margin-bottom:25px;
+                max-width:700px;
+                width:100%;
+                margin-left:auto;
+                margin-right:auto;
+                padding:30px;
 
-               {% if consultation.urgency == 'urgent' %}
-                   border-left:6px solid #dc3545;
-                   box-shadow:0 0 15px rgba(220,53,69,0.15);
-               {% else %}
-                   border-left:6px solid #28a745;
-               {% endif %}
-            ">
+                {% if consultation.urgency == 'urgent' %}
+                    border-left:6px solid #dc3545;
+                    box-shadow:0 0 15px rgba(220,53,69,0.15);
+                {% else %}
+                    border-left:6px solid #28a745;
+                {% endif %}
+        ">
            
            <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
 
