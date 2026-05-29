@@ -342,7 +342,7 @@ def admin():
                 id DESC
         """).fetchall()
 
-   for c in consultations:
+    for c in consultations:
         print("FOUND:", c["id"], c["name"], c["email"])
     
     total_count = conn.execute(
