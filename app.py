@@ -293,14 +293,14 @@ def admin():
 
     search = request.args.get("search", "").strip().lower()
 
-   if search:
-       consultations = conn.execute("""
-           SELECT *
-           FROM consultations
-           WHERE LOWER(name) LIKE ?
-           OR LOWER(email) LIKE ?
-           ORDER BY id DESC
-       """, (f"%{search}%", f"%{search}%")).fetchall()
+    if search:
+        consultations = conn.execute("""
+            SELECT *
+            FROM consultations
+            WHERE LOWER(name) LIKE ?
+            OR LOWER(email) LIKE ?
+            ORDER BY id DESC
+        """, (f"%{search}%", f"%{search}%")).fetchall()
         
     else:
         consultations = conn.execute("""
