@@ -30,22 +30,17 @@
            padding:30px;
        ">
 
-     style="
+           <p><strong>Total Consultations:</strong> {{ total_count }}</p>
 
-     margin-bottom:25px;
+           <p style="color:red;">
+               <strong>Urgent:</strong> {{ urgent_count }}
+           </p>
 
-     ">
-            <p><strong>Total Consultations:</strong> {{ total_count }}</p>
-
-            <p style="color:red;">
-                <strong>Urgent:</strong> {{ urgent_count }}
-            </p>
-
-            <p style="color:green;">
+           <p style="color:green;">
                 <strong>Non-Urgent:</strong> {{ non_urgent_count }}
-            </p>
+           </p>
 
-        </div>
+       </div>
 
         {% for consultation in consultations %}
 
