@@ -316,7 +316,6 @@ def admin():
 
     print("ADMIN DB:", os.path.abspath("consultations.db"))
 
-    import os
     print("CURRENT DIRECTORY:", os.getcwd())
     print("DATABASE FILE EXISTS:", os.path.exists("consultations.db"))
     print("DATABASE FILE SIZE:", os.path.getsize("consultations.db"))
