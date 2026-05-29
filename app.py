@@ -314,26 +314,10 @@ def admin():
 
     conn = get_db_connection()
 
-    print("ADMIN DB:", os.path.abspath("consultations.db"))
-
-    print("CURRENT DIRECTORY:", os.getcwd())
-    print("DATABASE FILE EXISTS:", os.path.exists("consultations.db"))
-    print("DATABASE FILE SIZE:", os.path.getsize("consultations.db"))
-
     all_rows = conn.execute("""
         SELECT id, name, email
         FROM consultations
     """).fetchall()
-
-    print("DATABASE ROW COUNT:", len(all_rows))
-
-    for row in all_rows:
-        print(
-            "ROW:",
-            row["id"],
-            row["name"],
-            row["email"]
-    )
 
     search = request.args.get("search", "").strip().lower()
 
@@ -358,10 +342,7 @@ def admin():
                 id DESC
         """).fetchall()
 
-    print("SEARCH TERM:", search)
-    print("RESULTS FOUND:", len(consultations))
-
-    for c in consultations:
+   for c in consultations:
         print("FOUND:", c["id"], c["name"], c["email"])
     
     total_count = conn.execute(
