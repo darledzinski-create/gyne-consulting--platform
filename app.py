@@ -314,11 +314,6 @@ def admin():
 
     conn = get_db_connection()
 
-    all_rows = conn.execute("""
-        SELECT id, name, email
-        FROM consultations
-    """).fetchall()
-
     search = request.args.get("search", "").strip().lower()
 
     if search:
