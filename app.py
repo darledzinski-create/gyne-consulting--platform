@@ -363,7 +363,7 @@ def admin():
         consultations=consultations,
         total_count=total_count,
         urgent_count=urgent_count,
-        non_urgent_count=non_urgent_count
+        non_urgent_count=non_urgent_count,
         page=page,
         total_pages=total_pages,
     )
