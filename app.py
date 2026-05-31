@@ -314,6 +314,10 @@ def admin():
 
     conn = get_db_connection()
 
+    page = request.args.get("page", 1, type=int)
+    per_page = 10
+    offset = (page - 1) * per_page
+
     search = request.args.get("search", "").strip().lower()
 
     if search:
@@ -327,19 +331,22 @@ def admin():
         
     else:
         consultations = conn.execute("""
-            SELECT * FROM consultations
-            ORDER BY
-                CASE
-                    WHEN status = 'New' THEN 1
-                    WHEN status = 'In Progress' THEN 2
-                    WHEN status = 'Completed' THEN 3
-                END,
-                id DESC
-        """).fetchall()
+        SELECT * FROM consultations
+        ORDER BY
+            CASE
+                WHEN status = 'New' THEN 1
+                WHEN status = 'In Progress' THEN 2
+                WHEN status = 'Completed' THEN 3
+            END,
+            id DESC
+        LIMIT ? OFFSET ?
+    """, (per_page, offset)).fetchall()
 
     total_count = conn.execute(
         "SELECT COUNT(*) FROM consultations"
     ).fetchone()[0]
+
+    total_pages = (total_count + per_page - 1) // per_page
 
     urgent_count = conn.execute(
         "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
@@ -357,7 +364,10 @@ def admin():
         total_count=total_count,
         urgent_count=urgent_count,
         non_urgent_count=non_urgent_count
+        page=page,
+        total_pages=total_pages,
     )
+
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
 
