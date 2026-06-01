@@ -345,16 +345,16 @@ def export_csv():
    
     for row in consultations:
 
-    writer.writerow([
-        row["id"],
-        row["name"],
-        row["email"],
-        row["urgency"],
-        row["status"],
-        row["message"],
-        row["doctor_notes"],
-        row["timestamp"]
-    ])
+        writer.writerow([
+            row["id"],
+            row["name"],
+            row["email"],
+            row["urgency"],
+            row["status"],
+            row["message"],
+            row["doctor_notes"],
+            row["timestamp"]
+        ])
 
     conn.close()
 
