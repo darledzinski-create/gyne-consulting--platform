@@ -6,6 +6,8 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 import sqlite3
 import os
+import csv
+import io
 
 
 mailjet = Client(
@@ -305,6 +307,82 @@ def update_notes(id):
     conn.close()
 
     return redirect(url_for("admin"))
+
+@app.route("/export-csv")
+
+def export_csv():
+
+    if not session.get("admin_logged_in"):
+
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+
+    consultations = conn.execute("""
+
+        SELECT id, name, email, urgency, status, timestamp
+
+        FROM consultations
+
+        ORDER BY id DESC
+
+    """).fetchall()
+
+    output = io.StringIO()
+
+    writer = csv.writer(output)
+
+    writer.writerow([
+
+        "ID",
+
+        "Name",
+
+        "Email",
+
+        "Urgency",
+
+        "Status",
+
+        "Timestamp"
+
+    ])
+
+    for row in consultations:
+
+        writer.writerow([
+
+            row["id"],
+
+            row["name"],
+
+            row["email"],
+
+            row["urgency"],
+
+            row["status"],
+
+            row["timestamp"]
+
+        ])
+
+    conn.close()
+
+    return Response(
+
+        output.getvalue(),
+
+        mimetype="text/csv",
+
+        headers={
+
+            "Content-Disposition":
+
+            "attachment; filename=consultations.csv"
+
+        }
+
+    )
 
 @app.route("/admin")
 def admin():
