@@ -320,12 +320,11 @@ def export_csv():
 
     consultations = conn.execute("""
 
-        SELECT id, name, email, urgency, status, timestamp
-
-        FROM consultations
-
-        ORDER BY id DESC
-
+       SELECT id, name, email, urgency, status,
+              message, doctor_notes, timestamp
+       FROM consultations
+       ORDER BY id DESC
+       
     """).fetchall()
 
     output = io.StringIO()
@@ -333,38 +332,29 @@ def export_csv():
     writer = csv.writer(output)
 
     writer.writerow([
-
         "ID",
-
         "Name",
-
         "Email",
-
         "Urgency",
-
         "Status",
-
+        "Message",
+        "Doctor Notes",
         "Timestamp"
-
     ])
 
+   
     for row in consultations:
 
-        writer.writerow([
-
-            row["id"],
-
-            row["name"],
-
-            row["email"],
-
-            row["urgency"],
-
-            row["status"],
-
-            row["timestamp"]
-
-        ])
+    writer.writerow([
+        row["id"],
+        row["name"],
+        row["email"],
+        row["urgency"],
+        row["status"],
+        row["message"],
+        row["doctor_notes"],
+        row["timestamp"]
+    ])
 
     conn.close()
 
