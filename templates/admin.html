@@ -46,6 +46,18 @@
                 <strong>Non-Urgent:</strong> {{ non_urgent_count }}
            </p>
 
+           <p style="color:blue;">
+               New: {{ new_count }}
+           </p>
+
+           <p style="color:orange;">
+               In Progress: {{ in_progress_count }}
+           </p>
+
+           <p style="color:green;">
+               Completed: {{ completed_count }}
+           </p>
+
        </div>
 
         {% for consultation in consultations %}
