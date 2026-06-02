@@ -424,6 +424,18 @@ def admin():
         "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
     ).fetchone()[0]
 
+    new_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations WHERE status='New'"
+    ).fetchone()[0]
+
+    in_progress_count = conn.execute(
+        "SELECT COUNT(*) FROM consultations WHERE status='In Progress'"
+    ).fetchone()[0]
+
+    completed_count = conn.execute(
+         "SELECT COUNT(*) FROM consultations WHERE status='Completed'"
+    ).fetchone()[0]
+
     conn.close()
 
     return render_template(
@@ -432,10 +444,13 @@ def admin():
         total_count=total_count,
         urgent_count=urgent_count,
         non_urgent_count=non_urgent_count,
+        new_count=new_count,
+        in_progress_count=in_progress_count,
+        completed_count=completed_count,
         page=page,
         total_pages=total_pages,
     )
-
+    
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
 
