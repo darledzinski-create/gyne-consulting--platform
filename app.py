@@ -383,20 +383,28 @@ def admin():
     conn = get_db_connection()
 
     page = request.args.get("page", 1, type=int)
+    status_filter = request.args.get("status", "")
     per_page = 10
     offset = (page - 1) * per_page
 
     search = request.args.get("search", "").strip().lower()
 
     if search:
-        consultations = conn.execute("""
-            SELECT *
-            FROM consultations
-            WHERE LOWER(name) LIKE ?
-            OR LOWER(email) LIKE ?
-            ORDER BY id DESC
-        """, (f"%{search}%", f"%{search}%")).fetchall()
-        
+        if status_filter:
+            consultations = conn.execute("""
+                SELECT *
+                FROM consultations
+                WHERE status = ?
+                ORDER BY id DESC
+                LIMIT ? OFFSET ?
+            """, (status_filter, per_page, offset)).fetchall()
+        else:
+            consultations = conn.execute("""
+                SELECT *
+                FROM consultations
+                ORDER BY id DESC
+                LIMIT ? OFFSET ?
+            """, (per_page, offset)).fetchall()
     else:
         consultations = conn.execute("""
         SELECT * FROM consultations
