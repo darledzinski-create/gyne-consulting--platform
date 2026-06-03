@@ -506,6 +506,54 @@ def delete_consultation(id):
 
     return redirect("/admin")
 
+consultations = conn.execute("""
+            SELECT *
+            FROM consultations
+            WHERE LOWER(name) LIKE ?
+            OR LOWER(email) LIKE ?
+            ORDER BY id DESC
+        """, (f"%{search}%", f"%{search}%")).fetchall()
+@app.route("/offer-appointment/<int:consultation_id>")
+def offer_appointment(consultation_id):
+
+    conn = get_db_connection()
+
+    consultation = conn.execute(
+
+        "SELECT * FROM consultations WHERE id = ?",
+
+        (consultation_id,)
+
+    ).fetchone()
+
+    if consultation:
+
+        conn.execute("""
+
+            INSERT INTO appointments
+
+            (name, email, status, created_at)
+
+            VALUES (?, ?, ?, ?)
+
+        """, (
+
+            consultation["name"],
+
+            consultation["email"],
+
+            "Offered",
+
+            datetime.now().strftime("%d %B %Y, %H:%M")
+
+        ))
+
+        conn.commit()
+
+    conn.close()
+
+    return redirect(url_for("admin"))
+
 @app.route("/update-status/<int:id>/<status>")
 def update_status(id, status):
 
