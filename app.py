@@ -513,6 +513,7 @@ consultations = conn.execute("""
             OR LOWER(email) LIKE ?
             ORDER BY id DESC
         """, (f"%{search}%", f"%{search}%")).fetchall()
+
 @app.route("/offer-appointment/<int:consultation_id>")
 def offer_appointment(consultation_id):
 
