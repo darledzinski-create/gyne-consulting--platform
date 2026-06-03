@@ -573,8 +573,25 @@ def appointments():
         "appointments.html",
 
         appointments=appointments
-
     )
+    
+@app.route("/appointment-status/<int:id>/<status>")
+def appointment_status(id, status):
+
+    conn = get_db_connection()
+
+    conn.execute(
+
+        "UPDATE appointments SET status = ? WHERE id = ?",
+
+        (status, id)
+    )
+
+    conn.commit()
+
+    conn.close()
+
+    return redirect(url_for("appointments"))
 
 @app.route("/update-status/<int:id>/<status>")
 def update_status(id, status):
