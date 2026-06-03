@@ -44,6 +44,21 @@ def create_table():
         )
     """)
 
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS appointments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT,
+        practice TEXT,
+        preferred_date TEXT,
+        preferred_time TEXT,
+        reason TEXT,
+        status TEXT DEFAULT 'Pending',
+        created_at TEXT
+    )
+    """)
+
     conn.commit()
     conn.close()
 
