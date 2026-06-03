@@ -547,7 +547,7 @@ def offer_appointment(consultation_id):
 
     return redirect(url_for("admin"))
 
-@app.route("/appointments"
+@app.route("/appointments")
 def appointments():
 
     if not session.get("admin_logged_in"):
