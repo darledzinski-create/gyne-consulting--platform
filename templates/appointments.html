@@ -17,6 +17,29 @@
         <p><strong>Email:</strong> {{ appointment.email }}</p>
 
         <p><strong>Status:</strong> {{ appointment.status }}</p>
+    <div style="margin-top:15px;">
+
+        <a href="/appointment-status/{{ appointment.id }}/Awaiting Payment"
+           class="btn-primary">
+           Awaiting Payment
+        </a>
+
+        <a href="/appointment-status/{{ appointment.id }}/Paid"
+           class="btn-primary">
+           Paid
+        </a>
+
+        <a href="/appointment-status/{{ appointment.id }}/Confirmed"
+           class="btn-primary">
+           Confirmed
+        </a>
+
+        <a href="/appointment-status/{{ appointment.id }}/Completed"
+           class="btn-primary">
+           Completed
+        </a>
+
+    </div>
 
         <p><strong>Created:</strong> {{ appointment.created_at }}</p>
 
