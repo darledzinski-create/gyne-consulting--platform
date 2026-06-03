@@ -547,6 +547,35 @@ def offer_appointment(consultation_id):
 
     return redirect(url_for("admin"))
 
+@app.route("/appointments"
+def appointments():
+
+    if not session.get("admin_logged_in"):
+
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+
+    appointments = conn.execute("""
+
+        SELECT *
+
+        FROM appointments
+
+        ORDER BY id DESC
+
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+
+        "appointments.html",
+
+        appointments=appointments
+
+    )
+
 @app.route("/update-status/<int:id>/<status>")
 def update_status(id, status):
 
