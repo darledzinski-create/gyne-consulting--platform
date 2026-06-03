@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="consultation-container">
+
+    <h1>Appointments</h1>
+
+    {% for appointment in appointments %}
+
+    <div class="feature-card" style="margin-bottom:25px;">
+
+        <p><strong>ID:</strong> {{ appointment.id }}</p>
+
+        <p><strong>Name:</strong> {{ appointment.name }}</p>
+
+        <p><strong>Email:</strong> {{ appointment.email }}</p>
+
+        <p><strong>Status:</strong> {{ appointment.status }}</p>
+
+        <p><strong>Created:</strong> {{ appointment.created_at }}</p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
