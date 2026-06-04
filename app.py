@@ -585,6 +585,11 @@ def appointments():
 
     """).fetchall()
 
+    print("APPOINTMENTS FOUND:", len(appointments))
+
+    for a in appointments:
+        print("APPOINTMENT:", dict(a))
+
     conn.close()
 
     return render_template(
