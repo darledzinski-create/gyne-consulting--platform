@@ -593,6 +593,24 @@ def appointments():
 
         appointments=appointments
     )
+
+@app.route("/delete-appointment/<int:id>")
+def delete_appointment(id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "DELETE FROM appointments WHERE id = ?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("appointments"))
     
 @app.route("/appointment-status/<int:id>/<status>")
 def appointment_status(id, status):
