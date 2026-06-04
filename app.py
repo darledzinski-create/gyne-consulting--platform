@@ -506,7 +506,8 @@ def delete_consultation(id):
 
     return redirect("/admin")
 
-@app.route("/offer-appointment/<int:consultation_id>")
+@app.route("/offer-appointment/<int:consultation_id>", methods=["GET", "POST"])
+
 def offer_appointment(consultation_id):
 
     conn = get_db_connection()
@@ -519,15 +520,17 @@ def offer_appointment(consultation_id):
 
     ).fetchone()
 
-    if consultation:
+    if request.method == "POST":
 
         conn.execute("""
 
             INSERT INTO appointments
 
-            (name, email, status, created_at)
+            (name, email, practice, preferred_date,
 
-            VALUES (?, ?, ?, ?)
+             preferred_time, reason, status, created_at)
+
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 
         """, (
 
@@ -535,7 +538,15 @@ def offer_appointment(consultation_id):
 
             consultation["email"],
 
-            "Offered",
+            request.form["practice"],
+
+            request.form["preferred_date"],
+
+            request.form["preferred_time"],
+
+            request.form["reason"],
+
+            "Awaiting Payment",
 
             datetime.now().strftime("%d %B %Y, %H:%M")
 
@@ -543,10 +554,18 @@ def offer_appointment(consultation_id):
 
         conn.commit()
 
-    conn.close()
+        conn.close()
 
-    return redirect(url_for("admin"))
+        return redirect(url_for("appointments"))
 
+    return render_template(
+
+        "book_appointment.html",
+
+        consultation=consultation
+
+    )
+    
 @app.route("/appointments")
 def appointments():
 
