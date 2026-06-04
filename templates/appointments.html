@@ -81,17 +81,14 @@
 
         <p><strong>Created:</strong> {{ appointment.created_at }}</p>
 
-        <a href="/delete-appointment/{{ appointment.id }}"
-           class="btn-primary"
-           style="background:red; display:inline-block; margin-top:15px;"
-           onclick="return confirm('Delete this appointment?');">
-           Delete Appointment
+        <p>
+
+        Delete URL:
+        {{ appointment.id }}
+        </p>
+
+        <a href="/delete-appointment/{{ appointment.id }}">
+        Delete Appointment
         </a>
-
-    </div>
-
-    {% endfor %}
-
-</div>
-
+        
 {% endblock %}
