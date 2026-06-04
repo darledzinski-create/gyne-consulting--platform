@@ -23,7 +23,38 @@
 
         <p><strong>Reason:</strong> {{ appointment.reason }}</p>
 
-        <p><strong>Status:</strong> {{ appointment.status }}</p>
+{% if appointment.status == "Awaiting Payment" %}
+    <p><strong>Status:</strong>
+       <span style="color:orange;">
+           {{ appointment.status }}
+       </span>
+    </p>
+    
+{% elif appointment.status == "Paid" %}
+    <p><strong>Status:</strong>
+       <span style="color:blue;">
+           {{ appointment.status }}
+       </span>
+    </p>
+
+{% elif appointment.status == "Confirmed" %}
+    <p><strong>Status:</strong>
+       <span style="color:green;">
+           {{ appointment.status }}
+       </span>
+    </p>
+
+{% elif appointment.status == "Completed" %}
+    <p><strong>Status:</strong>
+       <span style="color:darkgreen;">
+           {{ appointment.status }}
+       </span>
+    </p>
+
+{% else %}
+    <p><strong>Status:</strong> {{ appointment.status }}</p>
+{% endif %}
+        
     <div style="margin-top:15px;">
 
         <a href="/appointment-status/{{ appointment.id }}/Awaiting Payment"
