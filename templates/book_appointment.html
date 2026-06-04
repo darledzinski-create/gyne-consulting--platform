@@ -8,8 +8,12 @@
 
     <form method="POST">
 
-        <label>Patient Name</label>
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
 
+        <label>Patient Name</label>
+        
         <input type="text"
 
                value="{{ consultation.name }}"
