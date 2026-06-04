@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Book Appointment</h1>
+
+    <form method="POST">
+
+        <label>Patient Name</label>
+
+        <input type="text"
+
+               value="{{ consultation.name }}"
+
+               readonly>
+
+        <label>Email</label>
+
+        <input type="email"
+
+               value="{{ consultation.email }}"
+
+               readonly>
+
+        <label>Practice</label>
+
+        <input type="text"
+
+               name="practice"
+
+               required>
+
+        <label>Date</label>
+
+        <input type="date"
+
+               name="preferred_date"
+
+               required>
+
+        <label>Time</label>
+
+        <input type="time"
+
+               name="preferred_time"
+
+               required>
+
+        <label>Reason</label>
+
+        <textarea name="reason"></textarea>
+
+        <button type="submit">
+
+            Save Appointment
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
