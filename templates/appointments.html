@@ -81,16 +81,14 @@
 
         <p><strong>Created:</strong> {{ appointment.created_at }}</p>
 
-        <p>
-
-        Delete URL:
-        {{ appointment.id }}
-        </p>
-
         <a href="/delete-appointment/{{ appointment.id }}">
         Delete Appointment
         </a>
+    </div>
+        
         
 {% endfor %}
+
+    </div> 
         
 {% endblock %}
