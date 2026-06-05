@@ -40,8 +40,6 @@ def create_table():
         contact_method TEXT,
         urgency TEXT NOT NULL,
         message TEXT NOT NULL,
-        mobile = request.form["mobile"]
-        contact_method = request.form["contact_method"]
         timestamp TEXT NOT NULL,
         status TEXT NOT NULL DEFAULT 'New',
         doctor_notes TEXT
