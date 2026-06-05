@@ -29,6 +29,21 @@
             <label for="email">Email Address</label>
             <input type="email" id="email" name="email" required>
 
+            <label>Mobile Number</label>
+            <input
+                type="tel"
+                name="mobile"
+                placeholder="e.g. 0821234567"
+                required>
+
+            <label>Preferred Contact Method</label>
+
+            <select name="contact_method">
+                <option value="Email">Email</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Either">Either</option>
+            </select>
+
             <label for="urgency">Consultation Priority</label>
 
             <select id="urgency" name="urgency" required class="urgency-select">
