@@ -50,6 +50,7 @@ def create_table():
         name TEXT NOT NULL,
         email TEXT NOT NULL,
         phone TEXT,
+        contact_method TEXT,
         practice TEXT,
         preferred_date TEXT,
         preferred_time TEXT,
