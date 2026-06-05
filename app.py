@@ -109,7 +109,7 @@ def consultation():
         
         try:
             name = request.form.get("name")
-            email = request.form.get("email")mobile = request.form.get("mobile")
+            email = request.form.get("email")
             mobile = request.form.get("mobile")
             contact_method = request.form.get("contact_method")
             urgency = request.form.get("urgency")
