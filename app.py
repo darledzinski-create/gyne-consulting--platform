@@ -40,6 +40,8 @@ def create_table():
         contact_method TEXT,
         urgency TEXT NOT NULL,
         message TEXT NOT NULL,
+        mobile = request.form["mobile"]
+        contact_method = request.form["contact_method"]
         timestamp TEXT NOT NULL,
         status TEXT NOT NULL DEFAULT 'New',
         doctor_notes TEXT
@@ -51,7 +53,7 @@ def create_table():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL,
-        phone TEXT,
+        mobile TEXT,
         contact_method TEXT,
         practice TEXT,
         preferred_date TEXT,
@@ -107,7 +109,9 @@ def consultation():
         
         try:
             name = request.form.get("name")
-            email = request.form.get("email")
+            email = request.form.get("email")mobile = request.form.get("mobile")
+            mobile = request.form.get("mobile")
+            contact_method = request.form.get("contact_method")
             urgency = request.form.get("urgency")
             message = request.form.get("message")
             timestamp = datetime.now(ZoneInfo("Africa/Johannesburg")).strftime("%d %B %Y, %H:%M")
@@ -125,10 +129,19 @@ def consultation():
             print("CONSULTATION DB:", os.path.abspath("consultations.db"))
 
             conn.execute("""
-                INSERT INTO consultations
-                (name, email, urgency, message, timestamp)
-                VALUES (?, ?, ?, ?, ?)
-            """, (name, email, urgency, message, timestamp))
+            INSERT INTO consultations
+            (name, email, mobile, contact_method,
+            urgency, message, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (
+                name,
+                email,
+                mobile,
+                contact_method,
+                urgency,
+                message,
+                timestamp
+            ))
 
             all_rows = conn.execute("""
                 SELECT id, name, email
