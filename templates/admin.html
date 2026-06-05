@@ -204,9 +204,17 @@
             </div>
             
            
-            <p><strong>Message:</strong></p>
+          <p><strong>Mobile:</strong>
+          {{ consultation.mobile }}
+          </p>
 
-            <p>{{ consultation.message }}</p>
+<p><strong>Preferred Contact Method:</strong>
+{{ consultation.contact_method }}
+</p>
+
+<p><strong>Message:</strong></p>
+
+<p>{{ consultation.message }}</p>
             
             <form method="POST"
                   action="/update-notes/{{ consultation.id }}">
