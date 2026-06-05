@@ -32,16 +32,18 @@ def create_table():
     conn = sqlite3.connect("consultations.db")
 
     conn.execute("""
-        CREATE TABLE IF NOT EXISTS consultations (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            urgency TEXT NOT NULL,
-            message TEXT NOT NULL,
-            timestamp TEXT NOT NULL,
-            status TEXT NOT NULL DEFAULT 'New',
-            doctor_notes TEXT
-        )
+    CREATE TABLE IF NOT EXISTS consultations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        mobile TEXT,
+        contact_method TEXT,
+        urgency TEXT NOT NULL,
+        message TEXT NOT NULL,
+        timestamp TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'New',
+        doctor_notes TEXT
+    )
     """)
 
     conn.execute("""
