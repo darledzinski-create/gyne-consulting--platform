@@ -202,7 +202,7 @@ def consultation():
 
             elif urgency_clean == "not_urgent":
 
-                subject = "Consultation Request"
+                subject = "Standard Consultation"
 
                 patient_text = f"""
             Thank you for your consultation request.
