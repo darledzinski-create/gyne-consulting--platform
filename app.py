@@ -169,7 +169,7 @@ def consultation():
             # ----------------------------
 
            
-           if urgency_clean == "urgent":
+            if urgency_clean == "urgent":
 
                subject = "CONSULTATION REQUEST"
 
