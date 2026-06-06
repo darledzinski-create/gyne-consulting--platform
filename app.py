@@ -169,67 +169,70 @@ def consultation():
             # ----------------------------
 
            
-            if urgency_clean == "urgent":
+           if urgency_clean == "urgent":
 
-                subject = "CONSULTATION REQUEST"
+               subject = "CONSULTATION REQUEST"
 
-                patient_text = f"""
-            Your urgent consultation request has been received.
+               patient_text = f"""
+           Your urgent consultation request has been received.
 
-            This platform is not suitable for medical emergencies.
+           This platform is not suitable for medical emergencies.
 
-            Please seek immediate in-person medical care if necessary.
+           Please seek immediate in-person medical care if necessary.
 
-            Dr Dariusz
-            """
+           Dr Dariusz
+           """
 
-            doctor_text = f"""
-            CONSULTATION REQUEST
+               doctor_text = f"""
+           CONSULTATION REQUEST
 
-            Submitted:
+           Submitted:
+           {timestamp}
 
-            {timestamp}
+           Name: {name}
+           Email: {email}
+           Mobile: {mobile}
+           Preferred Contact Method: {contact_method}
 
-            Name: {name}
-            Email: {email}
-            Mobile: {mobile}
-            Preferred Contact Method: {contact_method}
+           Message:
 
-            Message:
+           {message}
 
-            {message}
-            """
+           """
 
-            elif urgency_clean == "not_urgent":
+           elif urgency_clean == "not_urgent":
 
-                subject = "Standard Consultation"
+               subject = "Standard Consultation"
 
-                patient_text = f"""
-            Thank you for your consultation request.
+               patient_text = f"""
+           Thank you for your consultation request.
 
-            Your message has been received and will be reviewed carefully.
+           Your message has been received and will be reviewed carefully.
 
-            Dr Dariusz
-            """
+           Dr Dariusz
+           """
 
-                doctor_text = f"""
-            Consultation Request
+               doctor_text = f"""
+           Standard Consultation
 
-            Sunbmitted:
-            {timestamp}
+           Submitted:
+           {timestamp}
 
-            Name: {name}
-            Email: {email}
+           Name: {name}
+           Email: {email}
+           Mobile: {mobile}
+           Preferred Contact Method: {contact_method}
 
-            Message:
-            {message}
-            """
+           Message:
 
-            else:
-                print("UNKNOWN URGENCY:", repr(urgency_clean))
-                return "Invalid submission", 400
-                
-            data_doctor = {
+           {message}
+           """
+
+           else:
+               print("UNKNOWN URGENCY:", repr(urgency_clean))
+               return "Invalid submission", 400
+            
+             data_doctor = {
                 "Messages": [
                     {
                         "From": {
