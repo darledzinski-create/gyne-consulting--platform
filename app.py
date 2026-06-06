@@ -421,31 +421,39 @@ def admin():
 
     search = request.args.get("search", "").strip().lower()
 
-    if search:
-        if status_filter:
-            consultations = conn.execute("""
-                SELECT *
-                FROM consultations
-                WHERE status = ?
-                ORDER BY id DESC
-                LIMIT ? OFFSET ?
-            """, (status_filter, per_page, offset)).fetchall()
-        else:
-            consultations = conn.execute("""
-                SELECT *
-                FROM consultations
-                ORDER BY id DESC
-                LIMIT ? OFFSET ?
-            """, (per_page, offset)).fetchall()
+   if search and status_filter:
+       consultations = conn.execute("""
+           SELECT *
+           FROM consultations
+           WHERE status = ?
+             AND (
+                 LOWER(name) LIKE ?
+                 OR LOWER(email) LIKE ?
+             )
+             ORDER BY id DESC
+             LIMIT ? OFFSET ?
+         """, (
+             status_filter,
+             f"%{search}%",
+             f"%{search}%",
+             per_page,
+             offset
+         )).fetchall()
 
-    elif status_filter:
-        consultations = conn.execute("""
-            SELECT *
-            FROM consultations
-            WHERE status = ?
-            ORDER BY id DESC
-            LIMIT ? OFFSET ?
-        """, (status_filter, per_page, offset)).fetchall()
+     elif search:
+         consultations = conn.execute("""
+             SELECT *
+             FROM consultations
+             WHERE LOWER(name) LIKE ?
+                OR LOWER(email) LIKE ?
+             ORDER BY id DESC
+             LIMIT ? OFFSET ?
+         """, (
+             f"%{search}%",
+             f"%{search}%",
+             per_page,
+             offset
+         )).fetchall()
         
     else:
         consultations = conn.execute("""
