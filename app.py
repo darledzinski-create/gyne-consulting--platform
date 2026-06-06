@@ -183,16 +183,20 @@ def consultation():
             Dr Dariusz
             """
 
-                doctor_text = f"""
-            CONSULTATIOIN REQUEST
+            doctor_text = f"""
+            CONSULTATION REQUEST
 
             Submitted:
+
             {timestamp}
 
             Name: {name}
             Email: {email}
+            Mobile: {mobile}
+            Preferred Contact Method: {contact_method}
 
             Message:
+
             {message}
             """
 
