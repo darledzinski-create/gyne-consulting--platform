@@ -421,7 +421,7 @@ def admin():
 
     search = request.args.get("search", "").strip().lower()
 
-    print("SEARCH =", repr(search))
+    print("SEARCH TERM =", (search))
 
     if search and status_filter:
         consultations = conn.execute("""
@@ -511,6 +511,11 @@ def admin():
     ).fetchone()[0]
 
     conn.close()
+
+    print("RESULT COUNT =", len(consultations))
+
+    for row in consultations:
+        print("FOUND:", row["name"], row["email"])
 
     return render_template(
         "admin.html",
