@@ -660,9 +660,9 @@ rows = conn.execute("""
 for row in rows:
     print(dict(row))
 
-        conn.close()
+    conn.close()
 
-        return redirect(url_for("appointments"))
+    return redirect(url_for("appointments"))
 
     return render_template(
 
