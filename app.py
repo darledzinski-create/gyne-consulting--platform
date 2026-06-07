@@ -423,7 +423,7 @@ def admin():
 
     print("CONSULTATION TABLE:")
     for row in rows:
-    print(row["id"], row["name"], row["email"])
+        print(row["id"], row["name"], row["email"])
 
     page = request.args.get("page", 1, type=int)
     status_filter = request.args.get("status", "")
