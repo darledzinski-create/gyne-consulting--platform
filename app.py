@@ -421,8 +421,8 @@ def admin():
         LIMIT 10
     """).fetchall()
 
-print("CONSULTATION TABLE:")
-for row in rows:
+    print("CONSULTATION TABLE:")
+    for row in rows:
     print(row["id"], row["name"], row["email"])
 
     page = request.args.get("page", 1, type=int)
