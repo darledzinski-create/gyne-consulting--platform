@@ -600,6 +600,66 @@ def offer_appointment(consultation_id):
 
         conn.commit()
 
+        patient_text = f"""
+        Dear {consultation["name"]},
+
+        Your appointment has been offered.
+        
+        Practice: {request.form["practice"]}
+        Date: {request.form["preferred_date"]}
+        Time: {request.form["preferred_time"]}
+
+        Reason:
+        {request.form["reason"]}
+
+        Please contact us if you need any changes.
+
+        Dr Dariusz Consulting
+        """
+
+        data_patient = {
+            "Messages": [
+                {
+
+                    "From": {
+                        "Email": "contact@drdariuszconsults.com",
+                        "Name": "Dr Dariusz"
+                    },
+                    "To": [
+                        {
+                             "Email": consultation["email"]
+                        }
+                    ],
+                    "Subject": "Appointment Offer",
+                    "TextPart": patient_text
+               }
+           ]
+        }
+
+        print("SENDING APPOINTMENT EMAIL")
+
+        result_patient = mailjet.send.create(data=data_patient)
+
+        print("APPOINTMENT EMAIL STATUS:",
+
+        result_patient.status_code)
+
+        count = conn.execute(
+        "SELECT COUNT(*) FROM consultations"
+    ).fetchone()[0]
+
+print("CONSULTATION COUNT =", count)
+
+rows = conn.execute("""
+    SELECT *
+    FROM consultations
+    ORDER BY id DESC
+    LIMIT 5
+""").fetchall()
+
+for row in rows:
+    print(dict(row))
+
         conn.close()
 
         return redirect(url_for("appointments"))
