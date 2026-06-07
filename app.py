@@ -644,25 +644,9 @@ def offer_appointment(consultation_id):
 
         result_patient.status_code)
 
-        count = conn.execute(
-        "SELECT COUNT(*) FROM consultations"
-    ).fetchone()[0]
+        conn.close()
 
-print("CONSULTATION COUNT =", count)
-
-rows = conn.execute("""
-    SELECT *
-    FROM consultations
-    ORDER BY id DESC
-    LIMIT 5
-""").fetchall()
-
-for row in rows:
-    print(dict(row))
-
-    conn.close()
-
-    return redirect(url_for("appointments"))
+        return redirect(url_for("appointments"))
 
     return render_template(
 
