@@ -421,6 +421,8 @@ def admin():
 
     search = request.args.get("search", "").strip().lower()
 
+    print("SEARCH =", repr(search))
+
     if search and status_filter:
         consultations = conn.execute("""
             SELECT *
