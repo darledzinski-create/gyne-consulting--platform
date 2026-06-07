@@ -414,17 +414,21 @@ def admin():
 
     conn = get_db_connection()
 
-    rows = conn.execute("""
-        SELECT id, name, email
-        FROM consultations
-        ORDER BY id DESC
-        LIMIT 10
-    """).fetchall()
+    count = conn.execute(
+        "SELECT COUNT(*) FROM consultations"
+    ).fetchone()[0]
 
-    print("CONSULTATION TABLE:")
-    for row in rows:
-        print(row["id"], row["name"], row["email"])
+print("CONSULTATION COUNT =", count)
 
+rows = conn.execute("""
+    SELECT *
+    FROM consultations
+    ORDER BY id DESC
+    LIMIT 5
+""").fetchall()
+
+for row in rows:
+    print(dict(row))
     page = request.args.get("page", 1, type=int)
     status_filter = request.args.get("status", "")
     per_page = 10
