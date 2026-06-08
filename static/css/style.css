@@ -693,6 +693,28 @@ textarea:focus {
 
 }
 
+/* ADMIN + APPOINTMENTS GRID */
+
+.cards-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+
+    gap: 25px;
+
+    margin-top: 20px;
+
+}
+
+.feature-card {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+}
+
 .btn-primary {
 
     display: inline-block;
