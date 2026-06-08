@@ -695,8 +695,8 @@ def appointments():
         
     print("APPOINTMENTS FOUND:", len(appointments))
 
-    for a in appointments:
-        print("APPOINTMENT:", dict(a))
+   for a in appointments:
+       print("NAME =", a["name"])
 
     conn.close()
 
