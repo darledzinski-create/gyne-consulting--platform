@@ -693,10 +693,10 @@ def appointments():
             ORDER BY id DESC
         """).fetchall()
         
-    print("APPOINTMENTS FOUND:", len(appointments))
+        print("APPOINTMENTS FOUND:", len(appointments))
 
-   for a in appointments:
-       print("NAME =", a["name"])
+        for a in appointments:
+            print("NAME =", a["name"])
 
     conn.close()
 
