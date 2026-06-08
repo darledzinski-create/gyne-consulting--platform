@@ -673,6 +673,8 @@ def appointments():
 
     search = request.args.get("search", "").strip().lower()
 
+    print("SEARCH TERM =", search)
+
     if search:
         appointments = conn.execute("""
             SELECT *
