@@ -651,6 +651,12 @@ def offer_appointment(consultation_id):
 
         conn.commit()
 
+        count = conn.execute(
+            "SELECT COUNT(*) FROM appointments"
+        ).fetchone()[0]
+
+        print("AFTER INSERT COUNT =", count)
+
         conn.close()
 
         return redirect(url_for("appointments"))
