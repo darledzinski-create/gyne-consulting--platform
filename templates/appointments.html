@@ -6,6 +6,19 @@
 
     <h1>Appointments</h1>
 
+    <form method="GET" style="margin-bottom:20px;">
+        <input
+            type="text"
+            name="search"
+            placeholder="Search patient name..."
+            value="{{ request.args.get('search', '') }}"
+            style="padding:10px; width:300px;">
+
+        <button type="submit" class="btn-primary">
+            Search
+        </button>
+    </form>
+
     <div class="cards-grid">
 
     {% for appointment in appointments %}
