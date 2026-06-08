@@ -694,6 +694,12 @@ def appointments():
             FROM appointments
             ORDER BY id DESC
         """).fetchall()
+
+        count = conn.execute(
+            "SELECT COUNT(*) FROM appointments"
+        ).fetchone()[0]
+
+        print("TOTAL APPOINTMENTS IN DB =", count)
         
         print("APPOINTMENTS FOUND:", len(appointments))
 
