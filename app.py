@@ -686,6 +686,8 @@ def appointments():
             f"%{search}%",
             f"%{search}%"
         )).fetchall()
+
+        print("RAW APPOINTMENTS =", appointments)
     else:
         appointments = conn.execute("""
             SELECT *
