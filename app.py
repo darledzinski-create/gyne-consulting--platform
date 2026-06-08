@@ -671,16 +671,26 @@ def appointments():
 
     conn = get_db_connection()
 
-    appointments = conn.execute("""
+    search = request.args.get("search", "").strip().lower()
 
-        SELECT *
-
-        FROM appointments
-
-        ORDER BY id DESC
-
-    """).fetchall()
-
+    if search:
+        appointments = conn.execute("""
+            SELECT *
+            FROM appointments
+            WHERE LOWER(name) LIKE ?
+            OR LOWER(email) LIKE ?
+            ORDER BY id DESC
+        """, (
+            f"%{search}%",
+            f"%{search}%"
+        )).fetchall()
+    else:
+        appointments = conn.execute("""
+            SELECT *
+            FROM appointments
+            ORDER BY id DESC
+        """).fetchall()
+        
     print("APPOINTMENTS FOUND:", len(appointments))
 
     for a in appointments:
