@@ -641,13 +641,19 @@ def offer_appointment(consultation_id):
         result_patient = mailjet.send.create(data=data_patient)
 
         print("APPOINTMENT EMAIL STATUS:",
+              result_patient.status_code)
 
-        result_patient.status_code)
+        conn.execute("""
+            UPDATE consultations
+            SET status = 'In Progress'
+            WHERE id = ?
+        """, (consultation_id,))
+
+        conn.commit()
 
         conn.close()
 
         return redirect(url_for("appointments"))
-
     return render_template(
 
         "book_appointment.html",
