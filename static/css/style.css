@@ -278,6 +278,22 @@ body {
 
 }
 
+.consultation-card {
+
+    width: 48%;
+
+    max-width: 650px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+
+}
+
 .top-bar {
 
     display: flex;
