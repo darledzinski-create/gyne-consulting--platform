@@ -682,11 +682,11 @@ textarea:focus {
 
     padding: 30px;
 
-    width: 210px;
+    width: auto;
 
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 
-    text-align: center;
+    text-align: left;
 }
 
 .card {
