@@ -521,6 +521,10 @@ def admin():
     for row in consultations:
         print("FOUND:", row["name"], row["email"])
 
+    print("TOTAL CONSULTATIONS =", total_count)
+    print("CONSULTATIONS OBJECT =", consultations)
+    print("LENGTH =", len(consultations))
+
     return render_template(
         "admin.html",
         consultations=consultations,
