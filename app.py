@@ -510,6 +510,10 @@ def admin():
          "SELECT COUNT(*) FROM consultations WHERE status='Completed'"
     ).fetchone()[0]
 
+    appointment_count = conn.execute(
+        "SELECT COUNT(*) FROM appointments"
+    ).fetchone()[0]
+
     conn.close()
 
     print("RESULT COUNT =", len(consultations))
@@ -526,6 +530,7 @@ def admin():
         new_count=new_count,
         in_progress_count=in_progress_count,
         completed_count=completed_count,
+        appointment_count=appointment_count,
         page=page,
         total_pages=total_pages,
     )
