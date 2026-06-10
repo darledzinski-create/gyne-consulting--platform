@@ -7,6 +7,41 @@
     <div class="consultation-container">
 
         <h1>Consultation Records</h1>
+
+    <div style="
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin:25px 0;
+    ">
+
+        <div class="feature-card" style="padding:20px; min-width:160px; text-align:center;">
+            <h3>{{ total_count }}</h3>
+            <p>Total Consultations</p>
+        </div>
+
+    <div class="feature-card" style="padding:20px; min-width:160px; text-align:center;">
+        <h3>{{ new_count }}</h3>
+        <p>New</p>
+    </div>
+
+    <div class="feature-card" style="padding:20px; min-width:160px; text-align:center;">
+        <h3>{{ in_progress_count }}</h3>
+        <p>In Progress</p>
+    </div>
+
+    <div class="feature-card" style="padding:20px; min-width:160px; text-align:center;">
+        <h3>{{ completed_count }}</h3>
+        <p>Completed</p>
+    </div>
+
+    <div class="feature-card" style="padding:20px; min-width:160px; text-align:center;">
+        <h3>{{ appointment_count }}</h3>
+        <p>Appointments</p>
+    </div>
+
+</div>
         
         <form method="GET" action="/admin" style="margin-bottom:30px;">
 
