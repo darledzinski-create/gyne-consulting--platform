@@ -1007,6 +1007,17 @@ textarea:focus {
 
     }
 
+    /* ADMIN CONSULTATION CARDS */
+
+    .consultation-card {
+        background: white;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
 }
 
 
