@@ -284,6 +284,10 @@ body {
 
     max-width: 650px;
 
+    box-sizing:border-box;
+
+    width:calc(50% - 20%);
+
     background: white;
 
     border-radius: 18px;
