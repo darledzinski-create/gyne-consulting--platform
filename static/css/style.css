@@ -484,11 +484,10 @@ textarea:focus {
 
     display: grid;
 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-
-    gap: 30px;
-
+    grid-template-columns: repeat(2, 1fr);
+    
     margin-top: 100px;
+
 
     padding-bottom: 80px;
 
