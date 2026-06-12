@@ -279,12 +279,13 @@ body {
 }
 
 .consultation-card {
+    flex: 0 0 48%;
 
-    width: 48%;
+    max-width: 48%;
 
     max-width: 650px;
 
-    box-sizing:border-box;
+    box-sizing: border-box;
 
     background: white;
 
