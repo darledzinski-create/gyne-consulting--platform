@@ -268,20 +268,16 @@ body {
 
 .cards-grid {
 
-    display: flex;
-
-    flex-wrap: wrap;
-
-    justify-content: space-between;
-
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
 
 }
 
 .consultation-card {
-    flex: 0 0 48%;
+    flex: 0 0 calc(50% - 15px);
 
-    max-width: 48%;
+    max-width: calc(50% - 15px);
 
     max-width: 650px;
 
@@ -1013,10 +1009,9 @@ textarea:focus {
         border-radius: 18px;
         padding: 30px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        width: 100%;
         box-sizing: border-box;
     }
 
-}
+
 
 
