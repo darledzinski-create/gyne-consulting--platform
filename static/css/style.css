@@ -1010,6 +1010,8 @@ textarea:focus {
     .consultation-card {
         background: white;
         border-radius: 18px;
+        width: 100%;
+        max-width: none;
         padding: 30px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         box-sizing: border-box;
