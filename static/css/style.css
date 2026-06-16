@@ -269,18 +269,16 @@ body {
 .cards-grid {
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background: yellow
+    grid-template-columns: 1fr 1fr;
     gap: 25px;
 
 }
 
 .consultation-card {
-    flex: 0 0 calc(50% - 15px);
+   
+    width:  100%;
 
-    max-width: calc(50% - 15px);
-
-    max-width: 650px;
+    max-width: none;
 
     box-sizing: border-box;
 
