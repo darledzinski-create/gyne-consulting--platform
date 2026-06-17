@@ -730,6 +730,9 @@ textarea:focus {
 
     margin-top: 20px;
 
+    background: red !important;
+    padding: 20px !important;
+
 }
 
 .feature-card {
