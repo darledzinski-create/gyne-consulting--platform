@@ -268,11 +268,16 @@ body {
 
 .cards-grid {
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    display: grid !important;
+
+    grid-template-columns: repeat(4, 1fr) !important;
+
+    gap: 20px !important;
+
+    background: red !important;
 
 }
+
 
 .consultation-card {
    
