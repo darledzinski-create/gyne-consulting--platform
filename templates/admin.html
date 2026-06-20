@@ -104,14 +104,22 @@
 
        </div>
 
-       <div class="cards-grid">
+       <div class="cards-grid"
+            style="
+              display:grid;
+              grid-template-columns:1fr 1fr;
+              gap:25px;
+              background:red;
+            ">
 
         {% for consultation in consultations %}
 
-       <div class="consultation-card"
-            style="
-                margin-bottom:25px;
-                
+        <div class="consultation-card"
+             style="
+               background:yellow;
+               min-height:200px;
+             "
+            
                 {% if consultation.urgency == 'urgent' %}
                     border-left:6px solid #dc3545;
                     box-shadow:0 0 15px rgba(220,53,69,0.15);
