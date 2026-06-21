@@ -6,16 +6,14 @@
 
     <div class="consultation-container">
 
-        <h1>CONSULTATION RECORDS - TEST 999</h1>
+        <h1>CONSULTATION RECORDS</h1>
 
     <div style="
     display:flex;
     justify-content:center;
     gap:20px;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
     margin:25px 0;
-    background:red;
-    border:5px solid blue;
     ">
         <div class="feature-card" style="padding:20px; min-width:160px; text-align:center;">
             <h3>{{ total_count }}</h3>
@@ -69,56 +67,18 @@
             </a>
         </div>
 
-        <div class="consultation-card" style="
-           margin-bottom:25px;
-           padding:30px;
-           <p style="background:red;color:white;padding:10px;">
-        ">
-
-        <p><strong>Total Consultations:</strong> {{ total_count }}</p>
-             TEST START
-        </p>
-
-           <p style="color:red;">
-               <strong>Urgent:</strong> {{ urgent_count }}
-           </p>
-
-           <p style="color:green;">
-                <strong>Non-Urgent:</strong> {{ non_urgent_count }}
-           </p>
-
-           <p style="color:blue;">
-               New: {{ new_count }}
-           </p>
-
-           <p style="color:orange;">
-               In Progress: {{ in_progress_count }}
-           </p>
-
-           <p style="color:green;">
-               Completed: {{ completed_count }}
-           </p>
-
-           <p style="background:blue;color:white;padding:10px;">
-           
-           </p>
-
-       </div>
-
-       <div class="cards-grid"
+        <div class="cards-grid"
             style="
               display:grid;
-              grid-template-columns:1fr 1fr;
-              gap:25px;
-              background:red;
-            ">
+              grid-template-columns:repeat(4 1fr);
+              gap:20px;
+            "
 
         {% for consultation in consultations %}
 
         <div class="consultation-card"
              style="
-               background:yellow;
-               min-height:200px;
+             min-height:200px;
              "
             
                 {% if consultation.urgency == 'urgent' %}
