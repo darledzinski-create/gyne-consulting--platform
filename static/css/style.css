@@ -268,13 +268,11 @@ body {
 
 .cards-grid {
 
-    display: grid !important;
+    display: grid;
 
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(4, 1fr);
 
-    gap: 20px !important;
-
-    background: red !important;
+    gap: 20px;
 
 }
 
@@ -734,9 +732,6 @@ textarea:focus {
     gap: 25px;
 
     margin-top: 20px;
-
-    background: red !important;
-    padding: 20px !important;
 
 }
 
