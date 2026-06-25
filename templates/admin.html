@@ -100,11 +100,12 @@
 
         <div class="patient-details">
 
-               <strong>Preferred Contact:</strong>
-               {{ consultation.contact_method }}
-           </p>
+            <p>
+                <strong>Preferred Contact:</strong>
+                {{ consultation.contact_method }}
+            </p>
 
-       </div>
+        </div>
            
             <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
 
@@ -234,10 +235,13 @@
 </div>
             
 <form method="POST"
+
       action="/update-notes/{{ consultation.id }}">
 
     <input type="hidden"
+
            name="csrf_token"
+
            value="{{ csrf_token() }}">
 
     <div class="notes-section">
@@ -248,60 +252,40 @@
 
                   rows="6">{{ consultation.doctor_notes or '' }}</textarea>
 
+    </div>
+
+    <div class="card-actions">
+
         <button type="submit"
 
                 class="btn-primary">
 
-        <div class="card-actions">
-
-        <button type="submit"
-                class="btn-primary">
             Save Notes
+
         </button>
 
         <a href="/offer-appointment/{{ consultation.id }}"
+
            class="btn-green">
+
             Offer Appointment
+
         </a>
 
         <a href="/delete/{{ consultation.id }}"
+
            class="btn-danger"
+
            onclick="return confirm('Delete this consultation?');">
-            Delete
+
+            Delete Consultation
+
         </a>
-
-        </div> 
-        
-        {% endfor %}
-
-        </div>
-        
-        <div style="text-align:center; margin-top:30px;">
-
-            {% if page > 1 %}
-                <a href="{{ url_for('admin', page=page-1) }}"
-                   class="btn-primary"
-                   style="padding:10px 20px;">
-                    ← Previous
-                </a>
-            {% endif %}
-
-            <span style="margin:0 20px;">
-                Page {{ page }} of {{ total_pages }}
-            </span>
-
-            {% if page < total_pages %}
-                <a href="{{ url_for('admin', page=page+1) }}"
-                   class="btn-primary"
-                   style="padding:10px 20px;">
-                   Next →
-               </a>
-           {% endif %}
-
-       </div>
 
     </div>
 
-</section>
+</form>
 
-{% endblock %}
+</div>
+
+{% endfor %}
