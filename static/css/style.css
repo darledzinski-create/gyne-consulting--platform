@@ -1179,6 +1179,26 @@ textarea:focus {
 
 }
 
+.card-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.card-actions a,
+
+.card-actions button{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
 
 
 
