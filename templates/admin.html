@@ -225,31 +225,40 @@
 {{ consultation.contact_method }}
 </p>
 
-<p><strong>Message:</strong></p>
+<h4>Patient Message</h4>
 
-<p>{{ consultation.message }}</p>
+<div class="message-box">
+
+    {{ consultation.message }}
+
+</div>
             
-            <form method="POST"
-                  action="/update-notes/{{ consultation.id }}">
+<form method="POST"
+      action="/update-notes/{{ consultation.id }}">
 
-                 <input type="hidden"
-                        name="csrf_token"
-                        value="{{ csrf_token() }}">
+    <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
 
-                 <p><strong>Doctor Notes:</strong></p>
+    <div class="notes-section">
 
-                 <textarea name="doctor_notes"
-                           rows="5"
-                           style="width:100%; padding:10px; margin-top:10px;">{{ consultation.doctor_notes or '' }}</textarea>
+        <h4>Doctor Notes</h4>
 
-                 <button type="submit"
-                         class="btn-primary"
-                         style="margin-top:10px; width:auto;">
-                      Save Notes
-                  </button>
+        <textarea name="doctor_notes"
 
-              </form>
+                  rows="6">{{ consultation.doctor_notes or '' }}</textarea>
 
+        <button type="submit"
+
+                class="btn-primary">
+
+            Save Notes
+
+        </button>
+
+    </div>
+
+</form>
             <a href="/offer-appointment/{{ consultation.id }}"
                class="btn-primary"
                style="background:green; margin-top:15px; margin-right:10px;">
