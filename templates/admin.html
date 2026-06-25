@@ -87,17 +87,34 @@
                 {% endif %}
              ">
            
+        <div class="card-header">
 
-        <div class="consultation-card"
-           <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+            <div>
+                <h3>Consultation #{{ consultation.id }}</h3>
+                <p class="submitted">
+                    Submitted: {{ consultation.timestamp }}
+                </p>
+            </div>
 
-               <p><strong>ID:</strong> {{ consultation.id }}</p>
+        </div>
 
-               <p><strong>Submitted:</strong> {{ consultation.timestamp }}</p>
+        <div class="patient-details">
 
-           </div>
+            <p><strong>Patient:</strong> {{ consultation.name }}</p>
 
-           <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+           <p><strong>Email:</strong> {{ consultation.email }}</p>
+
+           <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
+
+           <p>
+
+               <strong>Preferred Contact:</strong>
+               {{ consultation.contact_method }}
+           </p>
+
+       </div>
+           
+            <div style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
 
                <p><strong>Name:</strong> {{ consultation.name }}</p>
 
