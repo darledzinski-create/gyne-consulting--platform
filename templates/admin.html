@@ -1,0 +1,363 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="consultation-section">
+
+    <div class="consultation-container">
+
+        <h1>Consultation Records</h1>
+
+        <!-- Dashboard Counters -->
+
+        <div class="dashboard-grid">
+
+            <div class="feature-card">
+
+                <h3>{{ total_count }}</h3>
+
+                <p>Total Consultations</p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>{{ new_count }}</h3>
+
+                <p>New</p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>{{ in_progress_count }}</h3>
+
+                <p>In Progress</p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>{{ completed_count }}</h3>
+
+                <p>Completed</p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>{{ appointment_count }}</h3>
+
+                <p>Appointments</p>
+
+            </div>
+
+        </div>
+
+        <!-- Search -->
+
+        <form method="GET"
+
+              action="{{ url_for('admin') }}"
+
+              class="admin-search">
+
+            <input type="text"
+
+                   name="search"
+
+                   value="{{ request.args.get('search','') }}"
+
+                   placeholder="Search by patient name or email">
+
+            <select name="status">
+
+                <option value="">All Statuses</option>
+
+                <option value="New"
+
+                    {% if request.args.get('status')=="New" %}selected{% endif %}>
+
+                    New
+
+                </option>
+
+                <option value="In Progress"
+
+                    {% if request.args.get('status')=="In Progress" %}selected{% endif %}>
+
+                    In Progress
+
+                </option>
+
+                <option value="Completed"
+
+                    {% if request.args.get('status')=="Completed" %}selected{% endif %}>
+
+                    Completed
+
+                </option>
+
+            </select>
+
+            <button type="submit"
+
+                    class="btn-primary">
+
+                Search
+
+            </button>
+
+        </form>
+
+        <!-- Export -->
+
+        <div class="export-row">
+
+            <a href="/export-csv"
+
+               class="btn-primary">
+
+                Export CSV
+
+            </a>
+
+        </div>
+
+        <!-- Consultation Cards -->
+
+        <div class="cards-grid">
+
+        {% for consultation in consultations %}
+
+        <div class="consultation-card
+
+             {% if consultation.urgency == 'urgent' %}
+
+                 urgent
+
+             {% else %}
+
+                 normal
+
+             {% endif %}">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h3>
+
+                        Consultation #{{ consultation.id }}
+
+                    </h3>
+
+                    <p class="submitted">
+
+                        Submitted:
+
+                        {{ consultation.timestamp }}
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    {% if consultation.status == "New" %}
+
+                        <span class="status-badge new">
+
+                            NEW
+
+                        </span>
+
+                    {% elif consultation.status == "In Progress" %}
+
+                        <span class="status-badge progress">
+
+                            IN PROGRESS
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="status-badge completed">
+
+                            COMPLETED
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <div class="patient-details">
+
+                <p>
+
+                    <strong>Patient:</strong>
+
+                    {{ consultation.name }}
+
+                </p>
+
+                <p>
+
+                    <strong>Email:</strong>
+
+                    {{ consultation.email }}
+
+                </p>
+
+                <p>
+
+                    <strong>Mobile:</strong>
+
+                    {{ consultation.mobile }}
+
+                </p>
+
+                <p>
+
+                    <strong>Preferred Contact:</strong>
+
+                    {{ consultation.contact_method }}
+
+                </p>
+
+            </div>
+
+            <h4>Patient Message</h4>
+
+            <div class="message-box">
+
+                {{ consultation.message }}
+
+            </div>
+
+            <form method="POST"
+                  action="/update-notes/{{ consultation.id }}">
+                <input type="hidden"
+
+                       name="csrf_token"
+
+                       value="{{ csrf_token() }}">
+
+                <div class="notes-section">
+
+                    <h4>Doctor Notes</h4>
+
+                    <textarea name="doctor_notes"
+
+                              rows="6">{{ consultation.doctor_notes or '' }}</textarea>
+
+                </div>
+
+                <div class="status-buttons">
+
+                    <a href="/update-status/{{ consultation.id }}/New"
+
+                       class="btn-primary">
+
+                        New
+
+                    </a>
+
+                    <a href="/update-status/{{ consultation.id }}/In_Progress"
+
+                       class="btn-primary">
+
+                        In Progress
+
+                    </a>
+
+                    <a href="/update-status/{{ consultation.id }}/Completed"
+
+                       class="btn-primary">
+
+                        Completed
+
+                    </a>
+
+                </div>
+
+                <div class="card-actions">
+
+                    <button type="submit"
+
+                            class="btn-primary">
+
+                        Save Notes
+
+                    </button>
+
+                    <a href="/offer-appointment/{{ consultation.id }}"
+
+                       class="btn-primary">
+
+                        Offer Appointment
+
+                    </a>
+
+                    <a href="/delete/{{ consultation.id }}"
+
+                       class="btn-primary btn-danger"
+
+                       onclick="return confirm('Delete this consultation?');">
+
+                        Delete Consultation
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        {% endfor %}
+
+        </div>
+
+        <div class="pagination-row">
+
+            {% if page > 1 %}
+
+                <a href="{{ url_for('admin', page=page-1) }}"
+
+                   class="btn-primary">
+
+                    ← Previous
+
+                </a>
+
+            {% endif %}
+
+            <span class="page-number">
+
+                Page {{ page }} of {{ total_pages }}
+
+            </span>
+
+            {% if page < total_pages %}
+
+                <a href="{{ url_for('admin', page=page+1) }}"
+
+                   class="btn-primary">
+
+                    Next →
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
