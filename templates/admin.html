@@ -128,6 +128,40 @@
 
         <div class="cards-grid">
 
+        {% for consultation in consultations %}
+
+        <div class="consultation-card">
+
+            <div class="card-header">
+
+                <h3>Consultation #{{ consultation.id }}</h3>
+
+                <span class="status-badge">
+
+                    {{ consultation.status }}
+
+                </span>
+
+            </div>
+
+            <p class="submitted">
+
+                Submitted: {{ consultation.timestamp }}
+
+            </p>
+
+            <p><strong>Patient:</strong> {{ consultation.name }}</p>
+
+            <p><strong>Email:</strong> {{ consultation.email }}</p>
+
+            <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
+
+            <p><strong>Preferred Contact:</strong> {{ consultation.contact_method }}</p>
+
+        </div>
+
+        {% endfor %}
+
         <div class="pagination-row">
 
             {% if page > 1 %}
