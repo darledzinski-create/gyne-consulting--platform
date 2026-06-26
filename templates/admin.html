@@ -130,196 +130,77 @@
 
         {% for consultation in consultations %}
 
-        <div class="consultation-card
+<div class="consultation-card">
 
-             {% if consultation.urgency == 'urgent' %}
+    <div class="card-header">
 
-                 urgent
+        <h3>Consultation #{{ consultation.id }}</h3>
 
-             {% else %}
+        <span class="status-badge
 
-                 normal
+        {% if consultation.status == 'Completed' %}
 
-             {% endif %}">
+            completed
 
-            <div class="card-header">
+        {% elif consultation.status == 'In Progress' %}
 
-                <div>
+            progress
 
-                    <h3>
+        {% else %}
 
-                        Consultation #{{ consultation.id }}
+            new
 
-                    </h3>
+        {% endif %}">
 
-                    <p class="submitted">
+            {{ consultation.status }}
 
-                        Submitted:
+        </span>
 
-                        {{ consultation.timestamp }}
+    </div>
 
-                    </p>
+    <p class="submitted">
 
-                </div>
+        Submitted: {{ consultation.timestamp }}
 
-                <div>
+    </p>
 
-                    {% if consultation.status == "New" %}
+    <div class="patient-details">
 
-                        <span class="status-badge new">
+        <p><strong>Patient:</strong> {{ consultation.name }}</p>
 
-                            NEW
+        <p><strong>Email:</strong> {{ consultation.email }}</p>
 
-                        </span>
+        <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
 
-                    {% elif consultation.status == "In Progress" %}
+        <p><strong>Preferred Contact:</strong>
 
-                        <span class="status-badge progress">
+            {{ consultation.contact_method }}
 
-                            IN PROGRESS
+        </p>
 
-                        </span>
+    </div>
 
-                    {% else %}
+    <div class="message-section">
 
-                        <span class="status-badge completed">
+        <h4>Patient Message</h4>
 
-                            COMPLETED
+        <div class="message-box">
 
-                        </span>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-            <div class="patient-details">
-
-                <p>
-
-                    <strong>Patient:</strong>
-
-                    {{ consultation.name }}
-
-                </p>
-
-                <p>
-
-                    <strong>Email:</strong>
-
-                    {{ consultation.email }}
-
-                </p>
-
-                <p>
-
-                    <strong>Mobile:</strong>
-
-                    {{ consultation.mobile }}
-
-                </p>
-
-                <p>
-
-                    <strong>Preferred Contact:</strong>
-
-                    {{ consultation.contact_method }}
-
-                </p>
-
-            </div>
-
-            <h4>Patient Message</h4>
-
-            <div class="message-box">
-
-                {{ consultation.message }}
-
-            </div>
-
-            <form method="POST"
-                  action="/update-notes/{{ consultation.id }}">
-                <input type="hidden"
-
-                       name="csrf_token"
-
-                       value="{{ csrf_token() }}">
-
-                <div class="notes-section">
-
-                    <h4>Doctor Notes</h4>
-
-                    <textarea name="doctor_notes"
-
-                              rows="6">{{ consultation.doctor_notes or '' }}</textarea>
-
-                </div>
-
-                <div class="status-buttons">
-
-                    <a href="/update-status/{{ consultation.id }}/New"
-
-                       class="btn-primary">
-
-                        New
-
-                    </a>
-
-                    <a href="/update-status/{{ consultation.id }}/In_Progress"
-
-                       class="btn-primary">
-
-                        In Progress
-
-                    </a>
-
-                    <a href="/update-status/{{ consultation.id }}/Completed"
-
-                       class="btn-primary">
-
-                        Completed
-
-                    </a>
-
-                </div>
-
-                <div class="card-actions">
-
-                    <button type="submit"
-
-                            class="btn-primary">
-
-                        Save Notes
-
-                    </button>
-
-                    <a href="/offer-appointment/{{ consultation.id }}"
-
-                       class="btn-primary">
-
-                        Offer Appointment
-
-                    </a>
-
-                    <a href="/delete/{{ consultation.id }}"
-
-                       class="btn-primary btn-danger"
-
-                       onclick="return confirm('Delete this consultation?');">
-
-                        Delete Consultation
-
-                    </a>
-
-                </div>
-
-            </form>
+            {{ consultation.message }}
 
         </div>
 
-        {% endfor %}
+    </div>
 
+    <form method="POST"
+
+          action="/update-notes/{{ consultation.id }}">
+
+        <input type="hidden"
+
+               name="csrf_token"
+
+               value="{{ csrf_token() }}">
         </div>
 
         <div class="pagination-row">
