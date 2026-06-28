@@ -336,26 +336,35 @@
 
 =========================== */
 
-.card-actions{
+.card-actions {
 
-    display:flex;
+    display: flex;
 
-    flex-direction:column;
+    flex-wrap: wrap;
 
-    gap:12px;
+    justify-content: center;
 
-    margin-top:10px;
+    gap: 12px;
+
+    margin-top: 20px;
 
 }
 
 .card-actions a,
 
-.card-actions button{
+.card-actions button {
 
-    width:100%;
+    min-width: 170px;
+
+    padding: 12px 20px;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    font-weight: 600;
 
 }
-
 /* ===========================
 
    PAGINATION
