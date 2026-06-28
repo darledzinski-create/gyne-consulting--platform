@@ -169,6 +169,59 @@
 
        </div>
 
+    <form method="POST"
+          action="/update-notes/{{ consultation.id }}">
+
+         <input type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}">
+
+         <div class="notes-section">
+
+             <h4>Doctor Notes</h4>
+
+             <textarea name="doctor_notes"
+                       rows="6">{{ consultation.doctor_notes or '' }}</textarea>
+
+          </div>
+
+          <div class="card-actions">
+
+              <button type="submit"
+                      class="btn-primary">
+                  Save Notes
+              </button>
+
+              <a href="/update-status/{{ consultation.id }}/New"
+                 class="btn-primary">
+                  New
+              </a>
+
+              <a href="/update-status/{{ consultation.id }}/In_Progress"
+                 class="btn-warning">
+                  In Progress
+              </a>
+
+              <a href="/update-status/{{ consultation.id }}/Completed"
+                 class="btn-success">
+                  Completed
+              </a>
+
+              <a href="/offer-appointment/{{ consultation.id }}"
+                 class="btn-green">
+                  Offer Appointment
+              </a>
+
+              <a href="/delete/{{ consultation.id }}"
+                 class="btn-danger"
+                 onclick="return confirm('Delete this consultation?');">
+                  Delete Consultation
+              </a>
+
+          </div>
+
+       </form
+
        {% endfor %}
 
         <div class="pagination-row">
