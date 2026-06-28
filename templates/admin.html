@@ -158,9 +158,18 @@
 
             <p><strong>Preferred Contact:</strong> {{ consultation.contact_method }}</p>
 
-        </div>
+       <div class="message-section">
 
-        {% endfor %}
+           <h4>Patient Message</h4>
+
+           <div class="message-box">
+
+               {{ consultation.message }}
+           </div>
+
+       </div>
+
+       {% endfor %}
 
         <div class="pagination-row">
 
