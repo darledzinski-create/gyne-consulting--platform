@@ -128,141 +128,104 @@
 
         <div class="cards-grid">
 
-       {% for consultation in consultations %}
+        {% for consultation in consultations %}
 
-<div class="consultation-card">
+        <div class="consultation-card {% if consultation.urgency == 'urgent' %}urgent{% endif %}">
 
-    <div class="card-header">
+            <div class="card-header">
 
-        <div>
+                <div>
+                    <h3>Consultation #{{ consultation.id }}</h3>
+              
+                    <p class="submitted">
+                        Submitted: {{ consultation.timestamp }}
+                    </p>
+                </div>
 
-            <h3>Consultation #{{ consultation.id }}</h3>
+                <span class="status-badge">
+                    {{ consultation.status }}
+                </span>
 
-            <p class="submitted">
+            </div>
 
-                Submitted: {{ consultation.timestamp }}
+            <div class="patient-details">
 
-            </p>
+                 <p><strong>Patient:</strong> {{ consultation.name }}</p>
 
-        </div>
+                 <p><strong>Email:</strong> {{ consultation.email }}</p>
 
-        <span class="status-badge">
+                 <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
 
-            {{ consultation.status }}
+                 <p><strong>Preferred Contact:</strong> {{ consultation.contact_method }}</p>
 
-        </span>
+             </div>
 
-    </div>
+             <div class="message-section">
 
-    <div class="patient-details">
+                 <h4>Patient Message</h4>
 
-        <p><strong>Patient:</strong> {{ consultation.name }}</p>
+                 <div class="message-box">
+                     {{ consultation.message }}
+                 </div>
 
-        <p><strong>Email:</strong> {{ consultation.email }}</p>
+             </div>
 
-        <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
+             <form method="POST"
+                   action="/update-notes/{{ consultation.id }}">
 
-        <p><strong>Preferred Contact:</strong>
+                 <input type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}">
 
-            {{ consultation.contact_method }}
+                 <div class="notes-section">
 
-        </p>
+                     <h4>Doctor Notes</h4>
 
-    </div>
+                     <textarea name="doctor_notes"
+                               rows="6">{{ consultation.doctor_notes or '' }}</textarea>
 
-    <div class="message-section">
+                 </div>
 
-        <h4>Patient Message</h4>
+                 <div class="card-actions">
 
-        <div class="message-box">
+                     <button type="submit"
+                             class="btn-primary">
+                         Save Notes
+                     </button>
 
-            {{ consultation.message }}
+                     <a href="/update-status/{{ consultation.id }}/New"
+                        class="btn-primary">
+                         New
+                     </a>
 
-        </div>
+                     <a href="/update-status/{{ consultation.id }}/In_Progress"
+                        class="btn-warning">
+                         In Progress
+                     </a>
 
-    </div>
+                     <a href="/update-status/{{ consultation.id }}/Completed"
+                        class="btn-success">
+                         Completed
+                     </a>
 
-    <form method="POST"
+                     <a href="/offer-appointment/{{ consultation.id }}"
+                        class="btn-green">
+                         Offer Appointment
+                     </a>
 
-      action="/update-notes/{{ consultation.id }}">
+                     <a href="/delete/{{ consultation.id }}"
+                        class="btn-danger"
+                        onclick="return confirm('Delete this consultation?');">
+                         Delete Consultation
+                     </a>
 
-    <input type="hidden"
+                 </div>
 
-           name="csrf_token"
+             </form>
 
-           value="{{ csrf_token() }}">
+         </div>
 
-    <div class="notes-section">
-
-        <h4>Doctor Notes</h4>
-
-        <textarea name="doctor_notes"
-
-                  rows="6">{{ consultation.doctor_notes or '' }}</textarea>
-
-    </div>
-
-    <button type="submit"
-
-            class="btn-primary">
-
-        Save Notes
-
-    </button>
-
-</form>
-
-<div class="status-buttons">
-
-    <a href="/update-status/{{ consultation.id }}/New"
-
-       class="btn-primary">
-
-        New
-
-    </a>
-
-    <a href="/update-status/{{ consultation.id }}/In_Progress"
-
-       class="btn-warning">
-
-        In Progress
-
-    </a>
-
-    <a href="/update-status/{{ consultation.id }}/Completed"
-
-       class="btn-success">
-
-        Completed
-
-    </a>
-
-</div>
-
-<div class="card-actions">
-
-    <a href="/offer-appointment/{{ consultation.id }}"
-
-       class="btn-green">
-
-        Offer Appointment
-
-    </a>
-
-    <a href="/delete/{{ consultation.id }}"
-
-       class="btn-danger"
-
-       onclick="return confirm('Delete this consultation?');">
-
-        Delete Consultation
-
-    </a>
-
-</div>
-
-     {% endfor %}
+         {% endfor %}
 
      </div>
        
