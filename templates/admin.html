@@ -130,13 +130,13 @@
 
         {% for consultation in consultations %}
 
-        <div class="consultation-card {% if consultation.urgency == 'urgent' %}urgent{% endif %}">
+        <div class="consultation-card {% if consultation.urgency == 'urgent' %}urgent{% else %}normal{% endif %}">
 
             <div class="card-header">
 
                 <div>
                     <h3>Consultation #{{ consultation.id }}</h3>
-              
+
                     <p class="submitted">
                         Submitted: {{ consultation.timestamp }}
                     </p>
@@ -150,84 +150,92 @@
 
             <div class="patient-details">
 
-                 <p><strong>Patient:</strong> {{ consultation.name }}</p>
+                <p><strong>Patient:</strong> {{ consultation.name }}</p>
 
-                 <p><strong>Email:</strong> {{ consultation.email }}</p>
+                <p><strong>Email:</strong> {{ consultation.email }}</p>
 
-                 <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
+                <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
 
-                 <p><strong>Preferred Contact:</strong> {{ consultation.contact_method }}</p>
+                <p><strong>Preferred Contact:</strong> {{ consultation.contact_method }}</p>
+
+            </div>
+
+            <div class="message-section">
+
+                <h4>Patient Message</h4>
+
+                <div class="message-box">
+
+                    {{ consultation.message }}
+
+                </div>
+
+            </div>
+
+         <form method="POST"
+               action="/update-notes/{{ consultation.id }}">
+
+             <input type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+             <div class="notes-section">
+
+                 <h4>Doctor Notes</h4>
+
+                 <textarea name="doctor_notes"
+                           rows="6">{{ consultation.doctor_notes or '' }}</textarea>
 
              </div>
 
-             <div class="message-section">
+             <button type="submit"
+                     class="btn-primary">
 
-                 <h4>Patient Message</h4>
+                 Save Notes
 
-                 <div class="message-box">
-                     {{ consultation.message }}
-                 </div>
+             </button>
 
-             </div>
+         </form>
 
-             <form method="POST"
-                   action="/update-notes/{{ consultation.id }}">
+         <div class="status-buttons">
 
-                 <input type="hidden"
-                        name="csrf_token"
-                        value="{{ csrf_token() }}">
+             <a href="/update-status/{{ consultation.id }}/New"
+                class="btn-primary">
+                 New
+             </a>
 
-                 <div class="notes-section">
+             <a href="/update-status/{{ consultation.id }}/In_Progress"
+                class="btn-warning">
+                 In Progress
+             </a>
 
-                     <h4>Doctor Notes</h4>
+             <a href="/update-status/{{ consultation.id }}/Completed"
+                class="btn-success">
+                 Completed
+             </a>
 
-                     <textarea name="doctor_notes"
-                               rows="6">{{ consultation.doctor_notes or '' }}</textarea>
+         </div>
 
-                 </div>
+         <div class="card-actions">
 
-                 <div class="card-actions">
+             <a href="/offer-appointment/{{ consultation.id }}"
+                class="btn-green">
+                 Offer Appointment
+             </a>
 
-                     <button type="submit"
-                             class="btn-primary">
-                         Save Notes
-                     </button>
+             <a href="/delete/{{ consultation.id }}"
+                class="btn-danger"
+                onclick="return confirm('Delete this consultation?');">
+                 Delete Consultation
+             </a>
 
-                     <a href="/update-status/{{ consultation.id }}/New"
-                        class="btn-primary">
-                         New
-                     </a>
-
-                     <a href="/update-status/{{ consultation.id }}/In_Progress"
-                        class="btn-warning">
-                         In Progress
-                     </a>
-
-                     <a href="/update-status/{{ consultation.id }}/Completed"
-                        class="btn-success">
-                         Completed
-                     </a>
-
-                     <a href="/offer-appointment/{{ consultation.id }}"
-                        class="btn-green">
-                         Offer Appointment
-                     </a>
-
-                     <a href="/delete/{{ consultation.id }}"
-                        class="btn-danger"
-                        onclick="return confirm('Delete this consultation?');">
-                         Delete Consultation
-                     </a>
-
-                 </div>
-
-             </form>
+         </div>
 
          </div>
 
          {% endfor %}
 
-     </div>
+         </div>
        
         <div class="pagination-row">
 
