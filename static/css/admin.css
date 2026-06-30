@@ -152,9 +152,9 @@
 
 .consultation-card{
 
-    background:white;
+    background:red !important;
 
-    border-radius:16px;
+    border-radius:10px solid blue !important;
 
     padding:24px;
 
