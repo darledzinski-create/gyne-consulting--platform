@@ -148,18 +148,32 @@
 
             </div>
 
-            <div class="patient-details">
+    <div class="patient-details">
 
-                <p><strong>Patient:</strong> {{ consultation.name }}</p>
+        <h4>Patient Information</h4>
 
-                <p><strong>Email:</strong> {{ consultation.email }}</p>
+        <div class="detail-row">
+            <span class="label">Patient</span>
+            <span class="value">{{ consultation.name }}</span>
+        </div>
 
-                <p><strong>Mobile:</strong> {{ consultation.mobile }}</p>
+        <div class="detail-row">
+            <span class="label">Email</span>
+            <span class="value">{{ consultation.email }}</span>
+        </div>
 
-                <p><strong>Preferred Contact:</strong> {{ consultation.contact_method }}</p>
+        <div class="detail-row">
+            <span class="label">Mobile</span>
+            <span class="value">{{ consultation.mobile }}</span>
+        </div>
 
-            </div>
+        <div class="detail-row">
+            <span class="label">Preferred Contact</span>
+            <span class="value">{{ consultation.contact_method }}</span>
+        </div>
 
+    </div>
+            
             <div class="message-section">
 
                 <h4>Patient Message</h4>
