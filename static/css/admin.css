@@ -164,10 +164,13 @@
 
     flex-direction:column;
 
+    justify-content:flex-start;
+
     gap:18px;
 
-}
+    height:100%;
 
+}
 .consultation-card.normal{
 
     border-left:6px solid #28a745;
@@ -400,7 +403,7 @@
 
     gap: 12px;
 
-    margin-top: 20px;
+    margin-top: auto;
 
 }
 
