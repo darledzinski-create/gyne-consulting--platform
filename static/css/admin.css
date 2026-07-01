@@ -212,17 +212,71 @@
 
 }
 
-/* ===========================
+/* ==========================
 
-   PATIENT DETAILS
+   PATIENT INFORMATION
 
-=========================== */
+========================== */
 
-.patient-details p{
+.patient-details{
 
-    margin:8px 0;
+    margin:20px 0;
 
-    line-height:1.5;
+    padding:18px;
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+}
+
+.patient-details h4{
+
+    margin:0 0 18px;
+
+    font-size:18px;
+
+    color:#1e3a8a;
+
+}
+
+.detail-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.detail-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.label{
+
+    font-weight:600;
+
+    color:#6b7280;
+
+}
+
+.value{
+
+    color:#111827;
+
+    font-weight:500;
+
+    text-align:right;
 
 }
 
