@@ -1,1 +1,657 @@
+/* ===================================
+
+   DR DARIUSZ CONSULTING
+
+   ADMIN DASHBOARD V2
+
+=================================== */
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+.consultation-container{
+
+    max-width:1600px;
+
+    margin:40px auto;
+
+    padding:30px;
+
+}
+
+.consultation-container h1{
+
+    text-align:center;
+
+    font-size:42px;
+
+    color:#1f2937;
+
+    margin-bottom:40px;
+
+    font-weight:700;
+
+}
+
+/* ===================================
+
+   DASHBOARD COUNTERS
+
+=================================== */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:24px;
+
+    margin-bottom:40px;
+
+}
+
+.feature-card{
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    padding:28px;
+
+    text-align:center;
+
+    box-shadow:0 8px 24px rgba(15,23,42,.08);
+
+    border:1px solid #e5e7eb;
+
+    transition:all .25s ease;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 34px rgba(15,23,42,.14);
+
+}
+
+.feature-card h3{
+
+    margin:0;
+
+    font-size:42px;
+
+    color:#1d4ed8;
+
+    font-weight:700;
+
+}
+
+.feature-card p{
+
+    margin-top:10px;
+
+    color:#6b7280;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* ===================================
+
+   SEARCH & EXPORT
+
+=================================== */
+
+.admin-search{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:30px;
+
+}
+
+.admin-search input{
+
+    flex:1;
+
+    padding:14px 18px;
+
+    font-size:16px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:12px;
+
+    background:#ffffff;
+
+    transition:border-color .2s ease,
+
+               box-shadow .2s ease;
+
+}
+
+.admin-search input:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+.admin-search select{
+
+    width:220px;
+
+    padding:14px;
+
+    font-size:16px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:12px;
+
+    background:#ffffff;
+
+}
+
+.admin-search button{
+
+    padding:14px 24px;
+
+    border-radius:12px;
+
+}
+
+.export-row{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-bottom:35px;
+
+}
+
+/* ===================================
+
+   CONSULTATION GRID
+
+=================================== */
+
+.cards-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3, minmax(360px,1fr));
+
+    gap:28px;
+
+    align-items:start;
+
+}
+
+/* ===================================
+
+   CONSULTATION CARD
+
+=================================== */
+
+.consultation-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+    transition:
+
+        transform .25s ease,
+
+        box-shadow .25s ease;
+
+}
+
+.consultation-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 18px 40px rgba(15,23,42,.12);
+
+}
+
+.consultation-card.normal{
+
+    border-left:6px solid #16a34a;
+
+}
+
+.consultation-card.urgent{
+
+    border-left:6px solid #dc2626;
+
+}
+
+/* ===================================
+
+   CARD HEADER
+
+=================================== */
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+.card-header h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+}
+
+.submitted{
+
+    margin-top:6px;
+
+    font-size:14px;
+
+    color:#6b7280;
+
+}
+
+/* ===================================
+
+   STATUS BADGES
+
+=================================== */
+
+.status-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:120px;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+.status-badge.new{
+
+    background:#2563eb;
+
+}
+
+.status-badge.progress{
+
+    background:#f59e0b;
+
+}
+
+.status-badge.completed{
+
+    background:#16a34a;
+
+}
+
+/* ===================================
+
+   PATIENT INFORMATION
+
+=================================== */
+
+.patient-details{
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    padding:18px;
+
+}
+
+.patient-details h4{
+
+    margin:0 0 16px;
+
+    color:#1d4ed8;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.detail-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.detail-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.label{
+
+    color:#6b7280;
+
+    font-weight:600;
+
+}
+
+.value{
+
+    color:#111827;
+
+    font-weight:600;
+
+    text-align:right;
+
+}
+
+/* ===================================
+
+   MESSAGE & DOCTOR NOTES
+
+=================================== */
+
+.message-section,
+
+.notes-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.message-section h4,
+
+.notes-section h4{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+}
+
+.message-box{
+
+    background:#f9fafb;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    min-height:110px;
+
+    line-height:1.7;
+
+    color:#374151;
+
+}
+
+.notes-section textarea{
+
+    width:100%;
+
+    min-height:140px;
+
+    padding:16px;
+
+    font-size:15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:14px;
+
+    resize:vertical;
+
+    transition:border-color .2s ease,
+
+               box-shadow .2s ease;
+
+}
+
+.notes-section textarea:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+/* ===================================
+
+   BUTTONS
+
+=================================== */
+
+.status-buttons{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+}
+
+.status-buttons a{
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:all .25s ease;
+
+}
+
+.card-actions{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+
+    margin-top:auto;
+
+}
+
+.card-actions a{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:all .25s ease;
+
+}
+
+.card-actions a:hover,
+
+.status-buttons a:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ===================================
+
+   RESPONSIVE
+
+=================================== */
+
+@media (max-width:1400px){
+
+    .cards-grid{
+
+        grid-template-columns:repeat(2,minmax(340px,1fr));
+
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
+@media (max-width:900px){
+
+    .cards-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .admin-search{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .admin-search input,
+
+    .admin-search select,
+
+    .admin-search button{
+
+        width:100%;
+
+    }
+
+    .card-actions{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .status-buttons{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .card-header{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+}
+
 
