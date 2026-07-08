@@ -20,8 +20,8 @@ csrf = CSRFProtect(app)
 
 app.secret_key = os.environ.get("SECRET_KEY")
 
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "DrDariusz1952"
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 def get_db_connection():
     conn = sqlite3.connect("consultations.db")
@@ -296,7 +296,7 @@ def login():
 
         password = request.form.get("password")
 
-        if password == "DrDariusz1952":
+        if password == ADMIN_PASSWORD:
 
             session["admin_logged_in"] = True
 
