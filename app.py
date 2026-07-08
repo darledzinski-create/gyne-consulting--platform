@@ -542,11 +542,8 @@ def admin():
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
 
-    auth = request.authorization
-
-    if not auth or not check_auth(auth.username, auth.password):
-        return authenticate()
-
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
     conn = get_db_connection()
 
     search = request.args.get("search", '').strip()
