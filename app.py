@@ -1,7 +1,6 @@
 from flask import Flask, request, redirect, url_for, render_template, session
 from mailjet_rest import Client
 from flask_wtf.csrf import CSRFProtect
-from flask import Response
 from datetime import datetime
 from zoneinfo import ZoneInfo
 import sqlite3
@@ -62,34 +61,24 @@ def create_table():
     )
     """)
 
+    try:
+        conn.execute(
+            "ALTER TABLE consultations ADD COLUMN status TEXT NOT NULL DEFAULT 'New'"
+        )
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        conn.execute(
+            "ALTER TABLE consultations ADD COLUMN doctor_notes TEXT"
+        )
+    except sqlite3.OperationalError:
+        pass
+    
     conn.commit()
     conn.close()
 
 create_table()
-
-conn = get_db_connection()
-
-try:
-    conn.execute(
-        "ALTER TABLE consultations ADD COLUMN status TEXT NOT NULL DEFAULT 'New'"
-    )
-    conn.commit()
-except:
-    pass
-
-conn.close()
-
-conn = get_db_connection()
-
-
-
-try:
-    conn.execute(
-        "ALTER TABLE consultations ADD COLUMN doctor_notes TEXT"
-    )
-    conn.commit()
-except:
-    pass
 
 conn.close()
 
@@ -278,16 +267,6 @@ def consultation():
 def thank_you():
     urgency = request.args.get("urgency", '')
     return render_template("thank_you.html", urgency=urgency)
-
-def check_auth(username, password):
-    return username == ADMIN_USERNAME and password == ADMIN_PASSWORD
-
-def authenticate():
-    return Response(
-        "Access denied",
-        401,
-        {"WWW-Authenticate": 'Basic realm="Login Required"'}
-    )
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
