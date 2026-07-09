@@ -7,7 +7,10 @@ import sqlite3
 import os
 import csv
 import io
+import logging
+
 from database import get_db_connection
+
 
 
 mailjet = Client(
@@ -18,7 +21,15 @@ mailjet = Client(
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 
+logging.basicConfig(level=logging.INFO)
+
+logger = logging.getLogger(__name__)
+
+APP_VERSION = "1.0.0"
+
 app.secret_key = os.environ.get("SECRET_KEY")
+
+logger.info(f"Starting Dr Dariusz Consulting v{APP_VERSION}")
 
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
@@ -605,8 +616,8 @@ def appointments():
 
     search = request.args.get("search", "").strip().lower()
 
-    print("SEARCH TERM =", search)
-
+    logger.info(f"Search term: {search}")
+    
     if search:
         appointments = conn.execute("""
             SELECT *
@@ -631,12 +642,12 @@ def appointments():
             "SELECT COUNT(*) FROM appointments"
         ).fetchone()[0]
 
-        print("TOTAL APPOINTMENTS IN DB =", count)
+        logger.info(f"Appointments in database: {count}")
         
         print("APPOINTMENTS FOUND:", len(appointments))
 
         for a in appointments:
-            print("NAME =", a["name"])
+        logger.info(f"Appointment: {a['name']}")
 
     conn.close()
 
