@@ -644,10 +644,10 @@ def appointments():
 
         logger.info(f"Appointments in database: {count}")
         
-        print("APPOINTMENTS FOUND:", len(appointments))
+        logger.info(f"Appointments found: {len(appointments)}")
 
         for a in appointments:
-        logger.info(f"Appointment: {a['name']}")
+            logger.info(f"Appointment: {a['name']}")
 
     conn.close()
 
