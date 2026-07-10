@@ -10,7 +10,7 @@ import logging
 
 from database import get_db_connection
 
-from mail import mailjet
+from mail import send_email
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
@@ -193,11 +193,11 @@ def consultation():
             }
             
             print("SENDING DOCTOR EMAIL")
-            result_doctor = mailjet.send.create(data=data_doctor)
+            result_doctor = send_email(data_doctor)
             print("DOCTOR STATUS:", result_doctor.status_code)
             
             print("SENDING PATIENT EMAIL")
-            result_patient = mailjet.send.create(data=data_patient)
+            result_patient = send_email(data_patient)
             print("PATIENT STATUS:", result_patient.status_code)
             
             return redirect(url_for("thank_you", urgency=urgency_clean))
@@ -567,13 +567,14 @@ def offer_appointment(consultation_id):
            ]
         }
 
-        print("SENDING APPOINTMENT EMAIL")
+        logger.info("Sending appointment email")
 
-        result_patient = mailjet.send.create(data=data_patient)
+        result_patient = send_email(data_patient)
+        
+        logger.info(
+           f"Appointment email status: {result_patient.status_code}"
 
-        print("APPOINTMENT EMAIL STATUS:",
-              result_patient.status_code)
-
+)
         conn.execute("""
             UPDATE consultations
             SET status = 'In Progress'
@@ -586,7 +587,7 @@ def offer_appointment(consultation_id):
             "SELECT COUNT(*) FROM appointments"
         ).fetchone()[0]
 
-        print("AFTER INSERT COUNT =", count)
+        logger.info(f"Appointments after insert: {count}")
 
         conn.close()
 
