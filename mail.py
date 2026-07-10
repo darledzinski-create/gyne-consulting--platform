@@ -15,3 +15,15 @@ mailjet = Client(
     version="v3.1"
 
 )
+
+def send_email(data):
+
+    """
+
+    Send an email using Mailjet.
+
+    Returns the Mailjet response.
+
+    """
+
+    return mailjet.send.create(data=data)
