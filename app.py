@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, url_for, render_template, session
-from mailjet_rest import Client
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -11,12 +10,7 @@ import logging
 
 from database import get_db_connection
 
-
-
-mailjet = Client(
-    auth=(os.environ.get("MAILJET_API_KEY"), os.environ.get("MAILJET_SECRET_KEY")),
-    version='v3.1'
-)
+from mail import mailjet
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
