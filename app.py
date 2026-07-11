@@ -10,7 +10,7 @@ import logging
 
 from database import get_db_connection
 
-from mail import send_email
+from mail import send_email, send_appointment_email
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
@@ -531,50 +531,21 @@ def offer_appointment(consultation_id):
 
         conn.commit()
 
-        patient_text = f"""
-        Dear {consultation["name"]},
-
-        Your appointment has been offered.
-        
-        Practice: {request.form["practice"]}
-        Date: {request.form["preferred_date"]}
-        Time: {request.form["preferred_time"]}
-
-        Reason:
-        {request.form["reason"]}
-
-        Please contact us if you need any changes.
-
-        Dr Dariusz Consulting
-        """
-
-        data_patient = {
-            "Messages": [
-                {
-
-                    "From": {
-                        "Email": "contact@drdariuszconsults.com",
-                        "Name": "Dr Dariusz"
-                    },
-                    "To": [
-                        {
-                             "Email": consultation["email"]
-                        }
-                    ],
-                    "Subject": "Appointment Offer",
-                    "TextPart": patient_text
-               }
-           ]
-        }
-
         logger.info("Sending appointment email")
 
-        result_patient = send_email(data_patient)
-        
-        logger.info(
-           f"Appointment email status: {result_patient.status_code}"
+        result_patient = send_appointment_email(
+            consultation["email"],
+            consultation["name"],
+            request.form["practice"],
+            request.form["preferred_date"],
+            request.form["preferred_time"],
+            request.form["reason"]
+        )
 
-)
+        logger.info(
+            f"Appointment email status: {result_patient.status_code}"
+        )
+        
         conn.execute("""
             UPDATE consultations
             SET status = 'In Progress'
