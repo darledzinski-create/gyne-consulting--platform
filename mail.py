@@ -27,3 +27,77 @@ def send_email(data):
     """
 
     return mailjet.send.create(data=data)
+
+def send_appointment_email(
+
+    patient_email,
+
+    patient_name,
+
+    practice,
+
+    date,
+
+    time,
+
+    reason
+
+):
+
+    patient_text = f"""
+
+Dear {patient_name},
+
+Your appointment has been offered.
+
+Practice: {practice}
+
+Date: {date}
+
+Time: {time}
+
+Reason:
+
+{reason}
+
+Please contact us if you need any changes.
+
+Dr Dariusz Consulting
+
+"""
+
+    data = {
+
+        "Messages": [
+
+            {
+
+                "From": {
+
+                    "Email": "contact@drdariuszconsults.com",
+
+                    "Name": "Dr Dariusz"
+
+                },
+
+                "To": [
+
+                    {
+
+                        "Email": patient_email
+
+                    }
+
+                ],
+
+                "Subject": "Appointment Offer",
+
+                "TextPart": patient_text
+
+            }
+
+        ]
+
+    }
+
+    return send_email(data)
