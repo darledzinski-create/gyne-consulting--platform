@@ -44,6 +44,54 @@ def send_appointment_email(
 
 ):
 
+def send_consultation_email(
+
+    to_email,
+
+    from_name,
+
+    subject,
+
+    message
+
+):
+
+    data = {
+
+        "Messages": [
+
+            {
+
+                "From": {
+
+                    "Email": "contact@drdariuszconsults.com",
+
+                    "Name": from_name
+
+                },
+
+                "To": [
+
+                    {
+
+                        "Email": to_email
+
+                    }
+
+                ],
+
+                "Subject": subject,
+
+                "TextPart": message
+
+            }
+
+        ]
+
+    }
+
+    return send_email(data)
+
     patient_text = f"""
 
 Dear {patient_name},
