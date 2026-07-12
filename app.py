@@ -160,27 +160,24 @@ def consultation():
         """
 
             else:
-               logger.info("Sending doctor consultation email")
+                logger.info("Sending doctor consultation email")
 
-result_doctor = send_email(data_doctor)
+                result_doctor = send_email(data_doctor)
 
-logger.info(
+                logger.info(
 
-    f"Doctor email status: {result_doctor.status_code}"
+                   f"Doctor email status: {result_doctor.status_code}"
+                )
 
-)
+                logger.info("Sending patient confirmation email")
 
-logger.info("Sending patient confirmation email")
+                result_patient = send_email(data_patient)
 
-result_patient = send_email(data_patient)
+                logger.info(
+                    f"Patient email status: {result_patient.status_code}"
+                )
 
-logger.info(
-
-    f"Patient email status: {result_patient.status_code}"
-
-)
-
-logger.warning(f"Unknown urgency: {urgency_clean!r}")
+                logger.warning(f"Unknown urgency: {urgency_clean!r}")
 
                 return "Invalid submission", 400
                 
@@ -232,12 +229,11 @@ logger.warning(f"Unknown urgency: {urgency_clean!r}")
             
             return redirect(url_for("thank_you", urgency=urgency_clean))
 
-       except Exception as e:
+        except Exception as e:
            logger.exception(f"Consultation route failed: {e}")
+           return "Something went wrong", 500
 
-    return "Something went wrong", 500
-
-    return render_template("consultation.html")
+        return render_template("consultation.html")
 
 
 @app.route("/thank-you")
