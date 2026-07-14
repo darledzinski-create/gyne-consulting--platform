@@ -8,7 +8,17 @@ import csv
 import io
 import logging
 
-from database import get_db_connection, create_appointment
+import os
+
+def get_db_connection():
+
+    print("DATABASE:", os.path.abspath("consultations.db"))
+
+    conn = sqlite3.connect("consultations.db")
+
+    conn.row_factory = sqlite3.Row
+
+    return conn
 
 from mail import ( send_email, send_appointment_email, send_consultation_email )
 
