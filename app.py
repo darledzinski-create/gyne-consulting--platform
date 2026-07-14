@@ -598,7 +598,7 @@ def offer_appointment(consultation_id):
     if request.method == "POST":
 
         create_appointment(
-            consultation_id
+            consultation_id,
             consultation,
             request.form["practice"],
             request.form["preferred_date"],
