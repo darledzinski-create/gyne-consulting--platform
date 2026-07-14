@@ -58,12 +58,17 @@
 
         <textarea name="reason"></textarea>
 
-        <button type="submit">
-
+        <button type="submit" id="submit-btn">
             Save Appointment
-
         </button>
 
+        <script>
+        document.querySelector("form").addEventListener("submit", function () {
+            document.getElementById("submit-btn").disabled = true;
+            document.getElementById("submit-btn").textContent = "Saving...";
+        });
+        </script>
+        
     </form>
 
 </div>
