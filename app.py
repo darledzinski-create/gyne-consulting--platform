@@ -323,6 +323,7 @@ Message:
     return render_template("consultation.html")
 
 @app.route("/login", methods=["GET", "POST"])
+
 def login():
 
     if request.method == "POST":
@@ -335,7 +336,19 @@ def login():
 
             return redirect(url_for("admin"))
 
-  
+        # Wrong password
+
+        return render_template(
+
+            "login.html",
+
+            error="Incorrect password."
+
+        )
+
+    # GET request
+
+    return render_template("login.html")
 
 @app.route("/logout")
 def logout():
