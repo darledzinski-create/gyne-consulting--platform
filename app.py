@@ -8,7 +8,7 @@ import csv
 import io
 import logging
 
-from database import get_db_connection
+from database import get_db_connection, create_appointment
 
 from mail import ( send_email, send_appointment_email, send_consultation_email )
 
@@ -597,38 +597,14 @@ def offer_appointment(consultation_id):
 
     if request.method == "POST":
 
-        conn.execute("""
-
-            INSERT INTO appointments
-
-            (name, email, practice, preferred_date,
-
-             preferred_time, reason, status, created_at)
-
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-
-        """, (
-
-            consultation["name"],
-
-            consultation["email"],
-
+        create_appointment(
+            consultation,
             request.form["practice"],
-
             request.form["preferred_date"],
-
             request.form["preferred_time"],
-
-            request.form["reason"],
-
-            "Awaiting Payment",
-
-            datetime.now().strftime("%d %B %Y, %H:%M")
-
-        ))
-
-        conn.commit()
-
+            request.form["reason"]
+        )
+        
         logger.info("Sending appointment email")
 
         result_patient = send_appointment_email(
