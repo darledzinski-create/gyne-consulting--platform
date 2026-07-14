@@ -1,5 +1,7 @@
 import sqlite3
 
+from datetime import datetime
+
 def get_db_connection():
 
     conn = sqlite3.connect("consultations.db")
@@ -105,3 +107,75 @@ def create_table():
     conn.close()
 
 create_table()
+
+def create_appointment(
+
+    consultation,
+
+    practice,
+
+    preferred_date,
+
+    preferred_time,
+
+    reason
+
+):
+
+    conn = get_db_connection()
+
+    conn.execute(
+
+        """
+
+        INSERT INTO appointments
+
+        (
+
+            name,
+
+            email,
+
+            practice,
+
+            preferred_date,
+
+            preferred_time,
+
+            reason,
+
+            status,
+
+            created_at
+
+        )
+
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+
+        """,
+
+        (
+
+            consultation["name"],
+
+            consultation["email"],
+
+            practice,
+
+            preferred_date,
+
+            preferred_time,
+
+            reason,
+
+            "Awaiting Payment",
+
+            datetime.now().strftime("%d %B %Y, %H:%M")
+
+        )
+
+    )
+
+    conn.commit()
+
+    conn.close()
