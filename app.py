@@ -10,7 +10,7 @@ import logging
 
 from database import get_db_connection
 
-from mail import send_email, send_appointment_email
+from mail import ( send_email, send_appointment_email, send_consultation_email )
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
@@ -41,6 +41,276 @@ def homepage():
 def thank_you():
     urgency = request.args.get("urgency", '')
     return render_template("thank_you.html", urgency=urgency)
+
+@app.route("/consultation", methods=["GET", "POST"])
+
+def consultation():
+
+    if request.method == "POST":
+
+        try:
+
+            # ----------------------------
+
+            # Read form values
+
+            # ----------------------------
+
+            name = request.form.get("name", "").strip()
+
+            email = request.form.get("email", "").strip()
+
+            mobile = request.form.get("mobile", "").strip()
+
+            contact_method = request.form.get("contact_method", "").strip()
+
+            urgency = request.form.get("urgency", "").strip()
+
+            message = request.form.get("message", "").strip()
+
+            timestamp = datetime.now(
+
+                ZoneInfo("Africa/Johannesburg")
+
+            ).strftime("%d %B %Y, %H:%M")
+
+            # ----------------------------
+
+            # Honeypot spam protection
+
+            # ----------------------------
+
+            website = request.form.get("website", "").strip()
+
+            if website:
+
+                logger.warning("Spam submission blocked.")
+
+                return "Spam detected", 400
+
+            # ----------------------------
+
+            # Required fields
+
+            # ----------------------------
+
+            if not name or not email or not urgency or not message:
+
+                logger.warning("Required fields missing.")
+
+                return "All fields are required", 400
+
+            urgency_clean = urgency.lower()
+
+            # ----------------------------
+
+            # Save consultation
+
+            # ----------------------------
+
+            conn = get_db_connection()
+
+            conn.execute(
+
+                """
+
+                INSERT INTO consultations
+
+                (
+
+                    name,
+
+                    email,
+
+                    mobile,
+
+                    contact_method,
+
+                    urgency,
+
+                    message,
+
+                    timestamp
+
+                )
+
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+
+                """,
+
+                (
+
+                    name,
+
+                    email,
+
+                    mobile,
+
+                    contact_method,
+
+                    urgency_clean,
+
+                    message,
+
+                    timestamp
+
+                )
+
+            )
+
+            conn.commit()
+
+            conn.close()
+
+            logger.info(
+
+                f"Consultation saved for {name} ({email})"
+
+            )
+
+            # ----------------------------
+
+            # Build email content
+
+            # ----------------------------
+
+            if urgency_clean == "urgent":
+
+                subject = "CONSULTATION REQUEST"
+
+                patient_text = """
+
+Your urgent consultation request has been received.
+
+This platform is not suitable for medical emergencies.
+
+Please seek immediate in-person medical care if necessary.
+
+Dr Dariusz
+
+"""
+
+                doctor_text = f"""
+
+CONSULTATION REQUEST
+
+Submitted:
+
+{timestamp}
+
+Name: {name}
+
+Email: {email}
+
+Mobile: {mobile}
+
+Preferred Contact Method: {contact_method}
+
+Message:
+
+{message}
+
+"""
+
+            elif urgency_clean == "not_urgent":
+
+                subject = "Standard Consultation"
+
+                patient_text = """
+
+Thank you for your consultation request.
+
+Your message has been received and will be reviewed carefully.
+
+Dr Dariusz
+
+"""
+
+                doctor_text = f"""
+
+Consultation Request
+
+Submitted:
+
+{timestamp}
+
+Name: {name}
+
+Email: {email}
+
+Message:
+
+{message}
+
+"""
+
+            else:
+
+                logger.warning(
+
+                    f"Unknown urgency value: {urgency_clean!r}"
+
+                )
+
+                return "Invalid submission", 400
+
+            # ----------------------------
+
+            # Send emails
+
+            # ----------------------------
+
+            logger.info("Sending doctor consultation email")
+
+            send_consultation_email(
+
+                "darledzinski@gmail.com",
+
+                "Consultation System",
+
+                subject,
+
+                doctor_text
+
+            )
+
+            logger.info("Sending patient confirmation email")
+
+            send_consultation_email(
+
+                email,
+
+                "Dr Dariusz",
+
+                subject,
+
+                patient_text
+
+            )
+
+            logger.info(
+
+                f"Consultation workflow completed for {email}"
+
+            )
+
+            return redirect(
+
+                url_for("thank_you", urgency=urgency_clean)
+
+            )
+
+        except Exception as e:
+
+            logger.exception(
+
+                f"Consultation route failed: {e}"
+
+            )
+
+            return "Something went wrong", 500
+
+    return render_template("consultation.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
