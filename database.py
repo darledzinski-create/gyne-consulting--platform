@@ -110,6 +110,8 @@ create_table()
 
 def create_appointment(
 
+    consultation_id,
+
     consultation,
 
     practice,
@@ -173,6 +175,22 @@ def create_appointment(
             datetime.now().strftime("%d %B %Y, %H:%M")
 
         )
+
+    )
+
+    conn.execute(
+
+        """
+
+        UPDATE consultations
+
+        SET status = 'In Progress'
+
+        WHERE id = ?
+
+        """,
+
+        (consultation_id,)
 
     )
 
