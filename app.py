@@ -728,18 +728,37 @@ def appointment_status(id, status):
     return redirect(url_for("appointments"))
 
 @app.route("/update-status/<int:id>/<status>")
+
 def update_status(id, status):
+
+    logger.info(f"Updating consultation {id} to {status}")
 
     status = status.replace("_", " ")
 
     conn = get_db_connection()
 
-    conn.execute(
+    cursor = conn.execute(
+
         "UPDATE consultations SET status = ? WHERE id = ?",
+
         (status, id)
+
     )
 
+    logger.info(f"Rows updated: {cursor.rowcount}")
+
     conn.commit()
+
+    result = conn.execute(
+
+        "SELECT id, status FROM consultations WHERE id = ?",
+
+        (id,)
+
+    ).fetchone()
+
+    logger.info(f"Database now says: {result}")
+
     conn.close()
 
     return redirect("/admin")
