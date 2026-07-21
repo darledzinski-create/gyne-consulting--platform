@@ -8,24 +8,25 @@ import csv
 import io
 import logging
 
-import os
+from database import (
 
-def get_db_connection():
+    get_db_connection,
 
-    print("DATABASE:", os.path.abspath("consultations.db"))
+    create_appointment
 
-    conn = sqlite3.connect("consultations.db")
+)
 
-    tables = conn.execute(
-        "SELECT name FROM sqlite_master WHERE type='table';"
-    ).fetchall()
-    print("TABLES:", tables)
+from mail import (
 
-    conn.row_factory = sqlite3.Row
+    send_email,
 
-    return conn
+    send_appointment_email,
 
-from mail import ( send_email, send_appointment_email, send_consultation_email )
+    send_consultation_email
+
+)
+
+
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
