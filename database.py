@@ -4,12 +4,6 @@ from datetime import datetime
 
 print("DATABASE.PY IMPORTED")
 
-def create_table():
-
-    print("CREATING TABLES...")
-
-    conn = sqlite3.connect("consultations.db")
-
 def get_db_connection():
 
     conn = sqlite3.connect("consultations.db")
