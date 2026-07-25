@@ -124,7 +124,8 @@ def consultation():
                 name,
                 email,
                 mobile,
-                contact_method, urgency_clean,
+                contact_method, 
+                urgency_clean,
                 message,
                 timestamp
             )
