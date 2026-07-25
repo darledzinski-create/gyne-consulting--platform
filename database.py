@@ -199,3 +199,42 @@ def create_appointment(
     conn.commit()
 
     conn.close()
+
+def save_consultation(
+    name,
+    email,
+    mobile,
+    contact_method,
+    urgency,
+    message,
+    timestamp
+):
+
+    conn = get_db_connection (
+
+    conn.execute("""
+        INSERT INTO consultation (
+            name,
+            email,
+            mobile,
+            contact_method,
+            urgency,
+            message,
+            timestamp
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (
+        name,
+        email,
+        mobile,
+        contact_method,
+        urgency,
+        message,
+        timestamp
+    ))
+
+    conn.commit()
+    conn.close()
+
+
+    
