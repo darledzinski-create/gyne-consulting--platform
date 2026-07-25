@@ -210,7 +210,7 @@ def save_consultation(
     timestamp
 ):
 
-    conn = get_db_connection (
+    conn = get_db_connection ()
 
     conn.execute("""
         INSERT INTO consultation (
