@@ -213,7 +213,7 @@ def save_consultation(
     conn = get_db_connection ()
 
     conn.execute("""
-        INSERT INTO consultation (
+        INSERT INTO consultations (
             name,
             email,
             mobile,
