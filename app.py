@@ -12,7 +12,9 @@ from database import (
 
     get_db_connection,
 
-    create_appointment
+    create_appointment,
+
+    save_consultation
 
 )
 
@@ -118,66 +120,16 @@ def consultation():
 
             urgency_clean = urgency.lower()
 
-            # ----------------------------
-
-            # Save consultation
-
-            # ----------------------------
-
-            conn = get_db_connection()
-
-            conn.execute(
-
-                """
-
-                INSERT INTO consultations
-
-                (
-
-                    name,
-
-                    email,
-
-                    mobile,
-
-                    contact_method,
-
-                    urgency,
-
-                    message,
-
-                    timestamp
-
-                )
-
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-
-                """,
-
-                (
-
-                    name,
-
-                    email,
-
-                    mobile,
-
-                    contact_method,
-
-                    urgency_clean,
-
-                    message,
-
-                    timestamp
-
-                )
-
+            save_consultation(
+                name,
+                email,
+                mobile,
+                contact_method, urgency_clean,
+                message,
+                timestamp
             )
 
-            conn.commit()
-
-            conn.close()
-
+           
             logger.info(
 
                 f"Consultation saved for {name} ({email})"
