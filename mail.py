@@ -58,31 +58,31 @@ def send_consultation_email(
 
     return send_email(data)
 
-    def create_patient_email(name, urgency):
-        if urgency == "urgent":
-            subject = "CONSULTATION REQUEST"
-            TEXT = f"""
-    Your uregent consultation request has been received.
+def create_patient_email(name, urgency):
+    if urgency == "urgent":
+        subject = "CONSULTATION REQUEST"
+        TEXT = f"""
+Your uregent consultation request has been received.
     
-    This platform is not suitable for medical emergencies.
+This platform is not suitable for medical emergencies.
 
-    Please seek immediate in-person medical care if necessary.
+Please seek immediate in-person medical care if necessary.
 
-    Dr Dariusz
-    """
-        else:
+Dr Dariusz
+"""
+    else:
 
-            subject = "STANDARD CONSULTATION"
+        subject = "STANDARD CONSULTATION"
 
-            text = f"""
-    Thank you for your consultation request.
+        text = f"""
+Thank you for your consultation request.
 
-    Your message has been received and will be reviewed carefully.
+Your message has been received and will be reviewed carefully.
 
-    Dr Dariusz
-    """
+Dr Dariusz
+"""
 
-        return subject, TEXT
+    return subject, TEXT
     
 
  def send_appointment_email(
