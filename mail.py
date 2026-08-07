@@ -54,11 +54,11 @@ def send_consultation_email(
 
             }
 
-        ]
+    ]
 
-    }
+    
 
- return send_email(data)
+    return send_email(data)
 
 def create_patient_email(name, urgency):
     if urgency == "urgent":
