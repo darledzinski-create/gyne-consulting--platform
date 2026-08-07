@@ -17,14 +17,16 @@ mailjet = Client(
 )
 
 def send_email(data):
+    result = mailjet.send.create(data=data)
 
-    """
+    print("Status:", result.status_code)
+    print("Response:", result.json())
 
-    Send an email using Mailjet.
+    return result
 
-    Returns the Mailjet response.
 
-    """
+
+   
 
     return mailjet.send.create(data=data)
 
