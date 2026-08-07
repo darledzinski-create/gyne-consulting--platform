@@ -51,12 +51,9 @@ def send_consultation_email(
                 ],
                 "Subject": subject,
                 "TextPart": message
-
             }
-
-    ]
-
-    
+        ]
+    }     
 
     return send_email(data)
 
