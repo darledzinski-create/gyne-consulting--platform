@@ -632,6 +632,8 @@ def appointments():
     search = request.args.get("search", "").strip().lower()
 
     logger.info(f"Search term: {search}")
+
+    print(ALL APPOINTMENT NAMES =", [row["name"] for row in conn.execute(SELECT name FROM appointments").fetchall()])
     
     if search:
         appointments = conn.execute("""
