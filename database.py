@@ -154,7 +154,7 @@ def create_appointment(
 
         )
 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?,)
 
         """,
 
