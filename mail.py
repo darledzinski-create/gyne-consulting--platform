@@ -104,11 +104,17 @@ Time: {time}
 Reason:
 {reason}
 
-Please contact us if you need any changes.
+PAYMENT BY EFT
 
-Dr Dariusz Consulting
+Bank: GoTyme
+Account holder: Dariusz Ledzinski
+Account number: 510 1312 9386
+Please make payment by EFT and reply to this email with your proof of payment.
+Your appointment will be confirmed once payment has been received and verified.
+If you need any changes to the appointment, please contact us.
+
+Dr Dariusz Ledzinski
 """
-
     data = {
         "Messages": [
             {
@@ -131,60 +137,5 @@ Dr Dariusz Consulting
     }
 
     return send_email(data)
-    patient_text = f"""
-
-Dear {patient_name},
-
-Your appointment has been offered.
-
-Practice: {practice}
-
-Date: {date}
-
-Time: {time}
-
-Reason:
-
-{reason}
-
-Please contact us if you need any changes.
-
-Dr Dariusz Consulting
-
-"""
-
-    data = {
-
-        "Messages": [
-
-            {
-
-                "From": {
-
-                    "Email": "contact@drdariuszconsults.com",
-
-                    "Name": "Dr Dariusz"
-
-                },
-
-                "To": [
-
-                    {
-
-                        "Email": patient_email
-
-                    }
-
-                ],
-
-                "Subject": "Appointment Offer",
-
-                "TextPart": patient_text
-
-            }
-
-        ]
-
-    }
-
-    return send_email(data)
+   
+   
