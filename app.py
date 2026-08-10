@@ -707,6 +707,12 @@ def appointment_status(id, status):
 
     conn.commit()
 
+    if status == "Confirmed":
+        appointment = conn.execute(
+            "SELECT name, email, practice, preferred_date, preferred_time, reason FROM appointments WHERE id = ?"
+            (id,)
+        ).fetchone()
+    
     conn.close()
 
     return redirect(url_for("appointments"))
