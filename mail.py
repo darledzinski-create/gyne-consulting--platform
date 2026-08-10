@@ -24,10 +24,6 @@ def send_email(data):
 
     return result
 
-
-
-   
-
     return mailjet.send.create(data=data)
 
 def send_consultation_email(
