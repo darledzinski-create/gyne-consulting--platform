@@ -717,7 +717,7 @@ def appointment_status(id, status):
             appointment["emai"l,
             appointment["name"],
             appointment["practice"],
-            appointment["preferred_date"]'
+            appointment["preferred_date"],
             appointment["preferred_time"],
             appointment["reason"]
         )
