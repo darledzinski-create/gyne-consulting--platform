@@ -279,25 +279,25 @@ Dr Dariusz Ledzinski
     Dr Dariusz Ledzinski
     """
 
-       data = {
-           "Messages": [
-               {
-                   "From": {
-                       "Email": "contact@drdariuszconsults.com",
-                       "Name": "Dr Dariusz"
-                   },
-                   "To": [
-                       {
-                           "Email": patient_email
-                       }
-                   ],
-                   "Subject": "Appointment Confirmed",
-                   "TextPart": patient_text
-               }
-           ]
-       }
+        data = {
+            "Messages": [
+                {
+                    "From": {
+                        "Email": "contact@drdariuszconsults.com",
+                        "Name": "Dr Dariusz"
+                    },
+                    "To": [
+                        {
+                            "Email": patient_email
+                        }
+                    ],
+                    "Subject": "Appointment Confirmed",
+                    "TextPart": patient_text
+                }
+            ]
+        }
 
-       return send_email(data)
+        return send_email(data)
        
    
    
