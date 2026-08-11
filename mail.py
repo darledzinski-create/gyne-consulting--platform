@@ -135,7 +135,7 @@ Dr Dariusz Ledzinski
     return send_email(data)
 
     def send_email(data):
-    result = mailjet.send.create(data=data)
+        result = mailjet.send.create(data=data)
 
     print("Status:", result.status_code)
     print("Response:", result.json())
