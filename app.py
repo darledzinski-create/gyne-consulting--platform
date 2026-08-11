@@ -709,7 +709,7 @@ def appointment_status(id, status):
 
     if status == "Confirmed":
         appointment = conn.execute(
-            "SELECT name, email, practice, preferred_date, preferred_time, reason FROM appointments WHERE id = ?"
+            "SELECT name, email, practice, preferred_date, preferred_time, reason FROM appointments WHERE id = ?",
             (id,)
         ).fetchone()
     
