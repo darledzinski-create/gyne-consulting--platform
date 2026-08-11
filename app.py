@@ -712,6 +712,15 @@ def appointment_status(id, status):
             "SELECT name, email, practice, preferred_date, preferred_time, reason FROM appointments WHERE id = ?",
             (id,)
         ).fetchone()
+
+        send_appointment_confirmation_email(
+            appointment["emai"l,
+            appointment["name"],
+            appointment["practice"],
+            appointment["preferred_date"]'
+            appointment["preferred_time"],
+            appointment["reason"]
+        )
     
     conn.close()
 
