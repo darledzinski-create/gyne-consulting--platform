@@ -252,32 +252,32 @@ Dr Dariusz Ledzinski
 
     return send_email(data)
    
-   def send_appoimtment_confirmation_email(
-       patient_email,
-       patient_name,
-       practice,
-       date,
-       time,
-       reason
-   ):
-       patient_text = f"""
-   Dear {patient_name},
+    def send_appoimtment_confirmation_email(
+        patient_email,
+        patient_name,
+        practice,
+        date,
+        time,
+        reason
+    ):
+        patient_text = f"""
+    Dear {patient_name},
 
-   Your appointment has been confirmed.
+    Your appointment has been confirmed.
 
-   Practice: {practice}
-   Date: {date}
-   Time: {time}
+    Practice: {practice}
+    Date: {date}
+    Time: {time}
 
-   Reason:
-   {reason}
+    Reason:
+    {reason}
 
-   Payment has been received and verified.
+    Payment has been received and verified.
 
-   We look forward to seeing you.
+    We look forward to seeing you.
 
-   Dr Dariusz Ledzinski
-   """
+    Dr Dariusz Ledzinski
+    """
 
        data = {
            "Messages": [
