@@ -19,13 +19,10 @@ from database import (
 )
 
 from mail import (
-
     send_email,
-
     send_appointment_email,
-
+    send_appointment_confirmation_email,
     send_consultation_email
-
 )
 
 
