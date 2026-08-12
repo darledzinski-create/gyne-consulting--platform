@@ -76,66 +76,12 @@ Your message has been received and will be reviewed carefully.
 
 Dr Dariusz
 """
-
     return subject, text
     
-def send_appointment_email(
-    patient_email,
-    patient_name,
-    practice,
-    date,
-    time,
-    reason
-):
-
-    patient_text = f"""
-Dear {patient_name},
-
-Your appointment has been offered.
-
-Practice: {practice}
-Date: {date}
-Time: {time}
-
-Reason:
-{reason}
-
-PAYMENT BY EFT
-
-Bank: GoTyme
-Account holder: Dariusz Ledzinski
-Account number: 510 1312 9386
-Please make payment by EFT and reply to this email with your proof of payment.
-Your appointment will be confirmed once payment has been received and verified.
-If you need any changes to the appointment, please contact us.
-
-Dr Dariusz Ledzinski
-"""
-    data = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "contact@drdariuszconsults.com",
-                    "Name": "Dr Dariusz"
-                },
-                "To": [
-                    {
-                        "Email": patient_email
-                    }
-                ],
-                "Subject": "Appointment Offer",
-                "TextPart": patient_text
-
-            }
-
-        ]
-
-    }
-
     return send_email(data)
 
-    def send_email(data):
-        result = mailjet.send.create(data=data)
+def send_email(data):
+    result = mailjet.send.create(data=data)
 
     print("Status:", result.status_code)
     print("Response:", result.json())
