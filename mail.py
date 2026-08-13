@@ -198,7 +198,7 @@ Dr Dariusz Ledzinski
 
     return send_email(data)
    
-    def send_appoimtment_confirmation_email(
+    def send_appointment_confirmation_email(
         patient_email,
         patient_name,
         practice,
