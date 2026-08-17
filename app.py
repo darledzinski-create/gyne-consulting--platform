@@ -711,7 +711,7 @@ def appointment_status(id, status):
         ).fetchone()
 
         send_appointment_confirmation_email(
-            appointment["emai"],
+            appointment["email"],
             appointment["name"],
             appointment["practice"],
             appointment["preferred_date"],
