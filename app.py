@@ -761,3 +761,48 @@ def update_status(id, status):
 
     return redirect("/admin")
 
+@app.route("/mailjet-account-check")
+def mailjet_account_check():
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    import json
+    from mailjet_rest import Client
+
+    mailjet = Client(
+        auth=(
+            os.environ.get("MAILJET_API_KEY"),
+            os.environ.get("MAILJET_SECRET_KEY")
+        ),
+        version="v3"
+    )
+
+    try:
+
+        result = mailjet.sender.get(
+            limit=100
+        )
+
+        diagnostic = {
+            "status_code": result.status_code,
+            "senders": result.json()
+        }
+
+        return (
+            "<h1>Mailjet Account Diagnostic</h1>"
+            "<pre>"
+            + json.dumps(diagnostic, indent=2)
+            + "</pre>"
+        )
+
+    except Exception as e:
+
+        return (
+            "<h1>Mailjet Account Diagnostic Error</h1>"
+            "<pre>"
+            + str(e)
+            + "</pre>"
+        ), 500
+            
+
