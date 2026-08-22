@@ -745,9 +745,24 @@ def update_status(id, status):
 
     conn.commit()
 
-    @app.route("/mailjet-check")
-    def mailjet_check():
+    
 
+    result = conn.execute(
+
+        "SELECT id, status FROM consultations WHERE id = ?",
+
+        (id,)
+
+    ).fetchone()
+
+    logger.info(f"Database now says: {result}")
+
+    conn.close()
+
+    return redirect("/admin")
+
+@app.route("/mailjet-check")
+def mailjet_check():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
@@ -765,14 +780,8 @@ def update_status(id, status):
     )
 
     try:
-
-        message_result = mailjet.message.get(
-            id=message_id
-        )
-
-        history_result = mailjet.messagehistory.get(
-            id=message_id
-        )
+        message_result = mailjet.message.get(id=message_id)
+        history_result = mailjet.messagehistory.get(id=message_id)
 
         diagnostic = {
             "message_id": message_id,
@@ -790,24 +799,9 @@ def update_status(id, status):
         )
 
     except Exception as e:
-
         return (
             "<h1>Mailjet Diagnostic Error</h1>"
             "<pre>"
             + str(e)
             + "</pre>"
         ), 500
-
-    result = conn.execute(
-
-        "SELECT id, status FROM consultations WHERE id = ?",
-
-        (id,)
-
-    ).fetchone()
-
-    logger.info(f"Database now says: {result}")
-
-    conn.close()
-
-    return redirect("/admin")
