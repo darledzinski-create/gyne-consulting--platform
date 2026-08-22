@@ -12,13 +12,18 @@ mailjet = Client(
 
 
 def send_email(data):
+
+    print(
+        "ACTUAL MAILJET FROM:",
+        data["Messages"][0]["From"]["Email"]
+    )
+
     result = mailjet.send.create(data=data)
 
     print("Status:", result.status_code)
     print("Response:", result.json())
 
     return result
-
 
 def send_consultation_email(
     to_email,
