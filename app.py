@@ -761,3 +761,56 @@ def update_status(id, status):
 
     return redirect("/admin")
 
+@app.route("/mailjet-message-check")
+def mailjet_message_check():
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    import json
+    from mailjet_rest import Client
+
+    message_id = 288230415465517284
+
+    mailjet = Client(
+        auth=(
+            os.environ.get("MAILJET_API_KEY"),
+            os.environ.get("MAILJET_SECRET_KEY")
+        ),
+        version="v3"
+    )
+
+    try:
+
+        message_result = mailjet.message.get(
+            id=message_id
+        )
+
+        history_result = mailjet.messagehistory.get(
+            id=message_id
+        )
+
+        diagnostic = {
+            "message_id": message_id,
+            "message_status_code": message_result.status_code,
+            "message_record": message_result.json(),
+            "history_status_code": history_result.status_code,
+            "message_history": history_result.json()
+        }
+
+        return (
+            "<h1>Mailjet Message Diagnostic</h1>"
+            "<pre>"
+            + json.dumps(diagnostic, indent=2)
+            + "</pre>"
+        )
+
+    except Exception as e:
+
+        return (
+            "<h1>Mailjet Message Diagnostic Error</h1>"
+            "<pre>"
+            + str(e)
+            + "</pre>"
+        ), 500
+
