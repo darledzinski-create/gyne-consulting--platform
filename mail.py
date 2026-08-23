@@ -118,7 +118,7 @@ Dr Dariusz Ledzinski
         "Messages": [
             {
                 "From": {
-                    "Email": "contact@drdariusconsults.com",
+                    "Email": "contact@drdariuszconsults.com",
                     "Name": "Dr Dariusz"
                 },
                 "To": [
@@ -166,7 +166,7 @@ Dr Dariusz Ledzinski
         "Messages": [
             {
                 "From": {
-                    "Email": "contact@drdariusconsults.com",
+                    "Email": "contact@drdariuszconsults.com",
                     "Name": "Dr Dariusz"
                 },
                 "To": [
