@@ -782,24 +782,18 @@ def mailjet_message_check():
 
     try:
 
-        message_result = mailjet.message.get(
-            id=message_id
-        )
-
-        history_result = mailjet.messagehistory.get(
+        result = mailjet.messageinformation.get(
             id=message_id
         )
 
         diagnostic = {
             "message_id": message_id,
-            "message_status_code": message_result.status_code,
-            "message_record": message_result.json(),
-            "history_status_code": history_result.status_code,
-            "message_history": history_result.json()
+            "status_code": result.status_code,
+            "message_information": result.json()
         }
 
         return (
-            "<h1>Mailjet Message Diagnostic</h1>"
+            "<h1>Mailjet Message Information</h1>"
             "<pre>"
             + json.dumps(diagnostic, indent=2)
             + "</pre>"
@@ -808,9 +802,8 @@ def mailjet_message_check():
     except Exception as e:
 
         return (
-            "<h1>Mailjet Message Diagnostic Error</h1>"
+            "<h1>Mailjet Message Information Error</h1>"
             "<pre>"
             + str(e)
             + "</pre>"
         ), 500
-
