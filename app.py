@@ -698,14 +698,12 @@ def appointment_status(id, status):
 
     allowed_statuses = {
         "Awaiting Payment",
+        "Paid",
         "Confirmed",
         "Cancelled"
     }
 
     if status not in allowed_statuses:
-        logger.warning(
-            f"Invalid appointment status requested: {status}"
-        )
         return "Invalid appointment status", 400
 
     conn = get_db_connection()
@@ -728,14 +726,10 @@ def appointment_status(id, status):
     ).fetchone()
 
     if appointment is None:
-
         conn.close()
-
-        logger.warning(
-            f"Appointment {id} not found"
-        )
-
         return "Appointment not found", 404
+
+    old_status = appointment["status"]
 
     conn.execute(
         """
@@ -750,10 +744,10 @@ def appointment_status(id, status):
 
     logger.info(
         f"Appointment {id} status changed "
-        f"from {appointment['status']} to {status}"
+        f"from {old_status} to {status}"
     )
 
-    if status == "Confirmed" and appointment["status"] != "Confirmed":
+    if status == "Confirmed" and old_status != "Confirmed":
 
         result = send_appointment_confirmation_email(
             appointment["email"],
@@ -769,36 +763,7 @@ def appointment_status(id, status):
             f"{result.status_code}"
         )
 
-    elif status == "Confirmed" and appointment["status"] == "Confirmed":
-
-        logger.info(
-            f"Appointment {id} was already confirmed. "
-            f"No duplicate confirmation email sent."
-        )
-            conn.commit()
-
-        logger.info(
-        f"Appointment {id} status changed "
-        f"from {appointment['status']} to {status}"
-        )
-
-    if status == "Confirmed" and appointment["status"] != "Confirmed":
-
-        result = send_appointment_confirmation_email(
-            appointment["email"],
-            appointment["name"],
-            appointment["practice"],
-            appointment["preferred_date"],
-            appointment["preferred_time"],
-            appointment["reason"]
-        )
-
-        logger.info(
-            f"Appointment confirmation email status: "
-            f"{result.status_code}"
-        )
-
-    elif status == "Confirmed" and appointment["status"] == "Confirmed":
+    elif status == "Confirmed" and old_status == "Confirmed":
 
         logger.info(
             f"Appointment {id} was already confirmed. "
