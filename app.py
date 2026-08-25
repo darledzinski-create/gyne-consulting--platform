@@ -777,10 +777,10 @@ def appointment_status(id, status):
         )
             conn.commit()
 
-    logger.info(
+        logger.info(
         f"Appointment {id} status changed "
         f"from {appointment['status']} to {status}"
-    )
+        )
 
     if status == "Confirmed" and appointment["status"] != "Confirmed":
 
