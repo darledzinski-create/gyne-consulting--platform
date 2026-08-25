@@ -772,7 +772,7 @@ def appointment_status(id, status):
         logger.info(
             f"Appointment confirmation email status: "
             f"{result.status_code}"
-        ))
+        )
 
     conn.close()
 
