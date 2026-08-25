@@ -568,7 +568,7 @@ def offer_appointment(consultation_id):
 
     conn = get_db_connection()
 
-    consultation = conn.execute(
+    consultation = conn.execute()
 
         "SELECT * FROM consultations WHERE id = ?",
 
