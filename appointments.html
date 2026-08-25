@@ -6,23 +6,118 @@
 
     <h1>Appointments</h1>
 
-    {% for appointment in appointments %}
+    {% if appointments %}
 
-    <div class="feature-card" style="margin-bottom:25px;">
+        {% for appointment in appointments %}
 
-        <p><strong>ID:</strong> {{ appointment.id }}</p>
+        <div class="feature-card" style="margin-bottom:25px;">
 
-        <p><strong>Name:</strong> {{ appointment.name }}</p>
+            <p>
+                <strong>ID:</strong>
+                {{ appointment.id }}
+            </p>
 
-        <p><strong>Email:</strong> {{ appointment.email }}</p>
+            <p>
+                <strong>Name:</strong>
+                {{ appointment.name }}
+            </p>
 
-        <p><strong>Status:</strong> {{ appointment.status }}</p>
+            <p>
+                <strong>Email:</strong>
+                {{ appointment.email }}
+            </p>
 
-        <p><strong>Created:</strong> {{ appointment.created_at }}</p>
+            <p>
+                <strong>Practice:</strong>
+                {{ appointment.practice }}
+            </p>
 
-    </div>
+            <p>
+                <strong>Date:</strong>
+                {{ appointment.preferred_date }}
+            </p>
 
-    {% endfor %}
+            <p>
+                <strong>Time:</strong>
+                {{ appointment.preferred_time }}
+            </p>
+
+            <p>
+                <strong>Reason:</strong>
+                {{ appointment.reason }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ appointment.status }}
+            </p>
+
+            <p>
+                <strong>Created:</strong>
+                {{ appointment.created_at }}
+            </p>
+
+            <div style="margin-top:20px;">
+
+                {% if appointment.status == "Awaiting Payment" %}
+
+                    <a
+                        href="{{ url_for(
+                            'appointment_status',
+                            id=appointment.id,
+                            status='Confirmed'
+                        ) }}"
+                        class="btn"
+                        onclick="return confirm(
+                            'Confirm this appointment and send the confirmation email?'
+                        );"
+                    >
+                        Confirm Appointment
+                    </a>
+
+                    <a
+                        href="{{ url_for(
+                            'appointment_status',
+                            id=appointment.id,
+                            status='Cancelled'
+                        ) }}"
+                        class="btn"
+                        onclick="return confirm(
+                            'Cancel this appointment?'
+                        );"
+                    >
+                        Cancel Appointment
+                    </a>
+
+                {% elif appointment.status == "Confirmed" %}
+
+                    <strong>Appointment Confirmed</strong>
+
+                {% elif appointment.status == "Cancelled" %}
+
+                    <strong>Appointment Cancelled</strong>
+
+                {% else %}
+
+                    <strong>Status: {{ appointment.status }}</strong>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="feature-card">
+
+            <p>No appointments found.</p>
+
+        </div>
+
+    {% endif %}
 
 </div>
 
