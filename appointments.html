@@ -61,34 +61,39 @@
 
                 {% if appointment.status == "Awaiting Payment" %}
 
-                    <a
-                        href="{{ url_for(
-                            'appointment_status',
-                            id=appointment.id,
-                            status='Confirmed'
-                        ) }}"
-                        class="btn"
-                        onclick="return confirm(
-                            'Confirm this appointment and send the confirmation email?'
-                        );"
-                    >
-                        Confirm Appointment
-                    </a>
+<form
+    method="POST"
+    action="{{ url_for(
+        'appointment_status',
+        id=appointment.id,
+        status='Confirmed'
+    ) }}"
+    style="display:inline;"
+    onsubmit="return confirm(
+        'Confirm this appointment and send the confirmation email?'
+    );"
+>
+    <button type="submit" class="btn">
+        Confirm Appointment
+    </button>
+</form>
 
-                    <a
-                        href="{{ url_for(
-                            'appointment_status',
-                            id=appointment.id,
-                            status='Cancelled'
-                        ) }}"
-                        class="btn"
-                        onclick="return confirm(
-                            'Cancel this appointment?'
-                        );"
-                    >
-                        Cancel Appointment
-                    </a>
-
+<form
+    method="POST"
+    action="{{ url_for(
+        'appointment_status',
+        id=appointment.id,
+        status='Cancelled'
+    ) }}"
+    style="display:inline;"
+    onsubmit="return confirm(
+        'Cancel this appointment?'
+    );"
+>
+    <button type="submit" class="btn">
+        Cancel Appointment
+    </button>
+</form
                 {% elif appointment.status == "Confirmed" %}
 
                     <strong>Appointment Confirmed</strong>
