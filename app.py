@@ -561,19 +561,16 @@ def delete_consultation(id):
     return redirect("/admin")
 
 @app.route("/offer-appointment/<int:consultation_id>", methods=["GET", "POST"])
-
 def offer_appointment(consultation_id):
+
     if not session.get("admin_logged_in"):
-        return redirect(url_for("login")
+        return redirect(url_for("login"))
 
     conn = get_db_connection()
 
-    consultation = conn.execute()
-
+    consultation = conn.execute(
         "SELECT * FROM consultations WHERE id = ?",
-
         (consultation_id,)
-
     ).fetchone()
 
     if request.method == "POST":
@@ -586,7 +583,7 @@ def offer_appointment(consultation_id):
             request.form["preferred_time"],
             request.form["reason"]
         )
-        
+
         logger.info("Sending appointment email")
 
         result_patient = send_appointment_email(
@@ -601,7 +598,7 @@ def offer_appointment(consultation_id):
         logger.info(
             f"Appointment email status: {result_patient.status_code}"
         )
-        
+
         count = conn.execute(
             "SELECT COUNT(*) FROM appointments"
         ).fetchone()[0]
@@ -611,12 +608,10 @@ def offer_appointment(consultation_id):
         conn.close()
 
         return redirect(url_for("appointments"))
+
     return render_template(
-
         "book_appointment.html",
-
         consultation=consultation
-
     )
     
 @app.route("/appointments")
