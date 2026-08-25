@@ -693,24 +693,69 @@ def delete_appointment(id):
 @app.route("/appointment-status/<int:id>/<status>")
 def appointment_status(id, status):
 
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    allowed_statuses = {
+        "Awaiting Payment",
+        "Confirmed",
+        "Cancelled"
+    }
+
+    if status not in allowed_statuses:
+        logger.warning(
+            f"Invalid appointment status requested: {status}"
+        )
+        return "Invalid appointment status", 400
+
     conn = get_db_connection()
 
+    appointment = conn.execute(
+        """
+        SELECT
+            id,
+            name,
+            email,
+            practice,
+            preferred_date,
+            preferred_time,
+            reason,
+            status
+        FROM appointments
+        WHERE id = ?
+        """,
+        (id,)
+    ).fetchone()
+
+    if appointment is None:
+
+        conn.close()
+
+        logger.warning(
+            f"Appointment {id} not found"
+        )
+
+        return "Appointment not found", 404
+
     conn.execute(
-
-        "UPDATE appointments SET status = ? WHERE id = ?",
-
+        """
+        UPDATE appointments
+        SET status = ?
+        WHERE id = ?
+        """,
         (status, id)
     )
 
     conn.commit()
 
-    if status == "Confirmed":
-        appointment = conn.execute(
-            "SELECT name, email, practice, preferred_date, preferred_time, reason FROM appointments WHERE id = ?",
-            (id,)
-        ).fetchone()
+    logger.info(
+        f"Appointment {id} status changed "
+        f"from {appointment['status']} to {status}"
+    )
 
-        send_appointment_confirmation_email(
+    if status == "Confirmed":
+
+        result = send_appointment_confirmation_email(
             appointment["email"],
             appointment["name"],
             appointment["practice"],
@@ -718,46 +763,12 @@ def appointment_status(id, status):
             appointment["preferred_time"],
             appointment["reason"]
         )
-    
+
+        logger.info(
+            f"Appointment confirmation email status: "
+            f"{result.status_code}"
+        )
+
     conn.close()
 
     return redirect(url_for("appointments"))
-
-@app.route("/update-status/<int:id>/<status>")
-
-def update_status(id, status):
-
-    logger.info(f"Updating consultation {id} to {status}")
-
-    status = status.replace("_", " ")
-
-    conn = get_db_connection()
-
-    cursor = conn.execute(
-
-        "UPDATE consultations SET status = ? WHERE id = ?",
-
-        (status, id)
-
-    )
-
-    logger.info(f"Rows updated: {cursor.rowcount}")
-
-    conn.commit()
-
-    
-
-    result = conn.execute(
-
-        "SELECT id, status FROM consultations WHERE id = ?",
-
-        (id,)
-
-    ).fetchone()
-
-    logger.info(f"Database now says: {result}")
-
-    conn.close()
-
-    return redirect("/admin")
-
