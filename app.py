@@ -563,6 +563,8 @@ def delete_consultation(id):
 @app.route("/offer-appointment/<int:consultation_id>", methods=["GET", "POST"])
 
 def offer_appointment(consultation_id):
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login")
 
     conn = get_db_connection()
 
@@ -690,7 +692,10 @@ def delete_appointment(id):
 
     return redirect(url_for("appointments"))
     
-@app.route("/appointment-status/<int:id>/<status>")
+@app.route(
+    "/appointment-status/<int:id>/<status>",
+    methods=["POST"]
+)
 def appointment_status(id, status):
 
     if not session.get("admin_logged_in"):
