@@ -688,7 +688,7 @@ def delete_appointment(id):
     return redirect(url_for("appointments"))
     
 @app.route(
-    "/appointment-status/<int:id>/<status>",
+    "/change-appointment-status/<int:id>/<status>",
     methods=["POST"]
 )
 def appointment_status(id, status):
