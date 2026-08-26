@@ -170,38 +170,37 @@
         <div class="detail-row">
             <span class="label">Contact Patient</span>
 
-        <span class="value">
+            <span class="value contact-actions">
 
-        {% if consultation.contact_method == "Email" %}
+                {% if consultation.contact_method == "Email" %}
 
-            <a
-                href="mailto:{{ consultation.email }}"
-                class="btn-primary"
-            >
-                Email Patient
-            </a>
+                    <a
+                        href="mailto:{{ consultation.email }}"
+                        class="contact-btn"
+                    >
+                        Email Patient
+                    </a>
 
-        {% elif consultation.contact_method == "WhatsApp" %}
+                {% elif consultation.contact_method == "WhatsApp" %}
 
-            <a
-                href="https://wa.me/{{ consultation.mobile }}"
-                target="_blank"
-                rel="noopener"
-                class="btn-success"
-            >
-                WhatsApp Patient
-            </a>
+                   <a
+                         href="https://wa.me/{{ consultation.mobile }}"
+                         target="_blank"
+                         rel="noopener"
+                         class="contact-btn"
+                   >
+                         WhatsApp Patient
+                   </a>
 
-        {% else %}
+                 {% else %}
 
-            <span>
-                {{ consultation.contact_method }}
-            </span>
+                     <span>{{ consultation.contact_method }}</span>
 
-        {% endif %}
+                 {% endif %}
 
-    </span>
-</div>   
+             </span>
+         </div> 
+        
         <div class="detail-row">
             <span class="label">Preferred Contact</span>
             <span class="value">{{ consultation.contact_method }}</span>
