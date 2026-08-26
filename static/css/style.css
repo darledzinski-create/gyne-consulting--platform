@@ -209,6 +209,17 @@ body {
 
 }
 
+.contact-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 14px;
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 2px 0;
+}
+
+
 .section {
     margin-top: 60px;
     text-align: center;
