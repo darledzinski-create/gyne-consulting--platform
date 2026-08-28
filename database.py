@@ -140,6 +140,10 @@ def create_appointment(
 
             email,
 
+            mobile,
+
+            contact_method,
+
             practice,
 
             preferred_date,
@@ -154,7 +158,7 @@ def create_appointment(
 
         )
 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
         """,
 
@@ -163,6 +167,10 @@ def create_appointment(
             consultation["name"],
 
             consultation["email"],
+
+            consultation["mobile"],
+
+            consultation["contact_method"],
 
             practice,
 
@@ -178,8 +186,7 @@ def create_appointment(
 
         )
 
-    )
-
+    
     conn.execute(
 
         """
