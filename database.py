@@ -186,6 +186,8 @@ def create_appointment(
 
         )
 
+    )
+
     
     conn.execute(
 
