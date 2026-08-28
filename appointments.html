@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -25,6 +26,16 @@
             <p>
                 <strong>Email:</strong>
                 {{ appointment.email }}
+            </p>
+
+            <p>
+                <strong>Mobile:</strong>
+                {{ appointment.mobile }}
+            </p>
+
+            <p>
+                <strong>Preferred Contact:</strong>
+                {{ appointment.contact_method }}
             </p>
 
             <p>
