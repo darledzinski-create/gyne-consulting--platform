@@ -1049,13 +1049,11 @@ textarea:focus {
     /* FAQ SECTION */
 
 .faq-section {
-
+    width: 100%;
     max-width: 900px;
-
     margin: 100px auto 60px auto;
-
     padding: 20px;
-
+    box-sizing: border-box;
 }
 
 .faq-section h2 {
