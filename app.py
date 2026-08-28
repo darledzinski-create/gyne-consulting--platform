@@ -573,6 +573,15 @@ def offer_appointment(consultation_id):
         (consultation_id,)
     ).fetchone()
 
+    logger.info(
+        f"Appointment source mobile: {consultation['mobile']}"
+    )
+
+    logger.info(
+        f"Appointment source contact method: "
+        f"{consultation['contact_method']}"
+    
+
     if request.method == "POST":
 
         create_appointment(
