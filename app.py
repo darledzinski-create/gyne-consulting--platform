@@ -1,3 +1,4 @@
+
 from flask import Flask, request, redirect, url_for, render_template, session
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
@@ -669,6 +670,14 @@ def appointments():
 
         for a in appointments:
             logger.info(f"Appointment: {a['name']}")
+
+        logger.info(f"Appointments found: {len(appointments)}")
+
+        for a in appointments:
+            logger.info(f"Appointment: {a['name']}")
+            logger.info(f"Appointment mobile: {a['mobile']}")
+            logger.info(f"Appointment contact method: {a['contact_method']}")
+            logger.info(f"Appointment email: {a['email']}")
 
     conn.close()
 
