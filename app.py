@@ -580,6 +580,7 @@ def offer_appointment(consultation_id):
     logger.info(
         f"Appointment source contact method: "
         f"{consultation['contact_method']}"
+    )
     
 
     if request.method == "POST":
