@@ -43,6 +43,37 @@
                 {{ appointment.practice }}
             </p>
 
+            <div style="margin-top:20px;">
+
+                 <strong>Contact Patient</strong>
+
+            <div style="margin-top:10px;">
+
+        {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
+
+            <a
+                href="https://wa.me/{{ appointment.mobile }}"
+                target="_blank"
+                class="btn-green"
+            >
+                WhatsApp Patient
+            </a>
+
+        {% elif appointment.contact_method == "Email" and appointment.email %}
+
+            <a
+                href="mailto:{{ appointment.email }}"
+                class="btn-primary"
+            >
+                Email Patient
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
             <p>
                 <strong>Date:</strong>
                 {{ appointment.preferred_date }}
