@@ -51,14 +51,19 @@
 
         {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
-            <a
-                href="https://wa.me/27{{ appointment.mobile[1:] }}"
-                target="_blank"
-                class="btn-green"
-            >
-                WhatsApp Patient
-            </a>
+           <a
+               href="https://wa.me/27{{ appointment.mobile[1:] }}"
+               target="_blank"
+               class="btn-green"
+           >
+               WhatsApp Patient
+           </a>
 
+           <p>
+               WhatsApp link:
+               https://wa.me/27{{ appointment.mobile[1:] }}
+           </p> 
+                
         {% elif appointment.contact_method == "Email" and appointment.email %}
 
             <a
