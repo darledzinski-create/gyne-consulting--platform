@@ -4,6 +4,7 @@ from datetime import datetime
 
 print("DATABASE.PY IMPORTED")
 
+
 def get_db_connection():
 
     conn = sqlite3.connect("consultations.db")
@@ -13,27 +14,151 @@ def get_db_connection():
     return conn
 
 
+def create_table():
 
-    
+    conn = sqlite3.connect("consultations.db")
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS consultations (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            name TEXT NOT NULL,
+
+            email TEXT NOT NULL,
+
+            mobile TEXT,
+
+            contact_method TEXT,
+
+            urgency TEXT NOT NULL,
+
+            message TEXT NOT NULL,
+
+            timestamp TEXT NOT NULL,
+
+            status TEXT NOT NULL DEFAULT 'New',
+
+            doctor_notes TEXT
+
+        )
+    """)
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS appointments (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            name TEXT NOT NULL,
+
+            email TEXT NOT NULL,
+
+            mobile TEXT,
+
+            contact_method TEXT,
+
+            practice TEXT,
+
+            preferred_date TEXT,
+
+            preferred_time TEXT,
+
+            reason TEXT,
+
+            status TEXT DEFAULT 'Pending',
+
+            created_at TEXT
+
+        )
+    """)
+
+    try:
+
+        conn.execute("""
+            ALTER TABLE consultations
+            ADD COLUMN status TEXT NOT NULL DEFAULT 'New'
+        """)
+
+    except sqlite3.OperationalError:
+
+        pass
+
+
+    try:
+
+        conn.execute("""
+            ALTER TABLE consultations
+            ADD COLUMN doctor_notes TEXT
+        """)
+
+    except sqlite3.OperationalError:
+
+        pass
+
+
+    conn.commit()
+
+    conn.close()
+
+
+create_table()
+
+
+def create_appointment(
+    consultation_id,
+    consultation,
+    practice,
+    preferred_date,
+    preferred_time,
+    reason
+):
+
+    conn = get_db_connection()
+
     conn.execute(
-
         """
-
-        UPDATE consultations
-
-        SET status = 'In Progress'
-
-        WHERE id = ?
-
+        INSERT INTO appointments
+        (
+            name,
+            email,
+            mobile,
+            contact_method,
+            practice,
+            preferred_date,
+            preferred_time,
+            reason,
+            status,
+            created_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
+        (
+            consultation["name"],
+            consultation["email"],
+            consultation["mobile"],
+            consultation["contact_method"],
+            practice,
+            preferred_date,
+            preferred_time,
+            reason,
+            "Awaiting Payment",
+            datetime.now().strftime("%d %B %Y, %H:%M")
+        )
+    )
 
+    conn.execute(
+        """
+        UPDATE consultations
+        SET status = 'In Progress'
+        WHERE id = ?
+        """,
         (consultation_id,)
-
     )
 
     conn.commit()
 
     conn.close()
+
 
 def save_consultation(
     name,
@@ -45,7 +170,7 @@ def save_consultation(
     timestamp
 ):
 
-    conn = get_db_connection ()
+    conn = get_db_connection()
 
     conn.execute("""
         INSERT INTO consultations (
@@ -69,14 +194,5 @@ def save_consultation(
     ))
 
     conn.commit()
+
     conn.close()
-
-
-    print("SAVING APPOINTMENT MOBILE =", consultation["mobile"])
-    print(
-        "SAVING APPOINTMENT CONTACT METHOD =",
-        consultation["contact_method"]
-    )
-
-
-    
