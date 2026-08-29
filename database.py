@@ -66,7 +66,7 @@ def save_consultation(
         urgency,
         message,
         timestamp
-    )
+    ))
 
     conn.commit()
     conn.close()
