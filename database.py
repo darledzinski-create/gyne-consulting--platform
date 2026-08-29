@@ -155,6 +155,18 @@ def create_appointment(
         (consultation_id,)
     )
 
+        saved = conn.execute(
+        """
+        SELECT mobile, contact_method
+        FROM appointments
+        ORDER BY id DESC
+        LIMIT 1
+        """
+    ).fetchone()
+
+    print("SAVED APPOINTMENT MOBILE =", saved["mobile"])
+    print("SAVED APPOINTMENT CONTACT METHOD =", saved["contact_method"])
+
     conn.commit()
 
     conn.close()
