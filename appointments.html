@@ -52,7 +52,7 @@
         {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
             <a
-                href="https://wa.me/{{ appointment.mobile }}"
+                href="https://wa.me/27{{ appointment.mobile[1:] }}"
                 target="_blank"
                 class="btn-green"
             >
