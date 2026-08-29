@@ -12,181 +12,7 @@ def get_db_connection():
 
     return conn
 
-def create_table():
 
-    conn = sqlite3.connect("consultations.db")
-
-    conn.execute("""
-
-    CREATE TABLE IF NOT EXISTS consultations (
-
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-        name TEXT NOT NULL,
-
-        email TEXT NOT NULL,
-
-        mobile TEXT,
-
-        contact_method TEXT,
-
-        urgency TEXT NOT NULL,
-
-        message TEXT NOT NULL,
-
-        timestamp TEXT NOT NULL,
-
-        status TEXT NOT NULL DEFAULT 'New',
-
-        doctor_notes TEXT
-
-    )
-
-    """)
-
-    conn.execute("""
-
-    CREATE TABLE IF NOT EXISTS appointments (
-
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-        name TEXT NOT NULL,
-
-        email TEXT NOT NULL,
-
-        mobile TEXT,
-
-        contact_method TEXT,
-
-        practice TEXT,
-
-        preferred_date TEXT,
-
-        preferred_time TEXT,
-
-        reason TEXT,
-
-        status TEXT DEFAULT 'Pending',
-
-        created_at TEXT
-
-    )
-
-    """)
-
-    # Upgrade older databases
-
-    try:
-
-        conn.execute("""
-
-            ALTER TABLE consultations
-
-            ADD COLUMN status TEXT NOT NULL DEFAULT 'New'
-
-        """)
-
-    except sqlite3.OperationalError:
-
-        pass
-
-    try:
-
-        conn.execute("""
-
-            ALTER TABLE consultations
-
-            ADD COLUMN doctor_notes TEXT
-
-        """)
-
-    except sqlite3.OperationalError:
-
-        pass
-
-    conn.commit()
-
-    conn.close()
-
-create_table()
-
-def create_appointment(
-
-    consultation_id,
-
-    consultation,
-
-    practice,
-
-    preferred_date,
-
-    preferred_time,
-
-    reason
-
-):
-
-    conn = get_db_connection()
-
-    conn.execute(
-
-        """
-
-        INSERT INTO appointments
-
-        (
-
-            name,
-
-            email,
-
-            mobile,
-
-            contact_method,
-
-            practice,
-
-            preferred_date,
-
-            preferred_time,
-
-            reason,
-
-            status,
-
-            created_at
-
-        )
-
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-
-        """,
-
-        (
-
-            consultation["name"],
-
-            consultation["email"],
-
-            consultation["mobile"],
-
-            consultation["contact_method"],
-
-            practice,
-
-            preferred_date,
-
-            preferred_time,
-
-            reason,
-
-            "Awaiting Payment",
-
-            datetime.now().strftime("%d %B %Y, %H:%M")
-
-        )
-
-    )
 
     
     conn.execute(
@@ -240,10 +66,17 @@ def save_consultation(
         urgency,
         message,
         timestamp
-    ))
+    )
 
     conn.commit()
     conn.close()
+
+
+    print("SAVING APPOINTMENT MOBILE =", consultation["mobile"])
+    print(
+        "SAVING APPOINTMENT CONTACT METHOD =",
+        consultation["contact_method"]
+    )
 
 
     
