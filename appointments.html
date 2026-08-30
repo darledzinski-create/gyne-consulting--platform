@@ -51,6 +51,11 @@
 
         {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
+           <p>
+               <strong>Generated WhatsApp URL:</strong>
+               https://wa.me/27{{ appointment.mobile[1:] }}
+           </p>
+
            <a
                href="https://wa.me/27{{ appointment.mobile[1:] }}"
                target="_blank"
