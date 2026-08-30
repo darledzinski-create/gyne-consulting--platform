@@ -34,6 +34,37 @@
         <p><strong>Mobile:</strong> {{ appointment.mobile }}</p>
 
         <p><strong>Preferred Contact:</strong> {{ appointment.contact_method }}</p>
+        <div style="margin-top:15px;">
+
+        <strong>Contact Patient</strong>
+
+        <div style="margin-top:10px;">
+
+            {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
+
+               <a
+                    href="https://api.whatsapp.com/send?phone=27{{ appointment.mobile[1:] }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-green"
+               >
+                    WhatsApp Patient
+               </a>
+
+           {% elif appointment.contact_method == "Email" and appointment.email %}
+
+              <a
+                     href="mailto:{{ appointment.email }}"
+                     class="btn-primary"
+              >
+                     Email Patient
+              </a>
+
+          {% endif %}
+
+      </div>
+
+  </div>
 
         <p><strong>Practice:</strong> {{ appointment.practice }}</p>
 
