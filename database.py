@@ -8,21 +8,27 @@ print("DATABASE.PY IMPORTED")
 
 def get_db_connection():
 
-    conn = sqlite3.connect("consultations.db")
+    database_url = os.environ.get("DATABASE_URL")
 
-    conn.row_factory = sqlite3.Row
+    if not database_url:
+        raise RuntimeError("DATABASE_URL is not set")
+
+    conn = psycopg2.connect(
+        database_url,
+        cursor_factory=DictCursor
+    )
 
     return conn
 
 
 def create_table():
 
-    conn = sqlite3.connect("consultations.db")
+    conn = get_db_connection()
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS consultations (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
 
             name TEXT NOT NULL,
 
@@ -48,7 +54,7 @@ def create_table():
     conn.execute("""
         CREATE TABLE IF NOT EXISTS appointments (
 
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
 
             name TEXT NOT NULL,
 
@@ -73,33 +79,11 @@ def create_table():
         )
     """)
 
-    try:
-
-        conn.execute("""
-            ALTER TABLE consultations
-            ADD COLUMN status TEXT NOT NULL DEFAULT 'New'
-        """)
-
-    except sqlite3.OperationalError:
-
-        pass
-
-
-    try:
-
-        conn.execute("""
-            ALTER TABLE consultations
-            ADD COLUMN doctor_notes TEXT
-        """)
-
-    except sqlite3.OperationalError:
-
-        pass
-
-
     conn.commit()
 
     conn.close()
+
+    print("POSTGRES TABLES READY")
 
 
 create_table()
@@ -131,7 +115,7 @@ def create_appointment(
             status,
             created_at
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """,
         (
             consultation["name"],
@@ -151,7 +135,7 @@ def create_appointment(
         """
         UPDATE consultations
         SET status = 'In Progress'
-        WHERE id = ?
+        WHERE id = %s
         """,
         (consultation_id,)
     )
@@ -198,7 +182,7 @@ def save_consultation(
             message,
             timestamp
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
     """, (
         name,
         email,
