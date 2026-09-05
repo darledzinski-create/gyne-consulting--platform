@@ -13,7 +13,10 @@ def get_db_connection():
     if not database_url:
         raise RuntimeError("DATABASE_URL is not set")
 
-    conn = psycopg2.connect(database_url)
+    conn = psycopg2.connect(
+    database_url,
+    cursor_factory=DictCursor
+)
 
     return conn
 
