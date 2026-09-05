@@ -13,10 +13,7 @@ def get_db_connection():
     if not database_url:
         raise RuntimeError("DATABASE_URL is not set")
 
-    conn = psycopg2.connect(
-        database_url,
-        cursor_factory=DictCursor
-    )
+    conn = psycopg2.connect(database_url)
 
     return conn
 
@@ -24,8 +21,9 @@ def get_db_connection():
 def create_table():
 
     conn = get_db_connection()
+    cursor = conn.cursor()
 
-    conn.execute("""
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS consultations (
 
             id SERIAL PRIMARY KEY,
@@ -51,7 +49,7 @@ def create_table():
         )
     """)
 
-    conn.execute("""
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS appointments (
 
             id SERIAL PRIMARY KEY,
@@ -81,6 +79,7 @@ def create_table():
 
     conn.commit()
 
+    cursor.close()
     conn.close()
 
     print("POSTGRES TABLES READY")
@@ -99,8 +98,9 @@ def create_appointment(
 ):
 
     conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=DictCursor)
 
-    conn.execute(
+    cursor.execute(
         """
         INSERT INTO appointments
         (
@@ -131,7 +131,7 @@ def create_appointment(
         )
     )
 
-    conn.execute(
+    cursor.execute(
         """
         UPDATE consultations
         SET status = 'In Progress'
@@ -140,14 +140,16 @@ def create_appointment(
         (consultation_id,)
     )
 
-    saved = conn.execute(
+    cursor.execute(
         """
         SELECT mobile, contact_method
         FROM appointments
         ORDER BY id DESC
         LIMIT 1
         """
-    ).fetchone()
+    )
+
+    saved = cursor.fetchone()
 
     print("SAVED APPOINTMENT MOBILE =", saved["mobile"])
     print(
@@ -157,6 +159,7 @@ def create_appointment(
 
     conn.commit()
 
+    cursor.close()
     conn.close()
 
 
@@ -171,8 +174,9 @@ def save_consultation(
 ):
 
     conn = get_db_connection()
+    cursor = conn.cursor()
 
-    conn.execute("""
+    cursor.execute("""
         INSERT INTO consultations (
             name,
             email,
@@ -195,4 +199,5 @@ def save_consultation(
 
     conn.commit()
 
+    cursor.close()
     conn.close()
