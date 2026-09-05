@@ -1,22 +1,24 @@
-
-from flask import Flask, request, redirect, url_for, render_template, session
+from flask import (
+    Flask,
+    request,
+    redirect,
+    url_for,
+    render_template,
+    session,
+    Response
+)
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
 from zoneinfo import ZoneInfo
-import sqlite3
 import os
 import csv
 import io
 import logging
 
 from database import (
-
     get_db_connection,
-
     create_appointment,
-
     save_consultation
-
 )
 
 from mail import (
@@ -27,8 +29,8 @@ from mail import (
 )
 
 
-
 app = Flask(__name__)
+
 csrf = CSRFProtect(app)
 
 logging.basicConfig(level=logging.INFO)
@@ -46,20 +48,23 @@ ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 
 @app.route("/")
-
 def homepage():
 
     return render_template("home.html")
 
 
 @app.route("/thank-you")
-
 def thank_you():
-    urgency = request.args.get("urgency", '')
-    return render_template("thank_you.html", urgency=urgency)
+
+    urgency = request.args.get("urgency", "")
+
+    return render_template(
+        "thank_you.html",
+        urgency=urgency
+    )
+
 
 @app.route("/consultation", methods=["GET", "POST"])
-
 def consultation():
 
     if request.method == "POST":
@@ -67,52 +72,76 @@ def consultation():
         try:
 
             # ----------------------------
-
             # Read form values
-
             # ----------------------------
 
-            name = request.form.get("name", "").strip()
+            name = request.form.get(
+                "name",
+                ""
+            ).strip()
 
-            email = request.form.get("email", "").strip()
+            email = request.form.get(
+                "email",
+                ""
+            ).strip()
 
-            mobile = request.form.get("mobile", "").strip()
+            mobile = request.form.get(
+                "mobile",
+                ""
+            ).strip()
 
-            contact_method = request.form.get("contact_method", "").strip()
+            contact_method = request.form.get(
+                "contact_method",
+                ""
+            ).strip()
 
-            urgency = request.form.get("urgency", "").strip()
+            urgency = request.form.get(
+                "urgency",
+                ""
+            ).strip()
 
-            message = request.form.get("message", "").strip()
+            message = request.form.get(
+                "message",
+                ""
+            ).strip()
 
             timestamp = datetime.now(
-
                 ZoneInfo("Africa/Johannesburg")
-
-            ).strftime("%d %B %Y, %H:%M")
+            ).strftime(
+                "%d %B %Y, %H:%M"
+            )
 
             # ----------------------------
-
             # Honeypot spam protection
-
             # ----------------------------
 
-            website = request.form.get("website", "").strip()
+            website = request.form.get(
+                "website",
+                ""
+            ).strip()
 
             if website:
 
-                logger.warning("Spam submission blocked.")
+                logger.warning(
+                    "Spam submission blocked."
+                )
 
                 return "Spam detected", 400
 
             # ----------------------------
-
             # Required fields
-
             # ----------------------------
 
-            if not name or not email or not urgency or not message:
+            if (
+                not name
+                or not email
+                or not urgency
+                or not message
+            ):
 
-                logger.warning("Required fields missing.")
+                logger.warning(
+                    "Required fields missing."
+                )
 
                 return "All fields are required", 400
 
@@ -122,23 +151,19 @@ def consultation():
                 name,
                 email,
                 mobile,
-                contact_method, 
+                contact_method,
                 urgency_clean,
                 message,
                 timestamp
             )
 
-           
             logger.info(
-
-                f"Consultation saved for {name} ({email})"
-
+                f"Consultation saved for "
+                f"{name} ({email})"
             )
 
             # ----------------------------
-
             # Build email content
-
             # ----------------------------
 
             if urgency_clean == "urgent":
@@ -214,153 +239,199 @@ Message:
             else:
 
                 logger.warning(
-
-                    f"Unknown urgency value: {urgency_clean!r}"
-
+                    f"Unknown urgency value: "
+                    f"{urgency_clean!r}"
                 )
 
                 return "Invalid submission", 400
 
             # ----------------------------
-
             # Send emails
-
             # ----------------------------
 
-            logger.info("Sending doctor consultation email")
-
-            send_consultation_email(
-
-                "darledzinski@gmail.com",
-
-                "Consultation System",
-
-                subject,
-
-                doctor_text
-
+            logger.info(
+                "Sending doctor consultation email"
             )
 
-            logger.info("Sending patient confirmation email")
-
             send_consultation_email(
-
-                email,
-
-                "Dr Dariusz",
-
+                "darledzinski@gmail.com",
+                "Consultation System",
                 subject,
-
-                patient_text
-
+                doctor_text
             )
 
             logger.info(
+                "Sending patient confirmation email"
+            )
 
-                f"Consultation workflow completed for {email}"
+            send_consultation_email(
+                email,
+                "Dr Dariusz",
+                subject,
+                patient_text
+            )
 
+            logger.info(
+                f"Consultation workflow completed "
+                f"for {email}"
             )
 
             return redirect(
-
-                url_for("thank_you", urgency=urgency_clean)
-
+                url_for(
+                    "thank_you",
+                    urgency=urgency_clean
+                )
             )
 
         except Exception as e:
 
             logger.exception(
-
                 f"Consultation route failed: {e}"
-
             )
 
             return "Something went wrong", 500
 
-    return render_template("consultation.html")
+    return render_template(
+        "consultation.html"
+    )
+
 
 @app.route("/login", methods=["GET", "POST"])
-
 def login():
 
     if request.method == "POST":
 
-        password = request.form.get("password")
+        password = request.form.get(
+            "password"
+        )
 
         if password == ADMIN_PASSWORD:
 
             session["admin_logged_in"] = True
 
-            return redirect(url_for("admin"))
-
-        # Wrong password
+            return redirect(
+                url_for("admin")
+            )
 
         return render_template(
-
             "login.html",
-
             error="Incorrect password."
-
         )
 
-    # GET request
+    return render_template(
+        "login.html"
+    )
 
-    return render_template("login.html")
 
 @app.route("/logout")
 def logout():
 
-    session.pop("admin_logged_in", None)
+    session.pop(
+        "admin_logged_in",
+        None
+    )
 
-    return redirect(url_for("login"))
+    return redirect(
+        url_for("login")
+    )
 
-@app.route("/update-notes/<int:id>", methods=["POST"])
+
+@app.route(
+    "/update-notes/<int:id>",
+    methods=["POST"]
+)
 def update_notes(id):
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
+    if not session.get(
+        "admin_logged_in"
+    ):
 
-    doctor_notes = request.form.get("doctor_notes")
+        return redirect(
+            url_for("login")
+        )
+
+    doctor_notes = request.form.get(
+        "doctor_notes"
+    )
 
     conn = get_db_connection()
 
-    conn.execute(
-        "UPDATE consultations SET doctor_notes = ? WHERE id = ?",
-        (doctor_notes, id)
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE consultations
+        SET doctor_notes = %s
+        WHERE id = %s
+        """,
+        (
+            doctor_notes,
+            id
+        )
     )
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE urgency = 'urgent'
+        """
+    )
+
+    urgent_count = cursor.fetchone()[0]
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE urgency = 'not_urgent'
+        """
+    )
+
+    non_urgent_count = cursor.fetchone()[0]
 
     conn.commit()
 
-    urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
-    ).fetchone()[0]
-
-    non_urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
-    ).fetchone()[0]
-
+    cursor.close()
     conn.close()
 
-    return redirect(url_for("admin"))
+    return redirect(
+        url_for("admin")
+    )
+
 
 @app.route("/export-csv")
-
 def export_csv():
 
-    if not session.get("admin_logged_in"):
+    if not session.get(
+        "admin_logged_in"
+    ):
 
-        return redirect(url_for("login"))
+        return redirect(
+            url_for("login")
+        )
 
     conn = get_db_connection()
 
-    consultations = conn.execute("""
+    cursor = conn.cursor()
 
-       SELECT id, name, email, urgency, status,
-              message, doctor_notes, timestamp
-       FROM consultations
-       ORDER BY id DESC
-       
-    """).fetchall()
+    cursor.execute(
+        """
+        SELECT
+            id,
+            name,
+            email,
+            urgency,
+            status,
+            message,
+            doctor_notes,
+            timestamp
+        FROM consultations
+        ORDER BY id DESC
+        """
+    )
+
+    consultations = cursor.fetchall()
 
     output = io.StringIO()
 
@@ -377,156 +448,271 @@ def export_csv():
         "Timestamp"
     ])
 
-   
     for row in consultations:
 
         writer.writerow([
-            row["id"],
-            row["name"],
-            row["email"],
-            row["urgency"],
-            row["status"],
-            row["message"],
-            row["doctor_notes"],
-            row["timestamp"]
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+            row[6],
+            row[7]
         ])
 
+    cursor.close()
     conn.close()
 
     return Response(
-
         output.getvalue(),
-
         mimetype="text/csv",
-
         headers={
-
             "Content-Disposition":
-
-            "attachment; filename=consultations.csv"
-
+                "attachment; "
+                "filename=consultations.csv"
         }
-
     )
+
 
 @app.route("/admin")
 def admin():
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
 
     conn = get_db_connection()
 
-    page = request.args.get("page", 1, type=int)
-    status_filter = request.args.get("status", "")
+    cursor = conn.cursor()
+
+    page = request.args.get(
+        "page",
+        1,
+        type=int
+    )
+
+    status_filter = request.args.get(
+        "status",
+        ""
+    )
+
     per_page = 10
-    offset = (page - 1) * per_page
 
-    search = request.args.get("search", "").strip().lower()
+    offset = (
+        page - 1
+    ) * per_page
 
-    print("SEARCH TERM =", (search))
+    search = request.args.get(
+        "search",
+        ""
+    ).strip().lower()
+
+    print(
+        "SEARCH TERM =",
+        search
+    )
 
     if search and status_filter:
-        consultations = conn.execute("""
+
+        cursor.execute(
+            """
             SELECT *
             FROM consultations
-            WHERE status = ?
+            WHERE status = %s
             AND (
-                LOWER(name) LIKE ?
-                OR LOWER(email) LIKE ?
+                LOWER(name) LIKE %s
+                OR LOWER(email) LIKE %s
             )
             ORDER BY id DESC
-            LIMIT ? OFFSET ?
-        """, (
-            status_filter,
-            f"%{search}%",
-            f"%{search}%",
-            per_page,
-            offset
-        )).fetchall()
+            LIMIT %s OFFSET %s
+            """,
+            (
+                status_filter,
+                f"%{search}%",
+                f"%{search}%",
+                per_page,
+                offset
+            )
+        )
+
+        consultations = cursor.fetchall()
 
     elif search:
-        consultations = conn.execute("""
+
+        cursor.execute(
+            """
             SELECT *
             FROM consultations
-            WHERE LOWER(name) LIKE ?
-            OR LOWER(email) LIKE ?
+            WHERE LOWER(name) LIKE %s
+            OR LOWER(email) LIKE %s
             ORDER BY id DESC
-            LIMIT ? OFFSET ?
-        """, (
-            f"%{search}%",
-            f"%{search}%",
-            per_page,
-            offset
-        )).fetchall() 
+            LIMIT %s OFFSET %s
+            """,
+            (
+                f"%{search}%",
+                f"%{search}%",
+                per_page,
+                offset
+            )
+        )
+
+        consultations = cursor.fetchall()
 
     elif status_filter:
 
-        consultations = conn.execute("""
+        cursor.execute(
+            """
             SELECT *
             FROM consultations
-            WHERE status = ?
+            WHERE status = %s
             ORDER BY id DESC
-            LIMIT ? OFFSET ?
-        """, (
-            status_filter,
-            per_page,
-            offset
-        )).fetchall()
-        
+            LIMIT %s OFFSET %s
+            """,
+            (
+                status_filter,
+                per_page,
+                offset
+            )
+        )
+
+        consultations = cursor.fetchall()
+
     else:
-        consultations = conn.execute("""
-            SELECT * FROM consultations
+
+        cursor.execute(
+            """
+            SELECT *
+            FROM consultations
             ORDER BY
                 CASE
-                    WHEN status = 'New' THEN 1
-                    WHEN status = 'In Progress' THEN 2
-                    WHEN status = 'Completed' THEN 3
+                    WHEN status = 'New'
+                        THEN 1
+                    WHEN status = 'In Progress'
+                        THEN 2
+                    WHEN status = 'Completed'
+                        THEN 3
+                    ELSE 4
                 END,
                 id DESC
-                LIMIT ? OFFSET ?
-            """, (per_page, offset)).fetchall()
+            LIMIT %s OFFSET %s
+            """,
+            (
+                per_page,
+                offset
+            )
+        )
 
-    total_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations"
-    ).fetchone()[0]
+        consultations = cursor.fetchall()
 
-    total_pages = (total_count + per_page - 1) // per_page
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        """
+    )
 
-    urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='urgent'"
-    ).fetchone()[0]
+    total_count = cursor.fetchone()[0]
 
-    non_urgent_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE urgency='not_urgent'"
-    ).fetchone()[0]
+    total_pages = (
+        total_count
+        + per_page
+        - 1
+    ) // per_page
 
-    new_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE status='New'"
-    ).fetchone()[0]
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE urgency = 'urgent'
+        """
+    )
 
-    in_progress_count = conn.execute(
-        "SELECT COUNT(*) FROM consultations WHERE status='In Progress'"
-    ).fetchone()[0]
+    urgent_count = cursor.fetchone()[0]
 
-    completed_count = conn.execute(
-         "SELECT COUNT(*) FROM consultations WHERE status='Completed'"
-    ).fetchone()[0]
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE urgency = 'not_urgent'
+        """
+    )
 
-    appointment_count = conn.execute(
-        "SELECT COUNT(*) FROM appointments"
-    ).fetchone()[0]
+    non_urgent_count = cursor.fetchone()[0]
 
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE status = 'New'
+        """
+    )
+
+    new_count = cursor.fetchone()[0]
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE status = 'In Progress'
+        """
+    )
+
+    in_progress_count = cursor.fetchone()[0]
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE status = 'Completed'
+        """
+    )
+
+    completed_count = cursor.fetchone()[0]
+
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM appointments
+        """
+    )
+
+    appointment_count = cursor.fetchone()[0]
+
+    cursor.close()
     conn.close()
 
-    print("RESULT COUNT =", len(consultations))
+    print(
+        "RESULT COUNT =",
+        len(consultations)
+    )
 
     for row in consultations:
-        print("FOUND:", row["name"], row["email"])
 
-    print("TOTAL CONSULTATIONS =", total_count)
-    print("CONSULTATIONS OBJECT =", consultations)
-    print("LENGTH =", len(consultations))
+        print(
+            "FOUND:",
+            row["name"],
+            row["email"]
+        )
+
+    print(
+        "TOTAL CONSULTATIONS =",
+        total_count
+    )
+
+    print(
+        "CONSULTATIONS OBJECT =",
+        consultations
+    )
+
+    print(
+        "LENGTH =",
+        len(consultations)
+    )
 
     return render_template(
         "admin.html",
@@ -539,50 +725,95 @@ def admin():
         completed_count=completed_count,
         appointment_count=appointment_count,
         page=page,
-        total_pages=total_pages,
+        total_pages=total_pages
     )
-    
+
+
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
+
     conn = get_db_connection()
 
-    search = request.args.get("search", '').strip()
+    cursor = conn.cursor()
 
-    conn.execute(
-        "DELETE FROM consultations WHERE id = ?",
+    cursor.execute(
+        """
+        DELETE FROM consultations
+        WHERE id = %s
+        """,
         (id,)
     )
 
     conn.commit()
+
+    cursor.close()
     conn.close()
 
-    return redirect("/admin")
+    return redirect(
+        url_for("admin")
+    )
 
-@app.route("/offer-appointment/<int:consultation_id>", methods=["GET", "POST"])
-def offer_appointment(consultation_id):
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
+@app.route(
+    "/offer-appointment/<int:consultation_id>",
+    methods=["GET", "POST"]
+)
+def offer_appointment(
+    consultation_id
+):
+
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
 
     conn = get_db_connection()
 
-    consultation = conn.execute(
-        "SELECT * FROM consultations WHERE id = ?",
+    cursor = conn.cursor(
+        cursor_factory=__import__(
+            "psycopg2.extras",
+            fromlist=["DictCursor"]
+        ).DictCursor
+    )
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM consultations
+        WHERE id = %s
+        """,
         (consultation_id,)
-    ).fetchone()
+    )
+
+    consultation = cursor.fetchone()
+
+    if consultation is None:
+
+        cursor.close()
+        conn.close()
+
+        return "Consultation not found", 404
 
     logger.info(
-        f"Appointment source mobile: {consultation['mobile']}"
+        f"Appointment source mobile: "
+        f"{consultation['mobile']}"
     )
 
     logger.info(
         f"Appointment source contact method: "
         f"{consultation['contact_method']}"
     )
-    
 
     if request.method == "POST":
 
@@ -595,7 +826,9 @@ def offer_appointment(consultation_id):
             request.form["reason"]
         )
 
-        logger.info("Sending appointment email")
+        logger.info(
+            "Sending appointment email"
+        )
 
         result_patient = send_appointment_email(
             consultation["email"],
@@ -607,113 +840,219 @@ def offer_appointment(consultation_id):
         )
 
         logger.info(
-            f"Appointment email status: {result_patient.status_code}"
+            f"Appointment email status: "
+            f"{result_patient.status_code}"
         )
 
-        count = conn.execute(
-            "SELECT COUNT(*) FROM appointments"
-        ).fetchone()[0]
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM appointments
+            """
+        )
 
-        logger.info(f"Appointments after insert: {count}")
+        count = cursor.fetchone()[0]
 
+        logger.info(
+            f"Appointments after insert: "
+            f"{count}"
+        )
+
+        cursor.close()
         conn.close()
 
-        return redirect(url_for("appointments"))
+        return redirect(
+            url_for("appointments")
+        )
+
+    cursor.close()
+    conn.close()
 
     return render_template(
         "book_appointment.html",
         consultation=consultation
     )
-    
+
+
 @app.route("/appointments")
 def appointments():
 
-    if not session.get("admin_logged_in"):
+    if not session.get(
+        "admin_logged_in"
+    ):
 
-        return redirect(url_for("login"))
+        return redirect(
+            url_for("login")
+        )
 
     conn = get_db_connection()
 
-    search = request.args.get("search", "").strip().lower()
+    cursor = conn.cursor(
+        cursor_factory=__import__(
+            "psycopg2.extras",
+            fromlist=["DictCursor"]
+        ).DictCursor
+    )
 
-    logger.info(f"Search term: {search}")
+    search = request.args.get(
+        "search",
+        ""
+    ).strip().lower()
 
-    print("ALL APPOINTMENT NAMES =", [row["name"] for row in conn.execute("SELECT name FROM appointments").fetchall()])
-    
+    logger.info(
+        f"Search term: {search}"
+    )
+
+    cursor.execute(
+        """
+        SELECT name
+        FROM appointments
+        """
+    )
+
+    all_names = cursor.fetchall()
+
+    print(
+        "ALL APPOINTMENT NAMES =",
+        [row["name"] for row in all_names]
+    )
+
     if search:
-        appointments = conn.execute("""
+
+        cursor.execute(
+            """
             SELECT *
             FROM appointments
-            WHERE LOWER(name) LIKE ?
-            OR LOWER(email) LIKE ?
+            WHERE LOWER(name) LIKE %s
+            OR LOWER(email) LIKE %s
             ORDER BY id DESC
-        """, (
-            f"%{search}%",
-            f"%{search}%"
-        )).fetchall()
+            """,
+            (
+                f"%{search}%",
+                f"%{search}%"
+            )
+        )
 
-        print("RAW APPOINTMENTS =", appointments)
+        appointments = cursor.fetchall()
+
+        print(
+            "RAW APPOINTMENTS =",
+            appointments
+        )
+
     else:
-        appointments = conn.execute("""
+
+        cursor.execute(
+            """
             SELECT *
             FROM appointments
             ORDER BY id DESC
-        """).fetchall()
+            """
+        )
 
-        count = conn.execute(
-            "SELECT COUNT(*) FROM appointments"
-        ).fetchone()[0]
+        appointments = cursor.fetchall()
 
-        logger.info(f"Appointments in database: {count}")
-        
-        logger.info(f"Appointments found: {len(appointments)}")
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM appointments
+            """
+        )
 
-        for a in appointments:
-            logger.info(f"Appointment: {a['name']}")
+        count = cursor.fetchone()[0]
 
-        logger.info(f"Appointments found: {len(appointments)}")
+        logger.info(
+            f"Appointments in database: "
+            f"{count}"
+        )
 
-        for a in appointments:
-            logger.info(f"Appointment: {a['name']}")
-            logger.info(f"Appointment mobile: {a['mobile']}")
-            logger.info(f"Appointment contact method: {a['contact_method']}")
-            logger.info(f"Appointment email: {a['email']}")
+        logger.info(
+            f"Appointments found: "
+            f"{len(appointments)}"
+        )
 
+        for appointment in appointments:
+
+            logger.info(
+                f"Appointment: "
+                f"{appointment['name']}"
+            )
+
+            logger.info(
+                f"Appointment mobile: "
+                f"{appointment['mobile']}"
+            )
+
+            logger.info(
+                f"Appointment contact method: "
+                f"{appointment['contact_method']}"
+            )
+
+            logger.info(
+                f"Appointment email: "
+                f"{appointment['email']}"
+            )
+
+    cursor.close()
     conn.close()
 
     return render_template(
-
         "appointments.html",
-
         appointments=appointments
     )
 
-@app.route("/delete-appointment/<int:id>")
+
+@app.route(
+    "/delete-appointment/<int:id>"
+)
 def delete_appointment(id):
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
 
     conn = get_db_connection()
 
-    conn.execute(
-        "DELETE FROM appointments WHERE id = ?",
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM appointments
+        WHERE id = %s
+        """,
         (id,)
     )
 
     conn.commit()
+
+    cursor.close()
     conn.close()
 
-    return redirect(url_for("appointments"))
-    
+    return redirect(
+        url_for("appointments")
+    )
+
+
 @app.route(
     "/appointment-status/<int:id>/<status>",
     methods=["GET", "POST"]
 )
-def appointment_status(id, status):
+def appointment_status(
+    id,
+    status
+):
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
 
     allowed_statuses = {
         "Awaiting Payment",
@@ -723,11 +1062,19 @@ def appointment_status(id, status):
     }
 
     if status not in allowed_statuses:
+
         return "Invalid appointment status", 400
 
     conn = get_db_connection()
 
-    appointment = conn.execute(
+    cursor = conn.cursor(
+        cursor_factory=__import__(
+            "psycopg2.extras",
+            fromlist=["DictCursor"]
+        ).DictCursor
+    )
+
+    cursor.execute(
         """
         SELECT
             id,
@@ -739,24 +1086,32 @@ def appointment_status(id, status):
             reason,
             status
         FROM appointments
-        WHERE id = ?
+        WHERE id = %s
         """,
         (id,)
-    ).fetchone()
+    )
+
+    appointment = cursor.fetchone()
 
     if appointment is None:
+
+        cursor.close()
         conn.close()
+
         return "Appointment not found", 404
 
     old_status = appointment["status"]
 
-    conn.execute(
+    cursor.execute(
         """
         UPDATE appointments
-        SET status = ?
-        WHERE id = ?
+        SET status = %s
+        WHERE id = %s
         """,
-        (status, id)
+        (
+            status,
+            id
+        )
     )
 
     conn.commit()
@@ -766,29 +1121,41 @@ def appointment_status(id, status):
         f"from {old_status} to {status}"
     )
 
-    if status == "Confirmed" and old_status != "Confirmed":
+    if (
+        status == "Confirmed"
+        and old_status != "Confirmed"
+    ):
 
-        result = send_appointment_confirmation_email(
-            appointment["email"],
-            appointment["name"],
-            appointment["practice"],
-            appointment["preferred_date"],
-            appointment["preferred_time"],
-            appointment["reason"]
+        result = (
+            send_appointment_confirmation_email(
+                appointment["email"],
+                appointment["name"],
+                appointment["practice"],
+                appointment["preferred_date"],
+                appointment["preferred_time"],
+                appointment["reason"]
+            )
         )
 
         logger.info(
-            f"Appointment confirmation email status: "
-            f"{result.status_code}"
+            f"Appointment confirmation email "
+            f"status: {result.status_code}"
         )
 
-    elif status == "Confirmed" and old_status == "Confirmed":
+    elif (
+        status == "Confirmed"
+        and old_status == "Confirmed"
+    ):
 
         logger.info(
-            f"Appointment {id} was already confirmed. "
-            f"No duplicate confirmation email sent."
+            f"Appointment {id} was already "
+            f"confirmed. No duplicate "
+            f"confirmation email sent."
         )
 
+    cursor.close()
     conn.close()
 
-    return redirect(url_for("appointments"))
+    return redirect(
+        url_for("appointments")
+    )
