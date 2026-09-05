@@ -1,5 +1,6 @@
-import sqlite3
-
+import os
+import psycopg2
+from psycopg2.extras import DictCursor
 from datetime import datetime
 
 print("DATABASE.PY IMPORTED")
