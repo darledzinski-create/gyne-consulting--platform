@@ -1036,6 +1036,65 @@ def delete_appointment(id):
         url_for("appointments")
     )
 
+@app.route(
+    "/update-status/<int:consultation_id>/<status>",
+    methods=["GET", "POST"]
+)
+def update_status(
+    consultation_id,
+    status
+):
+
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
+
+    status_map = {
+        "New": "New",
+        "In_Progress": "In Progress",
+        "Completed": "Completed"
+    }
+
+    if status not in status_map:
+
+        return "Invalid consultation status", 400
+
+    new_status = status_map[status]
+
+    conn = get_db_connection()
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE consultations
+        SET status = %s
+        WHERE id = %s
+        """,
+        (
+            new_status,
+            consultation_id
+        )
+    )
+
+    conn.commit()
+
+    logger.info(
+        f"Consultation {consultation_id} "
+        f"status changed to {new_status}"
+    )
+
+    cursor.close()
+    conn.close()
+
+    return redirect(
+        url_for("admin")
+    )
+
 
 @app.route(
     "/appointment-status/<int:id>/<status>",
