@@ -99,8 +99,9 @@ Time: {time}
 Reason:
 {reason}
 
-PAYMENT BY EFT
+CONSULTATION FEE: R 500
 
+PAYMENT BY EFT
 Bank: GoTyme
 Account holder: Dariusz Ledzinski
 Account number: 510 1312 9386
