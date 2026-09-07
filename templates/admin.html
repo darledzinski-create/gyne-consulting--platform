@@ -179,7 +179,7 @@
                 {% elif consultation.contact_method == "WhatsApp" %}
 
                    <a
-                         href="https://wa.me/{{ consultation.mobile }}"
+                         href="https://wa.me/27{{ consultation.mobile[1:] }}"
                          target="_blank"
                          rel="noopener"
                          class="contact-btn"
