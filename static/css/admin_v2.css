@@ -10,13 +10,14 @@
     box-sizing: border-box;
 }
 
-.consultation-container {
+.admin-container {
+    width: 100%;
     max-width: 1600px;
     margin: 40px auto;
     padding: 30px;
 }
 
-.consultation-container h1 {
+.admin-container h1 {
     text-align: center;
     font-size: 42px;
     color: #1f2937;
