@@ -69,6 +69,8 @@
                WhatsApp link:
                https://wa.me/27{{ appointment.mobile[1:] }}
            </p> 
+
+           {% endif %}
                 
         {% elif appointment.contact_method == "Email" and appointment.email %}
 
