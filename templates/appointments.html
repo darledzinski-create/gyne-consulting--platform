@@ -51,7 +51,18 @@
                     WhatsApp Patient
                </a>
 
-           {% elif appointment.contact_method == "Email" and appointment.email %}
+            {% if appointment.mobile %}
+
+               <a
+                    href="https://api.whatsapp.com/send?phone=27{{ appointment.mobile[1:] }}&text=Dear%20{{ appointment.name }},%0A%0AYour%20appointment%20has%20been%20offered.%0A%0APractice:%20{{ appointment.practice }}%0ADate:%20{{ appointment.preferred_date }}%0ATime:%20{{ appointment.preferred_time }}%0A%0AConsultation%20fee:%20R%20500.%0A%0APlease%20make%20payment%20by%20EFT%20and%20send%20your%20proof%20of%20payment.%20Your%20appointment%20will%20be%20confirmed%20once%20payment%20has%20been%20received%20and%20verified.%0A%0APayment%20details%20are%20provided%20in%20your%20appointment%20email.%0A%0ADr%20Dariusz%20Ledzinski"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-green"
+               >
+                    WhatsApp Appointment Offer
+               </a>
+
+            {% elif appointment.contact_method == "Email" and appointment.email %}
 
               <a
                      href="mailto:{{ appointment.email }}"
