@@ -994,7 +994,7 @@ def appointments():
                 f"{appointment['email']}"
             )
 
-       for appointment in appointments:
+            for appointment in appointments:
 
            whatsapp_message = f"""Dear {appointment['name']},
 
