@@ -994,14 +994,38 @@ def appointments():
                 f"{appointment['email']}"
             )
 
+    for appointment in appointments:
+
+        whatsapp_message = f"""Dear {appointment['name']},
+
+Your appointment has been offered.
+
+Practice: {appointment['practice']}
+Date: {appointment['preferred_date']}
+Time: {appointment['preferred_time']}
+
+Consultation fee: R 500.
+
+Please make payment by EFT and send your proof of payment. Your appointment will be confirmed once payment has been received and verified.
+
+Payment details are provided in your appointment email.
+
+Dr Dariusz Ledzinski"""
+
+        appointment["whatsapp_url"] = (
+            "https://api.whatsapp.com/send"
+            f"?phone=27{appointment['mobile'][1:]}"
+            f"&text={quote(whatsapp_message)}"
+        )
+
     cursor.close()
     conn.close()
 
     return render_template(
         "appointments.html",
         appointments=appointments
-    ) 
-
+    )
+    
 @app.route(
     "/delete-appointment/<int:id>"
 )
