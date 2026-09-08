@@ -994,14 +994,13 @@ def appointments():
                 f"{appointment['email']}"
             )
 
+    whatsapp_urls = {}
 
-whatsapp_urls = {}
+    for appointment in appointments:
 
-for appointment in appointments:
+        if appointment["mobile"]:
 
-    if appointment["mobile"]:
-
-        whatsapp_message = f"""Dear {appointment['name']},
+            whatsapp_message = f"""Dear {appointment['name']},
 
 Your appointment has been offered.
 
@@ -1017,19 +1016,19 @@ Payment details are provided in your appointment email.
 
 Dr Dariusz Ledzinski"""
 
-        whatsapp_urls[appointment["id"]] = (
-            "https://api.whatsapp.com/send"
-            f"?phone=27{appointment['mobile'][1:]}"
-            f"&text={quote(whatsapp_message)}"
+            whatsapp_urls[appointment["id"]] = (
+                "https://api.whatsapp.com/send"
+                f"?phone=27{appointment['mobile'][1:]}"
+                f"&text={quote(whatsapp_message)}"
+            )
 
-        )
-        
     cursor.close()
     conn.close()
 
     return render_template(
         "appointments.html",
-        appointments=appointments
+        appointments=appointments,
+        whatsapp_urls=whatsapp_urls
     )
     
 @app.route(
