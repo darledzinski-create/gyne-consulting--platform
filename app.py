@@ -10,6 +10,7 @@ from flask import (
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from urllib.parse import quote
 import os
 import csv
 import io
