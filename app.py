@@ -1031,16 +1031,13 @@ Dr Dariusz Ledzinski"""
     )
             
 @app.route(
-    "/appointment-status/<int:id>/<status>",
+    "/update-status/<int:consultation_id>/<status>",
     methods=["GET", "POST"]
-   
 )
-    
 def update_status(
     consultation_id,
     status
-    
-    ):
+):
 
     if not session.get(
         "admin_logged_in"
@@ -1091,7 +1088,6 @@ def update_status(
     return redirect(
         url_for("admin")
     )
-
 
 @app.route(
     "/appointment-status/<int:id>/<status>",
