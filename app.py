@@ -1022,6 +1022,12 @@ Dr Dariusz Ledzinski"""
                 f"&text={quote(whatsapp_message)}"
             )
 
+            logger.info(
+                f"WhatsApp URL for appointment "
+                f"{appointment['id']}: "
+                f"{whatsapp_urls[appointment['id']]}"
+            )
+
     cursor.close()
     conn.close()
 
