@@ -176,23 +176,53 @@
                         Email Patient
                     </a>
 
-                {% elif consultation.contact_method == "WhatsApp" %}
+                {% if consultation.contact_method == "Email" and consultation.email %}
 
-                   <a
-                         href="https://wa.me/27{{ consultation.mobile[1:] }}"
-                         target="_blank"
-                         rel="noopener"
-                         class="contact-btn"
-                   >
-                         WhatsApp Patient
-                   </a>
+    <a
+        href="mailto:{{ consultation.email }}"
+        class="contact-btn"
+    >
+        Email Patient
+    </a>
 
-                 {% else %}
+{% elif consultation.contact_method == "WhatsApp" and consultation.mobile %}
 
-                     <span>{{ consultation.contact_method }}</span>
+    <a
+        href="https://wa.me/27{{ consultation.mobile[1:] }}"
+        target="_blank"
+        rel="noopener"
+        class="contact-btn"
+    >
+        WhatsApp Patient
+    </a>
 
-                 {% endif %}
+{% elif consultation.contact_method == "Either" %}
 
+    {% if consultation.email %}
+
+        <a
+            href="mailto:{{ consultation.email }}"
+            class="contact-btn"
+        >
+            Email Patient
+        </a>
+
+    {% endif %}
+
+    {% if consultation.mobile %}
+
+        <a
+            href="https://wa.me/27{{ consultation.mobile[1:] }}"
+            target="_blank"
+            rel="noopener"
+            class="contact-btn"
+        >
+            WhatsApp Patient
+        </a>
+
+    {% endif %}
+
+{% endif %}
              </span>
          </div> 
         
