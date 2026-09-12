@@ -1016,60 +1016,16 @@ Payment details are provided in your appointment email.
 
 Dr Dariusz Ledzinski"""
 
-           whatsapp_urls[appointment["id"]] = (
-               f"https://wa.me/27{appointment['mobile'][1:]}"
-               f"?text={quote(whatsapp_message)}"
+            whatsapp_urls[appointment["id"]] = (
+                f"https://wa.me/27{appointment['mobile'][1:]}"
+                f"?text={quote(whatsapp_message)}"
             )
+
             logger.info(
                 f"WhatsApp URL for appointment "
                 f"{appointment['id']}: "
                 f"{whatsapp_urls[appointment['id']]}"
-            )
-
-    cursor.close()
-    conn.close()
-
-    return render_template(
-        "appointments.html",
-        appointments=appointments,
-        whatsapp_urls=whatsapp_urls
-    )
-    
-@app.route(
-    "/delete-appointment/<int:id>"
-)
-def delete_appointment(id):
-
-    if not session.get(
-        "admin_logged_in"
-    ):
-
-        return redirect(
-            url_for("login")
-        )
-
-    conn = get_db_connection()
-
-    cursor = conn.cursor()
-
-    cursor.execute(
-        """
-        DELETE FROM appointments
-        WHERE id = %s
-        """,
-        (id,)
-    )
-
-    conn.commit()
-
-    cursor.close()
-    conn.close()
-
-    return redirect(
-        url_for("appointments")
-    )
-
-@app.route(
+            
     "/update-status/<int:consultation_id>/<status>",
     methods=["GET", "POST"]
 )
