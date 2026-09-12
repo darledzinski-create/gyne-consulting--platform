@@ -44,13 +44,12 @@
 {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
     <a
-        href="https://api.whatsapp.com/send?phone=27{{ appointment.mobile[1:] }}"
+        href="https://wa.me/27{{ appointment.mobile[1:] }}"
         target="_blank"
         rel="noopener noreferrer"
         class="btn-green"
     >
         WhatsApp Patient
-    
     </a>
 
     <a
@@ -60,7 +59,6 @@
         class="btn-green"
     >
         WhatsApp Appointment Offer
-
     </a>
 
 {% elif appointment.contact_method == "Email" and appointment.email %}
@@ -71,6 +69,41 @@
     >
         Email Patient
     </a>
+
+{% elif appointment.contact_method == "Either" %}
+
+    {% if appointment.email %}
+
+        <a
+            href="mailto:{{ appointment.email }}"
+            class="btn-primary"
+        >
+            Email Patient
+        </a>
+
+    {% endif %}
+
+    {% if appointment.mobile %}
+
+        <a
+            href="https://wa.me/27{{ appointment.mobile[1:] }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-green"
+        >
+            WhatsApp Patient
+        </a>
+
+        <a
+            href="{{ whatsapp_urls[appointment.id] }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-green"
+        >
+            WhatsApp Appointment Offer
+        </a>
+
+    {% endif %}
 
 {% endif %}
      
