@@ -1016,12 +1016,10 @@ Payment details are provided in your appointment email.
 
 Dr Dariusz Ledzinski"""
 
-            whatsapp_urls[appointment["id"]] = (
-                "https://api.whatsapp.com/send"
-                f"?phone=27{appointment['mobile'][1:]}"
-                f"&text={quote(whatsapp_message)}"
+           whatsapp_urls[appointment["id"]] = (
+               f"https://wa.me/27{appointment['mobile'][1:]}"
+               f"?text={quote(whatsapp_message)}"
             )
-
             logger.info(
                 f"WhatsApp URL for appointment "
                 f"{appointment['id']}: "
