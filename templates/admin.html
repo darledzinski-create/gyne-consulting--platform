@@ -163,42 +163,9 @@
         </div>
 
         <div class="detail-row">
-            <span class="label">Contact Patient</span>
-
             <span class="value contact-actions">
 
-                {% if consultation.contact_method == "Email" %}
-
-                    <a
-                        href="mailto:{{ consultation.email }}"
-                        class="contact-btn"
-                    >
-                        Email Patient
-                    </a>
-
-                {% if consultation.contact_method == "Email" and consultation.email %}
-
-    <a
-        href="mailto:{{ consultation.email }}"
-        class="contact-btn"
-    >
-        Email Patient
-    </a>
-
-{% elif consultation.contact_method == "WhatsApp" and consultation.mobile %}
-
-    <a
-        href="https://wa.me/27{{ consultation.mobile[1:] }}"
-        target="_blank"
-        rel="noopener"
-        class="contact-btn"
-    >
-        WhatsApp Patient
-    </a>
-
-{% elif consultation.contact_method == "Either" %}
-
-    {% if consultation.email %}
+    {% if consultation.contact_method == "Email" and consultation.email %}
 
         <a
             href="mailto:{{ consultation.email }}"
@@ -207,9 +174,7 @@
             Email Patient
         </a>
 
-    {% endif %}
-
-    {% if consultation.mobile %}
+    {% elif consultation.contact_method == "WhatsApp" and consultation.mobile %}
 
         <a
             href="https://wa.me/27{{ consultation.mobile[1:] }}"
@@ -220,9 +185,31 @@
             WhatsApp Patient
         </a>
 
+    {% elif consultation.contact_method == "Either" %}
+
+        {% if consultation.email %}
+            <a
+                href="mailto:{{ consultation.email }}"
+                class="contact-btn"
+            >
+                Email Patient
+            </a>
+        {% endif %}
+
+        {% if consultation.mobile %}
+            <a
+                href="https://wa.me/27{{ consultation.mobile[1:] }}"
+                target="_blank"
+                rel="noopener"
+                class="contact-btn"
+            >
+                WhatsApp Patient
+            </a>
+        {% endif %}
+
     {% endif %}
 
-{% endif %}
+</span>
              </span>
          </div> 
         
