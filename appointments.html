@@ -49,39 +49,37 @@
 
             <div style="margin-top:10px;">
 
-        {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
+        
+          {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
-           <p>
-               <strong>Generated WhatsApp URL:</strong>
-               https://wa.me/27{{ appointment.mobile[1:] }}
-           </p>
+    <a
+        href="https://wa.me/27{{ appointment.mobile[1:] }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-green"
+    >
+        WhatsApp Patient
+    </a>
 
-           <a
-               href="https://wa.me/27{{ appointment.mobile[1:] }}"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="btn-green"
-           >
-               WhatsApp Patient
-           </a>
+    <a
+        href="{{ whatsapp_urls[appointment.id] }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-green"
+    >
+        WhatsApp Appointment Offer
+    </a>
 
-           <p>
-               WhatsApp link:
-               https://wa.me/27{{ appointment.mobile[1:] }}
-           </p> 
+{% elif appointment.contact_method == "Email" and appointment.email %}
 
-           {% endif %}
-                
-        {% elif appointment.contact_method == "Email" and appointment.email %}
+    <a
+        href="mailto:{{ appointment.email }}"
+        class="btn-primary"
+    >
+        Email Patient
+    </a>
 
-            <a
-                href="mailto:{{ appointment.email }}"
-                class="btn-primary"
-            >
-                Email Patient
-            </a>
-
-        {% endif %}
+{% endif %}
 
     </div>
 
