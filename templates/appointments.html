@@ -50,15 +50,17 @@
         class="btn-green"
     >
         WhatsApp Patient
+    
     </a>
 
     <a
-        href="{{ appointment.whatsapp_url }}"
+        href="{{ whatsapp_urls[appointment.id] }}"
         target="_blank"
         rel="noopener noreferrer"
         class="btn-green"
     >
         WhatsApp Appointment Offer
+
     </a>
 
 {% elif appointment.contact_method == "Email" and appointment.email %}
