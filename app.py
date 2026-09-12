@@ -1021,18 +1021,26 @@ Dr Dariusz Ledzinski"""
                 f"?text={quote(whatsapp_message)}"
             )
 
-            logger.info(
-                f"WhatsApp URL for appointment "
-                f"{appointment['id']}: "
-                f"{whatsapp_urls[appointment['id']]}"
+    cursor.close()
+    conn.close()
+
+    return render_template(
+        "appointments.html",
+        appointments=appointments,
+        whatsapp_urls=whatsapp_urls
+    )
             
-    "/update-status/<int:consultation_id>/<status>",
+@app.route(
+    "/appointment-status/<int:id>/<status>",
     methods=["GET", "POST"]
-)
-def update_status(
+   
+    )
+    
+    def update_status(
     consultation_id,
     status
-):
+    
+    ):
 
     if not session.get(
         "admin_logged_in"
