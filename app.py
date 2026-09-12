@@ -1034,9 +1034,9 @@ Dr Dariusz Ledzinski"""
     "/appointment-status/<int:id>/<status>",
     methods=["GET", "POST"]
    
-    )
+)
     
-    def update_status(
+def update_status(
     consultation_id,
     status
     
