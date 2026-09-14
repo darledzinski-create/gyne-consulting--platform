@@ -150,59 +150,71 @@
 {% endif %}
         
     <div style="margin-top:15px;">
-<div class="status-buttons">
 
-    {% if appointment.status == "Awaiting Payment" %}
+    <div class="status-buttons">
 
-        <a
-            href="/appointment-status/{{ appointment.id }}/Paid"
-            class="btn-primary"
-        >
-            Paid
-        </a>
+        {% if appointment.status == "Awaiting Payment" %}
 
-        <a
-            href="/appointment-status/{{ appointment.id }}/Cancelled"
-            class="btn-danger"
-        >
-            Cancelled
-        </a>
+            <a
+                href="/appointment-status/{{ appointment.id }}/Paid"
+                class="btn-primary"
+            >
+                Paid
+            </a>
 
-    {% elif appointment.status == "Paid" %}
+            <a
+                href="/appointment-status/{{ appointment.id }}/Cancelled"
+                class="btn-danger"
+            >
+                Cancelled
+            </a>
 
-        <a
-            href="/appointment-status/{{ appointment.id }}/Confirmed"
-            class="btn-primary"
-        >
-            Confirmed
-        </a>
+        {% elif appointment.status == "Paid" %}
 
-        <a
-            href="/appointment-status/{{ appointment.id }}/Cancelled"
-            class="btn-danger"
-        >
-            Cancelled
-        </a>
+            <a
+                href="/appointment-status/{{ appointment.id }}/Confirmed"
+                class="btn-primary"
+            >
+                Confirmed
+            </a>
 
-    {% elif appointment.status == "Confirmed" %}
+            <a
+                href="/appointment-status/{{ appointment.id }}/Cancelled"
+                class="btn-danger"
+            >
+                Cancelled
+            </a>
 
-        <a
-            href="/appointment-status/{{ appointment.id }}/Completed"
-            class="btn-success"
-        >
-            Completed
-        </a>
+        {% elif appointment.status == "Confirmed" %}
 
-        <a
-            href="/appointment-status/{{ appointment.id }}/Cancelled"
-            class="btn-danger"
-        >
-            Cancelled
-        </a>
+            <a
+                href="/appointment-status/{{ appointment.id }}/Completed"
+                class="btn-success"
+            >
+                Completed
+            </a>
 
-    {% endif %}
+            <a
+                href="/appointment-status/{{ appointment.id }}/Cancelled"
+                class="btn-danger"
+            >
+                Cancelled
+            </a>
+
+        {% endif %}
+
+    </div>
 
 </div>
-       
-        
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    </div>
+
+</div>
+
 {% endblock %}
