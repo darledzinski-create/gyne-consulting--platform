@@ -75,7 +75,7 @@
     {% if appointment.email %}
 
         <a
-            href="mailto:{{ appointment.email }}"
+            href="{{ email_urls[appointment.id] }}"
             class="btn-green"
         >
             Email Patient
