@@ -996,6 +996,8 @@ def appointments():
 
     whatsapp_urls = {}
 
+    email_urls = {}
+
     for appointment in appointments:
 
         if appointment["mobile"]:
@@ -1021,13 +1023,38 @@ Dr Dariusz Ledzinski"""
                 f"?text={quote(whatsapp_message)}"
             )
 
+        if appointment["email"]:
+
+            email_message = f"""Dear {appointment['name']},
+
+Your appointment has been offered.
+
+Practice: {appointment['practice']}
+Date: {appointment['preferred_date']}
+Time: {appointment['preferred_time']}
+
+Consultation fee: R 500.
+
+Please make payment by EFT and send your proof of payment. Your appointment will be confirmed once payment has been received and verified.
+
+Payment details are provided in your appointment email.
+
+Dr Dariusz Ledzinski"""
+
+            email_urls[appointment["id"]] = (
+                f"mailto:{appointment['email']}"
+                f"?subject={quote('Appointment Offer')}"
+                f"&body={quote(email_message)}"
+            )
+
     cursor.close()
     conn.close()
 
     return render_template(
         "appointments.html",
         appointments=appointments,
-        whatsapp_urls=whatsapp_urls
+        whatsapp_urls=whatsapp_urls,
+        email_urls=email_urls
     )
             
 @app.route(
