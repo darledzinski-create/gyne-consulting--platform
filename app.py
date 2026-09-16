@@ -1147,14 +1147,15 @@ if status not in allowed_statuses:
 
 conn = get_db_connection()
 
-    cursor = conn.cursor(
-        cursor_factory=__import__(
-            "psycopg2.extras",
-            fromlist=["DictCursor"]
-        ).DictCursor
-    )
+cursor = conn.cursor(
+    cursor_factory=__import__(
+        "psycopg2.extras",
+        fromlist=["DictCursor"]
+    ).DictCursor
+    
+)
 
-    cursor.execute(
+cursor.execute(
         """
         SELECT
             id,
