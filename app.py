@@ -1132,6 +1132,7 @@ def appointment_status(
         return redirect(
             url_for("login")
         )
+
 allowed_statuses = {
     "Awaiting Payment",
     "Paid",
@@ -1140,12 +1141,11 @@ allowed_statuses = {
     "Cancelled"
 }
     
+if status not in allowed_statuses:
 
-    if status not in allowed_statuses:
+    return "Invalid appointment status", 400
 
-        return "Invalid appointment status", 400
-
-    conn = get_db_connection()
+conn = get_db_connection()
 
     cursor = conn.cursor(
         cursor_factory=__import__(
