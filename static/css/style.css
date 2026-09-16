@@ -1214,6 +1214,25 @@ textarea:focus {
 
 }
 
+    /* THANK YOU PAGE */
+
+.thank-you-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.thank-you-box {
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    padding: 50px 40px;
+    text-align: center;
+    margin: 0 auto;
+}
+
 
 
 
