@@ -1132,13 +1132,14 @@ def appointment_status(
         return redirect(
             url_for("login")
         )
-
-    allowed_statuses = {
-        "Awaiting Payment",
-        "Paid",
-        "Confirmed",
-        "Cancelled"
-    }
+allowed_statuses = {
+    "Awaiting Payment",
+    "Paid",
+    "Confirmed",
+    "Completed",
+    "Cancelled"
+}
+    
 
     if status not in allowed_statuses:
 
