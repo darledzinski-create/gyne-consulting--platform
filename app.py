@@ -1133,29 +1133,28 @@ def appointment_status(
             url_for("login")
         )
 
-allowed_statuses = {
-    "Awaiting Payment",
-    "Paid",
-    "Confirmed",
-    "Completed",
-    "Cancelled"
-}
-    
-if status not in allowed_statuses:
+    allowed_statuses = {
+        "Awaiting Payment",
+        "Paid",
+        "Confirmed",
+        "Completed",
+        "Cancelled"
+    }
 
-    return "Invalid appointment status", 400
+    if status not in allowed_statuses:
 
-conn = get_db_connection()
+        return "Invalid appointment status", 400
 
-cursor = conn.cursor(
-    cursor_factory=__import__(
-        "psycopg2.extras",
-        fromlist=["DictCursor"]
-    ).DictCursor
-    
-)
+    conn = get_db_connection()
 
-cursor.execute(
+    cursor = conn.cursor(
+        cursor_factory=__import__(
+            "psycopg2.extras",
+            fromlist=["DictCursor"]
+        ).DictCursor
+    )
+
+    cursor.execute(
         """
         SELECT
             id,
