@@ -14,12 +14,16 @@
 <header class="top-bar">
     <div class="logo">Dr Dariusz Consulting</div>
 
-    <nav>
-        <a href="/">Home</a>
+   <nav>
+    <a href="/">Home</a>
+
+    {% if session.get("admin_logged_in") %}
         <a href="/admin">Consultation Records</a>
-        <a href="/logout">Logout</a>
         <a href="/appointments">Appointments</a>
-    </nav>
+        <a href="/logout">Logout</a>
+    {% endif %} 
+       
+</nav>
 </header>
 
         {% block content %}{% endblock %} 
@@ -38,13 +42,15 @@
 
         <div class="footer-links">
 
-            <a href="/">Home</a>
+    <a href="/">Home</a>
 
-            <a href="/admin">Consultation Records</a>
+    {% if session.get("admin_logged_in") %}
+        <a href="/admin">Consultation Records</a>
+        <a href="/appointments">Appointments</a>
+        <a href="/logout">Logout</a>
+    {% endif %}
 
-            <a href="/logout">Logout</a>
-
-        </div>
+</div>
 
         <div class="footer-bottom">
 
