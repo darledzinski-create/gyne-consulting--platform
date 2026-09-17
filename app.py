@@ -250,7 +250,7 @@ Message:
             # Send emails
             # ----------------------------
 
-            logger.info(
+                       logger.info(
                 "Sending doctor consultation email"
             )
 
@@ -265,35 +265,35 @@ Message:
 
                 logger.info(
                     "Sending patient confirmation email"
-            )
+                )
 
-            send_consultation_email(
-                email,
-                "Dr Darius",
-                subject,
-                patient_text
-            )
+                send_consultation_email(
+                    email,
+                    "Dr Darius",
+                    subject,
+                    patient_text
+                )
 
-        elif contact_method == "WhatsApp":
+            elif contact_method == "WhatsApp":
 
-            logger.info(
-                "Patient selected WhatsApp - "
-                "no patient confirmation email sent"
-            )
+                logger.info(
+                    "Patient selected WhatsApp - "
+                    "no patient confirmation email sent"
+                )
 
-        elif contact_method == "Either":
+            elif contact_method == "Either":
 
-            logger.info(
-                "Patient selected Either - "
-                "sending patient confirmation email"
-            )
+                logger.info(
+                    "Patient selected Either - "
+                    "sending patient confirmation email"
+                )
 
-           send_consultation_email(
-               email,
-               "Dr Darius",
-               subject,
-               patient_text
-            )
+                send_consultation_email(
+                    email,
+                    "Dr Darius",
+                    subject,
+                    patient_text
+                )
 
             logger.info(
                 f"Consultation workflow completed "
