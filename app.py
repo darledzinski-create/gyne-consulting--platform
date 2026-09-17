@@ -295,15 +295,15 @@ Message:
                     patient_text
                 )
 
-            logger.info(
-                f"Consultation workflow completed "
-                f"for {email}"
-            )
+                logger.info(
+                    f"Consultation workflow completed "
+                    f"for {email}"
+                )
 
-            return redirect(
-                url_for(
-                    "thank_you",
-                    urgency=urgency_clean
+                return redirect(
+                    url_for(
+                        "thank_you",
+                        urgency=urgency_clean
                 )
             )
 
