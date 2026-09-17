@@ -295,18 +295,19 @@ Message:
                     patient_text
                 )
 
-                logger.info(
-                    f"Consultation workflow completed "
-                    f"for {email}"
-                )
-
-                return redirect(
-                    url_for(
-                        "thank_you",
-                        urgency=urgency_clean
-                )
+            logger.info(
+                f"Consultation workflow completed "
+                f"for {email}"
             )
 
+            return redirect(
+                
+                url_for(
+                    "thank_you",
+                    urgency=urgency_clean
+                )
+            )
+            
         except Exception as e:
 
             logger.exception(
