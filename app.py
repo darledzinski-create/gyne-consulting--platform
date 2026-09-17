@@ -261,15 +261,38 @@ Message:
                 doctor_text
             )
 
-            logger.info(
-                "Sending patient confirmation email"
+            if contact_method == "Email":
+
+                logger.info(
+                    "Sending patient confirmation email"
             )
 
             send_consultation_email(
                 email,
-                "Dr Dariusz",
+                "Dr Darius",
                 subject,
                 patient_text
+            )
+
+        elif contact_method == "WhatsApp":
+
+            logger.info(
+                "Patient selected WhatsApp - "
+                "no patient confirmation email sent"
+            )
+
+        elif contact_method == "Either":
+
+            logger.info(
+                "Patient selected Either - "
+                "sending patient confirmation email"
+            )
+
+           send_consultation_email(
+               email,
+               "Dr Darius",
+               subject,
+               patient_text
             )
 
             logger.info(
