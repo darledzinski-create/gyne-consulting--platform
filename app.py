@@ -250,7 +250,7 @@ Message:
             # Send emails
             # ----------------------------
 
-                       logger.info(
+            logger.info(
                 "Sending doctor consultation email"
             )
 
