@@ -177,9 +177,7 @@
     {% elif consultation.contact_method == "WhatsApp" and consultation.mobile %}
 
         <a
-            href="https://wa.me/27{{ consultation.mobile[1:] }}?text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding your consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
-            target="_blank"
-            rel="noopener"
+            href="whatsapp://send?phone=27{{ consultation.mobile[1:] }}&text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
             class="contact-btn"
         >
             WhatsApp Patient
@@ -198,9 +196,7 @@
 
         {% if consultation.mobile %}
             <a
-                href="https://wa.me/27{{ consultation.mobile[1:] }}?text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding your consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
-                target="_blank"
-                rel="noopener"
+                href="whatsapp://send?phone=27{{ consultation.mobile[1:] }}&text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
                 class="contact-btn"
             >
                 WhatsApp Patient
