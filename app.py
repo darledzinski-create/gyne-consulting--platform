@@ -1026,21 +1026,29 @@ def appointments():
 
                if appointment["mobile"]:
 
-                   whatsapp_message = f"""Dear {appointment['name']},
+            whatsapp_message = f"""Dear {appointment['name']},
 
-       Your appointment has been offered.
+Your appointment has been offered.
 
-       Practice: {appointment['practice']}
-       Date: {appointment['preferred_date']}
-       Time: {appointment['preferred_time']}
+Practice: {appointment['practice']}
+Date: {appointment['preferred_date']}
+Time: {appointment['preferred_time']}
 
-       Consultation fee: R 500.
+Consultation fee: R 500.
 
-       Please make payment by EFT and send your proof of payment. Your appointment will be confirmed once payment has been received and verified.
+PAYMENT BY EFT
 
-       Payment details are provided in your appointment email.
+Bank: GoTyme
+Account holder: Dariusz Ledzinski
+Account number: 510 1312 9386
 
-       Dr Dariusz Ledzinski"""
+Please make payment by EFT and send your proof of payment.
+
+Your appointment will be confirmed once payment has been received and verified.
+
+If you need any changes to the appointment, please contact us.
+
+Dr Dariusz Ledzinski"""
 
                    whatsapp_urls[appointment["id"]] = (
                        f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
