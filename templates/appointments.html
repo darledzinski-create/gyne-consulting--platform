@@ -43,6 +43,7 @@
 
 {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
+    <div class="patient-contact">
     <a
         href="https://wa.me/27{{ appointment.mobile[1:] }}"
         target="_blank"
@@ -51,16 +52,17 @@
     >
         WhatsApp Patient
     </a>
+</div>
 
+<div class="appointment-contact">
     <a
         href="{{ whatsapp_urls[appointment.id] }}"
-        target="_blank"
-        rel="noopener noreferrer"
         class="btn-green"
     >
         WhatsApp Appointment Offer
     </a>
-
+</div>
+            
 {% elif appointment.contact_method == "Email" and appointment.email %}
 
     <a
@@ -85,24 +87,26 @@
 
     {% if appointment.mobile %}
 
-        <a
-            href="https://wa.me/27{{ appointment.mobile[1:] }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-green"
-        >
-            WhatsApp Patient
-        </a>
+        <div class="patient-contact">
+    <a
+        href="https://wa.me/27{{ appointment.mobile[1:] }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-green"
+    >
+        WhatsApp Patient
+    </a>
+</div>
 
-        <a
-            href="{{ whatsapp_urls[appointment.id] }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-green"
-        >
-            WhatsApp Appointment Offer
-        </a>
-
+<div class="appointment-contact">
+    <a
+        href="{{ whatsapp_urls[appointment.id] }}"
+        class="btn-green"
+    >
+        WhatsApp Appointment Offer
+    </a>
+</div>
+            
     {% endif %}
 
 {% endif %}
