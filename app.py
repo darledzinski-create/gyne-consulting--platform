@@ -1024,52 +1024,28 @@ def appointments():
 
     for appointment in appointments:
 
-        if appointment["mobile"]:
+               if appointment["mobile"]:
 
-            whatsapp_message = f"""Dear {appointment['name']},
+                   whatsapp_message = f"""Dear {appointment['name']},
 
-Your appointment has been offered.
+       Your appointment has been offered.
 
-Practice: {appointment['practice']}
-Date: {appointment['preferred_date']}
-Time: {appointment['preferred_time']}
+       Practice: {appointment['practice']}
+       Date: {appointment['preferred_date']}
+       Time: {appointment['preferred_time']}
 
-Consultation fee: R 500.
+       Consultation fee: R 500.
 
-Please make payment by EFT and send your proof of payment. Your appointment will be confirmed once payment has been received and verified.
+       Please make payment by EFT and send your proof of payment. Your appointment will be confirmed once payment has been received and verified.
 
-Payment details are provided in your appointment email.
+       Payment details are provided in your appointment email.
 
-Dr Dariusz Ledzinski"""
+       Dr Dariusz Ledzinski"""
 
-           whatsapp_urls[appointment["id"]] = (
-               f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
-               f"&text={quote(whatsapp_message)}"
-           )
-        if appointment["email"]:
-
-            email_message = f"""Dear {appointment['name']},
-
-Your appointment has been offered.
-
-Practice: {appointment['practice']}
-Date: {appointment['preferred_date']}
-Time: {appointment['preferred_time']}
-
-Consultation fee: R 500.
-
-Please make payment by EFT and send your proof of payment. Your appointment will be confirmed once payment has been received and verified.
-
-Payment details are provided in your appointment email.
-
-Dr Dariusz Ledzinski"""
-
-            email_urls[appointment["id"]] = (
-                f"mailto:{appointment['email']}"
-                f"?subject={quote('Appointment Offer')}"
-                f"&body={quote(email_message)}"
-            )
-
+                   whatsapp_urls[appointment["id"]] = (
+                       f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
+                       f"&text={quote(whatsapp_message)}"
+                   )
     cursor.close()
     conn.close()
 
