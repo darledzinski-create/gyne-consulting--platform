@@ -1024,7 +1024,7 @@ def appointments():
 
     for appointment in appointments:
 
-               if appointment["mobile"]:
+        if appointment["mobile"]:
 
             whatsapp_message = f"""Dear {appointment['name']},
 
@@ -1050,10 +1050,10 @@ If you need any changes to the appointment, please contact us.
 
 Dr Dariusz Ledzinski"""
 
-                   whatsapp_urls[appointment["id"]] = (
-                       f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
-                       f"&text={quote(whatsapp_message)}"
-                   )
+            whatsapp_urls[appointment["id"]] = (
+                f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
+                 f"&text={quote(whatsapp_message)}"
+            )
     cursor.close()
     conn.close()
 
