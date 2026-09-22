@@ -1295,6 +1295,16 @@ textarea:focus {
     border-color: #1e40af;
 }
 
+/* APPOINTMENT WHATSAPP BUTTONS */
+
+.patient-contact {
+    margin-bottom: 12px;
+}
+
+.appointment-contact {
+    margin-top: 4px;
+}
+
 
 
 
