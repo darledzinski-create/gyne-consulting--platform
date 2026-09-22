@@ -1042,11 +1042,10 @@ Payment details are provided in your appointment email.
 
 Dr Dariusz Ledzinski"""
 
-            whatsapp_urls[appointment["id"]] = (
-                f"https://wa.me/27{appointment['mobile'][1:]}"
-                f"?text={quote(whatsapp_message)}"
-            )
-
+           whatsapp_urls[appointment["id"]] = (
+               f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
+               f"&text={quote(whatsapp_message)}"
+           )
         if appointment["email"]:
 
             email_message = f"""Dear {appointment['name']},
