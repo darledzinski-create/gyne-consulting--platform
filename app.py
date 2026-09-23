@@ -1054,6 +1054,32 @@ Dr Dariusz Ledzinski"""
                 f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
                  f"&text={quote(whatsapp_message)}"
             )
+
+            if appointment["email"]:
+
+                email_message = f"""Dear {appointment['name']},
+
+    Your appointment has been offered.
+
+    Practice: {appointment['practice']}
+    Date: {appointment['preferred_date']}
+    Time: {appointment['preferred_time']}
+
+    Consultation fee: R 500.
+
+    Please make payment by EFT and send your proof of payment.
+
+    Your appointment will be confirmed once payment has been received and verified.
+
+    If you need any changes to the appointment, please contact us.
+
+    Dr Dariusz Ledzinski"""
+
+                email_urls[appointment["id"]] = (
+                    f"mailto:{appointment['email']}"
+                    f"?subject={quote('Appointment Offer')}"
+                    f"&body={quote(email_message)}"
+                )
     cursor.close()
     conn.close()
 
