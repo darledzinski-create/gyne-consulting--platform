@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -195,6 +196,14 @@
                 href="/appointment-status/{{ appointment.id }}/Completed"
                 class="btn-success"
             >
+
+            <a
+                href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+                class="btn-green"
+            >
+                WhatsApp Confirmation
+            </a>
+                
                 Completed
             </a>
 
