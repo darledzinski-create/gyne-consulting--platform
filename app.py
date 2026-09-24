@@ -1022,7 +1022,7 @@ def appointments():
 
     email_urls = {}
 
-    whatsapp_confirmation_urls = {
+    whatsapp_confirmation_urls = {}
 
     for appointment in appointments:
 
