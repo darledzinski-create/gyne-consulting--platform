@@ -1,3 +1,4 @@
+
 from flask import (
     Flask,
     request,
@@ -1082,6 +1083,31 @@ Dr Dariusz Ledzinski"""
                     f"?subject={quote('Appointment Offer')}"
                     f"&body={quote(email_message)}"
                 )
+
+            if (
+                appointment["mobile"]
+                and appointment["status"] == "Confirmed"
+            ):
+
+                confirmation_message = f"""Dear {appointment['name']},
+
+    Your appointment with Dr Dariusz has been confirmed.
+
+    Payment has been received and verified.
+
+    Practice: {appointment['practice']}
+    Date: {appointment['preferred_date']}
+    Time: {appointment['preferred_time']}
+
+    We look forward to your consultation.
+
+    Dr Dariusz Ledzinski"""
+
+                whatsapp_confirmation_urls[appointment["id"]] = (
+                    f"whatsapp://send?phone=27{appointment['mobile'][1:]}"
+                    f"&text={quote(confirmation_message)}"
+                )
+                
     cursor.close()
     conn.close()
 
