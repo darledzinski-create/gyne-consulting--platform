@@ -1111,13 +1111,13 @@ Dr Dariusz Ledzinski"""
     cursor.close()
     conn.close()
 
-   return render_template(
-       "appointments.html",
-       appointments=appointments,
-       whatsapp_urls=whatsapp_urls,
-       email_urls=email_urls,
-       whatsapp_confirmation_urls=whatsapp_confirmation_urls
-   )
+    return render_template(
+        "appointments.html",
+        appointments=appointments,
+        whatsapp_urls=whatsapp_urls,
+        email_urls=email_urls,
+        whatsapp_confirmation_urls=whatsapp_confirmation_urls
+    )
   
 @app.route(
     "/update-status/<int:consultation_id>/<status>",
