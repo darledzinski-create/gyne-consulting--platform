@@ -1278,7 +1278,7 @@ def appointment_status(
         f"from {old_status} to {status}"
     )
 
-    if (
+        if (
         status == "Confirmed"
         and old_status != "Confirmed"
     ):
@@ -1298,7 +1298,6 @@ def appointment_status(
             f"Appointment confirmation email "
             f"status: {result.status_code}"
         )
-
     elif (
         status == "Confirmed"
         and old_status == "Confirmed"
