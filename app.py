@@ -1,5 +1,6 @@
 
 
+
 from flask import (
     Flask,
     request,
@@ -1258,6 +1259,12 @@ def appointment_status(
         return "Appointment not found", 404
 
     old_status = appointment["status"]
+
+    logger.info(
+        f"Appointment {id} contact method: "
+        f"{appointment['contact_method']}"
+    
+    )
 
     cursor.execute(
         """
