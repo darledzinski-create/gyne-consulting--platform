@@ -1285,9 +1285,9 @@ def appointment_status(
         f"from {old_status} to {status}"
     )
 
-        if (
-            status == "Confirmed"
-            and old_status != "Confirmed"
+    if (
+         status == "Confirmed"
+         and old_status != "Confirmed"
     ):
 
         if appointment["contact_method"] in (
