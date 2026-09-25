@@ -1278,7 +1278,7 @@ def appointment_status(
         f"from {old_status} to {status}"
     )
 
-        if (
+    if (
         status == "Confirmed"
         and old_status != "Confirmed"
     ):
