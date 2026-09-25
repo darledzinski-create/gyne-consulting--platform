@@ -852,24 +852,37 @@ def offer_appointment(
             request.form["reason"]
         )
 
-        logger.info(
-            "Sending appointment email"
-        )
+        if consultation["contact_method"] in (
+            "Email",
+            "Either"
+        ):
 
-        result_patient = send_appointment_email(
-            consultation["email"],
-            consultation["name"],
-            request.form["practice"],
-            request.form["preferred_date"],
-            request.form["preferred_time"],
-            request.form["reason"]
-        )
+            logger.info(
+                f"Sending appointment email "
+                f"for contact method: "
+                f"{consultation['contact_method']}"
+            )
 
-        logger.info(
-            f"Appointment email status: "
-            f"{result_patient.status_code}"
-        )
+            result_patient = send_appointment_email(
+                consultation["email"],
+                consultation["name"],
+                request.form["practice"],
+                request.form["preferred_date"],
+                request.form["preferred_time"],
+                request.form["reason"]
+            )
 
+            logger.info(
+                f"Appointment email status: "
+                f"{result_patient.status_code}"
+            )
+
+        elif consultation["contact_method"] == "WhatsApp":
+
+            logger.info(
+                "Patient selected WhatsApp - "
+                "no automatic appointment email sent"
+            )
         cursor.execute(
             """
             SELECT COUNT(*)
