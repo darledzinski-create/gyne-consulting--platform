@@ -1285,26 +1285,39 @@ def appointment_status(
         f"from {old_status} to {status}"
     )
 
-    if (
-        status == "Confirmed"
-        and old_status != "Confirmed"
+        if (
+            status == "Confirmed"
+            and old_status != "Confirmed"
     ):
 
-        result = (
-            send_appointment_confirmation_email(
-                appointment["email"],
-                appointment["name"],
-                appointment["practice"],
-                appointment["preferred_date"],
-                appointment["preferred_time"],
-                appointment["reason"]
-            )
-        )
+        if appointment["contact_method"] in (
+            "Email",
+            "Either"
+        ):
 
-        logger.info(
-            f"Appointment confirmation email "
-            f"status: {result.status_code}"
-        )
+            result = (
+                send_appointment_confirmation_email(
+                    appointment["email"],
+                    appointment["name"],
+                    appointment["practice"],
+                    appointment["preferred_date"],
+                    appointment["preferred_time"],
+                    appointment["reason"]
+                )
+            )
+
+            logger.info(
+                f"Appointment confirmation email "
+                f"status: {result.status_code}"
+            )
+
+        elif appointment["contact_method"] == "WhatsApp":
+
+            logger.info(
+                "Patient selected WhatsApp - "
+                "no automatic confirmation email sent"
+            )
+
     elif (
         status == "Confirmed"
         and old_status == "Confirmed"
@@ -1315,7 +1328,6 @@ def appointment_status(
             f"confirmed. No duplicate "
             f"confirmation email sent."
         )
-
     cursor.close()
     conn.close()
 
