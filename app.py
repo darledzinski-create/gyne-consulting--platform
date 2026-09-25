@@ -1,4 +1,5 @@
 
+
 from flask import (
     Flask,
     request,
@@ -1235,6 +1236,7 @@ def appointment_status(
             id,
             name,
             email,
+            contact_method,
             practice,
             preferred_date,
             preferred_time,
