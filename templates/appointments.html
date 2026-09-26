@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -13,7 +12,8 @@
             name="search"
             placeholder="Search patient name..."
             value="{{ request.args.get('search', '') }}"
-            style="padding:10px; width:300px;">
+            style="padding:10px; width:300px;"
+        >
 
         <button type="submit" class="btn-primary">
             Search
@@ -24,238 +24,268 @@
 
     {% for appointment in appointments %}
 
-    <div class="feature-card" style="margin-bottom:25px;">
+        <div class="feature-card" style="margin-bottom:25px;">
 
-        <p><strong>ID:</strong> {{ appointment.id }}</p>
+            <p><strong>ID:</strong> {{ appointment.id }}</p>
 
-        <p><strong>Name:</strong> {{ appointment.name }}</p>
+            <p><strong>Name:</strong> {{ appointment.name }}</p>
 
-        <p><strong>Email:</strong> {{ appointment.email }}</p>
+            <p><strong>Email:</strong> {{ appointment.email }}</p>
 
-        <p><strong>Mobile:</strong> {{ appointment.mobile }}</p>
+            <p><strong>Mobile:</strong> {{ appointment.mobile }}</p>
 
-        <p><strong>Preferred Contact:</strong> {{ appointment.contact_method }}</p>
-        <div style="margin-top:15px;">
+            <p>
+                <strong>Preferred Contact:</strong>
+                {{ appointment.contact_method }}
+            </p>
 
-        <strong>Contact Patient</strong>
+            <div style="margin-top:15px;">
 
-        <div style="margin-top:10px;">
+                <strong>Contact Patient</strong>
 
+                <div style="margin-top:10px;">
 
-{% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
+                    {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
-    <div class="patient-contact">
-    <a
-        href="https://wa.me/27{{ appointment.mobile[1:] }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-green"
-    >
-        WhatsApp Patient
-    </a>
-</div>
+                        <div class="patient-contact">
+                            <a
+                                href="https://wa.me/27{{ appointment.mobile[1:] }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn-green"
+                            >
+                                WhatsApp Patient
+                            </a>
+                        </div>
 
-<div class="appointment-contact">
-    <a
-        href="{{ whatsapp_urls[appointment.id] }}"
-        class="btn-green"
-    >
-        WhatsApp Appointment Offer
-    </a>
-</div>
-            
-{% elif appointment.contact_method == "Email" and appointment.email %}
+                        <div class="appointment-contact">
+                            <a
+                                href="{{ whatsapp_urls[appointment.id] }}"
+                                class="btn-green"
+                            >
+                                WhatsApp Appointment Offer
+                            </a>
+                        </div>
 
-    <a
-        href="{{ email_urls[appointment.id] }}"
-        class="contact-btn"
-    >
-        Email Patient
-    </a>
+                    {% elif appointment.contact_method == "Email" and appointment.email %}
 
-{% elif appointment.contact_method == "Either" %}
+                        <a
+                            href="{{ email_urls[appointment.id] }}"
+                            class="contact-btn"
+                        >
+                            Email Patient
+                        </a>
 
-    {% if appointment.email %}
+                    {% elif appointment.contact_method == "Either" %}
 
-        <a
-            href="{{ email_urls[appointment.id] }}"
-            class="btn-green"
-        >
-            Email Patient
-        </a>
+                        {% if appointment.email %}
 
-    {% endif %}
+                            <a
+                                href="{{ email_urls[appointment.id] }}"
+                                class="btn-green"
+                            >
+                                Email Patient
+                            </a>
 
-    {% if appointment.mobile %}
+                        {% endif %}
 
-        <div class="patient-contact">
-    <a
-        href="https://wa.me/27{{ appointment.mobile[1:] }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-green"
-    >
-        WhatsApp Patient
-    </a>
-</div>
+                        {% if appointment.mobile %}
 
-<div class="appointment-contact">
-    <a
-        href="{{ whatsapp_urls[appointment.id] }}"
-        class="btn-green"
-    >
-        WhatsApp Appointment Offer
-    </a>
-</div>
-            
-    {% endif %}
+                            <div class="patient-contact">
+                                <a
+                                    href="https://wa.me/27{{ appointment.mobile[1:] }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn-green"
+                                >
+                                    WhatsApp Patient
+                                </a>
+                            </div>
 
-{% endif %}
-     
-    </div>
+                            <div class="appointment-contact">
+                                <a
+                                    href="{{ whatsapp_urls[appointment.id] }}"
+                                    class="btn-green"
+                                >
+                                    WhatsApp Appointment Offer
+                                </a>
+                            </div>
 
-        <p><strong>Practice:</strong> {{ appointment.practice }}</p>
+                        {% endif %}
 
-        <p><strong>Date:</strong> {{ appointment.preferred_date }}</p>
+                    {% endif %}
 
-        <p><strong>Time:</strong> {{ appointment.preferred_time }}</p>
+                </div>
+            </div>
 
-        <p><strong>Reason:</strong> {{ appointment.reason }}</p>
+            <p>
+                <strong>Practice:</strong>
+                {{ appointment.practice }}
+            </p>
 
-{% if appointment.status == "Awaiting Payment" %}
-    <p><strong>Status:</strong>
-       <span style="color:orange;">
-           {{ appointment.status }}
-       </span>
-    </p>
-    
-{% elif appointment.status == "Paid" %}
-    <p><strong>Status:</strong>
-       <span style="color:blue;">
-           {{ appointment.status }}
-       </span>
-    </p>
+            <p>
+                <strong>Date:</strong>
+                {{ appointment.preferred_date }}
+            </p>
 
-{% elif appointment.status == "Confirmed" %}
-    <p><strong>Status:</strong>
-       <span style="color:green;">
-           {{ appointment.status }}
-       </span>
-    </p>
+            <p>
+                <strong>Time:</strong>
+                {{ appointment.preferred_time }}
+            </p>
 
-{% elif appointment.status == "Completed" %}
-    <p><strong>Status:</strong>
-       <span style="color:darkgreen;">
-           {{ appointment.status }}
-       </span>
-    </p>
+            <p>
+                <strong>Reason:</strong>
+                {{ appointment.reason }}
+            </p>
 
-{% else %}
-    <p><strong>Status:</strong> {{ appointment.status }}</p>
-{% endif %}
-        
-    <div style="margin-top:15px;">
+            {% if appointment.status == "Awaiting Payment" %}
 
-    <div class="status-buttons">
+                <p>
+                    <strong>Status:</strong>
+                    <span style="color:orange;">
+                        {{ appointment.status }}
+                    </span>
+                </p>
 
-        {% if appointment.status == "Awaiting Payment" %}
+            {% elif appointment.status == "Paid" %}
 
-            <a
-                href="/appointment-status/{{ appointment.id }}/Paid"
-                class="btn-primary"
-            >
-                Paid
-            </a>
+                <p>
+                    <strong>Status:</strong>
+                    <span style="color:blue;">
+                        {{ appointment.status }}
+                    </span>
+                </p>
 
-            <a
-                href="/appointment-status/{{ appointment.id }}/Cancelled"
-                class="btn-danger"
-            >
-                Cancelled
-            </a>
+            {% elif appointment.status == "Confirmed" %}
 
-        {% elif appointment.status == "Paid" %}
+                <p>
+                    <strong>Status:</strong>
+                    <span style="color:green;">
+                        {{ appointment.status }}
+                    </span>
+                </p>
 
-            <a
-                href="/appointment-status/{{ appointment.id }}/Confirmed"
-                class="btn-primary"
-            >
-                Confirmed
-            </a>
+            {% elif appointment.status == "Completed" %}
 
-            <a
-                href="/appointment-status/{{ appointment.id }}/Cancelled"
-                class="btn-danger"
-            >
-                Cancelled
-            </a>
+                <p>
+                    <strong>Status:</strong>
+                    <span style="color:darkgreen;">
+                        {{ appointment.status }}
+                    </span>
+                </p>
 
-         {% elif appointment.status == "Confirmed" %}
+            {% else %}
 
-             {% if appointment.contact_method == "Email" and appointment.email %}
-
-                 <a
-                     href="mailto:{{ appointment.email }}?subject={{ 'Appointment Confirmation' | urlencode }}&body={{ ('Dear ' ~ appointment.name ~ ',\n\nYour appointment with Dr Dariusz has been confirmed.\n\nPayment has been received and verified.\n\nPractice: ' ~ appointment.practice ~ '\nDate: ' ~ appointment.preferred_date ~ '\nTime: ' ~ appointment.preferred_time ~ '\n\nWe look forward to your consultation.\n\nDr Dariusz Ledzinski') | urlencode }}"
-                     class="contact-btn"
-                 >
-                     Email Confirmation
-                 </a>
-
-            {% elif appointment.contact_method == "WhatsApp" and appointment.mobile %}
-
-                <a
-                    href="{{ whatsapp_confirmation_urls[appointment.id] }}"
-                    class="btn-green"
-                >
-                    WhatsApp Confirmation
-                </a>
-
-            {% elif appointment.contact_method == "Either" %}
-
-                {% if appointment.email %}
-
-                    <a
-                        href="mailto:{{ appointment.email }}?subject={{ 'Appointment Confirmation' | urlencode }}&body={{ ('Dear ' ~ appointment.name ~ ',\n\nYour appointment with Dr Dariusz has been confirmed.\n\nPayment has been received and verified.\n\nPractice: ' ~ appointment.practice ~ '\nDate: ' ~ appointment.preferred_date ~ '\nTime: ' ~ appointment.preferred_time ~ '\n\nWe look forward to your consultation.\n\nDr Dariusz Ledzinski') | urlencode }}"
-                        class="contact-btn"
-                    >
-                        Email Confirmation
-                    </a>
-
-                {% endif %}
-
-                {% if appointment.mobile %}
-
-                    <a
-                        href="{{ whatsapp_confirmation_urls[appointment.id] }}"
-                        class="btn-green"
-                    >
-                        WhatsApp Confirmation
-                    </a>
-
-                {% endif %}
+                <p>
+                    <strong>Status:</strong>
+                    {{ appointment.status }}
+                </p>
 
             {% endif %}
 
-            <a
-                href="/appointment-status/{{ appointment.id }}/Completed"
-                class="btn-success"
-            >
-                Completed
-            </a>
+            <div style="margin-top:15px;">
 
-            <a
-                href="/appointment-status/{{ appointment.id }}/Cancelled"
-                class="btn-danger"
-            >
-                Cancelled
-            </a>
-    </div>
+                <div class="status-buttons">
 
-</div>
+                    {% if appointment.status == "Awaiting Payment" %}
+
+                        <a
+                            href="/appointment-status/{{ appointment.id }}/Paid"
+                            class="btn-primary"
+                        >
+                            Paid
+                        </a>
+
+                        <a
+                            href="/appointment-status/{{ appointment.id }}/Cancelled"
+                            class="btn-danger"
+                        >
+                            Cancelled
+                        </a>
+
+                    {% elif appointment.status == "Paid" %}
+
+                        <a
+                            href="/appointment-status/{{ appointment.id }}/Confirmed"
+                            class="btn-primary"
+                        >
+                            Confirmed
+                        </a>
+
+                        <a
+                            href="/appointment-status/{{ appointment.id }}/Cancelled"
+                            class="btn-danger"
+                        >
+                            Cancelled
+                        </a>
+
+                    {% elif appointment.status == "Confirmed" %}
+
+                        {% if appointment.contact_method == "Email" and appointment.email %}
+
+                            <a
+                                href="mailto:{{ appointment.email }}?subject={{ 'Appointment Confirmation' | urlencode }}&body={{ ('Dear ' ~ appointment.name ~ ',\n\nYour appointment with Dr Dariusz has been confirmed.\n\nPayment has been received and verified.\n\nPractice: ' ~ appointment.practice ~ '\nDate: ' ~ appointment.preferred_date ~ '\nTime: ' ~ appointment.preferred_time ~ '\n\nWe look forward to your consultation.\n\nDr Dariusz Ledzinski') | urlencode }}"
+                                class="contact-btn"
+                            >
+                                Email Confirmation
+                            </a>
+
+                        {% elif appointment.contact_method == "WhatsApp" and appointment.mobile %}
+
+                            <a
+                                href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+                                class="btn-green"
+                            >
+                                WhatsApp Confirmation
+                            </a>
+
+                        {% elif appointment.contact_method == "Either" %}
+
+                            {% if appointment.email %}
+
+                                <a
+                                    href="mailto:{{ appointment.email }}?subject={{ 'Appointment Confirmation' | urlencode }}&body={{ ('Dear ' ~ appointment.name ~ ',\n\nYour appointment with Dr Dariusz has been confirmed.\n\nPayment has been received and verified.\n\nPractice: ' ~ appointment.practice ~ '\nDate: ' ~ appointment.preferred_date ~ '\nTime: ' ~ appointment.preferred_time ~ '\n\nWe look forward to your consultation.\n\nDr Dariusz Ledzinski') | urlencode }}"
+                                    class="contact-btn"
+                                >
+                                    Email Confirmation
+                                </a>
+
+                            {% endif %}
+
+                            {% if appointment.mobile %}
+
+                                <a
+                                    href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+                                    class="btn-green"
+                                >
+                                    WhatsApp Confirmation
+                                </a>
+
+                            {% endif %}
+
+                        {% endif %}
+
+                        <a
+                            href="/appointment-status/{{ appointment.id }}/Completed"
+                            class="btn-success"
+                        >
+                            Completed
+                        </a>
+
+                        <a
+                            href="/appointment-status/{{ appointment.id }}/Cancelled"
+                            class="btn-danger"
+                        >
+                            Cancelled
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
 
         </div>
-
-    </div>
 
     {% endfor %}
 
