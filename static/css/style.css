@@ -62,37 +62,42 @@ body {
 
     margin-bottom: 16px;
 
-}
 .hero-premium {
 
     width: 90%;
+    max-width: 1200px;
+    min-height: 520px;
 
-    max-width: 900px;
-
-    min-height: 320px;
-
-    margin: 28px auto 16px auto;
-
-    justify-content: center;
+    margin: 28px auto 30px auto;
 
     position: relative;
-
     overflow: hidden;
 
     border-radius: 28px;
 
-    padding: 28px 40px;
-
-    background: linear-gradient(135deg, #111827, #1e293b);
-
     display: flex;
+    align-items: center;
 
-    align-items: flex-start;
+    padding: 50px 60px;
+
+    box-sizing: border-box;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.96) 0%,
+            rgba(255,255,255,0.88) 42%,
+            rgba(255,255,255,0.10) 70%,
+            rgba(255,255,255,0.00) 100%
+        ),
+        url("/static/images/telemedicine-hero.png");
+
+    background-size: cover;
+    background-position: center;
 
     box-shadow: 0 20px 45px rgba(0,0,0,0.12);
 
 }
-
 .hero-overlay {
 
     max-width: 900px;
