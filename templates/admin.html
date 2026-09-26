@@ -168,7 +168,7 @@
     {% if consultation.contact_method == "Email" and consultation.email %}
 
         <a
-            href="mailto:{{ consultation.email }}"
+            href="mailto:{{ consultation.email }}?subject={{ 'Consultation Request' | urlencode }}&body={{ ('Good day ' ~ consultation.name ~ ',\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
             class="contact-btn"
         >
             Email Patient
