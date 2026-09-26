@@ -165,47 +165,46 @@
         <div class="detail-row">
             <span class="value contact-actions">
 
-    {% if consultation.contact_method == "Email" and consultation.email %}
+   {% if consultation.contact_method == "Email" and consultation.email %}
 
-        <a
-            href="mailto:{{ consultation.email }}?subject={{ 'Consultation Request' | urlencode }}&body={{ ('Good day ' ~ consultation.name ~ ',\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
-            class="contact-btn"
-        >
-            Email Patient
-        </a>
+       <a
+           href="mailto:{{ consultation.email }}?subject={{ 'Consultation Request' | urlencode }}&body={{ ('Good day ' ~ consultation.name ~ ',\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
+           class="contact-btn"
+       >
+           Email Patient
+       </a>
 
-    {% elif consultation.contact_method == "WhatsApp" and consultation.mobile %}
+   {% elif consultation.contact_method == "WhatsApp" and consultation.mobile %}
 
+       <a
+           href="whatsapp://send?phone=27{{ consultation.mobile[1:] }}&text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
+           class="contact-btn"
+       >
+           WhatsApp Patient
+       </a>
+
+   {% elif consultation.contact_method == "Either" %}
+
+       {% if consultation.email %}
+           <a
+               href="mailto:{{ consultation.email }}?subject={{ 'Consultation Request' | urlencode }}&body={{ ('Good day ' ~ consultation.name ~ ',\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
+               class="contact-btn"
+           >
+               Email Patient
+           </a>
+                
+       {% endif %}
+
+    {% if consultation.mobile %}
         <a
             href="whatsapp://send?phone=27{{ consultation.mobile[1:] }}&text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
             class="contact-btn"
         >
             WhatsApp Patient
         </a>
-
-    {% elif consultation.contact_method == "Either" %}
-
-        {% if consultation.email %}
-            <a
-                href="mailto:{{ consultation.email }}"
-                class="contact-btn"
-            >
-                Email Patient
-            </a>
-        {% endif %}
-
-        {% if consultation.mobile %}
-            <a
-                href="whatsapp://send?phone=27{{ consultation.mobile[1:] }}&text={{ ('Good day ' ~ consultation.name ~ '.\n\nThank you for contacting Dr Dariusz Consulting. I have received your consultation request and will review the information you provided. I will respond to you shortly regarding the consultation and the next steps.\n\nKind regards,\nDr Dariusz') | urlencode }}"
-                class="contact-btn"
-            >
-                WhatsApp Patient
-            </a>
-                
-        {% endif %}
-
     {% endif %}
 
+{% endif %}
 </span>
              </span>
          </div> 
