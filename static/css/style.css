@@ -1268,6 +1268,99 @@ textarea:focus {
     margin-top: 4px;
 }
 
+/* =========================================================
+   CONSULTATION PAGE - INTRODUCTORY VISUAL
+   ========================================================= */
+
+.consultation-visual {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 36px;
+    align-items: center;
+
+    margin: 30px 0 34px 0;
+    padding: 24px;
+
+    background: #f7f9fb;
+    border: 1px solid #e1e7ef;
+    border-radius: 20px;
+
+    box-sizing: border-box;
+}
+
+.consultation-visual-image {
+    width: 100%;
+    height: 330px;
+
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.consultation-visual-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.consultation-visual-text {
+    padding: 10px 18px 10px 4px;
+}
+
+.consultation-visual-text h2 {
+    margin: 0 0 18px 0;
+
+    color: #1e293b;
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.consultation-visual-text p {
+    margin: 0 0 16px 0;
+
+    color: #475569;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.consultation-visual-text p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Mobile layout */
+
+@media (max-width: 768px) {
+
+    .consultation-visual {
+        grid-template-columns: 1fr;
+        gap: 22px;
+
+        padding: 16px;
+        margin-top: 24px;
+    }
+
+    .consultation-visual-image {
+        height: 260px;
+    }
+
+    .consultation-visual-text {
+        padding: 4px 6px 8px 6px;
+    }
+
+    .consultation-visual-text h2 {
+        font-size: 25px;
+    }
+
+    .consultation-visual-text p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}
+
 
 
 
