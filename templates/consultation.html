@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Consultation{% endblock %}
@@ -13,8 +14,33 @@
         <p class="consultation-intro">
             Please provide your details and medical concerns below.
             All consultations are handled confidentially and professionally.
+<div class="consultation-visual">
+
+    <div class="consultation-visual-image">
+        <img
+            src="{{ url_for('static', filename='images/consultation-telemedicine.png') }}"
+            alt="Private online gynaecological consultation"
+        >
+    </div>
+
+    <div class="consultation-visual-text">
+
+        <h2>Personalised Gynaecological Care</h2>
+
+        <p>
+            Your consultation provides an opportunity to discuss your
+            concerns privately and comfortably from wherever you are.
         </p>
 
+        <p>
+            Your information is reviewed personally by Dr Dariusz,
+            with appropriate guidance and next steps discussed with you.
+        </p>
+
+    </div>
+
+</div>
+           
         <div class="fee-notice">
             <strong>Consultation Fee: R 500</strong>
         <p>
