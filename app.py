@@ -789,6 +789,8 @@ def delete_consultation(id):
 @app.route("/clear-consultations", methods=["POST"])
 def clear_consultations():
 
+    logger.info("CLEAR CONSULTATIONS ROUTE REACHED")
+
     if not session.get(
         "admin_logged_in"
     ):
@@ -807,8 +809,11 @@ def clear_consultations():
             """
         )
 
+        logger.info("ALL CONSULTATIONS DELETE EXECUTED")
+
         conn.commit()
 
+        logger.info("ALL CONSULTATIONS DELETE COMMITTED"
     except Exception:
 
         conn.rollback()
