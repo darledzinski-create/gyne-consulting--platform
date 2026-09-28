@@ -8,6 +8,7 @@
 
     max-width:1600px;
 
+
     margin:40px auto;
 
     padding:30px;
@@ -498,4 +499,66 @@ grid-template-columns:1fr;
 
 }
 
+}
+
+/* =========================================================
+   HOMEPAGE - TRUST BAR
+   ========================================================= */
+
+.trust-bar {
+    width: 90%;
+    max-width: 1020px;
+
+    margin: 0 auto 38px auto;
+    padding: 18px 24px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+
+    background: #ffffff;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+
+    box-sizing: border-box;
+}
+
+.trust-bar div {
+    text-align: center;
+
+    padding: 4px 18px;
+
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.trust-bar div + div {
+    border-left: 1px solid #e2e8f0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .trust-bar {
+        width: 90%;
+        grid-template-columns: 1fr;
+        gap: 12px;
+
+        padding: 16px;
+    }
+
+    .trust-bar div {
+        padding: 8px 10px;
+    }
+
+    .trust-bar div + div {
+        border-left: none;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 14px;
+    }
 }
