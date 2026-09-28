@@ -1,6 +1,3 @@
-
-
-
 from flask import (
     Flask,
     request,
@@ -784,6 +781,43 @@ def delete_consultation(id):
 
     cursor.close()
     conn.close()
+
+    return redirect(
+        url_for("admin")
+    )
+
+@app.route("/clear-consultations", methods=["POST"])
+def clear_consultations():
+
+    if not session.get(
+        "admin_logged_in"
+    ):
+        return redirect(
+            url_for("login")
+        )
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute(
+            """
+            DELETE FROM consultations
+            """
+        )
+
+        conn.commit()
+
+    except Exception:
+
+        conn.rollback()
+        raise
+
+    finally:
+
+        cursor.close()
+        conn.close()
 
     return redirect(
         url_for("admin")
