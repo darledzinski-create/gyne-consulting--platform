@@ -1,4 +1,4 @@
-from flask import (
+)from flask import (
     Flask,
     request,
     redirect,
@@ -813,7 +813,7 @@ def clear_consultations():
 
         conn.commit()
 
-        logger.info("ALL CONSULTATIONS DELETE COMMITTED"
+        logger.info("ALL CONSULTATIONS DELETE COMMITTED")
     except Exception:
 
         conn.rollback()
