@@ -124,6 +124,28 @@
 
         </div>
 
+        <div style="margin: 20px 0; text-align: right;">
+
+    <form
+        method="POST"
+        action="/clear-consultations"
+        onsubmit="return confirm(
+            'Are you sure you want to permanently delete ALL consultation records? This cannot be undone.'
+        );"
+    >
+
+        <button
+            type="submit"
+            class="contact-btn"
+            style="background:#b91c1c; border-color:#b91c1c;"
+        >
+            Clear All Consultation Records
+        </button>
+
+    </form>
+
+</div>
+
         <!-- Consultation Cards -->
 
         <div class="cards-grid">
