@@ -1,3 +1,4 @@
+
 from flask import (
     Flask,
     request,
@@ -1230,6 +1231,41 @@ def update_status(
 
     return redirect(
         url_for("admin")
+    )
+
+@app.route("/delete-appointment/<int:id>")
+def delete_appointment(id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute(
+            """
+            DELETE FROM appointments
+            WHERE id = %s
+            """,
+            (id,)
+        )
+
+        conn.commit()
+
+    except Exception:
+
+        conn.rollback()
+        raise
+
+    finally:
+
+        cursor.close()
+        conn.close()
+
+    return redirect(
+        url_for("appointments")
     )
 
 @app.route(
