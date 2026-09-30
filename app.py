@@ -1409,3 +1409,46 @@ def appointment_status(
     return redirect(
         url_for("appointments")
     )
+
+@app.route("/clear-appointments", methods=["POST"])
+def clear_appointments():
+
+    logger.info("CLEAR APPOINTMENTS ROUTE REACHED")
+
+    if not session.get(
+        "admin_logged_in"
+    ):
+        return redirect(
+            url_for("login")
+        )
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+
+        cursor.execute(
+            """
+            DELETE FROM appointments
+            """
+        )
+
+        logger.info("ALL APPOINTMENTS DELETE EXECUTED")
+
+        conn.commit()
+
+        logger.info("ALL APPOINTMENTS DELETE COMMITTED")
+
+    except Exception:
+
+        conn.rollback()
+        raise
+
+    finally:
+
+        cursor.close()
+        conn.close()
+
+    return redirect(
+        url_for("appointments")
+    )
