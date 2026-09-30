@@ -20,8 +20,32 @@
         </button>
     </form>
 
-    <div class="cards-grid">
+    <form
+        method="POST"
+        action="/clear-appointments"
+        onsubmit="return confirm(
+            'Are you sure you want to permanently delete ALL appointment records? This cannot be undone.'
+        );"
+        style="margin-bottom:20px;"
+    >
 
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="{{ csrf_token() }}"
+        >
+
+        <button
+            type="submit"
+            class="contact-btn"
+            style="background:#b91c1c; border-color:#b91c1c;"
+        >
+            Clear All Appointment Records
+        </button>
+
+    </form>
+
+    <div class="cards-grid">
     {% for appointment in appointments %}
 
         <div class="feature-card" style="margin-bottom:25px;">
