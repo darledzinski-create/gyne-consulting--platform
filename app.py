@@ -980,11 +980,13 @@ def appointments():
         ""
     ).strip().lower()
 
-    logger.info(
+        logger.info(
         f"Search term: {search}"
     )
 
-    cursor.execute(
+    if search:
+
+        cursor.execute(
             """
             SELECT *
             FROM appointments
@@ -999,11 +1001,6 @@ def appointments():
         )
 
         appointments = cursor.fetchall()
-
-        print(
-            "RAW APPOINTMENTS =",
-            appointments
-        )
 
     else:
 
