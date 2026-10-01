@@ -13,7 +13,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from urllib.parse import quote
 import os
-import csv
+import cvs
 import io
 import logging
 
@@ -24,7 +24,6 @@ from database import (
 )
 
 from mail import (
-    send_email,
     send_appointment_email,
     send_appointment_confirmation_email,
     send_consultation_email
@@ -45,7 +44,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 logger.info(f"Starting Dr Dariusz Consulting v{APP_VERSION}")
 
-ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 
@@ -160,8 +159,7 @@ def consultation():
             )
 
             logger.info(
-                f"Consultation saved for "
-                f"{name} ({email})"
+                "Consultation record saved successfully."
             )
 
             # ----------------------------
@@ -238,118 +236,9 @@ Message:
 
 """
 
-            else:
-
-                logger.warning(
-                    f"Unknown urgency value: "
-                    f"{urgency_clean!r}"
-                )
-
-                return "Invalid submission", 400
-
-            # ----------------------------
-            # Send emails
-            # ----------------------------
-
-            logger.info(
-                "Sending doctor consultation email"
-            )
-
-            send_consultation_email(
-                "darledzinski@gmail.com",
-                "Consultation System",
-                subject,
-                doctor_text
-            )
-
-            if contact_method == "Email":
-
-                logger.info(
-                    "Sending patient confirmation email"
-                )
-
-                send_consultation_email(
-                    email,
-                    "Dr Darius",
-                    subject,
-                    patient_text
-                )
-
-            elif contact_method == "WhatsApp":
-
-                logger.info(
-                    "Patient selected WhatsApp - "
-                    "no patient confirmation email sent"
-                )
-
-            elif contact_method == "Either":
-
-                logger.info(
-                    "Patient selected Either - "
-                    "sending patient confirmation email"
-                )
-
-                send_consultation_email(
-                    email,
-                    "Dr Darius",
-                    subject,
-                    patient_text
-                )
-
-            logger.info(
-                f"Consultation workflow completed "
-                f"for {email}"
-            )
-
-            return redirect(
-                
-                url_for(
-                    "thank_you",
-                    urgency=urgency_clean
-                )
-            )
-            
-        except Exception as e:
-
-            logger.exception(
-                f"Consultation route failed: {e}"
-            )
-
-            return "Something went wrong", 500
-
-    return render_template(
-        "consultation.html"
-    )
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-
-    if request.method == "POST":
-
-        password = request.form.get(
-            "password"
-        )
-
-        if password == ADMIN_PASSWORD:
-
-            session["admin_logged_in"] = True
-
-            return redirect(
-                url_for("admin")
-            )
-
-        return render_template(
-            "login.html",
-            error="Incorrect password."
-        )
-
-    return render_template(
-        "login.html"
-    )
-
-
-@app.route("/logout")
+           logger.info(
+    "Consultation workflow completed successfully."
+)
 def logout():
 
     session.pop(
@@ -396,26 +285,7 @@ def update_notes(id):
         )
     )
 
-    cursor.execute(
-        """
-        SELECT COUNT(*)
-        FROM consultations
-        WHERE urgency = 'urgent'
-        """
-    )
-
-    urgent_count = cursor.fetchone()[0]
-
-    cursor.execute(
-        """
-        SELECT COUNT(*)
-        FROM consultations
-        WHERE urgency = 'not_urgent'
-        """
-    )
-
-    non_urgent_count = cursor.fetchone()[0]
-
+   
     conn.commit()
 
     cursor.close()
@@ -538,11 +408,7 @@ def admin():
         ""
     ).strip().lower()
 
-    print(
-        "SEARCH TERM =",
-        search
-    )
-
+   
     if search and status_filter:
 
         cursor.execute(
@@ -712,34 +578,6 @@ def admin():
     cursor.close()
     conn.close()
 
-    print(
-        "RESULT COUNT =",
-        len(consultations)
-    )
-
-    for row in consultations:
-
-        print(
-            "FOUND:",
-            row["name"],
-            row["email"]
-        )
-
-    print(
-        "TOTAL CONSULTATIONS =",
-        total_count
-    )
-
-    print(
-        "CONSULTATIONS OBJECT =",
-        consultations
-    )
-
-    print(
-        "LENGTH =",
-        len(consultations)
-    )
-
     return render_template(
         "admin.html",
         consultations=consultations,
@@ -873,15 +711,7 @@ def offer_appointment(
 
         return "Consultation not found", 404
 
-    logger.info(
-        f"Appointment source mobile: "
-        f"{consultation['mobile']}"
-    )
-
-    logger.info(
-        f"Appointment source contact method: "
-        f"{consultation['contact_method']}"
-    )
+    
 
     if request.method == "POST":
 
@@ -925,20 +755,7 @@ def offer_appointment(
                 "Patient selected WhatsApp - "
                 "no automatic appointment email sent"
             )
-        cursor.execute(
-            """
-            SELECT COUNT(*)
-            FROM appointments
-            """
-        )
-
-        count = cursor.fetchone()[0]
-
-        logger.info(
-            f"Appointments after insert: "
-            f"{count}"
-        )
-
+        
         cursor.close()
         conn.close()
 
@@ -980,10 +797,6 @@ def appointments():
         ""
     ).strip().lower()
 
-    logger.info(
-        f"Search term: {search}"
-    )
-
     if search:
 
         cursor.execute(
@@ -1013,48 +826,6 @@ def appointments():
         )
 
         appointments = cursor.fetchall()
-
-        cursor.execute(
-            """
-            SELECT COUNT(*)
-            FROM appointments
-            """
-        )
-
-        count = cursor.fetchone()[0]
-
-        logger.info(
-            f"Appointments in database: "
-            f"{count}"
-        )
-
-        logger.info(
-            f"Appointments found: "
-            f"{len(appointments)}"
-        )
-
-        for appointment in appointments:
-
-            logger.info(
-                f"Appointment: "
-                f"{appointment['name']}"
-            )
-
-            logger.info(
-                f"Appointment mobile: "
-                f"{appointment['mobile']}"
-            )
-
-            logger.info(
-                f"Appointment contact method: "
-                f"{appointment['contact_method']}"
-            )
-
-            logger.info(
-                f"Appointment email: "
-                f"{appointment['email']}"
-            )
-
     whatsapp_urls = {}
 
     email_urls = {}
@@ -1315,13 +1086,6 @@ def appointment_status(
         return "Appointment not found", 404
 
     old_status = appointment["status"]
-
-    logger.info(
-        f"Appointment {id} contact method: "
-        f"{appointment['contact_method']}"
-    
-    )
-
     cursor.execute(
         """
         UPDATE appointments
@@ -1393,8 +1157,6 @@ def appointment_status(
 
 @app.route("/clear-appointments", methods=["POST"])
 def clear_appointments():
-
-    logger.info("CLEAR APPOINTMENTS ROUTE REACHED")
 
     if not session.get(
         "admin_logged_in"
