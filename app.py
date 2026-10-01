@@ -236,9 +236,9 @@ Message:
 
 """
 
-           logger.info(
-    "Consultation workflow completed successfully."
-)
+            logger.info(
+                "Consultation workflow completed successfully."
+            )
 def logout():
 
     session.pop(
