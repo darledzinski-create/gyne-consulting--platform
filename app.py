@@ -984,7 +984,7 @@ def appointments():
         f"Search term: {search}"
     )
 
-        cursor.execute(
+    cursor.execute(
             """
             SELECT *
             FROM appointments
