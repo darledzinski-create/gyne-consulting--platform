@@ -236,10 +236,10 @@ Message:
 
 """
 
-            logger.info(
+    logger.info(
                 "Consultation workflow completed successfully."
-            )
-def logout():
+    )
+    def logout():
 
     session.pop(
         "admin_logged_in",
