@@ -975,7 +975,7 @@ def appointments():
         ).DictCursor
     )
 
-       search = request.args.get(
+    search = request.args.get(
         "search",
         ""
     ).strip().lower()
