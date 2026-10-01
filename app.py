@@ -984,22 +984,6 @@ def appointments():
         f"Search term: {search}"
     )
 
-    cursor.execute(
-        """
-        SELECT name
-        FROM appointments
-        """
-    )
-
-    all_names = cursor.fetchall()
-
-    print(
-        "ALL APPOINTMENT NAMES =",
-        [row["name"] for row in all_names]
-    )
-
-    if search:
-
         cursor.execute(
             """
             SELECT *
