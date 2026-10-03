@@ -236,10 +236,59 @@ Message:
 
 """
 
-    logger.info(
+            logger.info(
                 "Consultation workflow completed successfully."
+            )
+
+            return redirect(
+                url_for(
+                    "thank_you",
+                    urgency=urgency_clean
+                )
+            )
+
+        except Exception as e:
+
+            logger.exception(
+                f"Consultation route failed: {e}"
+            )
+
+            return "Something went wrong", 500
+
+    return render_template(
+        "consultation.html"
     )
-    def logout():
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        password = request.form.get(
+            "password"
+        )
+
+        if password == ADMIN_PASSWORD:
+
+            session["admin_logged_in"] = True
+
+            return redirect(
+                url_for("admin")
+            )
+
+        return render_template(
+            "login.html",
+            error="Incorrect password."
+        )
+
+    return render_template(
+        "login.html"
+    )
+
+
+@app.route("/logout")
+def logout():
 
     session.pop(
         "admin_logged_in",
@@ -249,7 +298,6 @@ Message:
     return redirect(
         url_for("login")
     )
-
 
 @app.route(
     "/update-notes/<int:id>",
