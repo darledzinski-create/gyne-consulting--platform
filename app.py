@@ -1,4 +1,4 @@
-
+F
 from flask import (
     Flask,
     request,
@@ -235,6 +235,27 @@ Message:
 {message}
 
 """
+            logger.info(
+                "Sending doctor consultation email"
+            )
+
+            send_consultation_email(
+                "darledzinski@gmail.com",
+                "Consultation System",
+                subject,
+                doctor_text
+            )
+
+            logger.info(
+                "Sending patient confirmation email"
+            )
+
+            send_consultation_email(
+                email,
+                "Dr Dariusz",
+                subject,
+                patient_text
+            )
 
             logger.info(
                 "Consultation workflow completed successfully."
