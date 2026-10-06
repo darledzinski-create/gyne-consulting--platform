@@ -100,44 +100,35 @@
                             Email Patient
                         </a>
 
-                    {% elif appointment.contact_method == "Either" %}
+{% elif appointment.contact_method == "Either" %}
 
-                        {% if appointment.email %}
+    {% if appointment.email %}
 
-                            <a
-                                href="{{ email_urls[appointment.id] }}"
-                                class="btn-green"
-                            >
-                                Email Appointment Offer
-                            </a>
+        <div class="appointment-contact">
+            <a
+                href="{{ email_urls[appointment.id] }}"
+                class="btn-green"
+            >
+                Email Appointment Offer
+            </a>
+        </div>
 
-                        {% endif %}
+    {% endif %}
 
-                        {% if appointment.mobile %}
+    {% if appointment.mobile %}
 
-                            <div class="patient-contact">
-                                <a
-                                    href="https://wa.me/27{{ appointment.mobile[1:] }}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="btn-green"
-                                >
-                                    WhatsApp Patient
-                                </a>
-                            </div>
+        <div class="appointment-contact">
+            <a
+                href="{{ whatsapp_urls[appointment.id] }}"
+                class="btn-green"
+            >
+                WhatsApp Appointment Offer
+            </a>
+        </div>
 
-                            <div class="appointment-contact">
-                                <a
-                                    href="{{ whatsapp_urls[appointment.id] }}"
-                                    class="btn-green"
-                                >
-                                    WhatsApp Appointment Offer
-                                </a>
-                            </div>
-
-                        {% endif %}
-
-                    {% endif %}
+    {% endif %}
+                    
+            {% endif %}
 
                 </div>
             </div>
