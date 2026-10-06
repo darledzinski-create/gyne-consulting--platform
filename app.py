@@ -943,15 +943,20 @@ Dr Dariusz Ledzinski"""
     Date: {appointment['preferred_date']}
     Time: {appointment['preferred_time']}
 
-    Consultation fee: R 500.
+Consultation fee: R 500.
+PAYMENT BY EFT
 
-    Please make payment by EFT and send your proof of payment.
+Bank: GoTyme
+Account holder: Dariusz Ledzinski
+Account number: 510 1312 9386
 
-    Your appointment will be confirmed once payment has been received and verified.
+Please make payment by EFT and send your proof of payment.
 
-    If you need any changes to the appointment, please contact us.
+Your appointment will be confirmed once payment has been received and verified.
 
-    Dr Dariusz Ledzinski"""
+If you need any changes to the appointment, please contact us.
+
+Dr Dariusz Ledzinski"""
 
                 email_urls[appointment["id"]] = (
                     f"mailto:{appointment['email']}"
