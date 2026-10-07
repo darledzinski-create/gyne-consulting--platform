@@ -1,3 +1,4 @@
+
 from mailjet_rest import Client
 import os
 import base64
@@ -129,6 +130,53 @@ Dr Dariusz Ledzinski
                     }
                 ],
                 "Subject": "Appointment Offer",
+                "TextPart": patient_text
+            }
+        ]
+    }
+
+    return send_email(data)
+
+def send_appointment_confirmation_email(
+    patient_email,
+    patient_name,
+    practice,
+    date,
+    time,
+    reason
+):
+    patient_text = f"""
+Dear {patient_name},
+
+Your appointment has been confirmed.
+
+Practice: {practice}
+Date: {date}
+Time: {time}
+
+Reason:
+{reason}
+
+Payment has been received and verified.
+
+We look forward to seeing you.
+
+Dr Dariusz Ledzinski
+"""
+
+    data = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": "contact@drdariuszconsults.com",
+                    "Name": "Dr Dariusz"
+                },
+                "To": [
+                    {
+                        "Email": patient_email
+                    }
+                ],
+                "Subject": "Appointment Confirmed",
                 "TextPart": patient_text
             }
         ]
