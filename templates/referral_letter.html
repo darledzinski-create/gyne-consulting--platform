@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Referral Letter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Referral Letter</h2>
+
+    <hr>
+
+    <h3>
+        DR. DARIUSZ LEDZINSKI, MD, M Med (Obs & Gyne)
+    </h3>
+
+    <p>
+        HPCSA: MP0249688 |
+        Practice No.: 1605690
+    </p>
+
+    <p>
+        Email: consult@drdariusz.online |
+        Phone: +27 820478579
+    </p>
+
+    <hr>
+
+    <h2>REFERRAL LETTER</h2>
+
+    <p>
+        <strong>Date:</strong>
+        __________________________
+    </p>
+
+    <p>
+        <strong>To:</strong>
+        {{ referred_to }}
+    </p>
+
+    <p>
+        Dear Colleague,
+    </p>
+
+    <p>
+        I am referring the following patient for further
+        assessment and management:
+    </p>
+
+    <p>
+        <strong>Patient Name:</strong>
+        {{ patient_name }}
+    </p>
+
+    <p>
+        <strong>Age:</strong>
+        {{ age }}
+    </p>
+
+    <p>
+        <strong>Contact:</strong>
+        {{ contact }}
+    </p>
+
+    <h3>Reason for Referral</h3>
+
+    <p>
+        {{ reason }}
+    </p>
+
+    <h3>Relevant History / Findings</h3>
+
+    <p>
+        {{ history }}
+    </p>
+
+    <br>
+
+    <p>
+        Yours sincerely,
+    </p>
+
+    <br>
+
+    <p>
+        <strong>Dr. Dariusz Ledzinski</strong>
+    </p>
+
+    <p>
+        Signature: ____________________________
+    </p>
+
+    <br>
+
+    <button
+        type="button"
+        onclick="window.print()"
+        class="btn-primary">
+
+        Print / Save Referral Letter
+
+    </button>
+
+    <a
+        href="/admin"
+        class="btn-secondary">
+
+        Return to Consultation Records
+
+    </a>
+
+</div>
+
+</body>
+
+</html>
