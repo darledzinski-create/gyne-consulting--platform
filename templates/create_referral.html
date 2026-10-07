@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Referral Letter</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Create Referral Letter</h2>
+
+        <p>
+            Prepare the referral letter for
+            <strong>{{ consultation.name }}</strong>.
+        </p>
+
+
+        <form method="POST"
+              action="/create-referral/{{ consultation.id }}">
+
+            <input type="hidden"
+                   name="csrf_token"
+                   value="{{ csrf_token() }}">
+
+
+            <h3>Patient Information</h3>
+
+            <label>Patient Name</label>
+
+            <input type="text"
+                   name="patient_name"
+                   value="{{ consultation.name }}"
+                   required>
+
+
+            <label>Age</label>
+
+            <input type="text"
+                   name="age">
+
+
+            <label>Contact</label>
+
+            <input type="text"
+                   name="contact"
+                   value="{{ consultation.mobile or '' }}">
+
+
+            <h3>Referral Information</h3>
+
+            <label>To: Specialist / Hospital</label>
+
+            <input type="text"
+                   name="referred_to"
+                   required>
+
+
+            <label>Reason for Referral</label>
+
+            <textarea name="reason"
+                      rows="5"
+                      required></textarea>
+
+
+            <label>Relevant History / Findings</label>
+
+            <textarea name="history"
+                      rows="8"></textarea>
+
+
+            <br>
+
+
+            <button type="submit"
+                    class="btn-primary">
+
+                Generate Referral Letter
+
+            </button>
+
+
+            <a href="/admin"
+               class="btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
