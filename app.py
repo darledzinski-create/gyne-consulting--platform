@@ -660,6 +660,93 @@ def admin():
         total_pages=total_pages
     )
 
+@app.route("/create-referral/<int:id>", methods=["GET", "POST"])
+def create_referral(id):
+
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
+
+    conn = get_db_connection()
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM consultations
+        WHERE id = %s
+        """,
+        (id,)
+    )
+
+    consultation = cursor.fetchone()
+
+    if not consultation:
+
+        cursor.close()
+        conn.close()
+
+        return "Consultation not found", 404
+
+    if request.method == "POST":
+
+        patient_name = request.form.get(
+            "patient_name",
+            ""
+        ).strip()
+
+        age = request.form.get(
+            "age",
+            ""
+        ).strip()
+
+        contact = request.form.get(
+            "contact",
+            ""
+        ).strip()
+
+        referred_to = request.form.get(
+            "referred_to",
+            ""
+        ).strip()
+
+        reason = request.form.get(
+            "reason",
+            ""
+        ).strip()
+
+        history = request.form.get(
+            "history",
+            ""
+        ).strip()
+
+        cursor.close()
+        conn.close()
+
+        return render_template(
+            "referral_letter.html",
+            consultation=consultation,
+            patient_name=patient_name,
+            age=age,
+            contact=contact,
+            referred_to=referred_to,
+            reason=reason,
+            history=history
+        )
+
+    cursor.close()
+    conn.close()
+
+    return render_template(
+        "create_referral.html",
+        consultation=consultation
+    )
+
 
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
