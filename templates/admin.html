@@ -311,32 +311,52 @@
 
             </div>
 
-         <form method="POST"
-               action="/update-notes/{{ consultation.id }}">
 
-             <input type="hidden"
-                    name="csrf_token"
-                    value="{{ csrf_token() }}">
+<form method="POST"
+      action="/update-notes/{{ consultation.id }}">
 
-             <div class="notes-section">
+    <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
 
-                 <h4>Doctor Notes</h4>
+    <div class="notes-section">
 
-                 <textarea name="doctor_notes"
-                           rows="6">{{ consultation.doctor_notes or '' }}</textarea>
+        <h4>Doctor Notes</h4>
 
-             </div>
+        <textarea name="doctor_notes"
+                  rows="6">{{ consultation.doctor_notes or '' }}</textarea>
 
-             <button type="submit"
-                     class="btn-primary">
+    </div>
 
-                 Save Notes
+    <button type="submit"
+            class="btn-primary">
 
-             </button>
+        Save Notes
 
-         </form>
+    </button>
 
-         <div class="status-buttons">
+</form>
+
+
+<div class="document-actions">
+
+    <a href="/create-referral/{{ consultation.id }}"
+       class="btn-primary">
+
+        Create Referral Letter
+
+    </a>
+
+    <a href="/create-prescription/{{ consultation.id }}"
+       class="btn-primary">
+
+        Create Prescription
+
+    </a>
+
+</div>
+
+            <div class="status-buttons">
 
              <a href="/update-status/{{ consultation.id }}/New"
                 class="btn-primary">
