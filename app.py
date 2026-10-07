@@ -15,6 +15,8 @@ import os
 import csv
 import io
 import logging
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
 
 from database import (
     get_db_connection,
