@@ -1,6 +1,7 @@
 from mailjet_rest import Client
 import os
-
+import base
+64
 
 mailjet = Client(
     auth=(
@@ -136,32 +137,17 @@ Dr Dariusz Ledzinski
     return send_email(data)
 
 
-def send_appointment_confirmation_email(
+def send_pdf_email(
     patient_email,
     patient_name,
-    practice,
-    date,
-    time,
-    reason
+    subject,
+    message,
+    pdf_bytes,
+    filename
 ):
-    patient_text = f"""
-Dear {patient_name},
-
-Your appointment has been confirmed.
-
-Practice: {practice}
-Date: {date}
-Time: {time}
-
-Reason:
-{reason}
-
-Payment has been received and verified.
-
-We look forward to seeing you.
-
-Dr Dariusz Ledzinski
-"""
+    encoded_pdf = base64.b64encode(
+        pdf_bytes
+    ).decode("utf-8")
 
     data = {
         "Messages": [
@@ -172,11 +158,19 @@ Dr Dariusz Ledzinski
                 },
                 "To": [
                     {
-                        "Email": patient_email
+                        "Email": patient_email,
+                        "Name": patient_name
                     }
                 ],
-                "Subject": "Appointment Confirmed",
-                "TextPart": patient_text
+                "Subject": subject,
+                "TextPart": message,
+                "Attachments": [
+                    {
+                        "ContentType": "application/pdf",
+                        "Filename": filename,
+                        "Base64Content": encoded_pdf
+                    }
+                ]
             }
         ]
     }
