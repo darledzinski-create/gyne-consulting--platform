@@ -1,7 +1,7 @@
 from mailjet_rest import Client
 import os
-import base
-64
+import base64
+
 
 mailjet = Client(
     auth=(
