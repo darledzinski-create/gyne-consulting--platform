@@ -105,23 +105,55 @@
 
     <br>
 
-    <button
-        type="button"
-        onclick="window.print()"
-        class="btn-primary">
+   <form method="POST"
+      action="/generate-referral-pdf/{{ consultation.id }}">
 
-        Print / Save Referral Letter
+    <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+
+    <input type="hidden"
+           name="patient_name"
+           value="{{ patient_name }}">
+
+    <input type="hidden"
+           name="age"
+           value="{{ age }}">
+
+    <input type="hidden"
+           name="contact"
+           value="{{ contact }}">
+
+    <input type="hidden"
+           name="referred_to"
+           value="{{ referred_to }}">
+
+    <input type="hidden"
+           name="reason"
+           value="{{ reason }}">
+
+    <input type="hidden"
+           name="history"
+           value="{{ history }}">
+
+    <button type="submit"
+            class="btn-primary">
+
+        Generate PDF
 
     </button>
 
-    <a
-        href="/admin"
-        class="btn-secondary">
+</form>
 
-        Return to Consultation Records
+<br>
 
-    </a>
+<a
+    href="/admin"
+    class="btn-secondary">
 
+    Return to Consultation Records
+
+</a>
 </div>
 
 </body>
