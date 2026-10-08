@@ -794,6 +794,15 @@ def generate_referral_pdf(id):
         ""
     ).strip()
 
+        approval_action = request.form.get(
+        "approval_action",
+        "draft"
+    )
+
+    is_signed = (
+        approval_action == "signed"
+    )
+
     pdf_buffer = io.BytesIO()
 
     pdf = canvas.Canvas(
@@ -812,11 +821,63 @@ def generate_referral_pdf(id):
         14
     )
 
-    pdf.drawString(
-        left,
-        y,
-        "DR. DARIUSZ LEDZINSKI"
-    )
+        if is_signed:
+
+        pdf.setFont(
+            "Helvetica-Bold",
+            11
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            "Electronically approved by:"
+        )
+
+        y -= 18
+
+        pdf.setFont(
+            "Helvetica-Bold",
+            11
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            "Dr. Dariusz Ledzinski"
+        )
+
+        y -= 18
+
+        pdf.setFont(
+            "Helvetica",
+            10
+        )
+
+        approval_timestamp = datetime.now(
+            ZoneInfo("Africa/Johannesburg")
+        ).strftime(
+            "%d %B %Y at %H:%M"
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            f"Date and time: {approval_timestamp}"
+        )
+
+    else:
+
+        pdf.setFont(
+            "Helvetica",
+            11
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            "Signature: ______________________________"
+        )
 
     y -= 20
 
@@ -1060,7 +1121,12 @@ def generate_referral_pdf(id):
         headers={
             "Content-Disposition":
                 "inline; "
-                "filename=Referral_Letter.pdf"
+                "filename="
+                + (
+                    "Referral_Letter_Signed.pdf"
+                    if is_signed
+                    else "Referral_Letter_Draft.pdf"
+                )
         }
     )
 
