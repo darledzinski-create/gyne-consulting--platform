@@ -787,7 +787,7 @@ def generate_referral_pdf(id):
     reason = request.form.get(
         "reason",
         ""
-    ).strip(
+    ).strip()
 
     history = request.form.get(
         "history",
