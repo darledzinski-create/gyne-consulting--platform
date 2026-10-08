@@ -1047,7 +1047,7 @@ def generate_referral_pdf(id):
         11
     )
 
-       if is_signed:
+    if is_signed:
 
         pdf.setFont(
             "Helvetica-Bold",
