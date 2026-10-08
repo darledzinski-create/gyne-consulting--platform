@@ -795,18 +795,89 @@ def generate_referral_pdf(id):
         ""
     ).strip()
 
-    approval_action = request.form.get(
-        "approval_action",
-        "draft"
-    )
 
-    is_signed = (
-        approval_action == "signed"
+document_action = request.form.get(
+    "document_action",
+    "draft"
+)
+
+is_signed = (
+    document_action in (
+        "signed",
+        "email"
     )
+)
+
+send_to_patient = (
+    document_action == "email"
+)
+
+    patient_email = None
+
+    if send_to_patient:
+
+        conn = get_db_connection()
+
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT email
+            FROM consultations
+            WHERE id = %s
+            """,
+            (id,)
+        )
+
+        patient_record = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if not patient_record or not patient_record[0]:
+
+            return (
+                "Patient email address not found",
+                400
+            )
+
+        patient_email = patient_record[0]
 
     pdf_buffer = io.BytesIO()
 
     pdf = canvas.Canvas(
+            if send_to_patient:
+
+        email_result = send_pdf_email(
+            patient_email,
+            patient_name,
+            "Referral Letter from Dr Dariusz",
+            f"""Dear {patient_name},
+
+Please find attached your referral letter from Dr Dariusz Ledzinski.
+
+Kind regards,
+
+Dr Dariusz Ledzinski
+""",
+            pdf_buffer.getvalue(),
+            "Referral_Letter_Signed.pdf"
+        )
+
+        logger.info(
+            "Signed referral letter email sent successfully."
+        )
+
+        if email_result.status_code != 200:
+
+            logger.error(
+                "Signed referral letter email failed."
+            )
+
+            return (
+                "Referral letter email could not be sent",
+                500
+            )
         pdf_buffer,
         pagesize=A4
     )
