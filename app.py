@@ -1144,6 +1144,40 @@ def generate_referral_pdf(id):
 
     pdf_buffer.seek(0)
 
+    if send_to_patient:
+
+        email_result = send_pdf_email(
+            patient_email,
+            patient_name,
+            "Referral Letter from Dr Dariusz",
+            f"""Dear {patient_name},
+
+Please find attached your referral letter from Dr Dariusz Ledzinski.
+
+Kind regards,
+
+Dr Dariusz Ledzinski
+""",
+            pdf_buffer.getvalue(),
+            "Referral_Letter_Signed.pdf"
+        )
+
+        logger.info(
+            f"Signed referral letter email status: "
+            f"{email_result.status_code}"
+        )
+
+        if email_result.status_code != 200:
+
+            logger.error(
+                "Signed referral letter email failed."
+            )
+
+            return (
+                "Referral letter email could not be sent",
+                500
+            )
+
     return Response(
         pdf_buffer.getvalue(),
         mimetype="application/pdf",
