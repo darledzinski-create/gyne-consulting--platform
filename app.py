@@ -821,19 +821,7 @@ def generate_referral_pdf(id):
         14
     )
 
-    if is_signed:
-
-        pdf.setFont(
-            "Helvetica-Bold",
-            11
-        )
-        pdf.drawString(
-            left,
-            y,
-            "Signature: ______________________________"
-        )
-
-    y -= 20
+     y -= 20
 
     pdf.setFont(
         "Helvetica",
@@ -1059,12 +1047,58 @@ def generate_referral_pdf(id):
         11
     )
 
-    pdf.drawString(
-        left,
-        y,
-        "Signature: ______________________________"
-    )
+       if is_signed:
 
+        pdf.setFont(
+            "Helvetica-Bold",
+            11
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            "Electronically approved by:"
+        )
+
+        y -= 18
+
+        pdf.drawString(
+            left,
+            y,
+            "Dr. Dariusz Ledzinski"
+        )
+
+        y -= 18
+
+        approval_timestamp = datetime.now(
+            ZoneInfo("Africa/Johannesburg")
+        ).strftime(
+            "%d %B %Y at %H:%M"
+        )
+
+        pdf.setFont(
+            "Helvetica",
+            10
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            f"Date and time: {approval_timestamp}"
+        )
+
+    else:
+
+        pdf.setFont(
+            "Helvetica",
+            11
+        )
+
+        pdf.drawString(
+            left,
+            y,
+            "Signature: ______________________________"
+        )
     pdf.save()
 
     pdf_buffer.seek(0)
