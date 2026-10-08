@@ -779,7 +779,7 @@ def generate_referral_pdf(id):
         ""
     ).strip()
 
-    referred_to = request.form.get(
+       referred_to = request.form.get(
         "referred_to",
         ""
     ).strip()
@@ -794,7 +794,7 @@ def generate_referral_pdf(id):
         ""
     ).strip()
 
-        approval_action = request.form.get(
+    approval_action = request.form.get(
         "approval_action",
         "draft"
     )
@@ -821,58 +821,12 @@ def generate_referral_pdf(id):
         14
     )
 
-        if is_signed:
+    if is_signed:
 
         pdf.setFont(
             "Helvetica-Bold",
             11
         )
-
-        pdf.drawString(
-            left,
-            y,
-            "Electronically approved by:"
-        )
-
-        y -= 18
-
-        pdf.setFont(
-            "Helvetica-Bold",
-            11
-        )
-
-        pdf.drawString(
-            left,
-            y,
-            "Dr. Dariusz Ledzinski"
-        )
-
-        y -= 18
-
-        pdf.setFont(
-            "Helvetica",
-            10
-        )
-
-        approval_timestamp = datetime.now(
-            ZoneInfo("Africa/Johannesburg")
-        ).strftime(
-            "%d %B %Y at %H:%M"
-        )
-
-        pdf.drawString(
-            left,
-            y,
-            f"Date and time: {approval_timestamp}"
-        )
-
-    else:
-
-        pdf.setFont(
-            "Helvetica",
-            11
-        )
-
         pdf.drawString(
             left,
             y,
