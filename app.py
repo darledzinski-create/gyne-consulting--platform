@@ -821,7 +821,7 @@ def generate_referral_pdf(id):
         14
     )
 
-     y -= 20
+    y -= 20
 
     pdf.setFont(
         "Helvetica",
