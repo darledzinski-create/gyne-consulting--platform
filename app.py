@@ -796,10 +796,10 @@ def generate_referral_pdf(id):
     ).strip()
 
 
-document_action = request.form.get(
-    "document_action",
-    "draft"
-)
+    document_action = request.form.get(
+        "document_action",
+        "draft"
+    )
 
     is_signed = (
         document_action in (
@@ -821,8 +821,7 @@ document_action = request.form.get(
         cursor = conn.cursor()
 
         cursor.execute(
-
-        """
+            """
             SELECT email
             FROM consultations
             WHERE id = %s
@@ -847,6 +846,9 @@ document_action = request.form.get(
     pdf_buffer = io.BytesIO()
 
     pdf = canvas.Canvas(
+        pdf_buffer,
+        pagesize=A4
+    )
             if send_to_patient:
 
         email_result = send_pdf_email(
