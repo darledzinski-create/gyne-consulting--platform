@@ -849,7 +849,7 @@ def generate_referral_pdf(id):
         pdf_buffer,
         pagesize=A4
     )
-            if send_to_patient:
+        if send_to_patient:
 
         email_result = send_pdf_email(
             patient_email,
