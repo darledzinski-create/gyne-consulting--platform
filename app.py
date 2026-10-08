@@ -801,16 +801,16 @@ document_action = request.form.get(
     "draft"
 )
 
-is_signed = (
-    document_action in (
-        "signed",
-        "email"
+    is_signed = (
+        document_action in (
+            "signed",
+            "email"
+        )
     )
-)
 
-send_to_patient = (
-    document_action == "email"
-)
+    send_to_patient = (
+        document_action == "email"
+    )
 
     patient_email = None
 
@@ -821,7 +821,8 @@ send_to_patient = (
         cursor = conn.cursor()
 
         cursor.execute(
-            """
+
+        """
             SELECT email
             FROM consultations
             WHERE id = %s
