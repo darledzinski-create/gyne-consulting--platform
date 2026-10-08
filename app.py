@@ -17,6 +17,7 @@ import io
 import logging
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
+from reportlab.lib.utils import simpleSplit
 
 from database import (
     get_db_connection,
@@ -747,6 +748,320 @@ def create_referral(id):
     return render_template(
         "create_referral.html",
         consultation=consultation
+    )
+
+@app.route(
+    "/generate-referral-pdf/<int:id>",
+    methods=["POST"]
+)
+def generate_referral_pdf(id):
+
+    if not session.get(
+        "admin_logged_in"
+    ):
+
+        return redirect(
+            url_for("login")
+        )
+
+    patient_name = request.form.get(
+        "patient_name",
+        ""
+    ).strip()
+
+    age = request.form.get(
+        "age",
+        ""
+    ).strip()
+
+    contact = request.form.get(
+        "contact",
+        ""
+    ).strip()
+
+    referred_to = request.form.get(
+        "referred_to",
+        ""
+    ).strip()
+
+    reason = request.form.get(
+        "reason",
+        ""
+    ).strip()
+
+    history = request.form.get(
+        "history",
+        ""
+    ).strip()
+
+    pdf_buffer = io.BytesIO()
+
+    pdf = canvas.Canvas(
+        pdf_buffer,
+        pagesize=A4
+    )
+
+    width, height = A4
+
+    left = 60
+    right = 60
+    y = height - 60
+
+    pdf.setFont(
+        "Helvetica-Bold",
+        14
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "DR. DARIUSZ LEDZINSKI"
+    )
+
+    y -= 20
+
+    pdf.setFont(
+        "Helvetica",
+        10
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "MD, M Med (Obs & Gyne)"
+    )
+
+    y -= 15
+
+    pdf.drawString(
+        left,
+        y,
+        "HPCSA: MP0249688 | Practice No.: 1605690"
+    )
+
+    y -= 15
+
+    pdf.drawString(
+        left,
+        y,
+        "Email: consult@drdariusz.online | "
+        "Phone: +27 820478579"
+    )
+
+    y -= 30
+
+    pdf.setFont(
+        "Helvetica-Bold",
+        15
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "REFERRAL LETTER"
+    )
+
+    y -= 30
+
+    pdf.setFont(
+        "Helvetica",
+        11
+    )
+
+    current_date = datetime.now(
+        ZoneInfo("Africa/Johannesburg")
+    ).strftime(
+        "%d %B %Y"
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        f"Date: {current_date}"
+    )
+
+    y -= 25
+
+    pdf.drawString(
+        left,
+        y,
+        f"To: {referred_to}"
+    )
+
+    y -= 30
+
+    pdf.drawString(
+        left,
+        y,
+        "Dear Colleague,"
+    )
+
+    y -= 25
+
+    introductory_text = (
+        "I am referring the following patient for "
+        "further assessment and management:"
+    )
+
+    for line in simpleSplit(
+        introductory_text,
+        "Helvetica",
+        11,
+        width - left - right
+    ):
+
+        pdf.drawString(
+            left,
+            y,
+            line
+        )
+
+        y -= 15
+
+    y -= 10
+
+    pdf.drawString(
+        left,
+        y,
+        f"Patient Name: {patient_name}"
+    )
+
+    y -= 18
+
+    pdf.drawString(
+        left,
+        y,
+        f"Age: {age}"
+    )
+
+    y -= 18
+
+    pdf.drawString(
+        left,
+        y,
+        f"Contact: {contact}"
+    )
+
+    y -= 30
+
+    pdf.setFont(
+        "Helvetica-Bold",
+        11
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "Reason for Referral"
+    )
+
+    y -= 20
+
+    pdf.setFont(
+        "Helvetica",
+        11
+    )
+
+    reason_lines = simpleSplit(
+        reason,
+        "Helvetica",
+        11,
+        width - left - right
+    )
+
+    for line in reason_lines:
+
+        pdf.drawString(
+            left,
+            y,
+            line
+        )
+
+        y -= 15
+
+    y -= 15
+
+    pdf.setFont(
+        "Helvetica-Bold",
+        11
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "Relevant History / Findings"
+    )
+
+    y -= 20
+
+    pdf.setFont(
+        "Helvetica",
+        11
+    )
+
+    history_lines = simpleSplit(
+        history,
+        "Helvetica",
+        11,
+        width - left - right
+    )
+
+    for line in history_lines:
+
+        pdf.drawString(
+            left,
+            y,
+            line
+        )
+
+        y -= 15
+
+    y -= 25
+
+    pdf.drawString(
+        left,
+        y,
+        "Yours sincerely,"
+    )
+
+    y -= 40
+
+    pdf.setFont(
+        "Helvetica-Bold",
+        11
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "Dr. Dariusz Ledzinski"
+    )
+
+    y -= 20
+
+    pdf.setFont(
+        "Helvetica",
+        11
+    )
+
+    pdf.drawString(
+        left,
+        y,
+        "Signature: ______________________________"
+    )
+
+    pdf.save()
+
+    pdf_buffer.seek(0)
+
+    return Response(
+        pdf_buffer.getvalue(),
+        mimetype="application/pdf",
+        headers={
+            "Content-Disposition":
+                "inline; "
+                "filename=Referral_Letter.pdf"
+        }
     )
 
 
