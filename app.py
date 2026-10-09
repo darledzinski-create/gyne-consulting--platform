@@ -1292,6 +1292,267 @@ def create_prescription(id):
         dosage_instructions=dosage_instructions
     )
 
+@app.route(
+    "/generate-prescription-pdf/<int:id>",
+    methods=["POST"]
+)
+def generate_prescription_pdf(id):
+
+    if not session.get("admin_logged_in"):
+
+        return redirect(
+            url_for("login")
+        )
+
+    document_action = request.form.get(
+        "document_action",
+        "draft"
+    )
+
+    # Only draft generation is enabled at this stage.
+    if document_action != "draft":
+
+        return (
+            "Only draft PDF generation is enabled at this stage.",
+            400
+        )
+
+    patient_name = request.form.get(
+        "patient_name", ""
+    ).strip()
+
+    age = request.form.get(
+        "age", ""
+    ).strip()
+
+    contact = request.form.get(
+        "contact", ""
+    ).strip()
+
+    prescription_date = request.form.get(
+        "prescription_date", ""
+    ).strip()
+
+    medication = request.form.get(
+        "medication", ""
+    ).strip()
+
+    dosage_instructions = request.form.get(
+        "dosage_instructions", ""
+    ).strip()
+
+    if not all([
+        patient_name,
+        prescription_date,
+        medication,
+        dosage_instructions
+    ]):
+
+        return (
+            "Please complete all required fields.",
+            400
+        )
+
+    # Confirm that this consultation exists.
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT id
+        FROM consultations
+        WHERE id = %s
+        """,
+        (id,)
+    )
+
+    consultation_record = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if not consultation_record:
+
+        return "Consultation not found", 404
+
+    pdf_buffer = io.BytesIO()
+
+    pdf = canvas.Canvas(
+        pdf_buffer,
+        pagesize=A4
+    )
+
+    width, height = A4
+
+    left = 55
+    y = height - 50
+
+    def draw_wrapped_text(
+        text,
+        font_name="Helvetica",
+        font_size=11,
+        leading=16
+    ):
+
+        nonlocal y
+
+        pdf.setFont(
+            font_name,
+            font_size
+        )
+
+        lines = simpleSplit(
+            text or "",
+            font_name,
+            font_size,
+            width - left - 55
+        )
+
+        for line in lines:
+
+            if y < 55:
+
+                pdf.showPage()
+                y = height - 55
+
+                # Make the draft status visible on each page.
+                pdf.setFont(
+                    "Helvetica-Bold",
+                    10
+                )
+
+                pdf.drawString(
+                    left,
+                    y,
+                    "DRAFT — NOT A VALID PRESCRIPTION"
+                )
+
+                y -= 30
+
+                pdf.setFont(
+                    font_name,
+                    font_size
+                )
+
+            pdf.drawString(
+                left,
+                y,
+                line
+            )
+
+            y -= leading
+
+    draw_wrapped_text(
+        "DRAFT — NOT A VALID PRESCRIPTION",
+        "Helvetica-Bold",
+        13,
+        20
+    )
+
+    y -= 5
+
+    draw_wrapped_text(
+        "DR. DARIUSZ LEDZINSKI",
+        "Helvetica-Bold",
+        15,
+        20
+    )
+
+    draw_wrapped_text(
+        "MD, M Med (Obs & Gyne)"
+    )
+
+    draw_wrapped_text(
+        "HPCSA: MP0249688 | Practice No.: 1605690"
+    )
+
+    draw_wrapped_text(
+        "Email: consult@drdariusz.online | "
+        "Phone: +27 820478579"
+    )
+
+    y -= 12
+
+    draw_wrapped_text(
+        "PRESCRIPTION — DRAFT",
+        "Helvetica-Bold",
+        14,
+        22
+    )
+
+    y -= 5
+
+    draw_wrapped_text(
+        f"Patient Name: {patient_name}"
+    )
+
+    draw_wrapped_text(
+        f"Age: {age or 'Not provided'}"
+    )
+
+    draw_wrapped_text(
+        f"Contact: {contact or 'Not provided'}"
+    )
+
+    draw_wrapped_text(
+        f"Date: {prescription_date}"
+    )
+
+    y -= 10
+
+    draw_wrapped_text(
+        "Medication Prescribed",
+        "Helvetica-Bold",
+        12,
+        18
+    )
+
+    draw_wrapped_text(
+        medication
+    )
+
+    y -= 10
+
+    draw_wrapped_text(
+        "Dosage & Instructions",
+        "Helvetica-Bold",
+        12,
+        18
+    )
+
+    draw_wrapped_text(
+        dosage_instructions
+    )
+
+    y -= 20
+
+    draw_wrapped_text(
+        "Doctor's approval and signature: "
+        "NOT YET PROVIDED"
+    )
+
+    y -= 12
+
+    draw_wrapped_text(
+        "This document is a draft for review. "
+        "It is not authorised for dispensing.",
+        "Helvetica-Bold",
+        10,
+        15
+    )
+
+    pdf.save()
+
+    pdf_buffer.seek(0)
+
+    return Response(
+        pdf_buffer.getvalue(),
+        mimetype="application/pdf",
+        headers={
+            "Content-Disposition":
+                "inline; filename=Prescription_Draft.pdf"
+        }
+    )
 
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
