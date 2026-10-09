@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Prescription</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 20px auto;
+            padding: 28px;
+            background: white;
+            border-radius: 12px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-top: 16px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .autofill-box {
+            margin: 24px 0;
+            padding: 16px;
+            background: #f4f6f8;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .autofill-box label {
+            font-weight: normal;
+            margin-top: 10px;
+        }
+
+        .autofill-box input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        button, .cancel-link {
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 8px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .primary {
+            background: #245b86;
+            color: white;
+        }
+
+        .secondary {
+            background: #e5e7eb;
+            color: #222;
+        }
+
+        .note {
+            line-height: 1.5;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Create Prescription</h2>
+
+    <p>
+        Patient:
+        <strong>{{ consultation.name }}</strong>
+    </p>
+
+    <p class="note">
+        Review all patient details and enter the prescription
+        information yourself. Medication and dosage will not
+        be filled automatically.
+    </p>
+
+    <form method="POST"
+          action="/create-prescription/{{ consultation.id }}">
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <div class="autofill-box">
+
+            <h3>Autofill Patient Details</h3>
+
+            <p>
+                Select the details you wish to refill from
+                the consultation record or today's date.
+            </p>
+
+            <label>
+                <input type="checkbox"
+                       id="fill_patient_name"
+                       checked>
+                Patient name
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       id="fill_contact"
+                       checked>
+                Contact number
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       id="fill_date"
+                       checked>
+                Today's date
+            </label>
+
+            <button type="button"
+                    class="secondary"
+                    onclick="autofillSelectedFields()">
+                Autofill Selected Fields
+            </button>
+
+        </div>
+
+        <h3>Patient Information</h3>
+
+        <label for="patient_name">Patient Name</label>
+        <input type="text"
+               id="patient_name"
+               name="patient_name"
+               value="{{ consultation.name }}"
+               data-autofill="{{ consultation.name }}"
+               required>
+
+        <label for="age">Age</label>
+        <input type="text"
+               id="age"
+               name="age"
+               inputmode="numeric">
+
+        <label for="contact">Contact</label>
+        <input type="text"
+               id="contact"
+               name="contact"
+               value="{{ consultation.mobile or '' }}"
+               data-autofill="{{ consultation.mobile or '' }}">
+
+        <label for="prescription_date">Date</label>
+        <input type="date"
+               id="prescription_date"
+               name="prescription_date"
+               value="{{ today_date }}"
+               data-autofill="{{ today_date }}"
+               required>
+
+        <h3>Prescription Information</h3>
+
+        <label for="medication">Medication Prescribed</label>
+        <textarea id="medication"
+                  name="medication"
+                  rows="4"
+                  placeholder="Enter the prescribed medication, strength and form."
+                  required></textarea>
+
+        <label for="dosage_instructions">Dosage &amp; Instructions</label>
+        <textarea id="dosage_instructions"
+                  name="dosage_instructions"
+                  rows="5"
+                  placeholder="Enter dosage, route, frequency and other instructions."
+                  required></textarea>
+
+        <p class="note">
+            Review the completed prescription carefully before
+            approving, signing or sending it.
+        </p>
+
+        <button type="submit" class="primary">
+            Review Prescription
+        </button>
+
+        <a href="/admin" class="cancel-link secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+<script>
+function autofillSelectedFields() {
+
+    if (document.getElementById("fill_patient_name").checked) {
+        const field = document.getElementById("patient_name");
+        field.value = field.dataset.autofill || "";
+    }
+
+    if (document.getElementById("fill_contact").checked) {
+        const field = document.getElementById("contact");
+        field.value = field.dataset.autofill || "";
+    }
+
+    if (document.getElementById("fill_date").checked) {
+        const field = document.getElementById("prescription_date");
+        field.value = field.dataset.autofill || "";
+    }
+}
+</script>
+
+</body>
+</html>
