@@ -1193,6 +1193,105 @@ Dr Dariusz Ledzinski
         }
     )
 
+@app.route(
+    "/create-prescription/<int:id>",
+    methods=["GET", "POST"]
+)
+def create_prescription(id):
+
+    if not session.get("admin_logged_in"):
+
+        return redirect(
+            url_for("login")
+        )
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM consultations
+        WHERE id = %s
+        """,
+        (id,)
+    )
+
+    consultation = cursor.fetchone()
+
+    if not consultation:
+
+        cursor.close()
+        conn.close()
+
+        return "Consultation not found", 404
+
+    today_date = datetime.now(
+        ZoneInfo("Africa/Johannesburg")
+    ).strftime("%Y-%m-%d")
+
+    if request.method == "GET":
+
+        cursor.close()
+        conn.close()
+
+        return render_template(
+            "create_prescription.html",
+            consultation=consultation,
+            today_date=today_date
+        )
+
+    patient_name = request.form.get(
+        "patient_name", ""
+    ).strip()
+
+    age = request.form.get(
+        "age", ""
+    ).strip()
+
+    contact = request.form.get(
+        "contact", ""
+    ).strip()
+
+    prescription_date = request.form.get(
+        "prescription_date", ""
+    ).strip()
+
+    medication = request.form.get(
+        "medication", ""
+    ).strip()
+
+    dosage_instructions = request.form.get(
+        "dosage_instructions", ""
+    ).strip()
+
+    cursor.close()
+    conn.close()
+
+    if not all([
+        patient_name,
+        prescription_date,
+        medication,
+        dosage_instructions
+    ]):
+
+        return (
+            "Please complete the required "
+            "prescription fields.",
+            400
+        )
+
+    return render_template(
+        "prescription_review.html",
+        consultation=consultation,
+        patient_name=patient_name,
+        age=age,
+        contact=contact,
+        prescription_date=prescription_date,
+        medication=medication,
+        dosage_instructions=dosage_instructions
+    )
+
 
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
