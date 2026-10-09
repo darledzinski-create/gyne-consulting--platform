@@ -855,8 +855,13 @@ def generate_referral_pdf(id):
 
     left = 60
     right = 60
-    y = height - 60
-
+    y = height - 60 
+    
+    status_label = (
+        "APPROVED ELECTRONICALLY"
+        if is_signed
+        else "DRAFT — NOT A VALID PRESCRIPTION"
+    )
     pdf.setFont(
         "Helvetica-Bold",
         14
@@ -1309,13 +1314,17 @@ def generate_prescription_pdf(id):
         "draft"
     )
 
-    # Only draft generation is enabled at this stage.
-    if document_action != "draft":
+       if document_action not in ("draft", "signed"):
 
-        return (
-            "Only draft PDF generation is enabled at this stage.",
-            400
-        )
+           return (
+               "Email delivery is not enabled yet. "
+               "Please select Draft PDF or Approve & Sign.",
+               400
+           )
+
+       is_signed = (
+           document_action == "signed"
+       )
 
     patient_name = request.form.get(
         "patient_name", ""
