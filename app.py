@@ -1403,6 +1403,15 @@ def generate_prescription_pdf(id):
 
         return "Consultation not found", 404
 
+    patient_email = consultation_record[1]
+
+    if send_to_patient and not patient_email:
+
+        return (
+            "Patient email address not found.",
+            400
+        )
+
     pdf_buffer = io.BytesIO()
 
     pdf = canvas.Canvas(
