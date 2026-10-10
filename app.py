@@ -1614,7 +1614,7 @@ def generate_prescription_pdf(id):
 
     pdf.save()
 
-        if send_to_patient:
+    if send_to_patient:
 
         email_result = send_pdf_email(
             patient_email,
