@@ -1253,7 +1253,7 @@ def create_prescription(id):
         prescription_date=prescription_date,
         medication=medication,
         dosage_instructions=dosage_instructions,
-        submission_token=secrets.token
+        submission_token=submission_token
     )
     patient_name = request.form.get(
         "patient_name", ""
