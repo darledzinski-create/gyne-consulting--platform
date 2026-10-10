@@ -1295,7 +1295,9 @@ def create_prescription(id):
         contact=contact,
         prescription_date=prescription_date,
         medication=medication,
-        dosage_instructions=dosage_instructions
+        dosage_instructions=dosage_instructions,
+        submission_token=secrets.token_urlsafe(32)
+    
     )
 
 
