@@ -1333,7 +1333,7 @@ def generate_prescription_pdf(id):
         )
     )
 
-        send_to_patient = (
+    send_to_patient = (
         document_action == "email"
     )
 
