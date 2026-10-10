@@ -1333,6 +1333,10 @@ def generate_prescription_pdf(id):
         )
     )
 
+        send_to_patient = (
+        document_action == "email"
+    )
+
     is_signed = (
         document_action == "signed"
     )
