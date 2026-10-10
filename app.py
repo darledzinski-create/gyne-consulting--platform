@@ -1297,6 +1297,7 @@ def create_prescription(id):
         dosage_instructions=dosage_instructions
     )
 
+
 @app.route(
     "/generate-prescription-pdf/<int:id>",
     methods=["POST"]
@@ -1314,17 +1315,17 @@ def generate_prescription_pdf(id):
         "draft"
     )
 
-       if document_action not in ("draft", "signed"):
+    if document_action not in ("draft", "signed"):
 
-           return (
-               "Email delivery is not enabled yet. "
-               "Please select Draft PDF or Approve & Sign.",
-               400
-           )
+        return (
+            "Email delivery is not enabled yet. "
+            "Please select Draft PDF or Approve & Sign.",
+            400
+        )
 
-       is_signed = (
-           document_action == "signed"
-       )
+    is_signed = (
+        document_action == "signed"
+    )
 
     patient_name = request.form.get(
         "patient_name", ""
@@ -1362,23 +1363,27 @@ def generate_prescription_pdf(id):
             400
         )
 
-    # Confirm that this consultation exists.
+    # Verify that the consultation exists.
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    cursor.execute(
-        """
-        SELECT id
-        FROM consultations
-        WHERE id = %s
-        """,
-        (id,)
-    )
+    try:
 
-    consultation_record = cursor.fetchone()
+        cursor.execute(
+            """
+            SELECT id
+            FROM consultations
+            WHERE id = %s
+            """,
+            (id,)
+        )
 
-    cursor.close()
-    conn.close()
+        consultation_record = cursor.fetchone()
+
+    finally:
+
+        cursor.close()
+        conn.close()
 
     if not consultation_record:
 
@@ -1393,8 +1398,15 @@ def generate_prescription_pdf(id):
 
     width, height = A4
 
-    left = 55
-    y = height - 50
+    left = 60
+    right = 60
+    y = height - 60
+
+    status_label = (
+        "APPROVED ELECTRONICALLY"
+        if is_signed
+        else "DRAFT — NOT A VALID PRESCRIPTION"
+    )
 
     def draw_wrapped_text(
         text,
@@ -1411,20 +1423,20 @@ def generate_prescription_pdf(id):
         )
 
         lines = simpleSplit(
-            text or "",
+            str(text or ""),
             font_name,
             font_size,
-            width - left - 55
+            width - left - right
         )
 
         for line in lines:
 
-            if y < 55:
+            if y < 60:
 
                 pdf.showPage()
-                y = height - 55
 
-                # Make the draft status visible on each page.
+                y = height - 60
+
                 pdf.setFont(
                     "Helvetica-Bold",
                     10
@@ -1433,15 +1445,15 @@ def generate_prescription_pdf(id):
                 pdf.drawString(
                     left,
                     y,
-                    "DRAFT — NOT A VALID PRESCRIPTION"
+                    status_label
                 )
 
                 y -= 30
 
-                pdf.setFont(
-                    font_name,
-                    font_size
-                )
+            pdf.setFont(
+                font_name,
+                font_size
+            )
 
             pdf.drawString(
                 left,
@@ -1452,10 +1464,10 @@ def generate_prescription_pdf(id):
             y -= leading
 
     draw_wrapped_text(
-        "DRAFT — NOT A VALID PRESCRIPTION",
+        status_label,
         "Helvetica-Bold",
         13,
-        20
+        22
     )
 
     y -= 5
@@ -1483,7 +1495,9 @@ def generate_prescription_pdf(id):
     y -= 12
 
     draw_wrapped_text(
-        "PRESCRIPTION — DRAFT",
+        "PRESCRIPTION"
+        if is_signed
+        else "PRESCRIPTION — DRAFT",
         "Helvetica-Bold",
         14,
         22
@@ -1535,33 +1549,65 @@ def generate_prescription_pdf(id):
 
     y -= 20
 
-    draw_wrapped_text(
-        "Doctor's approval and signature: "
-        "NOT YET PROVIDED"
-    )
+    if is_signed:
 
-    y -= 12
+        approval_timestamp = datetime.now(
+            ZoneInfo("Africa/Johannesburg")
+        ).strftime(
+            "%d %B %Y at %H:%M"
+        )
 
-    draw_wrapped_text(
-        "This document is a draft for review. "
-        "It is not authorised for dispensing.",
-        "Helvetica-Bold",
-        10,
-        15
-    )
+        draw_wrapped_text(
+            "Electronically approved by: "
+            "Dr. Dariusz Ledzinski",
+            "Helvetica-Bold",
+            11,
+            16
+        )
+
+        draw_wrapped_text(
+            f"Approval date and time: {approval_timestamp}",
+            "Helvetica",
+            10,
+            15
+        )
+
+    else:
+
+        draw_wrapped_text(
+            "Doctor's approval and signature: "
+            "NOT YET PROVIDED"
+        )
+
+        y -= 12
+
+        draw_wrapped_text(
+            "This document is a draft for review. "
+            "It is not authorised for dispensing.",
+            "Helvetica-Bold",
+            10,
+            15
+        )
 
     pdf.save()
 
     pdf_buffer.seek(0)
+
+    filename = (
+        "Prescription_Approved.pdf"
+        if is_signed
+        else "Prescription_Draft.pdf"
+    )
 
     return Response(
         pdf_buffer.getvalue(),
         mimetype="application/pdf",
         headers={
             "Content-Disposition":
-                "inline; filename=Prescription_Draft.pdf"
+                f"inline; filename={filename}"
         }
     )
+
 
 @app.route("/delete/<int:id>")
 def delete_consultation(id):
