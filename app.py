@@ -1236,7 +1236,7 @@ def create_prescription(id):
         ZoneInfo("Africa/Johannesburg")
     ).strftime("%Y-%m-%d")
 
-       if request.method == "GET":
+    if request.method == "GET":
 
         return redirect(
             url_for("intake", id=id)
