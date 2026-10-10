@@ -1315,7 +1315,7 @@ def generate_prescription_pdf(id):
         "draft"
     )
 
-        if document_action not in (
+    if document_action not in (
         "draft",
         "signed",
         "email"
