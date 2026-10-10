@@ -147,6 +147,10 @@
         <input type="hidden"
                name="csrf_token"
                value="{{ csrf_token() }}">
+        
+        <input type="hidden"
+               name="submission_token"
+               value="{{ submission_token }}">
 
         <input type="hidden"
                name="patient_name"
