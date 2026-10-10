@@ -1614,6 +1614,45 @@ def generate_prescription_pdf(id):
 
     pdf.save()
 
+        if send_to_patient:
+
+        email_result = send_pdf_email(
+            patient_email,
+            patient_name,
+            "Approved Prescription from Dr Dariusz",
+            f"""Dear {patient_name},
+
+Please find attached your electronically approved prescription
+from Dr Dariusz Ledzinski.
+
+Kind regards,
+
+Dr Dariusz Ledzinski
+""",
+            pdf_buffer.getvalue(),
+            "Prescription_Approved.pdf"
+        )
+
+        logger.info(
+            "Prescription email HTTP status: "
+            f"{email_result.status_code}"
+        )
+
+        if email_result.status_code != 200:
+
+            logger.error(
+                "Prescription email submission failed."
+            )
+
+            return (
+                "Prescription email could not be submitted.",
+                500
+            )
+
+        logger.info(
+            "Prescription email accepted by Mailjet."
+        )
+
     pdf_buffer.seek(0)
 
     filename = (
