@@ -1315,13 +1315,23 @@ def generate_prescription_pdf(id):
         "draft"
     )
 
-    if document_action not in ("draft", "signed"):
+        if document_action not in (
+        "draft",
+        "signed",
+        "email"
+    ):
 
         return (
-            "Email delivery is not enabled yet. "
-            "Please select Draft PDF or Approve & Sign.",
+            "Invalid prescription document action.",
             400
         )
+
+    is_signed = (
+        document_action in (
+            "signed",
+            "email"
+        )
+    )
 
     is_signed = (
         document_action == "signed"
