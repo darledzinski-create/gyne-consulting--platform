@@ -1243,13 +1243,17 @@ def create_prescription(id):
         cursor.close()
         conn.close()
 
-        return render_template(
-            "create_prescription.html",
-            consultation=consultation,
-            today_date=today_date,
-            submission_token=submission_token
-        )
-
+    return render_template(
+        "prescription_review.html",
+        consultation=consultation,
+        patient_name=patient_name,
+        age=age,
+        contact=contact,
+        prescription_date=prescription_date,
+        medication=medication,
+        dosage_instructions=dosage_instructions,
+        submission_token=secrets.token_urlsafe(32)
+    )
     patient_name = request.form.get(
         "patient_name", ""
     ).strip()
