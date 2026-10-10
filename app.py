@@ -1242,7 +1242,7 @@ def create_prescription(id):
             url_for("intake", id=id)
         )
 
-   patient_name = request.form.get(
+    patient_name = request.form.get(
         "patient_name", ""
     ).strip()
 
