@@ -195,7 +195,8 @@
             <button type="submit"
                     name="document_action"
                     value="email"
-                    class="primary">
+                    class="primary"
+                    onclick="if (this.form.dataset.emailSubmitting === 'yes') return false; this.form.dataset.emailSubmitting = 'yes'; this.textContent = 'Sending email...';">
                 Email Signed PDF to Patient
             </button>
 
