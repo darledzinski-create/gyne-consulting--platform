@@ -1337,10 +1337,6 @@ def generate_prescription_pdf(id):
         document_action == "email"
     )
 
-    is_signed = (
-        document_action == "signed"
-    )
-
     patient_name = request.form.get(
         "patient_name", ""
     ).strip()
