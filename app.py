@@ -1729,6 +1729,34 @@ Dr Dariusz Ledzinski
             "Prescription email accepted by Mailjet."
         )
 
+        guard_conn = get_db_connection()
+        guard_cursor = guard_conn.cursor()
+
+        try:
+            guard_cursor.execute(
+                """
+                UPDATE prescription_email_sends
+                SET status = %s
+                WHERE submission_token = %s
+                """,
+                (
+                    "sent",
+                    submission_token
+                )
+            )
+
+            guard_conn.commit()
+
+        except Exception:
+            guard_conn.rollback()
+            logger.exception(
+                "Could not update prescription email status."
+            )
+
+        finally:
+            guard_cursor.close()
+            guard_conn.close()
+
     pdf_buffer.seek(0)
 
     filename = (
