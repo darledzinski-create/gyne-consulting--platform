@@ -1385,7 +1385,7 @@ def generate_prescription_pdf(id):
 
         cursor.execute(
             """
-            SELECT id
+            SELECT id, email
             FROM consultations
             WHERE id = %s
             """,
