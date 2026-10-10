@@ -80,19 +80,19 @@ def create_table():
         )
     """)
 
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS prescription_email_sends (
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS prescription_email_sends (
 
-                submission_token TEXT PRIMARY KEY,
+            submission_token TEXT PRIMARY KEY,
 
-                consultation_id INTEGER NOT NULL,
+            consultation_id INTEGER NOT NULL,
 
-                status TEXT NOT NULL DEFAULT 'processing',
+            status TEXT NOT NULL DEFAULT 'processing',
 
-                created_at TEXT NOT NULL
+            created_at TEXT NOT NULL
 
-            )
-        """)
+        )
+    """)
 
     conn.commit()
 
