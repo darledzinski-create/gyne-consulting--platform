@@ -1236,19 +1236,19 @@ def create_prescription(id):
         ZoneInfo("Africa/Johannesburg")
     ).strftime("%Y-%m-%d")
 
-       if request.method == "GET":
+    if request.method == "GET":
 
-           submission_token = secrets.token_urlsafe(32)
+        submission_token = secrets.token_urlsafe(32)
 
-           cursor.close()
-           conn.close()
+        cursor.close()
+        conn.close()
 
-           return render_template(
-               "create_prescription.html",
-               consultation=consultation,
-               today_date=today_date,
-               submission_token=submission_token
-           )
+        return render_template(
+            "create_prescription.html",
+            consultation=consultation,
+            today_date=today_date,
+            submission_token=submission_token
+        )
 
     patient_name = request.form.get(
         "patient_name", ""
