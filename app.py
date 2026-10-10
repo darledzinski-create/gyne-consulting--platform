@@ -1238,11 +1238,12 @@ def create_prescription(id):
 
     if request.method == "GET":
 
-        submission_token = secrets.token_urlsafe(32)
-
+       
         cursor.close()
         conn.close()
 
+    submission_token = secrets.token_urlsafe(32)
+        
     return render_template(
         "prescription_review.html",
         consultation=consultation,
@@ -1252,7 +1253,7 @@ def create_prescription(id):
         prescription_date=prescription_date,
         medication=medication,
         dosage_instructions=dosage_instructions,
-        submission_token=secrets.token_urlsafe(32)
+        submission_token=secrets.token
     )
     patient_name = request.form.get(
         "patient_name", ""
