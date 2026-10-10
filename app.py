@@ -1238,8 +1238,13 @@ def create_prescription(id):
 
     if request.method == "GET":
 
-        return redirect(
-            url_for("intake", id=id)
+        cursor.close()
+        conn.close()
+
+        return render_template(
+            "create_prescription.html",
+            consultation=consultation,
+            today_date=today_date
         )
 
     patient_name = request.form.get(
