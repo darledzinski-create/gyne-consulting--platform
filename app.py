@@ -1622,6 +1622,83 @@ def generate_prescription_pdf(id):
 
     if send_to_patient:
 
+        submission_token = request.form.get(
+            "submission_token",
+            ""
+        ).strip()
+
+        if not submission_token:
+
+            return (
+                "Missing submission token. "
+                "Please reopen the prescription review form.",
+                400
+            )
+
+        guard_conn = get_db_connection()
+        guard_cursor = guard_conn.cursor()
+
+        try:
+
+            guard_cursor.execute(
+                """
+                INSERT INTO prescription_email_sends
+                (
+                    submission_token,
+                    consultation_id,
+                    status,
+                    created_at
+                )
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (submission_token)
+                DO NOTHING
+                RETURNING submission_token
+                """,
+                (
+                    submission_token,
+                    id,
+                    "processing",
+                    datetime.now(
+                        ZoneInfo("Africa/Johannesburg")
+                    ).isoformat()
+                )
+            )
+
+            email_claim = guard_cursor.fetchone()
+
+            guard_conn.commit()
+
+        except Exception:
+
+            guard_conn.rollback()
+
+            logger.exception(
+                "Could not claim prescription email submission."
+            )
+
+            return (
+                "Could not verify the email submission. "
+                "No email was sent by this attempt.",
+                500
+            )
+
+        finally:
+
+            guard_cursor.close()
+            guard_conn.close()
+
+        if not email_claim:
+
+            logger.warning(
+                "Duplicate prescription email submission blocked."
+            )
+
+            return (
+                "This prescription email request was already "
+                "submitted. No duplicate email was sent.",
+                409
+            )
+
         email_result = send_pdf_email(
             patient_email,
             patient_name,
