@@ -62,6 +62,30 @@
                 <p>Follow-Ups Due</p>
             </div>
 
+<div class="notes-section">
+
+    <h3>Patients Requiring Follow-Up</h3>
+
+    {% if follow_up_patients %}
+
+        <ul>
+            {% for patient in follow_up_patients %}
+                <li>
+                    {{ patient.name }}
+                    — Follow-up:
+                    {{ patient.follow_up_date }}
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <p>No patient follow-ups are currently due.</p>
+
+    {% endif %}
+
+</div>
+
         </div>
 
         <!-- Search -->
