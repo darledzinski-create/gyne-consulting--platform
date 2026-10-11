@@ -676,9 +676,9 @@ def admin():
         in_progress_count=in_progress_count,
         completed_count=completed_count,
         appointment_count=appointment_count,
+        follow_up_due_count=follow_up_due_count,
         page=page,
         total_pages=total_pages
-    )
 
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
 def create_referral(id):
