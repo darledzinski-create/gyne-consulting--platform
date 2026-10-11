@@ -342,6 +342,10 @@ def update_notes(id):
         "doctor_notes"
     )
 
+    follow_up_date = request.form.get(
+        "follow_up_date"
+    ) or None
+
     conn = get_db_connection()
 
     cursor = conn.cursor()
