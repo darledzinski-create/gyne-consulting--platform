@@ -654,6 +654,15 @@ def admin():
 
     appointment_count = cursor.fetchone()[0]
 
+    cursor.execute("""
+        SELECT COUNT(*)
+        FROM consultations
+        WHERE follow_up_date IS NOT NULL
+          AND follow_up_date <= CURRENT_DATE
+          AND status != 'Completed'
+    """)
+    follow_up_due_count = cursor.fetchone()[0]
+
     cursor.close()
     conn.close()
 
