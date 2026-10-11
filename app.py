@@ -482,6 +482,11 @@ def admin():
         page - 1
     ) * per_page
 
+    consultation_id = request.args.get(
+        "consultation_id",
+        type=int
+    )
+
     search = request.args.get(
         "search",
         ""
