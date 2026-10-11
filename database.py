@@ -53,6 +53,11 @@ def create_table():
     """)
 
     cursor.execute("""
+        ALTER TABLE consultations
+        ADD COLUMN IF NOT EXISTS follow_up_date DATE
+    """)
+
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS appointments (
 
             id SERIAL PRIMARY KEY,
