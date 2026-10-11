@@ -680,6 +680,8 @@ def admin():
         page=page,
         total_pages=total_pages
 
+    )
+
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
 def create_referral(id):
 
