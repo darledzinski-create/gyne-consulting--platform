@@ -245,6 +245,19 @@ body {
 
 }
 
+
+.admin-section .feature-card h3 {
+
+    font-size: 2.4rem;
+
+    font-weight: 700;
+
+    color: #245b86;
+
+    margin-bottom: 8px;
+
+}
+
 .feature-card p {
 
     font-size: 1rem;
