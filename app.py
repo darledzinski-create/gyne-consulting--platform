@@ -1757,6 +1757,14 @@ Dr Dariusz Ledzinski
             guard_cursor.close()
             guard_conn.close()
 
+        if send_to_patient:
+            return (
+                "<h2>Prescription Email Submitted Successfully</h2>"
+                "<p>The approved prescription has been "
+                "submitted to Mailjet for delivery.</p>"
+                "<p><a href='/admin'>Return to Admin Dashboard</a></p>"
+        )
+
     pdf_buffer.seek(0)
 
     filename = (
