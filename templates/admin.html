@@ -71,7 +71,9 @@
         <ul>
             {% for patient in follow_up_patients %}
                 <li>
-                    {{ patient.name }}
+                    <a href="{{ url_for('admin', consultation_id=patient.id) }}#consultation-{{ patient.id }}">
+                       {{ patient.name }}
+                    </a>
                     — Follow-up:
                     {{ patient.follow_up_date }}
                 </li>
