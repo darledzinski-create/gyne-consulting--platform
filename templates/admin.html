@@ -192,9 +192,9 @@
 
         {% for consultation in consultations %}
 
-        <div class="consultation-card {% if consultation.urgency == 'urgent' %}urgent{% else %}normal{% endif %}">
-
-            <div class="card-header">
+        <div id="consultation-{{ consultation.id }}"
+             class="consultation-card {% if consultation.urgency == 'urgent' %}urgent{% else %}normal{% endif %}">
+        <div class="card-header">
 
                 <div>
                     <h3>Consultation #{{ consultation.id }}</h3>
