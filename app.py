@@ -350,14 +350,16 @@ def update_notes(id):
 
     cursor = conn.cursor()
 
-    cursor.execute(
-        """
-        UPDATE consultations
-        SET doctor_notes = %s
+        cursor.execute(
+            """
+            UPDATE consultations
+            SET doctor_notes = %s,
+            follow_up_date = %s
         WHERE id = %s
         """,
         (
             doctor_notes,
+            follow_up_date,
             id
         )
     )
