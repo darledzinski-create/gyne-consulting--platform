@@ -493,8 +493,14 @@ def admin():
     ).strip().lower()
 
    
-    if search and status_filter:
+    if consultation_id is not None:
+        cursor.execute(
+            "SELECT * FROM consultations WHERE id = %s",
+            (consultation_id,)
+        )
+        consultations = cursor.fetchall()
 
+    elif search and status_filter:
         cursor.execute(
             """
             SELECT *
