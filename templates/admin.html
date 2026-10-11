@@ -326,6 +326,15 @@
 
     <div class="notes-section">
 
+        <label for="follow-up-{{ consultation.id }}">
+            Follow-Up Date
+        </label>
+
+        <input type="date"
+               id="follow-up-{{ consultation.id }}"
+               name="follow_up_date"
+               value="{{ consultation.follow_up_date or '' }}">
+
         <h4>Doctor Notes</h4>
 
         <textarea name="doctor_notes"
