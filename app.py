@@ -663,6 +663,15 @@ def admin():
     """)
     follow_up_due_count = cursor.fetchone()[0]
 
+    cursor.execute("""
+        SELECT id, name, follow_up_date
+        FROM consultations
+        WHERE follow_up_date IS NOT NULL
+          AND follow_up_date <= CURRENT_DATE
+          AND status != 'Completed'
+        ORDER BY follow_up_date ASC, id ASC
+    """)
+    follow_up_patients = cursor.fetchall()
     cursor.close()
     conn.close()
 
