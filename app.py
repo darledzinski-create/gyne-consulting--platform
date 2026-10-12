@@ -385,34 +385,33 @@ def complete_follow_up(id):
 
     cursor.execute(
         """
-        UPDATE consultations
-        SET follow_up_completed_at = CURRENT_TIMESTAMP,
-            follow_up_date = NULL
-        WHERE id = %s
-          AND follow_up_date IS NOT NULL
-        RETURNING follow_up_date, follow_up_completed_at
+        WITH completed AS MATERIALIZED (
+            SELECT id, follow_up_date
+            FROM consultations
+            WHERE id = %s
+              AND follow_up_date IS NOT NULL
+            FOR UPDATE
+        ),
+        updated AS (
+            UPDATE consultations
+            SET follow_up_completed_at = CURRENT_TIMESTAMP,
+                follow_up_date = NULL
+            WHERE id IN (SELECT id FROM completed)
+            RETURNING id, follow_up_completed_at
+        )
+        INSERT INTO follow_up_history (
+            consultation_id,
+            follow_up_date,
+            completed_at
+        )
+        SELECT updated.id,
+               completed.follow_up_date,
+               updated.follow_up_completed_at
+        FROM updated
+        JOIN completed ON completed.id = updated.id
         """,
         (id,)
     )
-
-    completed_follow_up = cursor.fetchone()
-
-    if completed_follow_up:
-        cursor.execute(
-            """
-            INSERT INTO follow_up_history (
-                consultation_id,
-                follow_up_date,
-                completed_at
-            )
-            VALUES (%s, %s, %s)
-            """,
-            (
-                id,
-                completed_follow_up[0],
-                completed_follow_up[1]
-            )
-        )
     conn.commit()
 
     cursor.close()
