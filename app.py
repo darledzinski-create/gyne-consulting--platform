@@ -380,6 +380,10 @@ def complete_follow_up(id):
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
+    follow_up_outcome = request.form.get(
+        "follow_up_outcome", ""
+    ).strip()
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
