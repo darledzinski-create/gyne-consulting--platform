@@ -403,19 +403,21 @@ def complete_follow_up(id):
             WHERE id IN (SELECT id FROM completed)
             RETURNING id, follow_up_completed_at
         )
+
         INSERT INTO follow_up_history (
             consultation_id,
             follow_up_date,
-            completed_at
+            completed_at,
+            outcome
         )
         SELECT updated.id,
                completed.follow_up_date,
-               updated.follow_up_completed_at
+               updated.follow_up_completed_at,
+               %s
         FROM updated
         JOIN completed ON completed.id = updated.id
         """,
-        (id,)
-    )
+        (id, follow_up_outcome)
     conn.commit()
 
     cursor.close()
