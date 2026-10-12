@@ -418,6 +418,8 @@ def complete_follow_up(id):
         JOIN completed ON completed.id = updated.id
         """,
         (id, follow_up_outcome)
+
+    )
     conn.commit()
 
     cursor.close()
