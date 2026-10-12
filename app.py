@@ -728,6 +728,13 @@ def admin():
         ORDER BY follow_up_date ASC, id ASC
     """)
     follow_up_patients = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT consultation_id, follow_up_date, completed_at
+        FROM follow_up_history
+        ORDER BY completed_at DESC
+    """)
+    follow_up_history = cursor.fetchall()
     cursor.close()
     conn.close()
 
