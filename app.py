@@ -390,10 +390,29 @@ def complete_follow_up(id):
             follow_up_date = NULL
         WHERE id = %s
           AND follow_up_date IS NOT NULL
+        RETURNING follow_up_date, follow_up_completed_at
         """,
         (id,)
     )
 
+    completed_follow_up = cursor.fetchone()
+
+    if completed_follow_up:
+        cursor.execute(
+            """
+            INSERT INTO follow_up_history (
+                consultation_id,
+                follow_up_date,
+                completed_at
+            )
+            VALUES (%s, %s, %s)
+            """,
+            (
+                id,
+                completed_follow_up[0],
+                completed_follow_up[1]
+            )
+        )
     conn.commit()
 
     cursor.close()
