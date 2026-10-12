@@ -749,6 +749,7 @@ def admin():
         appointment_count=appointment_count,
         follow_up_due_count=follow_up_due_count,
         follow_up_patients=follow_up_patients,
+        follow_up_history=follow_up_history,
         page=page,
         total_pages=total_pages
 
