@@ -63,6 +63,17 @@ def create_table():
     """)
 
     cursor.execute("""
+        CREATE TABLE IF NOT EXISTS follow_up_history (
+            id SERIAL PRIMARY KEY,
+            consultation_id INTEGER NOT NULL
+                REFERENCES consultations(id),
+            follow_up_date DATE NOT NULL,
+            completed_at TIMESTAMP NOT NULL
+                DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS appointments (
 
             id SERIAL PRIMARY KEY,
