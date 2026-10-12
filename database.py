@@ -74,6 +74,11 @@ def create_table():
     """)
 
     cursor.execute("""
+        ALTER TABLE follow_up_history
+        ADD COLUMN IF NOT EXISTS outcome TEXT
+    """)
+
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS appointments (
 
             id SERIAL PRIMARY KEY,
