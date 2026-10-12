@@ -357,6 +357,20 @@
 
     <div class="notes-section">
 
+        <label for="outcome-{{ consultation.id }}">
+            Follow-Up Outcome
+        </label>
+
+        <textarea
+            id="outcome-{{ consultation.id }}"
+            name="follow_up_outcome"
+            rows="4"
+            placeholder="Record the clinical outcome of this follow-up"></textarea>
+
+    </div>
+
+    <div class="notes-section">
+
         <label for="follow-up-{{ consultation.id }}">
             Follow-Up Date
         </label>
