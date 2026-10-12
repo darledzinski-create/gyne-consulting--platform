@@ -382,6 +382,24 @@
 
 </form>
 
+{% if consultation.follow_up_date %}
+
+<form method="POST"
+      action="{{ url_for('complete_follow_up', id=consultation.id) }}">
+
+    <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+
+    <button type="submit"
+            class="btn-primary">
+        Complete Follow-Up
+    </button>
+
+</form>
+
+{% endif %}
+
 
 <div class="document-actions">
 
