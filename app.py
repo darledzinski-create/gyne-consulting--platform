@@ -374,6 +374,33 @@ def update_notes(id):
         url_for("admin")
     )
 
+@app.route("/complete-follow-up/<int:id>", methods=["POST"])
+def complete_follow_up(id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE consultations
+        SET follow_up_completed_at = CURRENT_TIMESTAMP,
+            follow_up_date = NULL
+        WHERE id = %s
+          AND follow_up_date IS NOT NULL
+        """,
+        (id,)
+    )
+
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    return redirect(url_for("admin"))
+
 
 @app.route("/export-csv")
 def export_csv():
