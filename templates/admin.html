@@ -400,6 +400,33 @@
 
 {% endif %}
 
+<div class="notes-section">
+
+    <h4>Follow-Up History</h4>
+
+    {% set history = follow_up_history
+        | selectattr('consultation_id', 'equalto', consultation.id)
+        | list %}
+
+    {% if history %}
+
+        <ul>
+            {% for entry in history %}
+                <li>
+                    Scheduled: {{ entry.follow_up_date }}
+                    — Completed: {{ entry.completed_at }}
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <p>No completed follow-ups recorded yet.</p>
+
+    {% endif %}
+
+</div>
+
 
 <div class="document-actions">
 
