@@ -422,30 +422,35 @@
         | selectattr('consultation_id', 'equalto', consultation.id)
         | list %}
 
-{% for entry in history %}
-    <li>
-        <strong>Scheduled:</strong>
-        {{ entry.follow_up_date }}
+    {% if history %}
 
-        <br>
+        <ul>
+            {% for entry in history %}
+                <li>
+                    <strong>Scheduled:</strong>
+                    {{ entry.follow_up_date }}
 
-        <strong>Completed:</strong>
-        {{ entry.completed_at }}
+                    <br>
 
-        <br>
+                    <strong>Completed:</strong>
+                    {{ entry.completed_at }}
 
-        <strong>Clinical Outcome:</strong>
-        {{ entry.outcome or 'Not recorded' }}
-    </li>
-{% endfor %}
+                    <br>
+
+                    <strong>Clinical Outcome:</strong>
+                    {{ entry.outcome or 'Not recorded' }}
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
 
         <p>No completed follow-ups recorded yet.</p>
 
     {% endif %}
 
 </div>
-
-
+            
 <div class="document-actions">
 
     <a href="/create-referral/{{ consultation.id }}"
