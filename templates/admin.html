@@ -422,18 +422,22 @@
         | selectattr('consultation_id', 'equalto', consultation.id)
         | list %}
 
-    {% if history %}
+{% for entry in history %}
+    <li>
+        <strong>Scheduled:</strong>
+        {{ entry.follow_up_date }}
 
-        <ul>
-            {% for entry in history %}
-                <li>
-                    Scheduled: {{ entry.follow_up_date }}
-                    — Completed: {{ entry.completed_at }}
-                </li>
-            {% endfor %}
-        </ul>
+        <br>
 
-    {% else %}
+        <strong>Completed:</strong>
+        {{ entry.completed_at }}
+
+        <br>
+
+        <strong>Clinical Outcome:</strong>
+        {{ entry.outcome or 'Not recorded' }}
+    </li>
+{% endfor %}
 
         <p>No completed follow-ups recorded yet.</p>
 
