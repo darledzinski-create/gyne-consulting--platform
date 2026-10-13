@@ -44,10 +44,10 @@ body {
             rgba(255,255,255,0.35) 58%,
             rgba(255,255,255,0.00) 75%
         ),
-       url("/static/images/Unknown.png");
-
-    background-size: cover;
-    background-position: center, center top;
+        url("/static/images/Unknown.png");
+    background-size: cover, auto 100%;
+    background-position: center, right center;
+    background-repeat: no-repeat;
 
     box-shadow: 0 20px 45px rgba(0,0,0,0.12);
 
