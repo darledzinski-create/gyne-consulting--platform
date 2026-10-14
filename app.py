@@ -1946,7 +1946,17 @@ def clear_consultations():
     except Exception:
 
         conn.rollback()
-        raise
+
+        logger.exception(
+            "Consultations could not be deleted. "
+            "Related records may exist."
+        )
+
+        flash(
+            "Consultations were not deleted because "
+            "related clinical records must be protected.",
+            "warning"
+        )
 
     finally:
 
