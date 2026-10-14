@@ -1900,6 +1900,14 @@ def delete_consultation(id):
 
     cursor.execute(
         """
+        DELETE FROM follow_up_history
+        WHERE consultation_id = %s
+        """,
+        (id,)
+    )
+
+    cursor.execute(
+        """
         DELETE FROM consultations
         WHERE id = %s
         """,
