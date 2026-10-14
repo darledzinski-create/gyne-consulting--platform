@@ -739,8 +739,8 @@ def admin():
     """)
     follow_up_patients = cursor.fetchall()
 
-    cursor.execute("""
-        SELECT consultation_id, follow_up_date, completed_at
+        cursor.execute("""
+        SELECT consultation_id, follow_up_date, completed_at, outcome
         FROM follow_up_history
         ORDER BY completed_at DESC
     """)
