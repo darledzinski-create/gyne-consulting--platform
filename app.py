@@ -384,8 +384,6 @@ def complete_follow_up(id):
         "follow_up_outcome", ""
     ).strip()
 
-    print("FOLLOW-UP OUTCOME RECEIVED:", repr(follow_up_outcome), flush=True)
-
     conn = get_db_connection()
     cursor = conn.cursor()
 
