@@ -507,21 +507,6 @@
                 class="btn-green">
                  Offer Appointment
              </a>
-
-<form method="POST"
-      action="{{ url_for('delete_consultation', id=consultation.id) }}"
-      onsubmit="return confirm('Permanently delete this consultation and its follow-up history?');">
-
-    <input type="hidden"
-           name="csrf_token"
-           value="{{ csrf_token() }}">
-
-    <button type="submit"
-            class="btn-danger">
-        Delete Consultation
-    </button>
-
-</form>
          </div>
 
          </div>
