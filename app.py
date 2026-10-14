@@ -1934,10 +1934,15 @@ def clear_consultations():
 
         cursor.execute(
             """
-            DELETE FROM consultations
+            DELETE FROM follow_up_history
             """
         )
 
+        cursor.execute(
+            """
+            DELETE FROM consultations
+            """
+        )
         logger.info("ALL CONSULTATIONS DELETE EXECUTED")
 
         conn.commit()
