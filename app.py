@@ -422,6 +422,8 @@ def complete_follow_up(id):
         (id, follow_up_outcome)
 
     )
+
+    print("FOLLOW-UP ROWS INSERTED:", cursor.rowcount, flush=True)
     conn.commit()
 
     cursor.close()
