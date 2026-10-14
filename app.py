@@ -1883,7 +1883,7 @@ Dr Dariusz Ledzinski
     )
 
 
-@app.route("/delete/<int:id>")
+@app.route("/delete/<int:id>", methods=["POST"])
 def delete_consultation(id):
 
     if not session.get(
