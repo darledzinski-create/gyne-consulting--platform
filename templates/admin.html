@@ -398,19 +398,6 @@
 
 {% if consultation.follow_up_date %}
 
-<form method="POST"
-      action="{{ url_for('complete_follow_up', id=consultation.id) }}">
-
-    <input type="hidden"
-           name="csrf_token"
-           value="{{ csrf_token() }}">
-
-    <button type="submit"
-            class="btn-primary">
-        Complete Follow-Up
-    </button>
-
-</form>
 
 {% endif %}
 
@@ -442,7 +429,33 @@
                 </li>
             {% endfor %}
         </ul>
+<form method="POST"
+      action="{{ url_for('complete_follow_up', id=consultation.id) }}">
 
+    <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+
+    <div class="notes-section">
+
+        <label for="complete-outcome-{{ consultation.id }}">
+            Follow-Up Outcome
+        </label>
+
+        <textarea
+            id="complete-outcome-{{ consultation.id }}"
+            name="follow_up_outcome"
+            rows="4"
+            placeholder="Record the clinical outcome before completing the follow-up"></textarea>
+
+    </div>
+
+    <button type="submit"
+            class="btn-primary">
+        Complete Follow-Up
+    </button>
+
+</form>
     {% else %}
 
         <p>No completed follow-ups recorded yet.</p>
