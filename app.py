@@ -1883,9 +1883,9 @@ Dr Dariusz Ledzinski
     )
 
 
-@app.route("/delete/<int:id>", methods=["POST"])
-def delete_consultation(id):
-
+@app.route("/clear-consultations", methods=["POST"])
+def clear_consultations():
+    abort(403)
     if not session.get(
         "admin_logged_in"
     ):
