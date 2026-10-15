@@ -756,6 +756,7 @@ def admin():
         non_urgent_count=non_urgent_count,
         new_count=new_count,
         in_progress_count=in_progress_count,
+        completed_count=completed_count,
         appointment_count=appointment_count,
         follow_up_due_count=follow_up_due_count,
         follow_up_patients=follow_up_patients,
