@@ -1884,7 +1884,7 @@ Dr Dariusz Ledzinski
 
 
 @app.route("/clear-consultations", methods=["POST"])
-def clear_consultations():
+def disabled_consultation_deletion():
     abort(403)
     if not session.get(
         "admin_logged_in"
@@ -1924,8 +1924,7 @@ def clear_consultations():
     )
 
 @app.route("/clear-consultations", methods=["POST"])
-def clear_consultations():
-
+def unused_clear_consultations():
     logger.info("CLEAR CONSULTATIONS ROUTE REACHED")
 
     if not session.get(
