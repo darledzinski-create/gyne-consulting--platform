@@ -20,6 +20,10 @@
         </button>
     </form>
 
+{% if not appointments %}
+    <p>No appointments found.</p>
+{% endif %}
+
     <div class="cards-grid">
     {% for appointment in appointments %}
 
