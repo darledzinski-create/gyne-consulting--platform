@@ -2305,6 +2305,7 @@ def update_status(
 
 @app.route("/delete-appointment/<int:id>")
 def delete_appointment(id):
+    return "Appointment deletion is disabled to protect clinical records.", 403
 
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
