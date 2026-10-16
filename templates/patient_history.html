@@ -13,6 +13,24 @@
 
     <p>Dr Dariusz — Gynaecological Consulting Platform</p>
 
+    <h2>Find a Patient</h2>
+
+<form method="GET" action="/patient-history">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Enter patient name or email"
+    >
+
+    <button type="submit">
+        Search Patient
+    </button>
+
+</form>
+
+<hr>
+
     <h2>Stored Clinical Records</h2>
 
     <p>Consultations: {{ consultation_count }}</p>
