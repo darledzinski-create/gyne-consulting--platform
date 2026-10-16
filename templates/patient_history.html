@@ -54,6 +54,31 @@
 
 {% endif %}
 
+<h2>Appointment Search Results</h2>
+
+{% if appointments_found %}
+
+    {% for appointment in appointments_found %}
+
+        <div>
+            <p><strong>Patient:</strong> {{ appointment[1] }}</p>
+            <p><strong>Email:</strong> {{ appointment[2] }}</p>
+            <p><strong>Appointment Date:</strong> {{ appointment[3] }}</p>
+            <p><strong>Time:</strong> {{ appointment[4] }}</p>
+            <p><strong>Practice:</strong> {{ appointment[5] }}</p>
+            <p><strong>Status:</strong> {{ appointment[6] }}</p>
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No matching appointments found.</p>
+
+{% endif %}
+
     <h2>Stored Clinical Records</h2>
 
     <p>Consultations: {{ consultation_count }}</p>
