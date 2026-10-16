@@ -781,10 +781,19 @@ def patient_history():
 
     consultation_count = cursor.fetchone()[0]
 
+    cursor.execute(
+        "SELECT COUNT(*) FROM appointments"
+    )
+
+    appointment_count = cursor.fetchone()[0]
+
     cursor.close()
     conn.close()
 
-    return f"Patient History — Consultations stored: {consultation_count}"
+    return (
+        f"Patient History — Consultations stored: {consultation_count}"
+        f" | Appointments stored: {appointment_count}"
+    )
 
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
 def create_referral(id):
