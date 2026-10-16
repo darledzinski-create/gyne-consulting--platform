@@ -790,9 +790,10 @@ def patient_history():
     cursor.close()
     conn.close()
 
-    return (
-        f"Patient History — Consultations stored: {consultation_count}"
-        f" | Appointments stored: {appointment_count}"
+    return render_template(
+        "patient_history.html",
+        consultation_count=consultation_count,
+        appointment_count=appointment_count
     )
 
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
