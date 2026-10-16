@@ -31,6 +31,29 @@
 
 <hr>
 
+<h2>Consultation Search Results</h2>
+
+{% if consultations_found %}
+
+    {% for consultation in consultations_found %}
+
+        <div>
+            <p><strong>Patient:</strong> {{ consultation[1] }}</p>
+            <p><strong>Email:</strong> {{ consultation[2] }}</p>
+            <p><strong>Date:</strong> {{ consultation[3] }}</p>
+            <p><strong>Status:</strong> {{ consultation[4] }}</p>
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No matching consultations found.</p>
+
+{% endif %}
+
     <h2>Stored Clinical Records</h2>
 
     <p>Consultations: {{ consultation_count }}</p>
