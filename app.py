@@ -772,6 +772,10 @@ def patient_history():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
+    search = request.args.get("search", "").strip()
+
+    app.logger.info("Patient History search requested: %s", bool(search))
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
