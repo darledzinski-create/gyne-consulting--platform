@@ -831,7 +831,8 @@ def patient_history():
         "patient_history.html",
         consultation_count=consultation_count,
         appointment_count=appointment_count,
-        consultations_found=consultations_found
+        consultations_found=consultations_found,
+        appointments_found=appointments_found
     )
 
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
