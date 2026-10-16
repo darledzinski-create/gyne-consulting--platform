@@ -772,8 +772,20 @@ def patient_history():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
-    return "Patient History page is ready."
-        
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM consultations"
+    )
+
+    consultation_count = cursor.fetchone()[0]
+
+    cursor.close()
+    conn.close()
+
+    return f"Patient History — Consultations stored: {consultation_count}"
+
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
 def create_referral(id):
 
