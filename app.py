@@ -765,6 +765,14 @@ def admin():
         total_pages=total_pages
 
     )
+
+@app.route("/patient-history")
+def patient_history():
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    return "Patient History page is ready."
         
 @app.route("/create-referral/<int:id>", methods=["GET", "POST"])
 def create_referral(id):
