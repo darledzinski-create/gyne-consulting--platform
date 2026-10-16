@@ -807,6 +807,23 @@ def patient_history():
 
     appointment_count = cursor.fetchone()[0]
 
+    appointments_found = []
+
+    if search:
+        cursor.execute(
+            """
+            SELECT id, name, email, preferred_date,
+                   preferred_time, practice, status
+            FROM appointments
+            WHERE name ILIKE %s OR email ILIKE %s
+            ORDER BY id DESC
+            LIMIT 50
+            """,
+            (f"%{search}%", f"%{search}%")
+        )
+
+        appointments_found = cursor.fetchall()
+
     cursor.close()
     conn.close()
 
