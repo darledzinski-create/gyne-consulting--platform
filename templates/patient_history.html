@@ -17,11 +17,12 @@
 
 <form method="GET" action="/patient-history">
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Enter patient name or email"
-    >
+<input
+    type="text"
+    name="search"
+    placeholder="Enter patient name or email"
+    value="{{ request.args.get('search', '') }}"
+>
 
     <button type="submit">
         Search Patient
