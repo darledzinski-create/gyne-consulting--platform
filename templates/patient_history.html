@@ -77,12 +77,17 @@
 
     {% endfor %}
 
+    
 {% else %}
 
-    <p>No matching appointments found.</p>
+    {% if request.args.get("search", "").strip() %}
+
+        <p>No matching appointments found.</p>
+
+    {% endif %}
 
 {% endif %}
-
+    
     <h2>Stored Clinical Records</h2>
 
     <p>Consultations: {{ consultation_count }}</p>
