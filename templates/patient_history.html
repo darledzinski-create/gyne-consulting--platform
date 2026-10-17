@@ -32,7 +32,9 @@
 
 <hr>
 
-<h2>Consultation Search Results</h2>
+{% if request.args.get("search", "").strip() %}
+    <h2>Consultation Search Results</h2>
+{% endif %}
 
 {% if consultations_found %}
 
