@@ -61,8 +61,10 @@
 
 {% endif %}
 
-<h2>Appointment Search Results</h2>
-
+{% if request.args.get("search", "").strip() %}
+    <h2>Appointment Search Results</h2>
+{% endif %}
+    
 {% if appointments_found %}
 
     {% for appointment in appointments_found %}
