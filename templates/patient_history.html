@@ -50,7 +50,11 @@
 
 {% else %}
 
-    <p>No matching consultations found.</p>
+    {% if request.args.get("search", "").strip() %}
+
+        <p>No matching consultations found.</p>
+
+    {% endif %}
 
 {% endif %}
 
