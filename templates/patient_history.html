@@ -45,6 +45,11 @@
             <p><strong>Email:</strong> {{ consultation[2] }}</p>
             <p><strong>Date:</strong> {{ consultation[3] }}</p>
             <p><strong>Status:</strong> {{ consultation[4] }}</p>
+            <p>
+                <a href="{{ url_for('admin', consultation_id=consultation[0]) }}">
+                    View Consultation
+                </a>
+            </p>
         </div>
 
         <hr>
@@ -76,6 +81,7 @@
             <p><strong>Time:</strong> {{ appointment[4] }}</p>
             <p><strong>Practice:</strong> {{ appointment[5] }}</p>
             <p><strong>Status:</strong> {{ appointment[6] }}</p>
+            
         </div>
 
         <hr>
