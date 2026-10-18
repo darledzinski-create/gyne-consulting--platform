@@ -7,7 +7,7 @@
     <h1>Appointments</h1>
 
     <p>
-        <a href="{{ url_for('patient_history') }}">
+        <a href="{{ url_for('patient_history', search=request.args.get('history_search', '')) }}">
             ← Return to Patient History
         </a>
     </p>
