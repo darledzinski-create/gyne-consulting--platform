@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient History</title>
-</head>
-
-<body>
+<div class="consultation-container">
 
     <h1>Patient History</h1>
 
@@ -112,5 +106,6 @@
 
     <a href="/admin">Return to Admin Dashboard</a>
 
-</body>
-</html>
+</div>
+
+{% endblock %}
