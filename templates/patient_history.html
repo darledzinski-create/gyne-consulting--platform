@@ -46,7 +46,7 @@
             <p><strong>Date:</strong> {{ consultation[3] }}</p>
             <p><strong>Status:</strong> {{ consultation[4] }}</p>
             <p>
-                <a href="{{ url_for('admin', consultation_id=consultation[0]) }}">
+                <a href="{{ url_for('admin', consultation_id=consultation[0], history_search=request.args.get('search', '')) }}">   
                     View Consultation
                 </a>
             </p>
