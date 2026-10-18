@@ -20,6 +20,7 @@
     {% if session.get("admin_logged_in") %}
         <a href="/admin">Consultation Records</a>
         <a href="/appointments">Appointments</a>
+        <a href="{{ url_for('patient_history') }}">Patient History</a>
         <a href="/logout">Logout</a>
     {% endif %} 
        
