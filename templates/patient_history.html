@@ -82,7 +82,7 @@
             <p><strong>Practice:</strong> {{ appointment[5] }}</p>
             <p><strong>Status:</strong> {{ appointment[6] }}</p>
             <p>
-                <a href="{{ url_for('appointments', appointment_id=appointment[0]) }}">
+                <a href="{{ url_for('appointments', appointment_id=appointment[0], history_search=request.args.get('search', '')) }}">
                     View Appointment
                 </a>
             </p>
