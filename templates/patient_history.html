@@ -81,6 +81,11 @@
             <p><strong>Time:</strong> {{ appointment[4] }}</p>
             <p><strong>Practice:</strong> {{ appointment[5] }}</p>
             <p><strong>Status:</strong> {{ appointment[6] }}</p>
+            <p>
+                <a href="{{ url_for('appointments', appointment_id=appointment[0]) }}">
+                    View Appointment
+                </a>
+            </p>
             
         </div>
 
