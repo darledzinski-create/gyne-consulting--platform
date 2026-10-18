@@ -2179,7 +2179,25 @@ def appointments():
         ""
     ).strip().lower()
 
-    if search:
+    appointment_id = request.args.get(
+        "appointment_id",
+        type=int
+    )
+
+    if appointment_id is not None:
+
+        cursor.execute(
+            """
+            SELECT *
+            FROM appointments
+            WHERE id = %s
+            """,
+            (appointment_id,)
+        )
+
+        appointments = cursor.fetchall()
+
+    elif search:
 
         cursor.execute(
             """
