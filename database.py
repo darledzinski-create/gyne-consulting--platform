@@ -24,6 +24,30 @@ def make_invoice_number(invoice_id, issue_year):
     return f"INV-{issue_year}-{invoice_id:06d}"
 
 
+def create_paid_invoice(
+    consultation_id,
+    consultation_date,
+    amount,
+    tariff_code,
+    icd10_code,
+    payment_date,
+    payment_method,
+    payment_verified
+):
+    if payment_verified is not True:
+        raise ValueError(
+            "Payment must be verified before issuing a paid invoice."
+        )
+
+    if amount <= 0:
+        raise ValueError(
+            "Invoice amount must be greater than zero."
+        )
+
+    raise NotImplementedError(
+        "Invoice database saving is not enabled yet."
+    )
+
 def create_table():
 
     conn = get_db_connection()
