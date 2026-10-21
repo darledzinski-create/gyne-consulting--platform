@@ -1405,6 +1405,16 @@ def build_invoice_pdf():
         height - 125,
         "Online Gynaecological Consultation"
     )
+
+    
+    pdf.setFont("Helvetica-Bold", 18)
+
+    pdf.drawCentredString(
+        width / 2,
+        height - 180,
+        "SAMPLE ONLY - NOT A VALID INVOICE"
+    )
+
     pdf.save()
 
     pdf_buffer.seek(0)
