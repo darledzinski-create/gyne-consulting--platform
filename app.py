@@ -1397,12 +1397,10 @@ def create_invoice(id):
     if not consultation:
         return "Consultation not found", 404
 
-    return (
-        "Invoice preparation page — "
-        "Consultation ID: " + str(consultation[0]) +
-        ". No invoice has been issued."
+    return render_template(
+        "create_invoice.html",
+        consultation=consultation
     )
-
 @app.route(
     "/create-prescription/<int:id>",
     methods=["GET", "POST"]
