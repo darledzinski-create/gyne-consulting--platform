@@ -1392,12 +1392,19 @@ def build_invoice_pdf():
 
     pdf.setFont("Helvetica", 12)
 
-    pdf.drawString(
+       pdf.drawString(
         60,
         height - 100,
-        "Paid Invoice - PDF Layout Test"
+        "PAID INVOICE"
     )
 
+    pdf.setFont("Helvetica", 10)
+
+    pdf.drawString(
+        60,
+        height - 125,
+        "Online Gynaecological Consultation"
+    )
     pdf.save()
 
     pdf_buffer.seek(0)
