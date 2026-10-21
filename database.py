@@ -153,6 +153,12 @@ def create_table():
         )
     """)
 
+        cursor.execute("""
+        CREATE UNIQUE INDEX IF NOT EXISTS
+        paid_invoices_consultation_unique
+        ON paid_invoices (consultation_id)
+    """)
+
 
     conn.commit()
 
