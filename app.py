@@ -1369,6 +1369,41 @@ Dr Dariusz Ledzinski
         }
     )
 
+
+def build_invoice_pdf():
+
+    pdf_buffer = io.BytesIO()
+
+    pdf = canvas.Canvas(
+        pdf_buffer,
+        pagesize=A4
+    )
+
+    width, height = A4
+
+    pdf.setFont("Helvetica-Bold", 16)
+
+    pdf.drawString(
+        60,
+        height - 70,
+        "Dr Dariusz Consulting"
+    )
+
+    pdf.setFont("Helvetica", 12)
+
+    pdf.drawString(
+        60,
+        height - 100,
+        "Paid Invoice - PDF Layout Test"
+    )
+
+    pdf.save()
+
+    pdf_buffer.seek(0)
+
+    return pdf_buffer
+
+
 @app.route("/create-invoice/<int:id>", methods=["GET"])
 def create_invoice(id):
 
