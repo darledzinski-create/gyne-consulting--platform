@@ -1404,6 +1404,23 @@ def build_invoice_pdf():
     return pdf_buffer
 
 
+@app.route("/invoice-pdf-test", methods=["GET"])
+def invoice_pdf_test():
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    pdf_buffer = build_invoice_pdf()
+
+    return send_file(
+        pdf_buffer,
+        mimetype="application/pdf",
+        as_attachment=False,
+        download_name="Invoice_Layout_Test.pdf"
+    )
+
+
+
 @app.route("/create-invoice/<int:id>", methods=["GET"])
 def create_invoice(id):
 
