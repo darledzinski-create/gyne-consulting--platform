@@ -120,6 +120,40 @@ def create_table():
         )
     """)
 
+    
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS paid_invoices (
+
+            id SERIAL PRIMARY KEY,
+
+            consultation_id INTEGER NOT NULL
+                REFERENCES consultations(id),
+
+            invoice_number TEXT UNIQUE NOT NULL,
+
+            consultation_date DATE NOT NULL,
+
+            amount NUMERIC(10, 2) NOT NULL
+                CHECK (amount > 0),
+
+            tariff_code TEXT,
+
+            icd10_code TEXT,
+
+            payment_date DATE NOT NULL,
+
+            payment_method TEXT NOT NULL,
+
+            payment_verified BOOLEAN NOT NULL
+                DEFAULT FALSE,
+
+            issued_at TIMESTAMP NOT NULL
+                DEFAULT CURRENT_TIMESTAMP
+
+        )
+    """)
+
+
     conn.commit()
 
     cursor.close()
