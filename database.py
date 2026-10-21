@@ -20,6 +20,9 @@ def get_db_connection():
 
     return conn
 
+def make_invoice_number(invoice_id, issue_year):
+    return f"INV-{issue_year}-{invoice_id:06d}"
+
 
 def create_table():
 
@@ -124,12 +127,8 @@ def create_table():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS paid_invoices (
 
-            id SERIAL PRIMARY KEY,
-
-            consultation_id INTEGER NOT NULL
-                REFERENCES consultations(id),
-
-            invoice_number TEXT UNIQUE NOT NULL,
+           
+            
 
             consultation_date DATE NOT NULL,
 
