@@ -1,0 +1,132 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="consultation-container">
+
+    <div class="feature-card card">
+
+        <!-- Practice logo will be added here later -->
+
+        <h2>Prepare Paid Invoice</h2>
+
+        <p>
+            Online Gynaecological Consultation
+        </p>
+
+        <p>
+            <strong>Consultation ID:</strong>
+            {{ consultation.id }}
+        </p>
+
+        <p>
+            <strong>Patient:</strong>
+            {{ consultation.name }}
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            {{ consultation.email }}
+        </p>
+
+        <hr>
+
+        <h3>Invoice Details</h3>
+
+        <form>
+
+            <label for="consultation_date">
+                Consultation Date
+            </label>
+
+            <input
+                type="date"
+                id="consultation_date"
+                name="consultation_date"
+                required
+            >
+
+            <label for="amount">
+                Consultation Fee (ZAR)
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                name="amount"
+                min="0.01"
+                step="0.01"
+                placeholder="Enter consultation fee"
+                required
+            >
+
+            <label for="tariff_code">
+                Medical Aid Tariff Code
+            </label>
+
+            <input
+                type="text"
+                id="tariff_code"
+                name="tariff_code"
+                placeholder="Enter applicable code"
+            >
+
+            <label for="icd10_code">
+                ICD-10 Code
+            </label>
+
+            <input
+                type="text"
+                id="icd10_code"
+                name="icd10_code"
+                placeholder="Enter appropriate diagnosis code"
+            >
+
+            <label for="payment_date">
+                Date Payment Received
+            </label>
+
+            <input
+                type="date"
+                id="payment_date"
+                name="payment_date"
+                required
+            >
+
+            <label for="payment_method">
+                Payment Method
+            </label>
+
+            <select
+                id="payment_method"
+                name="payment_method"
+            >
+                <option value="EFT">EFT</option>
+                <option value="Cash">Cash</option>
+            </select>
+
+            <p>
+                <strong>Payment confirmation:</strong>
+                This form is a draft only. Payment
+                must be verified before a paid
+                invoice can be issued.
+            </p>
+
+            <button type="button" class="btn-primary" disabled>
+                Generate Paid Invoice — Coming Soon
+            </button>
+
+        </form>
+
+        <p>
+            <a href="{{ url_for('admin') }}">
+                ← Return to Admin Dashboard
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
