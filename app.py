@@ -1398,6 +1398,14 @@ def build_invoice_pdf():
         "PAID INVOICE"
     )
 
+    pdf.setFont("Helvetica", 11)
+
+    pdf.drawString(
+        60,
+        height - 150,
+        "Invoice Number: SAMPLE-0001"
+    )
+
     pdf.setFont("Helvetica", 10)
 
     pdf.drawString(
