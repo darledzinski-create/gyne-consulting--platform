@@ -1369,6 +1369,40 @@ Dr Dariusz Ledzinski
         }
     )
 
+@app.route("/create-invoice/<int:id>", methods=["GET"])
+def create_invoice(id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute(
+            """
+            SELECT id, name, email
+            FROM consultations
+            WHERE id = %s
+            """,
+            (id,)
+        )
+
+        consultation = cursor.fetchone()
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    if not consultation:
+        return "Consultation not found", 404
+
+    return (
+        "Invoice preparation page — "
+        "Consultation ID: " + str(consultation[0]) +
+        ". No invoice has been issued."
+    )
+
 @app.route(
     "/create-prescription/<int:id>",
     methods=["GET", "POST"]
