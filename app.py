@@ -5,8 +5,8 @@ from flask import (
     url_for,
     render_template,
     session,
-    Response
-    sent_file
+    Response,
+    send_file
 )
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
