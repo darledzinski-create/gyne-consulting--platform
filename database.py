@@ -44,12 +44,13 @@ def create_paid_invoice(
             "Invoice amount must be greater than zero."
         )
 
-        conn = get_db_connection()
+    conn = get_db_connection()
 
     try:
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
         )
+   
     finally:
         conn.close()
 
