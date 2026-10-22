@@ -1447,7 +1447,7 @@ def invoice_pdf_test():
 
 
 
-@app.route("/create-invoice/<int:id>", methods=["GET"])
+@app.route("/create-invoice/<int:id>", methods=["GET", "POST"])
 def create_invoice(id):
 
     if not session.get("admin_logged_in"):
