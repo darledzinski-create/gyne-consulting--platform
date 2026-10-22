@@ -1496,6 +1496,17 @@ def invoice_pdf_test():
                 400
             )
 
+        today_sa = datetime.now(
+            ZoneInfo("Africa/Johannesburg")
+        ).date()
+
+        if consultation_date > today_sa:
+            return (
+                "A paid invoice cannot be issued "
+                "for a future consultation.",
+                400
+            )
+
         if payment_date > consultation_date:
             return (
                 "Payment date cannot be later "
