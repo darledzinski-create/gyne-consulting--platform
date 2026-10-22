@@ -49,6 +49,20 @@ def create_paid_invoice(
 
     try:
         cursor = conn.cursor()
+        
+        cursor.execute(
+            """
+            SELECT id, invoice_number
+            FROM paid_invoices
+            WHERE consultation_id = %s
+            """,
+            (consultation_id,)
+        )
+
+        existing_invoice = cursor.fetchone()
+
+        if existing_invoice:
+            return existing_invoice
 
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
