@@ -1570,6 +1570,14 @@ def create_invoice(id):
     if not consultation:
         return "Consultation not found", 404
 
+    if request.method == "POST":
+        if consultation["status"] != "Completed":
+            return (
+                "A paid invoice can only be issued "
+                "for a completed consultation.",
+                400
+            )
+
     return render_template(
         "create_invoice.html",
         consultation=consultation
