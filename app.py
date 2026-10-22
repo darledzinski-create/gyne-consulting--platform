@@ -1552,7 +1552,7 @@ def create_invoice(id):
                 400
             )
 
-         required_fields = (
+        required_fields = (
             "consultation_date",
             "amount",
             "payment_date",
