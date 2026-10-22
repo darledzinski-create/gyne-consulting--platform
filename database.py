@@ -45,13 +45,23 @@ def create_paid_invoice(
         )
 
     conn = get_db_connection()
+    cursor = None
 
     try:
+        cursor = conn.cursor()
+
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
         )
-   
+
+    except Exception:
+        conn.rollback()
+        raise
+
     finally:
+        if cursor is not None:
+            cursor.close()
+
         conn.close()
 
 def create_table():
