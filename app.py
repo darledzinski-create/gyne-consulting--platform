@@ -1503,6 +1503,17 @@ def invoice_pdf_test():
                 400
             )
 
+        payment_method = request.form.get(
+            "payment_method", ""
+        ).strip()
+
+        if payment_method not in ("EFT", "Cash"):
+            return (
+                "Please select EFT or Cash "
+                "as the payment method.",
+                400
+            )
+
         return (
             "Invoice submission received. "
             "No invoice has been issued yet.",
