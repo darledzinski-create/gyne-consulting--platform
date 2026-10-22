@@ -1457,6 +1457,28 @@ def invoice_pdf_test():
                     400
                 )
 
+                from decimal import Decimal, InvalidOperation
+
+        try:
+            invoice_amount = Decimal(
+                request.form.get("amount", "")
+            )
+
+            if (
+                not invoice_amount.is_finite()
+                or invoice_amount <= 0
+                or invoice_amount.as_tuple().exponent < -2
+            ):
+                raise ValueError()
+
+        except (InvalidOperation, ValueError):
+            return (
+                "Please enter a valid consultation fee "
+                "greater than zero, with no more than "
+                "two decimal places.",
+                400
+            )
+
         return (
             "Invoice submission received. "
             "No invoice has been issued yet.",
