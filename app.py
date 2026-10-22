@@ -1554,7 +1554,7 @@ def create_invoice(id):
     try:
         cursor.execute(
             """
-            SELECT id, name, email
+            SELECT id, name, email, status
             FROM consultations
             WHERE id = %s
             """,
