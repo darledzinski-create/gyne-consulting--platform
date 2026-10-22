@@ -1436,6 +1436,19 @@ def invoice_pdf_test():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
+    if request.method == "POST":
+        if request.form.get("payment_verified") != "yes":
+            return (
+                "Payment must be verified before issuing a paid invoice.",
+                400
+            )
+
+        return (
+            "Invoice submission received. "
+            "No invoice has been issued yet.",
+            200
+        )
+
     pdf_buffer = build_invoice_pdf()
 
     return send_file(
