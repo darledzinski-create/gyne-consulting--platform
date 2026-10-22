@@ -67,6 +67,10 @@ def create_paid_invoice(
         issue_date = datetime.now(ZoneInfo("Africa/Johannesburg"))
         issue_year = issue_date.year
 
+        temporary_invoice_number = (
+            "PENDING-" + str(uuid.uuid4())
+        )
+
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
         )
