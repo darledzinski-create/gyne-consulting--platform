@@ -109,6 +109,18 @@ def create_paid_invoice(
             issue_year
         )
 
+        cursor.execute(
+            """
+            UPDATE paid_invoices
+            SET invoice_number = %s
+            WHERE id = %s
+            """,
+            (
+                permanent_invoice_number,
+                new_invoice_id
+            )
+        )
+
 
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
