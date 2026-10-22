@@ -1496,6 +1496,13 @@ def invoice_pdf_test():
                 400
             )
 
+        if payment_date > consultation_date:
+            return (
+                "Payment date cannot be later "
+                "than the consultation date.",
+                400
+            )
+
         return (
             "Invoice submission received. "
             "No invoice has been issued yet.",
