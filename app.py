@@ -1479,7 +1479,7 @@ def invoice_pdf_test():
                 400
             )
 
-                try:
+        try:
             consultation_date = datetime.strptime(
                 request.form.get("consultation_date", ""),
                 "%Y-%m-%d"
