@@ -122,9 +122,12 @@ def create_paid_invoice(
         )
 
 
-        raise NotImplementedError(
-            "Invoice database saving is not enabled yet."
-        )
+        conn.commit()
+
+        return {
+            "id": new_invoice_id,
+            "invoice_number": permanent_invoice_number
+        }
 
     except Exception:
         conn.rollback()
