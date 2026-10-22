@@ -1443,6 +1443,20 @@ def invoice_pdf_test():
                 400
             )
 
+        required_fields = (
+            "consultation_date",
+            "amount",
+            "payment_date",
+            "payment_method"
+        )
+
+        for field in required_fields:
+            if not request.form.get(field, "").strip():
+                return (
+                    "Missing required invoice field: " + field,
+                    400
+                )
+
         return (
             "Invoice submission received. "
             "No invoice has been issued yet.",
