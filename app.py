@@ -1545,6 +1545,13 @@ def invoice_pdf_test():
 @app.route("/create-invoice/<int:id>", methods=["GET", "POST"])
 def create_invoice(id):
 
+    if request.method == "POST":
+        if request.form.get("payment_verified") != "yes":
+            return (
+                "Payment must be verified before issuing a paid invoice.",
+                400
+            )
+
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
