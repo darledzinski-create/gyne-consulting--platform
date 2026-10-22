@@ -1603,6 +1603,7 @@ def create_invoice(id):
             return (
                 "Please enter valid consultation and payment dates.",
                 400
+            )
             
 
     if not session.get("admin_logged_in"):
