@@ -64,6 +64,9 @@ def create_paid_invoice(
         if existing_invoice:
             return existing_invoice
 
+        issue_date = datetime.now(ZoneInfo("Africa/Johannesburg"))
+        issue_year = issue_date.year
+
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
         )
