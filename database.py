@@ -72,6 +72,39 @@ def create_paid_invoice(
             "PENDING-" + str(uuid.uuid4())
         )
 
+        
+        cursor.execute(
+            """
+            INSERT INTO paid_invoices (
+                consultation_id,
+                invoice_number,
+                consultation_date,
+                amount,
+                tariff_code,
+                icd10_code,
+                payment_date,
+                payment_method,
+                payment_verified
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING id
+            """,
+            (
+                consultation_id,
+                temporary_invoice_number,
+                consultation_date,
+                amount,
+                tariff_code,
+                icd10_code,
+                payment_date,
+                payment_method,
+                payment_verified
+            )
+        )
+
+        new_invoice_id = cursor.fetchone()["id"]
+
+
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
         )
