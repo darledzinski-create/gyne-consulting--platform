@@ -104,6 +104,11 @@ def create_paid_invoice(
 
         new_invoice_id = cursor.fetchone()["id"]
 
+        permanent_invoice_number = make_invoice_number(
+            new_invoice_id,
+            issue_year
+        )
+
 
         raise NotImplementedError(
             "Invoice database saving is not enabled yet."
