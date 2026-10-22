@@ -1566,6 +1566,28 @@ def create_invoice(id):
                     400
                 )
 
+        from decimal import Decimal, InvalidOperation
+
+        try:
+            invoice_amount = Decimal(
+                request.form.get("amount", "")
+            )
+
+            if (
+                not invoice_amount.is_finite()
+                or invoice_amount <= 0
+                or invoice_amount.as_tuple().exponent < -2
+            ):
+                raise ValueError()
+
+        except (InvalidOperation, ValueError):
+            return (
+                "Please enter a valid consultation fee "
+                "greater than zero, with no more than "
+                "two decimal places.",
+                400
+            )
+
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
