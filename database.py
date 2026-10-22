@@ -45,6 +45,11 @@ def create_paid_invoice(
             "Invoice amount must be greater than zero."
         )
 
+    if payment_method not in ("EFT", "Cash"):
+        raise ValueError(
+            "Payment method must be EFT or Cash."
+        )
+
     conn = get_db_connection()
     cursor = None
 
