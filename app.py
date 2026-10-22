@@ -1588,6 +1588,23 @@ def create_invoice(id):
                 400
             )
 
+        try:
+            consultation_date = datetime.strptime(
+                request.form.get("consultation_date", ""),
+                "%Y-%m-%d"
+            ).date()
+
+            payment_date = datetime.strptime(
+                request.form.get("payment_date", ""),
+                "%Y-%m-%d"
+            ).date()
+
+        except ValueError:
+            return (
+                "Please enter valid consultation and payment dates.",
+                400
+            
+
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
