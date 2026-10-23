@@ -1526,6 +1526,18 @@ def invoice_pdf_test():
                 400
             )
 
+        # Database connection prepared, not yet activated.
+        # invoice = create_paid_invoice(
+        #     consultation_id=id,
+        #     consultation_date=consultation_date,
+        #     amount=invoice_amount,
+        #     tariff_code=tariff_code,
+        #     icd10_code=icd10_code,
+        #     payment_date=payment_date,
+        #     payment_method=payment_method,
+        #     payment_verified=payment_verified
+        # )
+
         return (
             "Invoice submission received. "
             "No invoice has been issued yet.",
