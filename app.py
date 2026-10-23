@@ -1545,6 +1545,9 @@ def invoice_pdf_test():
 @app.route("/create-invoice/<int:id>", methods=["GET", "POST"])
 def create_invoice(id):
 
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         if request.form.get("payment_verified") != "yes":
             return (
@@ -1633,9 +1636,6 @@ def create_invoice(id):
                 "Please select EFT or Cash.",
                 400
             )
-
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
 
     conn = get_db_connection()
     cursor = conn.cursor()
