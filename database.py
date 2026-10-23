@@ -136,6 +136,28 @@ def create_paid_invoice(
             "invoice_number": permanent_invoice_number
         }
 
+    except psycopg2.errors.UniqueViolation:
+        conn.rollback()
+
+        cursor.execute(
+            """
+            SELECT id, invoice_number
+            FROM paid_invoices
+            WHERE consultation_id = %s
+            """,
+            (consultation_id,)
+        )
+
+        existing_invoice = cursor.fetchone()
+
+        if existing_invoice:
+            return {
+                "id": existing_invoice["id"],
+                "invoice_number": existing_invoice["invoice_number"]
+            }
+
+        raise
+
     except Exception:
         conn.rollback()
         raise
