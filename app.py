@@ -1695,6 +1695,7 @@ def create_invoice(id):
 
         return (
             "Invoice validation passed successfully. "
+            "Database saving is not yet activated. "
             "No invoice has been created.",
             200
         )
