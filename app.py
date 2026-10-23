@@ -24,7 +24,8 @@ from reportlab.lib.utils import simpleSplit
 from database import (
     get_db_connection,
     create_appointment,
-    save_consultation
+    save_consultation,
+    create_paid_invoice
 )
 
 from mail import (
