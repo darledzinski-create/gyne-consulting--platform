@@ -1539,8 +1539,9 @@ def invoice_pdf_test():
         # )
 
         return (
-            "Invoice submission received. "
-            "No invoice has been issued yet.",
+            "Invoice validation passed successfully. "
+            "Database saving is not yet activated. "
+            "No invoice has been created.",
             200
         )
 
