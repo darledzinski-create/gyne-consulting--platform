@@ -1668,6 +1668,10 @@ def create_invoice(id):
                 400
             )
 
+        payment_verified = (
+            request.form.get("payment_verified") == "yes"
+        )
+
         return (
             "Invoice validation passed successfully. "
             "No invoice has been created.",
