@@ -68,8 +68,10 @@ def create_paid_invoice(
         existing_invoice = cursor.fetchone()
 
         if existing_invoice:
-            return existing_invoice
-
+            return {
+                "id": existing_invoice["id"],
+                "invoice_number": existing_invoice["invoice_number"]
+            }
         issue_date = datetime.now(ZoneInfo("Africa/Johannesburg"))
         issue_year = issue_date.year
 
