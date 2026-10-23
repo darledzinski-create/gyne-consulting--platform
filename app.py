@@ -1672,6 +1672,14 @@ def create_invoice(id):
             request.form.get("payment_verified") == "yes"
         )
 
+        tariff_code = request.form.get(
+            "tariff_code", ""
+        ).strip()
+
+        icd10_code = request.form.get(
+            "icd10_code", ""
+        ).strip()
+
         return (
             "Invoice validation passed successfully. "
             "No invoice has been created.",
