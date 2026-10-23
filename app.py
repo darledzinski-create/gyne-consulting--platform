@@ -1667,6 +1667,12 @@ def create_invoice(id):
                 400
             )
 
+        return (
+            "Invoice validation passed successfully. "
+            "No invoice has been created.",
+            200
+        )
+
     return render_template(
         "create_invoice.html",
         consultation=consultation
