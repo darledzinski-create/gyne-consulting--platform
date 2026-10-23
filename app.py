@@ -1611,6 +1611,17 @@ def create_invoice(id):
                 "the consultation date.",
                 400
             )
+
+        today = datetime.now(
+            ZoneInfo("Africa/Johannesburg")
+        ).date()
+
+        if consultation_date > today:
+            return (
+                "A paid invoice cannot be issued "
+                "for a future consultation.",
+                400
+            )
             
 
     if not session.get("admin_logged_in"):
