@@ -1622,7 +1622,17 @@ def create_invoice(id):
                 "for a future consultation.",
                 400
             )
-            
+
+        payment_method = request.form.get(
+            "payment_method", ""
+        )
+
+        if payment_method not in ("EFT", "Cash"):
+            return (
+                "Invalid payment method. "
+                "Please select EFT or Cash.",
+                400
+            )
 
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
