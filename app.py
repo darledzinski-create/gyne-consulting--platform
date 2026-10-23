@@ -1604,6 +1604,13 @@ def create_invoice(id):
                 "Please enter valid consultation and payment dates.",
                 400
             )
+
+        if payment_date > consultation_date:
+            return (
+                "Payment date cannot be later than "
+                "the consultation date.",
+                400
+            )
             
 
     if not session.get("admin_logged_in"):
