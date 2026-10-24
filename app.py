@@ -1526,12 +1526,21 @@ def invoice_pdf_test():
                 400
             )
 
+         invoice = create_paid_invoice(
+            consultation_id=id,
+            consultation_date=consultation_date,
+            amount=invoice_amount,
+            tariff_code=tariff_code,
+            icd10_code=icd10_code,
+            payment_date=payment_date,
+            payment_method=payment_method,
             payment_verified=payment_verified
         )
 
-        return (
-            
-        return (
+
+            payment_verified=payment_verified
+
+         return (
             "TEST INVOICE — NOT VALID FOR CLAIMS. "
             "Invoice record saved successfully. "
             "Invoice number: " + invoice["invoice_number"],
