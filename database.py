@@ -3,6 +3,7 @@ import uuid
 import psycopg2
 from psycopg2.extras import DictCursor
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 print("DATABASE.PY IMPORTED")
 
