@@ -1535,7 +1535,7 @@ def invoice_pdf_test():
             payment_date=payment_date,
             payment_method=payment_method,
             payment_verified=payment_verified
-        )
+         )
 
 
             payment_verified=payment_verified
