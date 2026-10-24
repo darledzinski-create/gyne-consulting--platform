@@ -1545,7 +1545,7 @@ def invoice_pdf_test():
             "Invoice record saved successfully. "
             "Invoice number: " + invoice["invoice_number"],
             200
-        )
+         )
 
     pdf_buffer = build_invoice_pdf()
 
