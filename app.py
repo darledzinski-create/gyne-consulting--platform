@@ -1557,19 +1557,14 @@ def invoice_pdf_test():
     )
 
 
-
 @app.route("/create-invoice/<int:id>", methods=["GET", "POST"])
 def create_invoice(id):
-
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
     if request.method == "POST":
         if request.form.get("payment_verified") != "yes":
-            return (
-                "Payment must be verified before issuing a paid invoice.",
-                400
-            )
+            return "Payment must be verified before issuing a paid invoice.", 400
 
         required_fields = (
             "consultation_date",
@@ -1580,30 +1575,25 @@ def create_invoice(id):
 
         for field in required_fields:
             if not request.form.get(field, "").strip():
-                return (
-                    "Missing required invoice field: " + field,
-                    400
-                )
+                return "Missing required invoice field: " + field, 400
 
         from decimal import Decimal, InvalidOperation
 
         try:
-            invoice_amount = Decimal(
-                request.form.get("amount", "")
-            )
+            invoice_amount = Decimal(request.form.get("amount", ""))
 
             if (
                 not invoice_amount.is_finite()
                 or invoice_amount <= 0
                 or invoice_amount.as_tuple().exponent < -2
+                or invoice_amount > Decimal("99999999.99")
             ):
                 raise ValueError()
 
         except (InvalidOperation, ValueError):
             return (
-                "Please enter a valid consultation fee "
-                "greater than zero, with no more than "
-                "two decimal places.",
+                "Please enter a valid consultation fee greater than zero, "
+                "with no more than two decimal places.",
                 400
             )
 
@@ -1619,39 +1609,22 @@ def create_invoice(id):
             ).date()
 
         except ValueError:
-            return (
-                "Please enter valid consultation and payment dates.",
-                400
-            )
+            return "Please enter valid consultation and payment dates.", 400
 
         if payment_date > consultation_date:
-            return (
-                "Payment date cannot be later than "
-                "the consultation date.",
-                400
-            )
+            return "Payment date cannot be later than the consultation date.", 400
 
         today = datetime.now(
             ZoneInfo("Africa/Johannesburg")
         ).date()
 
         if consultation_date > today:
-            return (
-                "A paid invoice cannot be issued "
-                "for a future consultation.",
-                400
-            )
+            return "A paid invoice cannot be issued for a future consultation.", 400
 
-        payment_method = request.form.get(
-            "payment_method", ""
-        )
+        payment_method = request.form.get("payment_method", "")
 
         if payment_method not in ("EFT", "Cash"):
-            return (
-                "Invalid payment method. "
-                "Please select EFT or Cash.",
-                400
-            )
+            return "Invalid payment method. Please select EFT or Cash.", 400
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -1665,7 +1638,6 @@ def create_invoice(id):
             """,
             (id,)
         )
-
         consultation = cursor.fetchone()
 
     finally:
@@ -1695,10 +1667,21 @@ def create_invoice(id):
             "icd10_code", ""
         ).strip()
 
+        invoice = create_paid_invoice(
+            consultation_id=id,
+            consultation_date=consultation_date,
+            amount=invoice_amount,
+            tariff_code=tariff_code,
+            icd10_code=icd10_code,
+            payment_date=payment_date,
+            payment_method=payment_method,
+            payment_verified=payment_verified
+        )
+
         return (
-            "Invoice validation passed successfully. "
-            "Database saving is not yet activated. "
-            "No invoice has been created.",
+            "Invoice record saved. Invoice number: "
+            + invoice["invoice_number"]
+            + ". No PDF or email has been generated.",
             200
         )
 
@@ -1706,6 +1689,7 @@ def create_invoice(id):
         "create_invoice.html",
         consultation=consultation
     )
+
 @app.route(
     "/create-prescription/<int:id>",
     methods=["GET", "POST"]
