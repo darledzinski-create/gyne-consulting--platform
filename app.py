@@ -1538,10 +1538,21 @@ def invoice_pdf_test():
         #     payment_verified=payment_verified
         # )
 
+        invoice = create_paid_invoice(
+            consultation_id=id,
+            consultation_date=consultation_date,
+            amount=invoice_amount,
+            tariff_code=tariff_code,
+            icd10_code=icd10_code,
+            payment_date=payment_date,
+            payment_method=payment_method,
+            payment_verified=payment_verified
+        )
+
         return (
-            "Invoice validation passed successfully. "
-            "Database saving is not yet activated. "
-            "No invoice has been created.",
+            "TEST INVOICE — NOT VALID FOR CLAIMS. "
+            "Invoice record saved successfully. "
+            "Invoice number: " + invoice["invoice_number"],
             200
         )
 
