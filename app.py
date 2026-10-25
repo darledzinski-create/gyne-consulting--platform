@@ -1631,10 +1631,17 @@ def create_invoice(id):
             payment_verified=payment_verified
         )
 
+        pdf_url = url_for(
+            "paid_invoice_pdf",
+            invoice_id=invoice["id"]
+        )
+
         return (
             "Invoice record saved. Invoice number: "
             + invoice["invoice_number"]
-            + ". No PDF or email has been generated.",
+            + ". View PAID Invoice PDF: "
+            + pdf_url
+            + ". No email has been sent.",
             200
         )
 
