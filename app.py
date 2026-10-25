@@ -1431,6 +1431,46 @@ def build_invoice_pdf():
 
     return pdf_buffer
 
+def build_paid_invoice_pdf(invoice):
+
+    pdf_buffer = io.BytesIO()
+    pdf = canvas.Canvas(pdf_buffer, pagesize=A4)
+
+    width, height = A4
+
+    pdf.setFont("Helvetica-Bold", 16)
+    pdf.drawString(60, height - 70, "Dr Dariusz Consulting")
+
+    pdf.setFont("Helvetica-Bold", 13)
+    pdf.drawString(60, height - 105, "PAID INVOICE")
+
+    pdf.setFont("Helvetica", 11)
+
+    details = [
+        ("Invoice Number", invoice["invoice_number"]),
+        ("Patient", invoice["patient_name"]),
+        ("Consultation Date", str(invoice["consultation_date"])),
+        ("Amount Paid", f"R {invoice['amount']:,.2f}"),
+        ("Payment Date", str(invoice["payment_date"])),
+        ("Payment Method", invoice["payment_method"]),
+        ("Tariff Code", invoice["tariff_code"] or "Not specified"),
+        ("ICD-10 Code", invoice["icd10_code"] or "Not specified"),
+    ]
+
+    y = height - 150
+
+    for label, value in details:
+        pdf.drawString(60, y, f"{label}: {value}")
+        y -= 28
+
+    pdf.setFont("Helvetica-Bold", 12)
+    pdf.drawString(60, y - 20, "PAYMENT RECEIVED")
+
+    pdf.save()
+    pdf_buffer.seek(0)
+
+    return pdf_buffer
+
 
 @app.route("/invoice-pdf-test", methods=["GET"])
 def invoice_pdf_test():
@@ -1444,6 +1484,29 @@ def invoice_pdf_test():
         mimetype="application/pdf",
         as_attachment=False,
         download_name="Invoice_Layout_Test.pdf"
+    )
+
+@app.route("/paid-invoice-pdf/<int:invoice_id>", methods=["GET"])
+def paid_invoice_pdf(invoice_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    invoice = get_paid_invoice(invoice_id)
+
+    if not invoice:
+        return "Invoice not found", 404
+
+    if not invoice["payment_verified"]:
+        return "Payment has not been verified.", 403
+
+    pdf_buffer = build_paid_invoice_pdf(invoice)
+
+    return send_file(
+        pdf_buffer,
+        mimetype="application/pdf",
+        as_attachment=False,
+        download_name=invoice["invoice_number"] + ".pdf"
     )
 
 
