@@ -269,7 +269,7 @@ def create_table():
     """)
 
     
-        cursor.execute("""
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS paid_invoices (
 
             id SERIAL PRIMARY KEY,
