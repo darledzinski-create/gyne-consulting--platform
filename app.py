@@ -6,8 +6,10 @@ from flask import (
     render_template,
     session,
     Response,
-    send_file
+    send_file,
+    render_template_string,
 )
+
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
 from zoneinfo import ZoneInfo
