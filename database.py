@@ -303,6 +303,13 @@ def create_table():
         ON paid_invoices (consultation_id)
     """)
 
+            id SERIAL PRIMARY KEY,
+
+            consultation_id INTEGER NOT NULL
+                REFERENCES consultations(id),
+
+            invoice_number TEXT UNIQUE NOT NULL,
+
 
     conn.commit()
 
