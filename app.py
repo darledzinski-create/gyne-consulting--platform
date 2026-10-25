@@ -25,7 +25,8 @@ from database import (
     get_db_connection,
     create_appointment,
     save_consultation,
-    create_paid_invoice
+    create_paid_invoice,
+    get_paid_invoice
 )
 
 from mail import (
