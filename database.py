@@ -25,6 +25,43 @@ def get_db_connection():
 def make_invoice_number(invoice_id, issue_year):
     return f"INV-{issue_year}-{invoice_id:06d}"
 
+def get_paid_invoice(invoice_id):
+
+    conn = get_db_connection()
+
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT
+                pi.id,
+                pi.invoice_number,
+                pi.consultation_date,
+                pi.amount,
+                pi.tariff_code,
+                pi.icd10_code,
+                pi.payment_date,
+                pi.payment_method,
+                pi.payment_verified,
+                pi.issued_at,
+                c.name AS patient_name,
+                c.email AS patient_email
+            FROM paid_invoices pi
+            JOIN consultations c
+                ON c.id = pi.consultation_id
+            WHERE pi.id = %s
+            """,
+            (invoice_id,)
+        )
+
+        invoice = cursor.fetchone()
+
+        return dict(invoice) if invoice else None
+
+    finally:
+        conn.close()
+
 
 def create_paid_invoice(
     consultation_id,
