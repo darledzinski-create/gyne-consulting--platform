@@ -343,6 +343,23 @@ def create_table():
         paid_invoices_consultation_unique
         ON paid_invoices (consultation_id)
     """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS invoice_email_sends (
+
+            invoice_id INTEGER PRIMARY KEY
+                REFERENCES paid_invoices(id),
+
+            status TEXT NOT NULL
+                DEFAULT 'processing',
+
+            created_at TIMESTAMP NOT NULL
+                DEFAULT CURRENT_TIMESTAMP,
+
+            sent_at TIMESTAMP
+
+        )
+    """)
            
     conn.commit()
 
