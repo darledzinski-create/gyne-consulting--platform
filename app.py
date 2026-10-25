@@ -1742,20 +1742,60 @@ def create_invoice(id):
             payment_verified=payment_verified
         )
 
-        pdf_url = url_for(
-            "paid_invoice_pdf",
-            invoice_id=invoice["id"]
-        )
 
-        return (
-            "Invoice record saved. Invoice number: "
-            + invoice["invoice_number"]
-            + ". View PAID Invoice PDF: "
-            + pdf_url
-            + ". No email has been sent.",
-            200
-        )
+        return render_template_string(
+            """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>PAID Invoice Ready</title>
+            </head>
+            <body>
+                <h2>PAID Invoice Ready</h2>
 
+                <p>
+                    Invoice Number:
+                    <strong>{{ invoice_number }}</strong>
+                </p>
+
+                <p>
+                    <a href="{{ pdf_url }}" target="_blank">
+                        View PAID Invoice PDF
+                    </a>
+                </p>
+
+                <form method="POST" action="{{ email_url }}">
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                    >
+
+                    <button type="submit">
+                        Email PAID Invoice to Patient
+                    </button>
+                </form>
+
+                <p>
+                    Email will be sent only after clicking
+                    the button above.
+                </p>
+
+                <p><a href="{{ admin_url }}">Return to Dashboard</a></p>
+            </body>
+            </html>
+            """,
+            invoice_number=invoice["invoice_number"],
+            pdf_url=url_for(
+                "paid_invoice_pdf",
+                invoice_id=invoice["id"]
+            ),
+            email_url=url_for(
+                "email_paid_invoice",
+                invoice_id=invoice["id"]
+            ),
+            admin_url=url_for("admin")
+        )
     return render_template(
         "create_invoice.html",
         consultation=consultation
