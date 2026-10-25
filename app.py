@@ -1509,6 +1509,117 @@ def paid_invoice_pdf(invoice_id):
         download_name=invoice["invoice_number"] + ".pdf"
     )
 
+@app.route("/email-paid-invoice/<int:invoice_id>", methods=["POST"])
+def email_paid_invoice(invoice_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    invoice = get_paid_invoice(invoice_id)
+
+    if not invoice:
+        return "Invoice not found", 404
+
+    if not invoice["payment_verified"]:
+        return "Payment has not been verified.", 403
+
+    if not invoice["patient_email"]:
+        return "Patient email address is missing.", 400
+
+    conn = get_db_connection()
+
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            INSERT INTO invoice_email_sends (invoice_id, status)
+            VALUES (%s, 'processing')
+            ON CONFLICT (invoice_id) DO NOTHING
+            RETURNING invoice_id
+            """,
+            (invoice_id,)
+        )
+
+        claimed = cursor.fetchone()
+        conn.commit()
+
+    except Exception:
+        conn.rollback()
+        logger.exception("Invoice email claim failed.")
+        return "Could not verify invoice email status.", 500
+
+    finally:
+        conn.close()
+
+    if not claimed:
+        return (
+            "This invoice has already been submitted for emailing. "
+            "No duplicate email was sent.",
+            409
+        )
+
+    try:
+        pdf_buffer = build_paid_invoice_pdf(invoice)
+
+        email_result = send_pdf_email(
+            invoice["patient_email"],
+            invoice["patient_name"],
+            "PAID Invoice from Dr Dariusz",
+            (
+                f"Dear {invoice['patient_name']},\n\n"
+                "Please find attached your PAID invoice "
+                "for your consultation.\n\n"
+                "Kind regards,\n"
+                "Dr Dariusz Ledzinski"
+            ),
+            pdf_buffer.getvalue(),
+            invoice["invoice_number"] + ".pdf"
+        )
+
+        if email_result.status_code != 200:
+            logger.error(
+                "Invoice email rejected by Mailjet: %s",
+                email_result.status_code
+            )
+            return "Invoice email was not accepted by Mailjet.", 502
+
+        conn = get_db_connection()
+
+        try:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                UPDATE invoice_email_sends
+                SET status = 'sent',
+                    sent_at = CURRENT_TIMESTAMP
+                WHERE invoice_id = %s
+                """,
+                (invoice_id,)
+            )
+            conn.commit()
+
+        except Exception:
+            conn.rollback()
+            logger.exception("Invoice email status update failed.")
+
+        finally:
+            conn.close()
+
+        return (
+            "PAID Invoice submitted successfully to Mailjet. "
+            "Invoice number: " + invoice["invoice_number"],
+            200
+        )
+
+    except Exception:
+        logger.exception("Invoice email submission failed.")
+        return (
+            "Invoice email submission could not be confirmed. "
+            "Check the logs before retrying.",
+            500
+        )
+
 
 @app.route("/create-invoice/<int:id>", methods=["GET", "POST"])
 def create_invoice(id):
