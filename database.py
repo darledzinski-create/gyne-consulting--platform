@@ -299,11 +299,7 @@ def create_table():
 
     cursor.execute("""
         CREATE UNIQUE INDEX IF NOT EXISTS
-        paid_invoices_consultation_unique
-        ON paid_invoices (consultation_id)
-    """)
-
-            id SERIAL PRIMARY KEY,
+                    id SERIAL PRIMARY KEY,
 
             consultation_id INTEGER NOT NULL
                 REFERENCES consultations(id),
@@ -311,6 +307,11 @@ def create_table():
             invoice_number TEXT UNIQUE NOT NULL,
 
 
+        paid_invoices_consultation_unique
+        ON paid_invoices (consultation_id)
+    """)
+
+           
     conn.commit()
 
     cursor.close()
