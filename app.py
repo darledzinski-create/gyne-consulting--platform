@@ -1441,11 +1441,14 @@ def build_paid_invoice_pdf(invoice):
     width, height = A4
 
     pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(60, height - 70, "Dr Dariusz Consulting")
+    pdf.drawString(60, height - 60, "Dr Dariusz Consulting")
+
+    pdf.setFont("Helvetica", 9)
+    pdf.drawString(60, height - 78, "BHF Practice Number: PR 1605690")
+    pdf.drawString(60, height - 92, "HPCSA Registration Number: MP 0249688")
 
     pdf.setFont("Helvetica-Bold", 13)
-    pdf.drawString(60, height - 105, "PAID INVOICE")
-
+    pdf.drawString(60, height - 120, "PAID INVOICE")
     pdf.setFont("Helvetica", 11)
 
     details = [
