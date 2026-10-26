@@ -1756,7 +1756,10 @@ def create_invoice(id):
             icd10_code=icd10_code,
             payment_date=payment_date,
             payment_method=payment_method,
-            payment_verified=payment_verified
+            payment_verified=payment_verified,
+            medical_scheme=medical_scheme,
+            membership_number=membership_number,
+            dependent_code=dependent_code
         )
 
 
