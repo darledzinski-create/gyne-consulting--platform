@@ -143,11 +143,8 @@ def create_paid_invoice(
                 icd10_code,
                 payment_date,
                 payment_method,
-                payment_verified,
-                medical_scheme="",
-                membership_number="",
-                dependent_code=""
-            ):
+                payment_verified
+            )
         )
 
         new_invoice_id = cursor.fetchone()["id"]
