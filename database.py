@@ -339,6 +339,21 @@ def create_table():
     """)
 
     cursor.execute("""
+        ALTER TABLE paid_invoices
+        ADD COLUMN IF NOT EXISTS medical_scheme TEXT
+    """)
+
+    cursor.execute("""
+        ALTER TABLE paid_invoices
+        ADD COLUMN IF NOT EXISTS membership_number TEXT
+    """)
+
+    cursor.execute("""
+        ALTER TABLE paid_invoices
+        ADD COLUMN IF NOT EXISTS dependent_code TEXT
+    """)
+
+    cursor.execute("""
         CREATE UNIQUE INDEX IF NOT EXISTS
         paid_invoices_consultation_unique
         ON paid_invoices (consultation_id)
