@@ -158,18 +158,7 @@ def create_paid_invoice(
                 dependent_code
             )
         )
-                consultation_id,
-                temporary_invoice_number,
-                consultation_date,
-                amount,
-                tariff_code,
-                icd10_code,
-                payment_date,
-                payment_method,
-                payment_verified
-            )
-        )
-
+               
         new_invoice_id = cursor.fetchone()["id"]
 
         permanent_invoice_number = make_invoice_number(
