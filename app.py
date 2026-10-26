@@ -1736,6 +1736,18 @@ def create_invoice(id):
             "icd10_code", ""
         ).strip()
 
+        medical_scheme = request.form.get(
+            "medical_scheme", ""
+        ).strip()
+
+        membership_number = request.form.get(
+            "membership_number", ""
+        ).strip()
+
+        dependent_code = request.form.get(
+            "dependent_code", ""
+        ).strip()
+
         invoice = create_paid_invoice(
             consultation_id=id,
             consultation_date=consultation_date,
