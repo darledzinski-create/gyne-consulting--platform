@@ -132,12 +132,32 @@ def create_paid_invoice(
                 icd10_code,
                 payment_date,
                 payment_method,
-                payment_verified
+                payment_verified,
+                medical_scheme,
+                membership_number,
+                dependent_code
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (
+                %s, %s, %s, %s, %s, %s,
+                %s, %s, %s, %s, %s, %s
+            )
             RETURNING id
             """,
             (
+                consultation_id,
+                temporary_invoice_number,
+                consultation_date,
+                amount,
+                tariff_code,
+                icd10_code,
+                payment_date,
+                payment_method,
+                payment_verified,
+                medical_scheme,
+                membership_number,
+                dependent_code
+            )
+        )
                 consultation_id,
                 temporary_invoice_number,
                 consultation_date,
