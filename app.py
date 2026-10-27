@@ -1458,8 +1458,11 @@ def build_paid_invoice_pdf(invoice):
         ("Amount Paid", f"R {invoice['amount']:,.2f}"),
         ("Payment Date", str(invoice["payment_date"])),
         ("Payment Method", invoice["payment_method"]),
-        ("Tariff Code", invoice["tariff_code"] or "Not specified"),
+                ("Tariff Code", invoice["tariff_code"] or "Not specified"),
         ("ICD-10 Code", invoice["icd10_code"] or "Not specified"),
+        ("Medical Scheme", invoice["medical_scheme"] or "Not specified"),
+        ("Membership Number", invoice["membership_number"] or "Not specified"),
+        ("Dependent Code", invoice["dependent_code"] or "Not specified"),
     ]
 
     y = height - 150
@@ -1491,8 +1494,7 @@ def invoice_pdf_test():
         download_name="Invoice_Layout_Test.pdf"
     )
 
-@app.route("/paid-invoice-pdf/<int:invoice_id>", methods=["GET"])
-def paid_invoice_pdf(invoice_id):
+@app.route("/paid-invoice-pdf/<int:invoice_id>", methods=["GET"])def paid_invoice_pdf(invoice_id):
 
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
