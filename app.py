@@ -1494,7 +1494,8 @@ def invoice_pdf_test():
         download_name="Invoice_Layout_Test.pdf"
     )
 
-@app.route("/paid-invoice-pdf/<int:invoice_id>", methods=["GET"])def paid_invoice_pdf(invoice_id):
+@app.route("/paid-invoice-pdf/<int:invoice_id>", methods=["GET"])
+def paid_invoice_pdf(invoice_id):
 
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
