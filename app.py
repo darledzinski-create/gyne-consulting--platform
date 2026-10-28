@@ -1753,6 +1753,85 @@ def create_invoice(id):
             "dependent_code", ""
         ).strip()
 
+        if confirmation_step != "confirmed":
+            session.pop("invoice_review", None)
+
+            session["invoice_review"] = {
+                "consultation_id": id,
+                "form_data": {
+                    key: value
+                    for key, value in request.form.items()
+                    if key not in ("csrf_token", "confirmation_step")
+                }
+            }
+
+            return render_template_string(
+                """
+                <h2>Review PAID Invoice Details</h2>
+                <p><strong>Patient:</strong> {{ patient }}</p>
+                <p><strong>Consultation Date:</strong> {{ consultation_date }}</p>
+                <p><strong>Amount:</strong> R {{ amount }}</p>
+                <p><strong>Tariff Code:</strong> {{ tariff_code }}</p>
+                <p><strong>ICD-10 Code:</strong> {{ icd10_code }}</p>
+                <p><strong>Medical Scheme:</strong> {{ medical_scheme }}</p>
+                <p><strong>Membership Number:</strong> {{ membership_number }}</p>
+                <p><strong>Dependent Code:</strong> {{ dependent_code }}</p>
+                <p><strong>Payment Date:</strong> {{ payment_date }}</p>
+                <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+
+                <p><strong>Please verify every detail before issuing the invoice.</strong></p>
+
+                <form method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="confirmation_step" value="confirmed">
+
+                    {% for field, value in fields.items() %}
+                        <input type="hidden" name="{{ field }}" value="{{ value }}">
+                    {% endfor %}
+
+                    <button type="submit">Confirm and Issue PAID Invoice</button>
+                </form>
+
+                <button type="button" onclick="history.back()">Go Back and Correct</button>
+                """,
+                patient=consultation["name"],
+                consultation_date=consultation_date,
+                amount=invoice_amount,
+                tariff_code=tariff_code,
+                icd10_code=icd10_code,
+                medical_scheme=medical_scheme,
+                membership_number=membership_number,
+                dependent_code=dependent_code,
+                payment_date=payment_date,
+                payment_method=payment_method,
+                fields={
+                    key: value
+                    for key, value in request.form.items()
+                    if key != "csrf_token"
+                }
+            )
+
+        if confirmation_step != "confirmed":
+            return "Invoice confirmation required.", 400
+
+        reviewed = session.get("invoice_review")
+
+        if not reviewed:
+            return "Invoice review required. Please start again.", 400
+
+        if reviewed.get("consultation_id") != id:
+            return "Invoice consultation does not match the review.", 400
+
+        confirmed_data = {
+            key: value
+            for key, value in request.form.items()
+            if key not in ("csrf_token", "confirmation_step")
+        }
+
+        if confirmed_data != reviewed.get("form_data"):
+            return "Invoice details changed. Please review again.", 400
+            
+     
         invoice = create_paid_invoice(
             consultation_id=id,
             consultation_date=consultation_date,
@@ -1767,6 +1846,7 @@ def create_invoice(id):
             dependent_code=dependent_code
         )
 
+        session.pop("invoice_review", None)
 
         return render_template_string(
             """
