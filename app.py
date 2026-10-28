@@ -1720,6 +1720,8 @@ def create_invoice(id):
         return "Consultation not found", 404
 
     if request.method == "POST":
+        confirmation_step = request.form.get("confirmation_step", "")
+
         if consultation["status"] != "Completed":
             return (
                 "A paid invoice can only be issued "
