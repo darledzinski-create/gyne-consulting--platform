@@ -1440,17 +1440,41 @@ def build_paid_invoice_pdf(invoice):
 
     width, height = A4
 
+    import os
+    from reportlab.lib.utils import ImageReader
+
+    logo_path = os.path.join(
+        app.static_folder,
+        "Dr Dariusz Consulting Medical Logo.png"
+    )
+
+    if os.path.exists(logo_path):
+        logo = ImageReader(logo_path)
+        image_width, image_height = logo.getSize()
+
+        logo_width = 240
+        logo_height = logo_width * image_height / image_width
+
+        pdf.drawImage(
+            logo,
+            60,
+            height - 45 - logo_height,
+            width=logo_width,
+            height=logo_height,
+            mask="auto"
+        )
+
     pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(60, height - 60, "Dr Dariusz Consulting")
+    pdf.drawString(60, height - 270, "Dr Dariusz Consulting")
 
     pdf.setFont("Helvetica", 9)
-    pdf.drawString(60, height - 78, "BHF Practice Number: PR 1605690")
-    pdf.drawString(60, height - 92, "HPCSA Registration Number: MP 0249688")
+    pdf.drawString(60, height - 288, "BHF Practice Number: PR 1605690")
+    pdf.drawString(60, height - 302, "HPCSA Registration Number: MP 0249688")
 
     pdf.setFont("Helvetica-Bold", 13)
-    pdf.drawString(60, height - 120, "PAID INVOICE")
+    pdf.drawString(60, height - 330, "PAID INVOICE")
     pdf.setFont("Helvetica", 11)
-
+    
     details = [
         ("Invoice Number", invoice["invoice_number"]),
         ("Patient", invoice["patient_name"]),
@@ -1465,7 +1489,7 @@ def build_paid_invoice_pdf(invoice):
         ("Dependent Code", invoice["dependent_code"] or "Not specified"),
     ]
 
-    y = height - 150
+    y = height - 360
 
     for label, value in details:
         pdf.drawString(60, y, f"{label}: {value}")
