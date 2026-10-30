@@ -28,24 +28,71 @@ def send_consultation_email(
     subject,
     message
 ):
+    import html
+
+    email_message = {
+        "From": {
+            "Email": "contact@drdariuszconsults.com",
+            "Name": from_name
+        },
+        "To": [
+            {
+                "Email": to_email
+            }
+        ],
+        "Subject": subject,
+        "TextPart": message
+    }
+
+    # Add the branded HTML version only to patient emails.
+    if from_name == "Dr Dariusz":
+
+        safe_message = html.escape(message).replace("\n", "<br>")
+
+        email_message["HTMLPart"] = f"""
+        <html>
+        <body style="margin:0; padding:30px 15px;
+                     background-color:#f4f7f9;">
+
+            <div style="max-width:600px; margin:0 auto;
+                        padding:35px 25px;
+                        background-color:#ffffff;
+                        border-radius:12px;">
+
+                <div style="text-align:center;
+                            margin-bottom:30px;">
+
+                    <img
+                        src="https://drdariuszconsults.com/static/Dr%20Dariusz%20Consulting%20Medical%20Logo.png"
+                        alt="Dr Dariusz Consulting"
+                        width="280"
+                        style="max-width:100%; height:auto;"
+                    >
+
+                </div>
+
+                <div style="font-family:Arial,sans-serif;
+                            font-size:16px;
+                            line-height:1.8;
+                            color:#263746;">
+
+                    {safe_message}
+
+                </div>
+
+            </div>
+
+        </body>
+        </html>
+        """
+
     data = {
         "Messages": [
-            {
-                "From": {
-                    "Email": "contact@drdariuszconsults.com",
-                    "Name": from_name
-                },
-                "To": [
-                    {
-                        "Email": to_email
-                    }
-                ],
-                "Subject": subject,
-                "TextPart": message
-            }
+            email_message
         ]
     }
 
+    return send_email(data)
     return send_email(data)
 
 
