@@ -3,9 +3,16 @@
 {% block title %}Thank You{% endblock %}
 
 {% block content %}
+
 <div class="thank-you-section">
 
     <div class="thank-you-box">
+
+        <img
+            src="{{ url_for('static', filename='Dr Dariusz Consulting Medical Logo.png') }}"
+            alt="Dr Dariusz Consulting logo"
+            style="display:block; width:100%; max-width:280px; height:auto; margin:0 auto 30px auto;"
+        >
 
         {% if urgency == "urgent" %}
 
