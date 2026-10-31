@@ -83,6 +83,7 @@
     method="POST"
     onsubmit="return confirm('Resend the appointment offer email to this patient?');"
 >
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <button type="submit" class="btn-green">
         Resend Appointment Offer
     </button>
