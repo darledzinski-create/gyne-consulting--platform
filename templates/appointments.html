@@ -78,25 +78,31 @@
 
                     {% elif appointment.contact_method == "Email" and appointment.email %}
 
-                        <a
-                            href="{{ email_urls[appointment.id] }}"
-                            class="contact-btn"
-                        >
-                            Email Patient
-                        </a>
+<form
+    action="{{ url_for('resend_appointment', appointment_id=appointment.id) }}"
+    method="POST"
+    onsubmit="return confirm('Resend the appointment offer email to this patient?');"
+>
+    <button type="submit" class="btn-green">
+        Resend Appointment Offer
+    </button>
+</form>
 
 {% elif appointment.contact_method == "Either" %}
 
     {% if appointment.email %}
 
-        <div class="appointment-contact">
-            <a
-                href="{{ email_urls[appointment.id] }}"
-                class="btn-green"
-            >
-                Email Appointment Offer
-            </a>
-        </div>
+<div class="appointment-contact">
+    <form
+        action="{{ url_for('resend_appointment', appointment_id=appointment.id) }}"
+        method="POST"
+        onsubmit="return confirm('Resend the appointment offer email to this patient?');"
+    >
+        <button type="submit" class="btn-green">
+            Resend Appointment Offer
+        </button>
+    </form>
+</div>
 
     {% endif %}
 
