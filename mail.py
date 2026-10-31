@@ -128,6 +128,7 @@ Dr Dariusz
     return subject, text
 
 
+
 def send_appointment_email(
     patient_email,
     patient_name,
@@ -136,6 +137,8 @@ def send_appointment_email(
     time,
     reason
 ):
+    import html
+
     patient_text = f"""
 Dear {patient_name},
 
@@ -164,6 +167,47 @@ If you need any changes to the appointment, please contact us.
 Dr Dariusz Ledzinski
 """
 
+    safe_message = html.escape(patient_text).replace(
+        "\n", "<br>"
+    )
+
+    patient_html = f"""
+    <html>
+    <body style="margin:0; padding:30px 15px;
+                 background-color:#f4f7f9;">
+
+        <div style="max-width:600px; margin:0 auto;
+                    padding:35px 25px;
+                    background-color:#ffffff;
+                    border-radius:12px;">
+
+            <div style="text-align:center;
+                        margin-bottom:30px;">
+
+                <img
+                    src="https://drdariuszconsults.com/static/Dr%20Dariusz%20Consulting%20Medical%20Logo.png"
+                    alt="Dr Dariusz Consulting"
+                    width="280"
+                    style="max-width:100%; height:auto;"
+                >
+
+            </div>
+
+            <div style="font-family:Arial,sans-serif;
+                        font-size:16px;
+                        line-height:1.8;
+                        color:#263746;">
+
+                {safe_message}
+
+            </div>
+
+        </div>
+
+    </body>
+    </html>
+    """
+
     data = {
         "Messages": [
             {
@@ -177,7 +221,8 @@ Dr Dariusz Ledzinski
                     }
                 ],
                 "Subject": "Appointment Offer",
-                "TextPart": patient_text
+                "TextPart": patient_text,
+                "HTMLPart": patient_html
             }
         ]
     }
