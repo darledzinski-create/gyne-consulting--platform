@@ -1,3 +1,4 @@
+
 from flask import (
     Flask,
     request,
@@ -2713,6 +2714,69 @@ def offer_appointment(
         "book_appointment.html",
         consultation=consultation
     )
+
+@app.route(
+    "/resend-appointment/<int:appointment_id>",
+    methods=["POST"]
+)
+def resend_appointment(appointment_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+
+    cursor = conn.cursor(
+        cursor_factory=__import__(
+            "psycopg2.extras",
+            fromlist=["DictCursor"]
+        ).DictCursor
+    )
+
+    try:
+        cursor.execute(
+            """
+            SELECT *
+            FROM appointments
+            WHERE id = %s
+            """,
+            (appointment_id,)
+        )
+
+        appointment = cursor.fetchone()
+
+        if appointment is None:
+            return "Appointment not found", 404
+
+        if not appointment["email"]:
+            return "No patient email available", 400
+
+        result = send_appointment_email(
+            appointment["email"],
+            appointment["name"],
+            appointment["practice"],
+            appointment["preferred_date"],
+            appointment["preferred_time"],
+            appointment["reason"]
+        )
+
+        if result.status_code not in (200, 201):
+            logger.error(
+                "Appointment resend failed: %s",
+                result.status_code
+            )
+            return "Email could not be sent", 502
+
+        logger.info(
+            "Appointment offer resent for appointment %s",
+            appointment_id
+        )
+
+        return redirect(url_for("appointments"))
+
+    finally:
+        cursor.close()
+        conn.close()
 
 
 @app.route("/appointments")
