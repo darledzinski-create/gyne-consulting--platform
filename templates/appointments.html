@@ -226,50 +226,29 @@
                             Cancelled
                         </a>
 
-                    {% elif appointment.status == "Confirmed" %}
+{% elif appointment.status == "Confirmed" %}
 
-                        {% if appointment.contact_method == "Email" and appointment.email %}
+    {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
-                            <a
-                                href="mailto:{{ appointment.email }}?subject={{ 'Appointment Confirmation' | urlencode }}&body={{ ('Dear ' ~ appointment.name ~ ',\n\nYour appointment with Dr Dariusz has been confirmed.\n\nPayment has been received and verified.\n\nPractice: ' ~ appointment.practice ~ '\nDate: ' ~ appointment.preferred_date ~ '\nTime: ' ~ appointment.preferred_time ~ '\n\nWe look forward to your consultation.\n\nDr Dariusz Ledzinski') | urlencode }}"
-                                class="contact-btn"
-                            >
-                                Email Confirmation
-                            </a>
+        <a
+            href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+            class="btn-green"
+        >
+            WhatsApp Confirmation
+        </a>
 
-                        {% elif appointment.contact_method == "WhatsApp" and appointment.mobile %}
+    {% elif appointment.contact_method == "Either" %}
 
-                            <a
-                                href="{{ whatsapp_confirmation_urls[appointment.id] }}"
-                                class="btn-green"
-                            >
-                                WhatsApp Confirmation
-                            </a>
+        {% if appointment.mobile %}
 
-                        {% elif appointment.contact_method == "Either" %}
+            <a
+                href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+                class="btn-green"
+            >
+                WhatsApp Confirmation
+            </a>
 
-                            {% if appointment.email %}
-
-                                <a
-                                    href="mailto:{{ appointment.email }}?subject={{ 'Appointment Confirmation' | urlencode }}&body={{ ('Dear ' ~ appointment.name ~ ',\n\nYour appointment with Dr Dariusz has been confirmed.\n\nPayment has been received and verified.\n\nPractice: ' ~ appointment.practice ~ '\nDate: ' ~ appointment.preferred_date ~ '\nTime: ' ~ appointment.preferred_time ~ '\n\nWe look forward to your consultation.\n\nDr Dariusz Ledzinski') | urlencode }}"
-                                    class="contact-btn"
-                                >
-                                    Email Confirmation
-                                </a>
-
-                            {% endif %}
-
-                            {% if appointment.mobile %}
-
-                                <a
-                                    href="{{ whatsapp_confirmation_urls[appointment.id] }}"
-                                    class="btn-green"
-                                >
-                                    WhatsApp Confirmation
-                                </a>
-
-                            {% endif %}
-
+        {% endif %}
                         {% endif %}
 
                         <a
