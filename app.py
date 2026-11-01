@@ -3117,6 +3117,14 @@ def appointment_status(
         return "Appointment not found", 404
 
     old_status = appointment["status"]
+    if status == "Confirmed" and old_status != "Paid":
+        cursor.close()
+        conn.close()
+        return (
+            "Appointment cannot be confirmed "
+            "until its status is Paid.",
+            400
+        )
     cursor.execute(
         """
         UPDATE appointments
