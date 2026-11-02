@@ -3053,7 +3053,7 @@ def delete_appointment(id):
 
 @app.route(
     "/appointment-status/<int:id>/<status>",
-    methods=["GET", "POST"]
+    methods=["POST"]
 )
 def appointment_status(
     id,
