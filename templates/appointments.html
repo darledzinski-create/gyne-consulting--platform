@@ -192,82 +192,92 @@
 
             <div style="margin-top:15px;">
 
-                <div class="status-buttons">
+               
+<div class="status-buttons">
 
-                    {% if appointment.status == "Awaiting Payment" %}
+    {% if appointment.status == "Awaiting Payment" %}
 
-                        <a
-                            href="/appointment-status/{{ appointment.id }}/Paid"
-                            class="btn-primary"
-                        >
-                            Paid
-                        </a>
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Paid') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-primary"
+                    onclick="return confirm('Has payment been received and verified?');">
+                Paid
+            </button>
+        </form>
 
-                        <a
-                            href="/appointment-status/{{ appointment.id }}/Cancelled"
-                            class="btn-danger"
-                        >
-                            Cancelled
-                        </a>
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Cancelled') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-danger"
+                    onclick="return confirm('Cancel this appointment?');">
+                Cancelled
+            </button>
+        </form>
 
-                    {% elif appointment.status == "Paid" %}
+    {% elif appointment.status == "Paid" %}
 
-                        <a
-                            href="/appointment-status/{{ appointment.id }}/Confirmed"
-                            class="btn-primary"
-                        >
-                            Confirmed
-                        </a>
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Confirmed') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-primary"
+                    onclick="return confirm('Confirm this appointment and send the patient confirmation email?');">
+                Confirmed
+            </button>
+        </form>
 
-                        <a
-                            href="/appointment-status/{{ appointment.id }}/Cancelled"
-                            class="btn-danger"
-                        >
-                            Cancelled
-                        </a>
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Cancelled') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-danger"
+                    onclick="return confirm('Cancel this appointment?');">
+                Cancelled
+            </button>
+        </form>
 
-{% elif appointment.status == "Confirmed" %}
+    {% elif appointment.status == "Confirmed" %}
 
-    {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
+        {% if appointment.contact_method == "WhatsApp" and appointment.mobile %}
 
-        <a
-            href="{{ whatsapp_confirmation_urls[appointment.id] }}"
-            class="btn-green"
-        >
-            WhatsApp Confirmation
-        </a>
-
-    {% elif appointment.contact_method == "Either" %}
-
-        {% if appointment.mobile %}
-
-            <a
-                href="{{ whatsapp_confirmation_urls[appointment.id] }}"
-                class="btn-green"
-            >
+            <a href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+               class="btn-green">
                 WhatsApp Confirmation
             </a>
 
+        {% elif appointment.contact_method == "Either" %}
+
+            {% if appointment.mobile %}
+
+                <a href="{{ whatsapp_confirmation_urls[appointment.id] }}"
+                   class="btn-green">
+                    WhatsApp Confirmation
+                </a>
+
+            {% endif %}
+
         {% endif %}
-                        {% endif %}
 
-                        <a
-                            href="/appointment-status/{{ appointment.id }}/Completed"
-                            class="btn-success"
-                        >
-                            Completed
-                        </a>
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Completed') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-success"
+                    onclick="return confirm('Mark this appointment as completed?');">
+                Completed
+            </button>
+        </form>
 
-                        <a
-                            href="/appointment-status/{{ appointment.id }}/Cancelled"
-                            class="btn-danger"
-                        >
-                            Cancelled
-                        </a>
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Cancelled') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-danger"
+                    onclick="return confirm('Cancel this appointment?');">
+                Cancelled
+            </button>
+        </form>
 
-                    {% endif %}
+    {% endif %}
 
-                   </div>
+</div>
 
                   
             </div>
