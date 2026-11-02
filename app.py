@@ -39,27 +39,6 @@ from mail import (
     send_pdf_email
 )
 
-@app.route("/admin/database-user-check")
-def database_user_check():
-
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
-
-    conn = get_db_connection()
-
-    try:
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT current_user")
-
-        username = cursor.fetchone()[0]
-
-        cursor.close()
-
-        return f"Database user: {username}"
-
-    finally:
-        conn.close()
 
 
 app = Flask(__name__)
@@ -3072,6 +3051,28 @@ def delete_appointment(id):
     return redirect(
         url_for("appointments")
     )
+
+@app.route("/admin/database-user-check")
+def database_user_check():
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT current_user")
+
+        username = cursor.fetchone()[0]
+
+        cursor.close()
+
+        return f"Database user: {username}"
+
+    finally:
+        conn.close()
 
 @app.route(
     "/appointment-status/<int:id>/<status>",
