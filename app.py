@@ -3058,22 +3058,27 @@ def database_user_check():
     if not session.get("admin_logged_in"):
         return redirect(url_for("login"))
 
+    import os
+    from urllib.parse import urlparse
+
+    database_url = os.environ.get("DATABASE_URL", "")
+    configured_user = urlparse(database_url).username or "Not found"
+
     conn = get_db_connection()
 
     try:
         cursor = conn.cursor()
-
         cursor.execute("SELECT current_user")
-
-        username = cursor.fetchone()[0]
-
+        actual_user = cursor.fetchone()[0]
         cursor.close()
 
-        return f"Database user: {username}"
+        return (
+            f"Configured database user: {configured_user}<br>"
+            f"Actual database user: {actual_user}"
+        )
 
     finally:
         conn.close()
-
 @app.route(
     "/appointment-status/<int:id>/<status>",
     methods=["POST"]
