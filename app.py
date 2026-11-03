@@ -3052,34 +3052,7 @@ def delete_appointment(id):
         url_for("appointments")
     )
 
-@app.route("/admin/database-user-check")
-def database_user_check():
 
-    if not session.get("admin_logged_in"):
-        return redirect(url_for("login"))
-
-    import os
-    from urllib.parse import urlparse
-
-    database_url = os.environ.get("DATABASE_URL", "")
-    configured_user = urlparse(database_url).username or "Not found"
-
-    conn = get_db_connection()
-
-    try:
-        cursor = conn.cursor()
-        cursor.execute("SELECT session_user, current_user")
-        session_user, actual_user = cursor.fetchone()
-        cursor.close()
-
-        return (
-            f"Configured database user: {configured_user}<br>"
-            f"Session database user: {session_user}<br>"
-            f"Actual database user: {actual_user}"
-        )
-
-    finally:
-        conn.close()
 @app.route(
     "/appointment-status/<int:id>/<status>",
     methods=["POST"]
