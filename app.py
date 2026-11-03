@@ -3072,11 +3072,11 @@ def database_user_check():
         session_user, actual_user = cursor.fetchone()
         cursor.close()
 
-       return (
-           f"Configured database user: {configured_user}<br>"
-           f"Session database user: {session_user}<br>"
-           f"Actual database user: {actual_user}"
-       )
+        return (
+            f"Configured database user: {configured_user}<br>"
+            f"Session database user: {session_user}<br>"
+            f"Actual database user: {actual_user}"
+        )
 
     finally:
         conn.close()
