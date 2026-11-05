@@ -2660,7 +2660,7 @@ def offer_appointment(
 
     if request.method == "POST":
 
-        create_appointment(
+        appointment_id, response_token = create_appointment(
             consultation_id,
             consultation,
             request.form["practice"],
@@ -2668,7 +2668,6 @@ def offer_appointment(
             request.form["preferred_time"],
             request.form["reason"]
         )
-
         if consultation["contact_method"] in (
             "Email",
             "Either"
