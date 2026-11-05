@@ -1,5 +1,6 @@
 import os
 import uuid
+import secrets
 import psycopg2
 from psycopg2.extras import DictCursor
 from datetime import datetime
@@ -430,6 +431,7 @@ def create_appointment(
 
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=DictCursor)
+    response_token = secrets.token_urlsafe(32)
 
     cursor.execute(
         """
@@ -444,9 +446,11 @@ def create_appointment(
             preferred_time,
             reason,
             status,
-            created_at
+            created_at,
+            response_token
         )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        RETURNING id
         """,
         (
             consultation["name"],
@@ -457,10 +461,12 @@ def create_appointment(
             preferred_date,
             preferred_time,
             reason,
-            "Awaiting Payment",
-            datetime.now().strftime("%d %B %Y, %H:%M")
+            "Appointment Offered",
+            datetime.now().strftime("%d %B %Y, %H:%M"),
+            response_token
         )
     )
+    appointment_id = cursor.fetchone()["id"]
 
     cursor.execute(
         """
@@ -492,6 +498,7 @@ def create_appointment(
 
     cursor.close()
     conn.close()
+    return appointment_id, response_token
 
 
 def save_consultation(
