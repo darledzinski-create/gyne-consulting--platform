@@ -306,6 +306,23 @@ def create_table():
         )
     """)
 
+    
+    cursor.execute("""
+        ALTER TABLE appointments
+        ADD COLUMN IF NOT EXISTS response_token TEXT
+    """)
+
+    cursor.execute("""
+        ALTER TABLE appointments
+        ADD COLUMN IF NOT EXISTS alternative_date TEXT
+    """)
+
+    cursor.execute("""
+        ALTER TABLE appointments
+        ADD COLUMN IF NOT EXISTS alternative_time TEXT
+    """)
+
+
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS prescription_email_sends (
 
