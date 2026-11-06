@@ -136,6 +136,7 @@ def send_appointment_email(
     date,
     time,
     reason
+    response_token
 ):
     import html
 
