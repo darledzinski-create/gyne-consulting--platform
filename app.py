@@ -2715,6 +2715,57 @@ def offer_appointment(
         consultation=consultation
     )
 
+
+@app.route("/appointment-response/<token>", methods=["GET"])
+def appointment_response(token):
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute(
+            """
+            SELECT preferred_date, preferred_time, status
+            FROM appointments
+            WHERE response_token = %s
+            """,
+            (token,)
+        )
+
+        appointment = cursor.fetchone()
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    if appointment is None:
+        return "Appointment link is invalid or unavailable.", 404
+
+    return render_template_string(
+        """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Appointment Response</title>
+        </head>
+        <body>
+            <h2>Dr Dariusz Consulting</h2>
+            <h3>Your Appointment Offer</h3>
+
+            <p><strong>Date:</strong> {{ date }}</p>
+            <p><strong>Time:</strong> {{ time }}</p>
+            <p><strong>Status:</strong> {{ status }}</p>
+
+            <p>Appointment response options will be available soon.</p>
+        </body>
+        </html>
+        """,
+        date=appointment[0],
+        time=appointment[1],
+        status=appointment[2]
+    )
+
+
 @app.route(
     "/resend-appointment/<int:appointment_id>",
     methods=["POST"]
