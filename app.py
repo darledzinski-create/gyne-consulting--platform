@@ -2776,6 +2776,51 @@ def appointment_response(token):
         conn.close()
 
     if appointment is None:
+
+        
+    if request.method == "POST":
+
+        if request.form.get("action") != "accept":
+            return "Invalid appointment response.", 400
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        try:
+            cursor.execute(
+                """
+                UPDATE appointments
+                SET status = 'Awaiting Payment'
+                WHERE response_token = %s
+                  AND status = 'Appointment Offered'
+                RETURNING id
+                """,
+                (token,)
+            )
+
+            updated = cursor.fetchone()
+
+            conn.commit()
+
+        except Exception:
+            conn.rollback()
+            raise
+
+        finally:
+            cursor.close()
+            conn.close()
+
+        if updated is None:
+            return (
+                "This appointment offer has already "
+                "been processed or is no longer available.",
+                409
+            )
+
+        return redirect(
+            url_for("appointment_response", token=token)
+        )
+
         return "Appointment link is invalid or unavailable.", 404
 
     return render_template_string(
