@@ -2753,7 +2753,7 @@ def check_appointment_token():
 
 
 
-@app.route("/appointment-response/<token>", methods=["GET"])
+@app.route("/appointment-response/<token>", methods=["GET", "POST"])
 def appointment_response(token):
 
     conn = get_db_connection()
