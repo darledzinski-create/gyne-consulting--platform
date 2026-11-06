@@ -2716,6 +2716,42 @@ def offer_appointment(
     )
 
 
+@app.route("/admin/check-appointment-token")
+def check_appointment_token():
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute(
+            """
+            SELECT response_token IS NOT NULL
+                   AND response_token <> ''
+            FROM appointments
+            WHERE id = %s
+            """,
+            (14,)
+        )
+
+        result = cursor.fetchone()
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    if result is None:
+        return "Appointment #14 was not found."
+
+    if result[0]:
+        return "SUCCESS: Appointment #14 has a response token."
+
+    return "Appointment #14 does not have a response token."
+
+
+
 @app.route("/appointment-response/<token>", methods=["GET"])
 def appointment_response(token):
 
