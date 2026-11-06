@@ -2733,7 +2733,7 @@ def check_appointment_token():
             FROM appointments
             WHERE id = %s
             """,
-            (14,)
+            (15,)
         )
 
         result = cursor.fetchone()
@@ -2743,12 +2743,12 @@ def check_appointment_token():
         conn.close()
 
     if result is None:
-        return "Appointment #14 was not found."
+        return "Appointment #15 was not found."
 
     if result[0]:
-        return "SUCCESS: Appointment #14 has a response token."
+        return "SUCCESS: Appointment #15 has a response token."
 
-    return "Appointment #14 does not have a response token."
+    return "Appointment #15 does not have a response token."
 
 
 
