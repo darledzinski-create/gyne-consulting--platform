@@ -2775,7 +2775,7 @@ def appointment_response(token):
         cursor.close()
         conn.close()
 
-    if appointment is None:
+        if appointment is None:
 
         
     if request.method == "POST":
