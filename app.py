@@ -2793,7 +2793,29 @@ def appointment_response(token):
             <p><strong>Time:</strong> {{ time }}</p>
             <p><strong>Status:</strong> {{ status }}</p>
 
-            <p>Appointment response options will be available soon.</p>
+            
+{% if status == "Appointment Offered" %}
+
+    <form method="POST">
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <input type="hidden"
+               name="action"
+               value="accept">
+
+        <button type="submit">
+            Accept Appointment
+        </button>
+    </form>
+
+{% else %}
+
+    <p>This appointment offer is no longer awaiting a response.</p>
+
+{% endif %}
+
         </body>
         </html>
         """,
