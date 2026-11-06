@@ -2771,14 +2771,16 @@ def appointment_response(token):
 
         appointment = cursor.fetchone()
 
+    
     finally:
         cursor.close()
         conn.close()
 
-        if appointment is None:
+    if appointment is None:
+        return "Appointment link is invalid or unavailable.", 404
 
-        
     if request.method == "POST":
+
 
         if request.form.get("action") != "accept":
             return "Invalid appointment response.", 400
