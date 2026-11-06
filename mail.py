@@ -140,10 +140,26 @@ def send_appointment_email(
 ):
     import html
 
+    
+    response_url = (
+        "https://drdariuszconsults.com/appointment-response/"
+        + response_token
+    )
+
+
     patient_text = f"""
 Dear {patient_name},
 
+
 Your appointment has been offered.
+
+Please review the proposed appointment details below.
+
+To accept this appointment or request another date or time,
+please open your private appointment response link:
+
+{response_url}
+
 
 Practice: {practice}
 Date: {date}
@@ -152,16 +168,16 @@ Time: {time}
 Reason:
 {reason}
 
+
 CONSULTATION FEE: R 500
 
-PAYMENT BY EFT
-Bank: GoTyme
-Account holder: Dariusz Ledzinski
-Account number: 510 1312 9386
+No payment is required at this stage.
 
-Please make payment by EFT and reply to this email with your proof of payment.
+Once you accept the proposed appointment, you will receive
+separate payment instructions.
 
-Your appointment will be confirmed once payment has been received and verified.
+Your appointment will be confirmed after payment has been
+received and verified.
 
 If you need any changes to the appointment, please contact us.
 
