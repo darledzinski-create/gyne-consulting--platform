@@ -2912,7 +2912,8 @@ def resend_appointment(appointment_id):
             appointment["practice"],
             appointment["preferred_date"],
             appointment["preferred_time"],
-            appointment["reason"]
+            appointment["reason"],
+            appointment["response_token"]
         )
 
         if result.status_code not in (200, 201):
