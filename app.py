@@ -2754,29 +2754,41 @@ def check_appointment_token():
 
 
 
+
 @app.route("/appointment-response/<token>", methods=["GET", "POST"])
 def appointment_response(token):
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    if request.method == "POST":
 
-    try:
-        cursor.execute(
-            """
-            SELECT preferred_date, preferred_time, status
-            FROM appointments
-            WHERE response_token = %s
-            """,
-            (token,)
-        )
+        if request.form.get("action") != "accept":
+            return "Invalid appointment response.", 400
 
-        appointment = cursor.fetchone()
+        conn = get_db_connection()
+        cursor = conn.cursor()
 
-    
-    finally:
-        cursor.close()
-        conn.close()
+        try:
+            cursor.execute(
+                """
+                UPDATE appointments
+                SET status = 'Awaiting Payment'
+                WHERE response_token = %s
+                  AND status = 'Appointment Offered'
+                RETURNING id, name, email, practice,
+                          preferred_date, preferred_time
+                """,
+                (token,)
+            )
 
+            updated = cursor.fetchone()
+            conn.commit()
+
+        except Exception:
+            conn.rollback()
+            raise
+
+        finally:
+            cursor.close()
+            conn.close()
 
         if updated is None:
             return (
@@ -2794,14 +2806,14 @@ def appointment_response(token):
                 updated[5]
             )
 
-            if result.status_code not in (200, 201):
-                logger.error(
+            if result is None or result.status_code not in (200, 201):
+                app.logger.error(
                     "Payment email failed for appointment %s",
                     updated[0]
                 )
 
         except Exception:
-            logger.exception(
+            app.logger.exception(
                 "Payment email error for appointment %s",
                 updated[0]
             )
@@ -2810,52 +2822,82 @@ def appointment_response(token):
             url_for("appointment_response", token=token)
         )
 
-    return render_template_string(
-    """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Appointment Response</title>
-        </head>
-        <body>
-            <h2>Dr Dariusz Consulting</h2>
-            <h3>Your Appointment Offer</h3>
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
-            <p><strong>Date:</strong> {{ date }}</p>
-            <p><strong>Time:</strong> {{ time }}</p>
-            <p><strong>Status:</strong> {{ status }}</p>
+    try:
+        cursor.execute(
+            """
+            SELECT preferred_date, preferred_time, status
+            FROM appointments
+            WHERE response_token = %s
+            """,
+            (token,)
+        )
 
-            
-{% if status == "Appointment Offered" %}
+        appointment = cursor.fetchone()
 
-    <form method="POST">
-        <input type="hidden"
-               name="csrf_token"
-               value="{{ csrf_token() }}">
+    finally:
+        cursor.close()
+        conn.close()
 
-        <input type="hidden"
-               name="action"
-               value="accept">
+    if appointment is None:
+        return "Invalid or expired appointment link.", 404
 
-        <button type="submit">
-            Accept Appointment
-        </button>
-    </form>
+    response = app.make_response(
+        render_template_string(
+            """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Appointment Response</title>
+            </head>
+            <body>
+                <h2>Dr Dariusz Consulting</h2>
+                <h3>Your Appointment Offer</h3>
 
-{% else %}
+                <p><strong>Date:</strong> {{ date }}</p>
+                <p><strong>Time:</strong> {{ time }}</p>
+                <p><strong>Status:</strong> {{ status }}</p>
 
-    <p>This appointment offer is no longer awaiting a response.</p>
+                {% if status == "Appointment Offered" %}
 
-{% endif %}
+                <form method="POST">
+                    <input type="hidden"
+                           name="csrf_token"
+                           value="{{ csrf_token() }}">
 
-        </body>
-        </html>
-        """,
-        date=appointment[0],
-        time=appointment[1],
-        status=appointment[2]
+                    <input type="hidden"
+                           name="action"
+                           value="accept">
+
+                    <button type="submit">
+                        Accept Appointment
+                    </button>
+                </form>
+
+                {% else %}
+
+                <p>
+                    This appointment offer is no longer
+                    awaiting a response.
+                </p>
+
+                {% endif %}
+
+            </body>
+            </html>
+            """,
+            date=appointment[0],
+            time=appointment[1],
+            status=appointment[2]
+        )
     )
 
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["Referrer-Policy"] = "no-referrer"
+
+    return response
 
 @app.route(
     "/resend-appointment/<int:appointment_id>",
