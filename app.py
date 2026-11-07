@@ -2795,7 +2795,8 @@ def appointment_response(token):
                 SET status = 'Awaiting Payment'
                 WHERE response_token = %s
                   AND status = 'Appointment Offered'
-                RETURNING id
+                
+                RETURNING id, name, email, practice, preferred_date, preferred_time
                 """,
                 (token,)
             )
