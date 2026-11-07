@@ -2777,48 +2777,33 @@ def appointment_response(token):
         cursor.close()
         conn.close()
 
-    if appointment is None:
-        return "Appointment link is invalid or unavailable.", 404
-
-    if request.method == "POST":
-
-
-        if request.form.get("action") != "accept":
-            return "Invalid appointment response.", 400
-
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        try:
-            cursor.execute(
-                """
-                UPDATE appointments
-                SET status = 'Awaiting Payment'
-                WHERE response_token = %s
-                  AND status = 'Appointment Offered'
-                
-                RETURNING id, name, email, practice, preferred_date, preferred_time
-                """,
-                (token,)
-            )
-
-            updated = cursor.fetchone()
-
-            conn.commit()
-
-        except Exception:
-            conn.rollback()
-            raise
-
-        finally:
-            cursor.close()
-            conn.close()
 
         if updated is None:
             return (
                 "This appointment offer has already "
                 "been processed or is no longer available.",
                 409
+            )
+
+        try:
+            result = send_appointment_payment_email(
+                updated[2],
+                updated[1],
+                updated[3],
+                updated[4],
+                updated[5]
+            )
+
+            if result.status_code not in (200, 201):
+                logger.error(
+                    "Payment email failed for appointment %s",
+                    updated[0]
+                )
+
+        except Exception:
+            logger.exception(
+                "Payment email error for appointment %s",
+                updated[0]
             )
 
         return redirect(
