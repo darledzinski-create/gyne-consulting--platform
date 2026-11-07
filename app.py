@@ -2823,8 +2823,8 @@ def appointment_response(token):
             url_for("appointment_response", token=token)
         )
 
-     return render_template_string(
-        """
+    return render_template_string(
+    """
         <!DOCTYPE html>
         <html>
         <head>
