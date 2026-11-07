@@ -247,6 +247,107 @@ Dr Dariusz Ledzinski
     return send_email(data)
 
 
+def send_appointment_payment_email(
+    patient_email,
+    patient_name,
+    practice,
+    date,
+    time
+):
+    import html
+
+    patient_text = f"""
+Dear {patient_name},
+
+Thank you for accepting your appointment.
+
+Your appointment details are:
+
+Practice: {practice}
+Date: {date}
+Time: {time}
+
+CONSULTATION FEE: R 500
+
+PAYMENT BY EFT
+
+Bank: GoTyme
+Account holder: Dariusz Ledzinski
+Account number: 510 1312 9386
+
+Please make payment by EFT and reply to this email
+with your proof of payment.
+
+Your appointment will be confirmed once payment
+has been received and verified.
+
+Dr Dariusz Ledzinski
+"""
+
+    safe_message = html.escape(patient_text).replace(
+        "\n", "<br>"
+    )
+
+    patient_html = f"""
+    <html>
+    <body style="margin:0; padding:30px 15px;
+                 background-color:#f4f7f9;">
+
+        <div style="max-width:600px; margin:0 auto;
+                    padding:35px 25px;
+                    background-color:#ffffff;
+                    border-radius:12px;">
+
+            <div style="text-align:center;
+                        margin-bottom:30px;">
+
+                <img
+                    src="https://drdariuszconsults.com/static/Dr%20Dariusz%20Consulting%20Medical%20Logo.png"
+                    alt="Dr Dariusz Consulting"
+                    width="280"
+                    style="max-width:100%; height:auto;"
+                >
+
+            </div>
+
+            <div style="font-family:Arial,sans-serif;
+                        font-size:16px;
+                        line-height:1.8;
+                        color:#263746;">
+
+                {safe_message}
+
+            </div>
+
+        </div>
+
+    </body>
+    </html>
+    """
+
+    data = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": "contact@drdariuszconsults.com",
+                    "Name": "Dr Dariusz"
+                },
+                "To": [
+                    {
+                        "Email": patient_email
+                    }
+                ],
+                "Subject": "Appointment Accepted - Payment Instructions",
+                "TextPart": patient_text,
+                "HTMLPart": patient_html
+            }
+        ]
+    }
+
+    return send_email(data)
+
+
+
 def send_appointment_confirmation_email(
     patient_email,
     patient_name,
