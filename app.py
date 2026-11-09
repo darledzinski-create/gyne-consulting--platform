@@ -2753,8 +2753,6 @@ def check_appointment_token():
     return "Appointment #15 does not have a response token."
 
 
-
-
 @app.route("/appointment-response/<token>", methods=["GET", "POST"])
 def appointment_response(token):
 
@@ -2860,30 +2858,78 @@ def appointment_response(token):
                 <p><strong>Time:</strong> {{ time }}</p>
                 <p><strong>Status:</strong> {{ status }}</p>
 
-                {% if status == "Appointment Offered" %}
+           
+{% if status == "Appointment Offered" %}
 
-                <form method="POST">
-                    <input type="hidden"
-                           name="csrf_token"
-                           value="{{ csrf_token() }}">
+    <form method="POST">
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
 
-                    <input type="hidden"
-                           name="action"
-                           value="accept">
+        <input type="hidden"
+               name="action"
+               value="accept">
 
-                    <button type="submit">
-                        Accept Appointment
-                    </button>
-                </form>
+        <button type="submit">
+            Accept Appointment
+        </button>
+    </form>
 
-                {% else %}
+    <hr>
 
-                <p>
-                    This appointment offer is no longer
-                    awaiting a response.
-                </p>
+    <h3>Unable to attend?</h3>
 
-                {% endif %}
+    <p>
+        You may request another appointment date
+        or time using the form below.
+    </p>
+
+    <form method="POST">
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <input type="hidden"
+               name="action"
+               value="alternative">
+
+        <label for="alternative_date">
+            Preferred alternative date:
+        </label>
+
+        <input type="date"
+               id="alternative_date"
+               name="alternative_date"
+               required>
+
+        <p></p>
+
+        <label for="alternative_time">
+            Preferred alternative time:
+        </label>
+
+        <input type="time"
+               id="alternative_time"
+               name="alternative_time"
+               required>
+
+        <p></p>
+
+        <button type="submit">
+            Request Another Date or Time
+        </button>
+
+    </form>
+
+{% else %}
+
+    <p>
+        This appointment offer is no longer
+        awaiting a response.
+    </p>
+
+{% endif %}
 
             </body>
             </html>
