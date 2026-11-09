@@ -2758,6 +2758,87 @@ def appointment_response(token):
 
     if request.method == "POST":
 
+        if request.form.get("action") == "alternative":
+
+            from datetime import date, datetime
+
+            alternative_date = request.form.get(
+                "alternative_date", ""
+            ).strip()
+
+            alternative_time = request.form.get(
+                "alternative_time", ""
+            ).strip()
+
+            try:
+                requested_date = date.fromisoformat(
+                    alternative_date
+                )
+
+                datetime.strptime(
+                    alternative_time,
+                    "%H:%M"
+                )
+
+                if requested_date < date.today():
+                    return (
+                        "Please select a future date.",
+                        400
+                    )
+
+            except ValueError:
+                return (
+                    "Please enter a valid date and time.",
+                    400
+                )
+
+            conn = get_db_connection()
+            cursor = conn.cursor()
+
+            try:
+                cursor.execute(
+                    """
+                    UPDATE appointments
+                    SET alternative_date = %s,
+                        alternative_time = %s,
+                        status = 'Alternative Requested'
+                    WHERE response_token = %s
+                      AND status = 'Appointment Offered'
+                    RETURNING id
+                    """,
+                    (
+                        alternative_date,
+                        alternative_time,
+                        token
+                    )
+                )
+
+                updated_alternative = cursor.fetchone()
+                conn.commit()
+
+            except Exception:
+                conn.rollback()
+                raise
+
+            finally:
+                cursor.close()
+                conn.close()
+
+            if updated_alternative is None:
+                return (
+                    "This appointment offer has already "
+                    "been processed or is no longer available.",
+                    409
+                )
+
+            return redirect(
+                url_for(
+                    "appointment_response",
+                    token=token
+                )
+            )
+
+
         if request.form.get("action") != "accept":
             return "Invalid appointment response.", 400
 
