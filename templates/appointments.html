@@ -172,13 +172,47 @@
                     </span>
                 </p>
 
+           
+               
+<div class="status-buttons">
+
+    {% if appointment.status == "Awaiting Payment" %}
+
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Paid') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-primary"
+                    onclick="return confirm('Has payment been received and verified?');">
+                Paid
+            </button>
+        </form>
+
+        <form method="POST"
+              action="{{ url_for('appointment_status', id=appointment.id, status='Cancelled') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-danger"
+                    onclick="return confirm('Cancel this appointment?');">
+                Cancelled
+            </button>
+        </form>
+
             {% elif appointment.status == "Completed" %}
 
-               
-            <p>
-                <strong>Time:</strong>
-                {{ appointment.preferred_time }}
-            </p>
+                <p>
+                    <strong>Status:</strong>
+                    <span style="color:darkgreen;">
+                        {{ appointment.status }}
+                    </span>
+                </p>
+
+            {% else %}
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ appointment.status }}
+                </p>
+
+            {% endif %}
 
             {% if appointment.status == "Alternative Requested" %}
 
@@ -207,46 +241,6 @@
                 </div>
 
             {% endif %}
-
-            <p>
-                <strong>Reason:</strong>
-                {{ appointment.reason }}
-            </p>
-
-
-            {% else %}
-
-                <p>
-                    <strong>Status:</strong>
-                    {{ appointment.status }}
-                </p>
-
-            {% endif %}
-
-            <div style="margin-top:15px;">
-
-               
-<div class="status-buttons">
-
-    {% if appointment.status == "Awaiting Payment" %}
-
-        <form method="POST"
-              action="{{ url_for('appointment_status', id=appointment.id, status='Paid') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <button type="submit" class="btn-primary"
-                    onclick="return confirm('Has payment been received and verified?');">
-                Paid
-            </button>
-        </form>
-
-        <form method="POST"
-              action="{{ url_for('appointment_status', id=appointment.id, status='Cancelled') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <button type="submit" class="btn-danger"
-                    onclick="return confirm('Cancel this appointment?');">
-                Cancelled
-            </button>
-        </form>
 
     {% elif appointment.status == "Paid" %}
 
