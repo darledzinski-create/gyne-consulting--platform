@@ -2795,8 +2795,54 @@ def appointment_response(token):
                     409
                 )
 
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    
+            conn = get_db_connection()
+            cursor = conn.cursor()
+
+            try:
+                cursor.execute(
+                    """
+                    UPDATE appointments
+                    SET alternative_date = %s,
+                        alternative_time = %s,
+                        status = 'Alternative Requested'
+                    WHERE response_token = %s
+                      AND status = 'Appointment Offered'
+                    RETURNING id
+                    """,
+                    (
+                        alternative_date,
+                        alternative_time,
+                        token
+                    )
+                )
+
+                updated_appointment = cursor.fetchone()
+
+                if updated_appointment is None:
+                    conn.rollback()
+                    return (
+                        "This appointment offer is no longer "
+                        "awaiting a response.",
+                        409
+                    )
+
+                conn.commit()
+
+            except Exception:
+                conn.rollback()
+                raise
+
+            finally:
+                cursor.close()
+                conn.close()
+
+            return redirect(
+                url_for(
+                    "appointment_response",
+                    token=token
+                )
+            )
 
    
     try:
