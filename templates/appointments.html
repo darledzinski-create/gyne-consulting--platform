@@ -225,6 +225,26 @@
 
             {% endif %}
 
+            
+{% if appointment.status == "Alternative Requested" %}
+    <form
+        action="{{ url_for('approve_alternative', appointment_id=appointment.id) }}"
+        method="POST"
+        onsubmit="return confirm('Approve the alternative appointment and email the revised offer to the patient?');"
+    >
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="{{ csrf_token() }}"
+        >
+
+        <button type="submit" class="btn-green">
+            Approve Alternative Appointment
+        </button>
+    </form>
+{% endif %}
+
+
             <div style="margin-top:15px;">
 
                 <div class="status-buttons">
