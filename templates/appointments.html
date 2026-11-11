@@ -91,25 +91,27 @@
 
 {% elif appointment.contact_method == "Either" %}
 
-    {% if appointment.email %}
+   
+    {% if appointment.email and appointment.status == "Appointment Offered" %}
 
-<div class="appointment-contact">
+        <div class="appointment-contact">
+            <form
+                action="{{ url_for('resend_appointment', appointment_id=appointment.id) }}"
+                method="POST"
+                onsubmit="return confirm('Resend the appointment offer email to this patient?');"
+            >
+                <input type="hidden"
+                       name="csrf_token"
+                       value="{{ csrf_token() }}">
 
-    {% if appointment.status == "Appointment Offered" %}
-    <form
-        action="{{ url_for('resend_appointment', appointment_id=appointment.id) }}"
-        method="POST"
-        onsubmit="return confirm('Resend the appointment offer email to this patient?');"
-    >
-        <button type="submit" class="btn-green">
-            Resend Appointment Offer
-        </button>
-    </form>
+                <button type="submit" class="btn-green">
+                    Resend Appointment Offer
+                </button>
+            </form>
+        </div>
 
     {% endif %}
-</div>
 
-    {% endif %}
 
     {% if appointment.mobile %}
 
