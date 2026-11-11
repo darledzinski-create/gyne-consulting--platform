@@ -2760,146 +2760,40 @@ def appointment_response(token):
 
         if request.form.get("action") == "alternative":
 
-            from datetime import date, datetime
-          
-        from datetime import datetime
-        from zoneinfo import ZoneInfo
+         
+            from datetime import datetime
+            from zoneinfo import ZoneInfo
 
-        try:
-            requested_datetime = datetime.strptime(
-                appointment["alternative_date"]
-                + " "
-                + appointment["alternative_time"],
-                "%Y-%m-%d %H:%M"
-            )
+            alternative_date = request.form.get(
+                "alternative_date", ""
+            ).strip()
 
-        except ValueError:
-            return "Invalid alternative date or time.", 400
-
-        south_africa_now = datetime.now(
-            ZoneInfo("Africa/Johannesburg")
-        )
-
-        requested_datetime = requested_datetime.replace(
-            tzinfo=ZoneInfo("Africa/Johannesburg")
-        )
-
-        if requested_datetime <= south_africa_now:
-            return (
-                "The requested appointment time has passed. "
-                "Please arrange another appointment.",
-                409
-            )
-
-           
-            conn = get_db_connection()
-            cursor = conn.cursor()
+            alternative_time = request.form.get(
+                "alternative_time", ""
+            ).strip()
 
             try:
-                cursor.execute(
-                    """
-                    UPDATE appointments
-                    SET alternative_date = %s,
-                        alternative_time = %s,
-                        status = 'Alternative Requested'
-                    WHERE response_token = %s
-                      AND status = 'Appointment Offered'
-                    RETURNING id
-                    """,
-                    (
-                        alternative_date,
-                        alternative_time,
-                        token
-                    )
+                requested_datetime = datetime.strptime(
+                    alternative_date + " " + alternative_time,
+                    "%Y-%m-%d %H:%M"
                 )
 
-                updated_alternative = cursor.fetchone()
-                conn.commit()
+            except ValueError:
+                return "Invalid alternative date or time.", 400
 
-            except Exception:
-                conn.rollback()
-                raise
+            requested_datetime = requested_datetime.replace(
+                tzinfo=ZoneInfo("Africa/Johannesburg")
+            )
 
-            finally:
-                cursor.close()
-                conn.close()
+            south_africa_now = datetime.now(
+                ZoneInfo("Africa/Johannesburg")
+            )
 
-            if updated_alternative is None:
+            if requested_datetime <= south_africa_now:
                 return (
-                    "This appointment offer has already "
-                    "been processed or is no longer available.",
+                    "The requested appointment time has passed.",
                     409
                 )
-
-            return redirect(
-                url_for(
-                    "appointment_response",
-                    token=token
-                )
-            )
-
-
-        if request.form.get("action") != "accept":
-            return "Invalid appointment response.", 400
-
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        try:
-            cursor.execute(
-                """
-                UPDATE appointments
-                SET status = 'Awaiting Payment'
-                WHERE response_token = %s
-                  AND status = 'Appointment Offered'
-                RETURNING id, name, email, practice,
-                          preferred_date, preferred_time
-                """,
-                (token,)
-            )
-
-            updated = cursor.fetchone()
-            conn.commit()
-
-        except Exception:
-            conn.rollback()
-            raise
-
-        finally:
-            cursor.close()
-            conn.close()
-
-        if updated is None:
-            return (
-                "This appointment offer has already "
-                "been processed or is no longer available.",
-                409
-            )
-
-        try:
-            result = send_appointment_payment_email(
-                updated[2],
-                updated[1],
-                updated[3],
-                updated[4],
-                updated[5]
-            )
-
-            if result is None or result.status_code not in (200, 201):
-                app.logger.error(
-                    "Payment email failed for appointment %s",
-                    updated[0]
-                )
-
-        except Exception:
-            app.logger.exception(
-                "Payment email error for appointment %s",
-                updated[0]
-            )
-
-        return redirect(
-            url_for("appointment_response", token=token)
-        )
 
     conn = get_db_connection()
     cursor = conn.cursor()
