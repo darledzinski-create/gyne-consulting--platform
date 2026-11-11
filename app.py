@@ -3158,6 +3158,137 @@ def resend_appointment(appointment_id):
         conn.close()
 
 
+@app.route(
+    "/approve-alternative/<int:appointment_id>",
+    methods=["POST"]
+)
+def approve_alternative(appointment_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+
+    cursor = conn.cursor(
+        cursor_factory=__import__(
+            "psycopg2.extras",
+            fromlist=["DictCursor"]
+        ).DictCursor
+    )
+
+    try:
+        cursor.execute(
+            """
+            SELECT *
+            FROM appointments
+            WHERE id = %s
+            FOR UPDATE
+            """,
+            (appointment_id,)
+        )
+
+        appointment = cursor.fetchone()
+
+        if appointment is None:
+            return "Appointment not found", 404
+
+        if appointment["status"] != "Alternative Requested":
+            return (
+                "This appointment is not awaiting "
+                "alternative approval.",
+                409
+            )
+
+        if not appointment["alternative_date"] or not appointment["alternative_time"]:
+            return "Alternative date or time is missing.", 400
+
+        if not appointment["email"]:
+            return "No patient email available.", 400
+
+        from datetime import date
+
+        try:
+            revised_date = date.fromisoformat(
+                appointment["alternative_date"]
+            )
+
+            datetime.strptime(
+                appointment["alternative_time"],
+                "%H:%M"
+            )
+
+        except ValueError:
+            return "Invalid alternative date or time.", 400
+
+        if revised_date < date.today():
+            return (
+                "The requested date is in the past. "
+                "Please arrange another appointment.",
+                409
+            )
+
+        new_token = secrets.token_urlsafe(32)
+
+        result = send_appointment_email(
+            appointment["email"],
+            appointment["name"],
+            appointment["practice"],
+            appointment["alternative_date"],
+            appointment["alternative_time"],
+            appointment["reason"],
+            new_token
+        )
+
+        if result is None or result.status_code not in (200, 201):
+            logger.error(
+                "Revised appointment email failed for %s",
+                appointment_id
+            )
+            return "Revised appointment email could not be sent.", 502
+
+        cursor.execute(
+            """
+            UPDATE appointments
+            SET preferred_date = alternative_date,
+                preferred_time = alternative_time,
+                alternative_date = NULL,
+                alternative_time = NULL,
+                response_token = %s,
+                status = 'Appointment Offered'
+            WHERE id = %s
+              AND status = 'Alternative Requested'
+            """,
+            (
+                new_token,
+                appointment_id
+            )
+        )
+
+        conn.commit()
+
+        logger.info(
+            "Revised appointment offer sent for appointment %s",
+            appointment_id
+        )
+
+        return redirect(url_for("appointments"))
+
+    except Exception:
+        conn.rollback()
+
+        logger.exception(
+            "Error approving alternative appointment %s",
+            appointment_id
+        )
+
+        return "Unable to approve alternative appointment.", 500
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
 @app.route("/appointments")
 def appointments():
 
