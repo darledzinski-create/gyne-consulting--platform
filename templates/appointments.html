@@ -76,7 +76,8 @@
                             </a>
                         </div>
 
-                    {% elif appointment.contact_method == "Email" and appointment.email %}
+                    
+{% elif appointment.contact_method == "Email" and appointment.email and appointment.status == "Appointment Offered" %}
 
 <form
     action="{{ url_for('resend_appointment', appointment_id=appointment.id) }}"
