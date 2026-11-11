@@ -94,6 +94,8 @@
     {% if appointment.email %}
 
 <div class="appointment-contact">
+
+    {% if appointment.status == "Appointment Offered" %}
     <form
         action="{{ url_for('resend_appointment', appointment_id=appointment.id) }}"
         method="POST"
@@ -103,6 +105,8 @@
             Resend Appointment Offer
         </button>
     </form>
+
+    {% endif %}
 </div>
 
     {% endif %}
