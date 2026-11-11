@@ -3115,8 +3115,16 @@ def resend_appointment(appointment_id):
 
         appointment = cursor.fetchone()
 
+        
         if appointment is None:
             return "Appointment not found", 404
+
+        if appointment["status"] != "Appointment Offered":
+            return (
+                "This appointment is not awaiting "
+                "a patient response.",
+                409
+            )
 
         if not appointment["email"]:
             return "No patient email available", 400
