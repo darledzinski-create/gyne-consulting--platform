@@ -2844,6 +2844,10 @@ def appointment_response(token):
                 )
             )
 
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
    
     try:
         cursor.execute(
