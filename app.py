@@ -2761,37 +2761,37 @@ def appointment_response(token):
         if request.form.get("action") == "alternative":
 
             from datetime import date, datetime
+          
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
 
-            alternative_date = request.form.get(
-                "alternative_date", ""
-            ).strip()
+        try:
+            requested_datetime = datetime.strptime(
+                appointment["alternative_date"]
+                + " "
+                + appointment["alternative_time"],
+                "%Y-%m-%d %H:%M"
+            )
 
-            alternative_time = request.form.get(
-                "alternative_time", ""
-            ).strip()
+        except ValueError:
+            return "Invalid alternative date or time.", 400
 
-            try:
-                requested_date = date.fromisoformat(
-                    alternative_date
-                )
+        south_africa_now = datetime.now(
+            ZoneInfo("Africa/Johannesburg")
+        )
 
-                datetime.strptime(
-                    alternative_time,
-                    "%H:%M"
-                )
+        requested_datetime = requested_datetime.replace(
+            tzinfo=ZoneInfo("Africa/Johannesburg")
+        )
 
-                if requested_date < date.today():
-                    return (
-                        "Please select a future date.",
-                        400
-                    )
+        if requested_datetime <= south_africa_now:
+            return (
+                "The requested appointment time has passed. "
+                "Please arrange another appointment.",
+                409
+            )
 
-            except ValueError:
-                return (
-                    "Please enter a valid date and time.",
-                    400
-                )
-
+           
             conn = get_db_connection()
             cursor = conn.cursor()
 
