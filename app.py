@@ -82,50 +82,7 @@ def consultation():
 
     if request.method == "POST":
 
-        if request.form.get("action") == "accept":
-
-            conn = get_db_connection()
-            cursor = conn.cursor()
-
-            try:
-                cursor.execute(
-                    """
-                    UPDATE appointments
-                    SET status = 'Awaiting Payment'
-                    WHERE response_token = %s
-                      AND status = 'Appointment Offered'
-                    RETURNING id
-                    """,
-                    (token,)
-                )
-
-                updated_appointment = cursor.fetchone()
-
-                if updated_appointment is None:
-                    conn.rollback()
-                    return (
-                        "This appointment offer is no longer "
-                        "awaiting a response.",
-                        409
-                    )
-
-                conn.commit()
-
-            except Exception:
-                conn.rollback()
-                raise
-
-            finally:
-                cursor.close()
-                conn.close()
-
-            return redirect(
-                url_for(
-                    "appointment_response",
-                    token=token
-                )
-            )
-
+       
         try:
 
             # ----------------------------
@@ -2814,7 +2771,7 @@ def appointment_response(token):
                     SET status = 'Awaiting Payment'
                     WHERE response_token = %s
                       AND status = 'Appointment Offered'
-                    RETURNING id
+                    RETURNING id, name, email, practice, preferred_date, preferred_time
                     """,
                     (token,)
                 )
@@ -2830,6 +2787,36 @@ def appointment_response(token):
                     )
 
                 conn.commit()
+
+                (
+                    appointment_id,
+                    patient_name,
+                    patient_email,
+                    practice,
+                    appointment_date,
+                    appointment_time
+                ) = updated_appointment
+
+                try:
+                    email_result = send_appointment_payment_email(
+                        patient_email,
+                        patient_name,
+                        practice,
+                        appointment_date,
+                        appointment_time
+                    )
+
+                    if email_result.status_code != 200:
+                        app.logger.error(
+                            "Payment email failed for appointment %s",
+                            appointment_id
+                        )
+
+                except Exception:
+                    app.logger.exception(
+                        "Payment email error for appointment %s",
+                        appointment_id
+                    )
 
             except Exception:
                 conn.rollback()
@@ -2917,6 +2904,7 @@ def appointment_response(token):
 
                 conn.commit()
 
+               
             except Exception:
                 conn.rollback()
                 raise
