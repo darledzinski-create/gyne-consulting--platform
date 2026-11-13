@@ -3078,15 +3078,29 @@ def appointment_response(token):
 
                         </form>
 
-                    {% else %}
+                    {% elif status == "Awaiting Payment" %}
+
+                        <h3>Thank You for Accepting Your Appointment</h3>
 
                         <p>
-                            This appointment offer is no longer
-                            awaiting a response.
+                            Your payment instructions have been
+                            sent to your email address.
                         </p>
 
-                    {% endif %}
+                        <p>
+                            Your appointment will be confirmed
+                            once payment has been received
+                            and verified.
+                        </p>
 
+                     {% else %}
+
+                         <p>
+                             This appointment offer is no longer
+                             awaiting a response.
+                         </p>
+
+                     {% endif %}
                 {% endif %}
 
             </body>
